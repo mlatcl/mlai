@@ -2,6 +2,11 @@
 layout: lecture
 week:  2
 title: Objective Functions
+author:
+- given: Neil D.
+  family: Lawrence
+  institution: University of Cambridge
+  url: http://inverseprobability.com
 abstract: "Objective functions, gradient descent and matrix factorization"
 room: SB-LT2
 date: 2015-10-06 09:00
