@@ -26,7 +26,14 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/mlai" # the subpath of your site, e.g. /blog
 twitter_username:
 github_username: mlatcl
-
+talk_files: slides/
+reveal:
+  width: 512
+  height: 384
+youtube:
+  width: 512
+  height: 384
+  
 collections:
   updates:
     output: true
