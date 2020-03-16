@@ -6,6 +6,8 @@ layout: default
 
 <h1>Week {{page.week}}: {{ page.title }}</h1>
 
+{% include talklinks.html %}
+
 <p>{% assign lastone = page.author | last %}
 {% for person in page.author %}
 {% include listperson.html %}
