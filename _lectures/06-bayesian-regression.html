@@ -94,17 +94,19 @@ $$</span><br /></p>
 <p>)}   </p>
 
 <h2 id="sum-of-squares-and-probability">Sum of Squares and Probability</h2>
-<p>In the overdetermined system we introduced a new set of slack variables, <span class="math inline">$\{\noiseScalar_i\}_{i=1}^\numData$</span>, on top of our parameters <span class="math inline"><em>m</em></span> and <span class="math inline"><em>c</em></span>. We dealt with the variables by placing a probability distribution over them. This gives rise to the likelihood and for the case of Gaussian distributed variables, it gives rise to the sum of squares error. It was Gauss who first made this connection in his volume on “Theoria Motus Corprum Coelestium” (written in Latin)</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="im">import</span> pods</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">pods.notebook.display_google_book(<span class="bu">id</span><span class="op">=</span><span class="st">&#39;ORUOAAAAQAAJ&#39;</span>, page<span class="op">=</span><span class="st">&#39;213&#39;</span>)</a></code></pre></div>
+<p>In the overdetermined system we introduced a new set of slack variables, <span class="math inline">$\{\noiseScalar_i\}_{i=1}^\numData$</span>, on top of our parameters <span class="math inline"><em>m</em></span> and <span class="math inline"><em>c</em></span>. We dealt with the variables by placing a probability distribution over them. This gives rise to the likelihood and for the case of Gaussian distributed variables, it gives rise to the sum of squares error. It was Gauss who first made this connection in his volume on <em>Theoria Motus Corprum Coelestium</em> (written in Latin)</p>
+<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA213&amp;output=embed" width="700" height="500">
+</iframe>
 <p>The relevant section roughly translates as</p>
 <blockquote>
 <p>… It is clear, that for the product <span class="math inline"><em>Ω</em> = <em>h</em><sup><em>μ</em></sup><em>π</em><sup> − <em>f</em><em>r</em><em>a</em><em>c</em>12<em>μ</em></sup><em>e</em><sup> − <em>h</em><em>h</em>(<em>v</em><em>v</em> + <em>v</em><sup>′</sup><em>v</em><sup>′</sup> + <em>v</em><sup>′′</sup><em>v</em><sup>′′</sup> + …)</sup></span> to be maximised the sum <span class="math inline"><em>v</em><em>v</em> + <em>v</em><sup>′</sup><em>v</em><sup>′</sup> + <em>v</em><sup>′′</sup><em>v</em><sup>′′</sup> + etc.</span> ought to be minimized. <em>Therefore, the most probable values of the unknown quantities <span class="math inline"><em>p</em>, <em>q</em>, <em>r</em>, <em>s</em>etc.</span>, should be that in which the sum of the squares of the differences between the functions <span class="math inline"><em>V</em>, <em>V</em><sup>′</sup>, <em>V</em><sup>′′</sup>etc</span>, and the observed values is minimized</em>, for all observations of the same degree of precision is presumed.</p>
 </blockquote>
-<p>It’s on the strength of this paragraph that the density is known as the Gaussian, despite the fact that four pages later Gauss credits the necessary integral for the density to Laplace, and it was also Laplace that did a lot of the original work on dealing with these errors through probability. <a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674403413">Stephen Stigler’s book on the measurement of uncertainty before 1900</a> has a nice chapter on this.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">pods.notebook.display_google_book(<span class="bu">id</span><span class="op">=</span><span class="st">&#39;ORUOAAAAQAAJ&#39;</span>, page<span class="op">=</span><span class="st">&#39;217&#39;</span>)</a></code></pre></div>
+<p>It’s on the strength of this paragraph that the density is known as the Gaussian, despite the fact that four pages later Gauss credits the necessary integral for the density to Laplace, and it was also Laplace that did a lot of the original work on dealing with these errors through probability. <a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674403413">Stephen Stigler’s book on the measurement of uncertainty before 1900</a> <span class="citation" data-cites="Stigler:table99">(Stigler 1999)</span> has a nice chapter on this.</p>
+<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA217&amp;output=embed" width="700" height="500">
+</iframe>
 <p>where the crediting to the Laplace is about halfway through the last paragraph. This book was published in 1809, four years after  in an appendix to one of his chapters on the orbit of comets. Gauss goes on to make a claim for priority on the method on page 221 (towards the end of the first paragraph …).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1">pods.notebook.display_google_book(<span class="bu">id</span><span class="op">=</span><span class="st">&#39;ORUOAAAAQAAJ&#39;</span>, page<span class="op">=</span><span class="st">&#39;221&#39;</span>)</a></code></pre></div>
+<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA221&amp;output=embed" width="700" height="500">
+</iframe>
 <h2 id="the-bayesian-approach-edit">The Bayesian Approach <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/the-bayesian-approach.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/the-bayesian-approach.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>Now we will study Bayesian approaches to regression. In the Bayesian approach we define a <em>prior</em> density over our parameters, <span class="math inline"><em>m</em></span> and <span class="math inline"><em>c</em></span> or more generally <span class="math inline">$\mappingVector$</span>. This prior distribution gives us a range of expected values for our parameter <em>before</em> we have seen the data. The object in Bayesian inference is to then compute the<em>posterior</em> density which is the effect on the density of having observed the data. In standard probability notation we write the prior distribution as, <br /><span class="math display">$$
 p(\mappingVector),
@@ -135,11 +137,11 @@ $$</span><br /> I like the term marginalisation, and the description of the prob
   $$</span><br /> where <span class="math inline">$p(\dataScalar)$</span> is the marginal probability of the data, obtained through integration over the joint density, <span class="math inline">$p(\dataScalar, c)=p(\dataScalar|c)p(c)$</span>. Overall the equation can be summarized as, <br /><span class="math display">$$
   \text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}.
   $$</span><br /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;dem_gaussian</span><span class="sc">{stage:0&gt;2}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">                            diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">                            stage<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;dem_gaussian</span><span class="sc">{stage:0&gt;2}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                            diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                            stage<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="dem-gaussian-3-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/dem_gaussian003.svg" width="70%" style=" ">
@@ -190,11 +192,11 @@ $$</span><br /> I like the term marginalisation, and the description of the prob
 </div>
 <h2 id="independence-assumption">Independence Assumption</h2>
 <p>First of all, we make an independence assumption, we assume that height and weight are independent. The definition of probabilistic independence is that the joint density, <span class="math inline"><em>p</em>(<em>w</em>, <em>h</em>)</span>, factorizes into its marginal densities, <br /><span class="math display"><em>p</em>(<em>w</em>, <em>h</em>) = <em>p</em>(<em>w</em>)<em>p</em>(<em>h</em>).</span><br /> Given this assumption we can sample from the joint distribution by independently sampling weights and heights.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="im">import</span> pods</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;independent_height_weight</span><span class="sc">{fig:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">                            fig<span class="op">=</span>IntSlider(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="im">import</span> pods</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;independent_height_weight</span><span class="sc">{fig:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                            fig<span class="op">=</span>IntSlider(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="independent-height-weight-7-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/independent_height_weight007.svg" width="70%" style=" ">
@@ -211,12 +213,12 @@ $$</span><br /> I like the term marginalisation, and the description of the prob
 \text{BMI} = \frac{w}{h^2}
 $$</span><br />To deal with this dependence we now introduce the notion of <em>correlation</em> to the multivariate Gaussian density.</p>
 <h2 id="sampling-two-dimensional-variables-edit">Sampling Two Dimensional Variables <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/two-d-gaussian-correlated-sample.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/two-d-gaussian-correlated-sample.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="im">import</span> pods</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">pods.notebook.display_plots(<span class="st">&#39;correlated_height_weight</span><span class="sc">{fig:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">                            fig<span class="op">=</span>IntSlider(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="im">import</span> pods</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">pods.notebook.display_plots(<span class="st">&#39;correlated_height_weight</span><span class="sc">{fig:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                            fig<span class="op">=</span>IntSlider(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="correlated-height-weight-7-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/correlated_height_weight007.svg" width="70%" style=" ">
@@ -264,12 +266,12 @@ $$</span><br /></p>
 $$</span><br /> In other words, we are assuming, for the prior, that each element of the parameters vector, <span class="math inline">$\mappingScalar_i$</span>, was drawn from a Gaussian density as follows <br /><span class="math display">$$
 \mappingScalar_i \sim \gaussianSamp{0}{\alpha}
 $$</span><br /> Let’s start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, <span class="math inline"><em>α</em></span>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># set prior variance on w</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">alpha <span class="op">=</span> <span class="fl">4.</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co"># set the order of the polynomial basis set</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">order <span class="op">=</span> <span class="dv">5</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co"># set the noise variance</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">sigma2 <span class="op">=</span> <span class="fl">0.01</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># set prior variance on w</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">alpha <span class="op">=</span> <span class="fl">4.</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># set the order of the polynomial basis set</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">order <span class="op">=</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># set the noise variance</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">sigma2 <span class="op">=</span> <span class="fl">0.01</span></a></code></pre></div>
 
 
 <h2 id="generating-from-the-model-edit">Generating from the Model <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/prior-sampling-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/prior-sampling-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
@@ -280,26 +282,26 @@ $$</span><br /> Let’s start by assigning the parameter of the prior distributi
 <li>Repeat to try and characterise the type of functions you are generating.</li>
 </ol>
 <p>Given a prior variance (as defined above) we can now sample from the prior distribution and combine with a basis set to see what assumptions we are making about the functions <em>a priori</em> (i.e. before we’ve seen the data). Firstly we compute the basis function matrix. We will do it both for our training data, and for a range of prediction locations (<code>x_pred</code>).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1">data <span class="op">=</span> pods.datasets.olympic_marathon_men()</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">x_pred <span class="op">=</span> np.linspace(<span class="dv">1890</span>, <span class="dv">2016</span>, num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">data <span class="op">=</span> pods.datasets.olympic_marathon_men()</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">x_pred <span class="op">=</span> np.linspace(<span class="dv">1890</span>, <span class="dv">2016</span>, num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></a></code></pre></div>
 <p>now let’s build the basis matrices. We define the polynomial basis as follows.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">def</span> polynomial(x, num_basis<span class="op">=</span><span class="dv">2</span>, loc<span class="op">=</span><span class="fl">0.</span>, scale<span class="op">=</span><span class="fl">1.</span>):</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">    degree<span class="op">=</span>num_basis<span class="dv">-1</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">    degrees <span class="op">=</span> np.arange(degree<span class="op">+</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">    <span class="cf">return</span> ((x<span class="op">-</span>loc)<span class="op">/</span>scale)<span class="op">**</span>degrees</a></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="im">import</span> mlai</a></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" data-line-number="1">loc<span class="op">=</span><span class="dv">1950</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">scale<span class="op">=</span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">degree<span class="op">=</span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">Phi_pred <span class="op">=</span> basis.Phi(x_pred)</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">Phi <span class="op">=</span> basis.Phi(x)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">def</span> polynomial(x, num_basis<span class="op">=</span><span class="dv">2</span>, loc<span class="op">=</span><span class="fl">0.</span>, scale<span class="op">=</span><span class="fl">1.</span>):</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    degree<span class="op">=</span>num_basis<span class="dv">-1</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    degrees <span class="op">=</span> np.arange(degree<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">    <span class="cf">return</span> ((x<span class="op">-</span>loc)<span class="op">/</span>scale)<span class="op">**</span>degrees</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="im">import</span> mlai</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1">loc<span class="op">=</span><span class="dv">1950</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">scale<span class="op">=</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">degree<span class="op">=</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">Phi_pred <span class="op">=</span> basis.Phi(x_pred)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">Phi <span class="op">=</span> basis.Phi(x)</a></code></pre></div>
 <h2 id="sampling-from-the-prior">Sampling from the Prior</h2>
 <p>Now we will sample from the prior to produce a vector <span class="math inline">$\mappingVector$</span> and use it to plot a function which is representative of our belief <em>before</em> we fit the data. To do this we are going to use the properties of the Gaussian density and a sample from a <em>standard normal</em> using the function <code>np.random.normal</code>.</p>
 <h2 id="scaling-gaussian-distributed-variables">Scaling Gaussian-distributed Variables</h2>
@@ -310,39 +312,39 @@ $$</span><br /> If <span class="math inline">$\mappingScalar$</span> is drawn fr
 $$</span><br /> and <span class="math inline">$\basisScalar$</span> is a scalar value which we are given, then properties of the Gaussian density tell us that <br /><span class="math display">$$
 \basisScalar \mappingScalar \sim \gaussianSamp{\basisScalar\meanScalar_\mappingScalar}{\basisScalar^2c_\mappingScalar}
 $$</span><br /> Let’s test this out numerically. First we will draw 200 samples from a standard normal,</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1">w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1">w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</a></code></pre></div>
 <p>We can compute the mean of these samples and their variance</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</a></code></pre></div>
 <p>These are close to zero (the mean) and one (the variance) as you’d expect. Now compute the mean and variance of the scaled version,</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1">phi <span class="op">=</span> <span class="dv">7</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1">phi <span class="op">=</span> <span class="dv">7</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</a></code></pre></div>
 <p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">$\mappingScalar$</span> from a Gaussian with mean <span class="math inline">$\meanScalar$</span> and variance <span class="math inline"><em>α</em></span>, <br /><span class="math display">$$\mappingScalar \sim \gaussianSamp{\meanScalar}{\alpha}$$</span><br /> We can simply scale and offset samples from the <em>standard normal</em>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1">mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" data-line-number="1">mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</a></code></pre></div>
 <p>Here the <code>np.sqrt</code> is necesssary because we need to multiply by the standard deviation and we specified the variance as <code>alpha</code>. So scaling and offsetting a Gaussian distributed variable keeps the variable Gaussian, but it effects the mean and variance of the resulting variable.</p>
 <p>To get an idea of the overall shape of the resulting distribution, let’s do the same thing with a histogram of the results.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="op">%</span>matplotlib inline</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="op">%</span>matplotlib inline</a></code></pre></div>
 <p>Now re-run this histogram with 100,000 samples and check that the both histograms look qualitatively Gaussian.</p>
 <h2 id="sampling-from-the-prior-1">Sampling from the Prior</h2>
 <p>Let’s use this way of constructing samples from a Gaussian to check what functions look like <em>a priori</em>. The process will be as follows. First, we sample a random vector <span class="math inline"><em>K</em></span> dimensional from <code>np.random.normal</code>. Then we scale it by <span class="math inline">$\sqrt{\alpha}$</span> to obtain a prior sample of <span class="math inline">$\mappingVector$</span>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1">K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="bu">print</span>(w_sample)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1">K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="bu">print</span>(w_sample)</a></code></pre></div>
 <p>Now we can combine our sample from the prior with the basis functions to create a function,</p>
 <p>This shows the recurring problem with the polynomial basis (note the scale on the left hand side!). Our prior allows relatively large coefficients for the basis associated with high polynomial degrees. Because we are operating with input values of around 2000, this leads to output functions of very high values. The fix we have used for this before is to rescale our data before we apply the polynomial basis to it. Above, we set the scale of the basis to 1. Here let’s set it to 100 and try again.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" data-line-number="1">scale <span class="op">=</span> <span class="fl">100.</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">Phi_pred <span class="op">=</span> basis.Phi(x_pred)</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">Phi <span class="op">=</span> basis.Phi(x)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1">scale <span class="op">=</span> <span class="fl">100.</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">Phi_pred <span class="op">=</span> basis.Phi(x_pred)</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">Phi <span class="op">=</span> basis.Phi(x)</a></code></pre></div>
 <p>Now we need to recompute the basis functions from above,</p>
 <p>Now let’s loop through some samples and plot various functions as samples from this system,</p>
 <p>The predictions for the mean output can now be computed. We want the expected value of the predictions under the posterior distribution. In matrix form, the predictions can be computed as <br /><span class="math display">$$
@@ -412,33 +414,33 @@ $$</span><br /></p>
 </tr>
 </table>
 <p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1">data <span class="op">=</span> pods.datasets.olympic_marathon_men()</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">offset <span class="op">=</span> y.mean()</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">scale <span class="op">=</span> np.sqrt(y.var())</a></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="im">import</span> teaching_plots <span class="im">as</span> plot</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="im">import</span> mlai</a></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">xlim <span class="op">=</span> (<span class="dv">1875</span>,<span class="dv">2030</span>)</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">ylim <span class="op">=</span> (<span class="fl">2.5</span>, <span class="fl">6.5</span>)</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">yhat <span class="op">=</span> (y<span class="op">-</span>offset)<span class="op">/</span>scale</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">_ <span class="op">=</span> ax.plot(x, y, <span class="st">&#39;r.&#39;</span>,markersize<span class="op">=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">ax.set_xlabel(<span class="st">&#39;year&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb29-9" data-line-number="9">ax.set_ylabel(<span class="st">&#39;pace min/km&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb29-10" data-line-number="10">ax.set_xlim(xlim)</a>
-<a class="sourceLine" id="cb29-11" data-line-number="11">ax.set_ylim(ylim)</a>
-<a class="sourceLine" id="cb29-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb29-13" data-line-number="13">mlai.write_figure(figure<span class="op">=</span>fig, </a>
-<a class="sourceLine" id="cb29-14" data-line-number="14">                  filename<span class="op">=</span><span class="st">&#39;../slides/diagrams/datasets/olympic-marathon.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb29-15" data-line-number="15">                  transparent<span class="op">=</span><span class="va">True</span>, </a>
-<a class="sourceLine" id="cb29-16" data-line-number="16">                  frameon<span class="op">=</span><span class="va">True</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1">data <span class="op">=</span> pods.datasets.olympic_marathon_men()</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">offset <span class="op">=</span> y.mean()</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">scale <span class="op">=</span> np.sqrt(y.var())</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="im">import</span> teaching_plots <span class="im">as</span> plot</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="im">import</span> mlai</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">xlim <span class="op">=</span> (<span class="dv">1875</span>,<span class="dv">2030</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">ylim <span class="op">=</span> (<span class="fl">2.5</span>, <span class="fl">6.5</span>)</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">yhat <span class="op">=</span> (y<span class="op">-</span>offset)<span class="op">/</span>scale</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">_ <span class="op">=</span> ax.plot(x, y, <span class="st">&#39;r.&#39;</span>,markersize<span class="op">=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">ax.set_xlabel(<span class="st">&#39;year&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">ax.set_ylabel(<span class="st">&#39;pace min/km&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">ax.set_xlim(xlim)</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">ax.set_ylim(ylim)</a>
+<a class="sourceLine" id="cb25-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb25-13" data-line-number="13">mlai.write_figure(figure<span class="op">=</span>fig, </a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">                  filename<span class="op">=</span><span class="st">&#39;../slides/diagrams/datasets/olympic-marathon.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb25-15" data-line-number="15">                  transparent<span class="op">=</span><span class="va">True</span>, </a>
+<a class="sourceLine" id="cb25-16" data-line-number="16">                  frameon<span class="op">=</span><span class="va">True</span>)</a></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
@@ -455,13 +457,13 @@ $$</span><br /></p>
 <p>More recent years see more consistently quick marathons.</p>
 <h2 id="olympic-data-with-bayesian-polynomials-edit">Olympic Data with Bayesian Polynomials <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-bayesian-polynomials.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-bayesian-polynomials.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="im">import</span> mlai</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="im">import</span> pods</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml/&#39;</span>, </a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="im">import</span> mlai</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="im">import</span> pods</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="im">import</span> pods</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml/&#39;</span>, </a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="olympic-blm-polynomial-number-26-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_BLM_polynomial_number026.svg" width="80%" style=" ">
@@ -476,11 +478,11 @@ $$</span><br /></p>
 </div>
 <h2 id="hold-out-validation">Hold Out Validation</h2>
 <p>For the polynomial fit, we will now look at <em>hold out</em> validation, where we are holding out some of the most recent points. This tests the abilit of our model to <em>extrapolate</em>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="im">import</span> pods</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_val_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="im">import</span> pods</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_val_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="olympic-val-blm-polynomial-number-26-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_BLM_polynomial_number026.svg" width="80%" style=" ">
@@ -495,12 +497,12 @@ $$</span><br /></p>
 </div>
 <h2 id="fold-cross-validation">5-fold Cross Validation</h2>
 <p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="im">import</span> pods</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_5cv</span><span class="sc">{part:0&gt;2}</span><span class="st">_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">                            part<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), </a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="im">import</span> pods</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1">pods.notebook.display_plots(<span class="st">&#39;olympic_5cv</span><span class="sc">{part:0&gt;2}</span><span class="st">_BLM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>, </a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">                            part<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), </a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">27</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure">
 <div id="olympic-5cv05-blm-polynomial-number-26-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg" width="80%" style=" ">
@@ -527,19 +529,19 @@ $$</span><br /> Then the sum of <span class="math inline"><em>K</em></span> inde
 \sum_{i=1}^K \dataScalar_i \sim \gaussianSamp{\sum_{i=1}^K \meanScalar_i}{\sum_{i=1}^K \dataStd_i^2}.
 $$</span><br /> Let’s try that experimentally. First let’s generate a vector of samples from a standard normal distribution, <span class="math inline">$z \sim \gaussianSamp{0}{1}$</span>, then we will scale and offset them, then keep adding them into a vector <code>y_vec</code>.</p>
 <h2 id="sampling-from-gaussians-and-summing-up">Sampling from Gaussians and Summing Up</h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb37-1" data-line-number="1">K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">y_vec <span class="op">=</span> np.zeros(num_samples)</a>
-<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</a>
-<a class="sourceLine" id="cb37-7" data-line-number="7">    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8">    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></a>
-<a class="sourceLine" id="cb37-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb37-10" data-line-number="10"><span class="co"># now y_vec is the sum of each scaled and off set z.</span></a>
-<a class="sourceLine" id="cb37-11" data-line-number="11"><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</a>
-<a class="sourceLine" id="cb37-12" data-line-number="12"><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</a>
-<a class="sourceLine" id="cb37-13" data-line-number="13"><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" data-line-number="1">K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">y_vec <span class="op">=</span> np.zeros(num_samples)</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6"><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></a>
+<a class="sourceLine" id="cb33-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb33-10" data-line-number="10"><span class="co"># now y_vec is the sum of each scaled and off set z.</span></a>
+<a class="sourceLine" id="cb33-11" data-line-number="11"><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</a>
+<a class="sourceLine" id="cb33-12" data-line-number="12"><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</a>
+<a class="sourceLine" id="cb33-13" data-line-number="13"><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </a></code></pre></div>
 <p>Of course, we can histogram <code>y_vec</code> as well.</p>
 <h2 id="matrix-multiplication-of-gaussian-variables">Matrix Multiplication of Gaussian Variables</h2>
 <p>We are interested in what our model is saying about the sort of functions we are observing. The fact that summing of Gaussian variables leads to new Gaussian variables, and scaling of Gaussian variables <em>also</em> leads to Gaussian variables means that matrix multiplication (which is just a series of sums and scales) also leads to Gaussian densities. Matrix multiplication is just adding and scaling together, in the formula, <span class="math inline">$\mappingFunctionVector = \basisMatrix \mappingVector$</span> we can extract the first element from <span class="math inline">$\mappingFunctionVector$</span> as <br /><span class="math display">$$
@@ -608,7 +610,12 @@ $$</span><br /></p>
 
 
 
-<h1 id="references">References</h1>
+<h1 id="references" class="unnumbered">References</h1>
+<div id="refs" class="references">
+<div id="ref-Stigler:table99">
+<p>Stigler, Stephen M. 1999. <em>Statistics on the Table: The History of Statistical Concepts and Methods</em>. Cambridge, MA: harvard.</p>
+</div>
+</div>
 <section class="footnotes">
 <hr />
 <ol>
