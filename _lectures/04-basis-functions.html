@@ -75,7 +75,7 @@ $$</span><br /> For the vector-valued function, we have simply collected the dif
 1 &amp; \inputScalar_n &amp; \inputScalar_n^2
 \end{bmatrix}
 $$</span><br /> where we are still in the one dimensional input setting so <span class="math inline">$\inputVector$</span> here represents a vector of our inputs with <span class="math inline">$\numData$</span> elements.</p>
-<p>Let’s try constructing such a matrix for a set of inputs. First of all, we create a function that returns the matrix valued function</p>
+<p>Let’s try constructing such a matrix for a set of inputs. First of all, we create a function that returns the matrix valued function.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated </span></a>
@@ -83,7 +83,7 @@ $$</span><br /> where we are still in the one dimensional input setting so <span
 <a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="cf">return</span> np.hstack([np.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</a></code></pre></div>
 <h2 id="functions-derived-from-quadratic-basis">Functions Derived from Quadratic Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {black\mappingScalar_0}   + {black\mappingScalar_1 \inputScalar} + {black\mappingScalar_2 \inputScalar^2}
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_0}   + {\color{black}\mappingScalar_1 \inputScalar} + {\color{black}\mappingScalar_2 \inputScalar^2}
 $$</span><br /></p>
 {
 <div class="figure">
@@ -134,7 +134,7 @@ $$</span><br /> which is known as the <em>polynomial basis</em>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="op">%</span>load <span class="op">-</span>s polynomial mlai.py</a></code></pre></div>
 <h2 id="functions-derived-from-polynomial-basis">Functions Derived from Polynomial Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{cyan}\mappingScalar_0}   + {\color{green}\mappingScalar_1 \inputScalar} + {\color{yellow}\mappingScalar_2 \inputScalar^2}
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_0} + {\color{black}\mappingScalar_1 \inputScalar} + {\color{black}\mappingScalar_2 \inputScalar^2}
 $$</span><br /></p>
 <div class="figure">
 <div id="polynomial-basis-3-figure" class="figure-frame">
@@ -175,7 +175,7 @@ $$</span><br /></p>
 <a class="sourceLine" id="cb18-3" data-line-number="3">                            num_basis<span class="op">=</span>IntSlider(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">1</span>))</a></code></pre></div>
 <h2 id="functions-derived-from-radial-basis">Functions Derived from Radial Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{cyan}\mappingScalar_1 e^{-2(\inputScalar+1)^2}}  + {\color{green}\mappingScalar_2e^{-2\inputScalar^2}} + {\color{yellow}\mappingScalar_3 e^{-2(\inputScalar-1)^2}}
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_1 e^{-2(\inputScalar+1)^2}}  + {\color{black}\mappingScalar_2e^{-2\inputScalar^2}} + {\color{black}\mappingScalar_3 e^{-2(\inputScalar-1)^2}}
 $$</span><br /></p>
 <div class="figure">
 <div id="radial-basis-2-figure" class="figure-frame">
@@ -203,7 +203,7 @@ $$</span><br /></p>
 <a class="sourceLine" id="cb25-3" data-line-number="3"><span class="im">import</span> mlai</a></code></pre></div>
 <h2 id="functions-derived-from-relu-basis">Functions Derived from Relu Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{cyan}\mappingScalar_0}   + {\color{green}\mappingScalar_1 xH(x+1.0) } + {\color{yellow}\mappingScalar_2 xH(x+0.33) } + {\color{magenta}\mappingScalar_3 xH(x-0.33)} +  {\color{red}\mappingScalar_4 xH(x-1.0)}
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_0}   + {\color{black}\mappingScalar_1 xH(x+1.0) } + {\color{black}\mappingScalar_2 xH(x+0.33) } + {\color{black}\mappingScalar_3 xH(x-0.33)} +  {\color{black}\mappingScalar_4 xH(x-1.0)}
 $$</span><br /></p>
 <div class="figure">
 <div id="relu-basis-4-figure" class="figure-frame">
@@ -229,7 +229,7 @@ $$</span><br /></p>
 <p>Sigmoid or hyperbolic tangent basis was popular in the original generation of multilayer perceptron models, or deep networks. These basis functions start flat, rise and then saturate.</p>
 <h2 id="functions-derived-from-tanh-basis">Functions Derived from Tanh Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{cyan}\mappingScalar_0}   + {\color{green}\mappingScalar_1 } + {\color{yellow}\mappingScalar_3 }
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_0}   + {\color{black}\mappingScalar_1 \text{tanh}\left(\inputScalar+1\right)}  + {\color{black}\mappingScalar_2 \text{tanh}\left(\inputScalar+0.33\right)}  + {\color{black}\mappingScalar_3 \text{tanh}\left(\inputScalar-0.33\right)} + {\color{black}\mappingScalar_4 \text{tanh}\left(\inputScalar-1\right)}
 $$</span><br /></p>
 <div class="figure">
 <div id="tanh-basis-4-figure" class="figure-frame">
@@ -264,7 +264,7 @@ $$</span><br /></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb38-1" data-line-number="1">pods.notebook.display_prediction(basis<span class="op">=</span>mlai.fourier, num_basis<span class="op">=</span><span class="dv">5</span>)</a></code></pre></div>
 <h2 id="functions-derived-from-fourier-basis">Functions Derived from Fourier Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{cyan}\mappingScalar_0}  + {\color{green}\mappingScalar_1 \sin(\inputScalar)} + {\color{yellow}\mappingScalar_2 \cos(\inputScalar)} + {\color{magenta}\mappingScalar_3 \sin(2\inputScalar)} + {\color{red}\mappingScalar_4 \cos(2\inputScalar)}
+\mappingFunction(\inputScalar) = {\color{black}\mappingScalar_0}  + {\color{black}\mappingScalar_1 \sin(\inputScalar)} + {\color{black}\mappingScalar_2 \cos(\inputScalar)} + {\color{black}\mappingScalar_3 \sin(2\inputScalar)} + {\color{black}\mappingScalar_4 \cos(2\inputScalar)}
 $$</span><br /></p>
 <div class="figure">
 <div id="fourier-basis-4-figure" class="figure-frame">
