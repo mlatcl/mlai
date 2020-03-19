@@ -26,6 +26,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/mlai" # the subpath of your site, e.g. /blog
 twitter_username:
 github_username: mlatcl
+colab: https://colab.research.google.com
+nbviewer: https://nbviewer.jupyter.org
 slidesdir: slides
 reveal:
   width: 512
