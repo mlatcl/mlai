@@ -370,7 +370,6 @@
 <li>Radiocarbon dating, the C14 calibration curve: predict age given quantity of C14 isotope.</li>
 <li>Predict quality of different Go or Backgammon moves given expert rated training data.</li>
 </ul>
-
 </section>
 <section id="olympic-100m-data" class="slide level2">
 <h2>Olympic 100m Data</h2>
@@ -405,7 +404,6 @@
 </td>
 </tr>
 </table>
-
 <p>import numpy as np import pods</p>
 <p>data = pods.datasets.olympic_marathon_men() x = data[‘X’] y = data[‘Y’]</p>
 <p>offset = y.mean() scale = np.sqrt(y.var())</p>
@@ -418,7 +416,6 @@
 </object>
 </div>
 </div>
-
 <!-- SECTION What is Machine Learning? -->
 </section>
 <section id="what-is-machine-learning" class="slide level2">
@@ -448,7 +445,6 @@
 <ul>
 <li>Royal Society Report: <a href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine Learning: Power and Promise of Computers that Learn by Example</a></li>
 </ul>
-
 </div>
 </section>
 <section id="what-is-machine-learning-2" class="slide level2">
@@ -459,19 +455,14 @@
 <li class="fragment"><strong>a prediction function</strong> <span class="math inline">\(\mappingFunction (\cdot)\)</span> includes our beliefs about the regularities of the universe</li>
 <li class="fragment"><strong>an objective function</strong> <span class="math inline">\(\errorFunction (\cdot)\)</span> defines the cost of misprediction.</li>
 </ul>
-
-
 <!-- SECTION Sum of Squares Error -->
 </section>
 <section id="sum-of-squares-error" class="slide level2">
 <h2>Sum of Squares Error</h2>
 
-
-
 </section>
 <section id="regression-linear-releationship" class="slide level2">
 <h2>Regression: Linear Releationship</h2>
-
 <p><span class="math display">\[\dataScalar_i = m \inputScalar_i + c\]</span></p>
 <ul>
 <li><p><span class="math inline">\(\dataScalar_i\)</span> : winning pace.</p></li>
@@ -479,17 +470,9 @@
 <li><p><span class="math inline">\(m\)</span> : rate of improvement over time.</p></li>
 <li><p><span class="math inline">\(c\)</span> : winning time at year 0.</p></li>
 </ul>
-
-
 </section>
 <section id="overdetermined-system" class="slide level2">
 <h2>Overdetermined System</h2>
-
-
-
-
-
-
 
 </section>
 <section id="section" class="slide level2">
@@ -571,7 +554,6 @@ showDivs(1, 'over_determined_system');
 </section>
 <section id="section-9" class="slide level2">
 <h2></h2>
-
 <div class="figure">
 <div id="pierre-simon-laplace-image-figure" class="figure-frame">
 <div class="centered" style="">
@@ -584,8 +566,6 @@ showDivs(1, 'over_determined_system');
 <h2></h2>
 <iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2&amp;output=embed" width="700" height="500">
 </iframe>
-
-
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
@@ -642,8 +622,6 @@ showDivs(1, 'over_determined_system');
     </embed>
 </object>
 --></p>
-
-
 </section>
 <section id="datascalar-minputscalar-c-noisescalar" class="slide level2">
 <h2><span class="math inline">\(\dataScalar = m\inputScalar + c + \noiseScalar\)</span></h2>
@@ -675,12 +653,10 @@ showDivs(1, 'over_determined_system');
 </div>
 <div class="fragment">
 <p>This is known as a stochastic process. </p>
-
 </div>
 </section>
 <section id="the-gaussian-density" class="slide level2">
 <h2>The Gaussian Density</h2>
-
 <ul>
 <li>Perhaps the most common probability density.</li>
 </ul>
@@ -716,16 +692,13 @@ showDivs(1, 'over_determined_system');
 </section>
 <section id="sum-of-gaussians" class="slide level2">
 <h2>Sum of Gaussians</h2>
-
 <div class="fragment">
 <p><span style="text-align:left">Sum of Gaussian variables is also Gaussian.</span></p>
 <p><span class="math display">\[\dataScalar_i \sim \gaussianSamp{\meanScalar_i}{\sigma_i^2}\]</span></p>
-
 </div>
 <div class="fragment">
 <p><span style="text-align:left">And the sum is distributed as</span></p>
 <p><span class="math display">\[\sum_{i=1}^{\numData} \dataScalar_i \sim \gaussianSamp{\sum_{i=1}^\numData \meanScalar_i}{\sum_{i=1}^\numData \sigma_i^2}\]</span></p>
-
 </div>
 <div class="fragment">
 <p><small>(<em>Aside</em>: As sum increases, sum of non-Gaussian, finite variance variables is also Gaussian because of <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">central limit theorem</a>.)</small></p>
@@ -733,7 +706,6 @@ showDivs(1, 'over_determined_system');
 </section>
 <section id="scaling-a-gaussian" class="slide level2">
 <h2>Scaling a Gaussian</h2>
-
 <div class="fragment">
 <p><span style="text-align:left">Scaling a Gaussian leads to a Gaussian.</span></p>
 </div>
@@ -753,7 +725,6 @@ showDivs(1, 'over_determined_system');
 <h2>A Probabilistic Process</h2>
 <p>Set the mean of Gaussian to be a function.</p>
 <div class="fragment">
-
 <p><span class="math display">\[p\left(\dataScalar_i|\inputScalar_i\right)=\frac{1}{\sqrt{2\pi\dataStd^2}}\exp\left(-\frac{\left(\dataScalar_i-f\left(\inputScalar_i\right)\right)^{2}}{2\dataStd^2}\right).\]</span></p>
 </div>
 <div class="fragment">
@@ -865,32 +836,17 @@ L(m,c,\dataStd^{2})=-\frac{\numData}{2}\log 2\pi -\frac{\numData}{2}\log \dataSt
 </section>
 <section id="sum-of-squares-error-1" class="slide level2">
 <h2>Sum of Squares Error</h2>
-
-
-
-
-
-
 <!-- SECTION Linear Algebra -->
 </section>
 <section id="linear-algebra" class="slide level2">
 <h2>Linear Algebra</h2>
-
-
 <p>import pods</p>
 <p>data = pods.datasets.olympic_marathon_men() x = data[‘X’] y = data[‘Y’]</p>
-
 <p>print(x) print(y)</p>
-
-
-
-
 <p>m = -0.4 c = 80</p>
-
 </section>
 <section id="coordinate-descent" class="slide level2">
 <h2>Coordinate Descent</h2>
-
 
 </section>
 <section id="learning-is-optimization" class="slide level2">
@@ -906,35 +862,36 @@ L(m,c,\dataStd^{2})=-\frac{\numData}{2}\log 2\pi -\frac{\numData}{2}\log \dataSt
 <ul>
 <li>Fixed point equations <span class="math display">\[0 = -2\sum_{i=1}^\numData \dataScalar_i +2\sum_{i=1}^\numData m \inputScalar_i +2n c\]</span> <span class="math display">\[c = \frac{\sum_{i=1}^\numData \left(\dataScalar_i - m\inputScalar_i\right)}{\numData}\]</span></li>
 </ul>
-
 </section>
-<section><section id="set-c-to-the-minimum" class="title-slide slide level1"><h1>set c to the minimum</h1></section><section id="learning-is-optimization-2" class="slide level2">
+<section>
+<section id="set-c-to-the-minimum" class="title-slide slide level1">
+<h1>set c to the minimum</h1>
+<p>c = (y - m*x).mean() print(c)</p>
+</section>
+<section id="learning-is-optimization-2" class="slide level2">
 <h2>Learning is Optimization</h2>
 <ul>
 <li>Learning is minimization of the cost function.</li>
 <li>At the minima the gradient is zero.</li>
 <li>Coordinate ascent, find gradient in each coordinate and set to zero. <span class="math display">\[\frac{\text{d}\errorFunction(m)}{\text{d}m} = -2\sum_{i=1}^\numData \inputScalar_i\left(\dataScalar_i- m \inputScalar_i - c \right)\]</span> <span class="math display">\[0 = -2\sum_{i=1}^\numData \inputScalar_i \left(\dataScalar_i-m \inputScalar_i - c \right)\]</span></li>
 </ul>
-</section><section id="learning-is-optimization-3" class="slide level2">
+</section>
+<section id="learning-is-optimization-3" class="slide level2">
 <h2>Learning is Optimization</h2>
 <ul>
 <li>Fixed point equations <span class="math display">\[0 = -2\sum_{i=1}^\numData \inputScalar_i\dataScalar_i+2\sum_{i=1}^\numData m \inputScalar_i^2+2\sum_{i=1}^\numData c\inputScalar_i\]</span> <span class="math display">\[m  =    \frac{\sum_{i=1}^\numData \left(\dataScalar_i -c\right)\inputScalar_i}{\sum_{i=1}^\numData\inputScalar_i^2}\]</span></li>
 </ul>
-
-
 <p><span class="math display">\[m^* = \frac{\sum_{i=1}^\numData (\dataScalar_i - c)\inputScalar_i}{\sum_{i=1}^\numData \inputScalar_i^2}\]</span></p>
-
-
-
-
-</section><section id="section-16" class="slide level2">
+</section>
+<section id="section-16" class="slide level2">
 <h2></h2>
 <p>Exercise 1</p>
 <p>Convert the following python code expressions into <span class="math inline">\(\LaTeX\)</span>j, writing your answers below. In each case write your answer as a single equality (i.e. your maths should only contain one expression, not several lines of expressions). For the purposes of your <span class="math inline">\(\LaTeX\)</span> please assume that <code>x</code> and <code>w</code> are <span class="math inline">\(n\)</span> dimensional vectors.</p>
 <p><code>(a) f = x.sum()</code></p>
 <p><code>(b) m = x.mean()</code></p>
 <p><code>(c) g = (x*w).sum()</code></p>
-</section><section id="fixed-point-updates" class="slide level2">
+</section>
+<section id="fixed-point-updates" class="slide level2">
 <h2>Fixed Point Updates</h2>
 <p><span style="text-align:left">Worked example.</span> <span class="math display">\[
 \begin{aligned}
@@ -946,24 +903,19 @@ _{i=1}^{\numData}\inputScalar_i\left(\dataScalar_i-c^{*}\right)}{\sum _{i=1}^{\n
 _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numData}
 \end{aligned}
 \]</span></p>
-
-</section><section id="section-17" class="slide level2">
+</section>
+<section id="section-17" class="slide level2">
 <h2></h2>
 <p>Exercise 1</p>
 <p>Derive the the gradient of the objective function with respect to the slope, <span class="math inline">\(m\)</span>. Rearrange it to show that the update equation written above does find the stationary points of the objective function. By computing its derivative show that it’s a minimum.</p>
 <p>m = ((y - c)*x).sum()/(x**2).sum() print(m)</p>
-
 <p>import numpy as np</p>
 <p>x_test = np.linspace(1890, 2020, 130)[:, None]</p>
-
 <p>f_test = m*x_test + c</p>
-
-
 <p>for i in np.arange(10): m = ((y - c)<em>x).sum()/(x</em>x).sum() c = (y-m*x).sum()/y.shape[0] print(m) print(c)</p>
-
 <p>f_test = m*x_test + c plt.plot(x_test, f_test, ‘b-’) plt.plot(x, y, ‘rx’)</p>
-
-</section><section id="section-18" class="slide level2">
+</section>
+<section id="section-18" class="slide level2">
 <h2></h2>
 <p>Exercise 2</p>
 <p>There is a problem here, we seem to need many interations to get to a good solution. Let’s explore what’s going on. Write code which alternates between updates of <code>c</code> and <code>m</code>. Include the following features in your code.</p>
@@ -973,7 +925,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <li>Cause the code to stop running when the error change over less than 10 iterations is smaller than <span class="math inline">\(1\times10^{-4}\)</span>. This is known as a stopping criterion.</li>
 </ol>
 <p>Why do we need so many iterations to get to the solution?</p>
-</section><section id="important-concepts-not-covered" class="slide level2">
+</section>
+<section id="important-concepts-not-covered" class="slide level2">
 <h2>Important Concepts Not Covered</h2>
 <ul>
 <li>Other optimization methods:
@@ -983,13 +936,15 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <li>Effective heuristics such as momentum.</li>
 <li>Local vs global solutions.</li>
 </ul>
-</section><section id="further-reading" class="slide level2 scrollable">
-<h2>Further Reading</h2>
+</section>
+<section id="further-reading" class="slide level2 scrollable">
+<h2 class="scrollable">Further Reading</h2>
 <ul>
 <li><p>For fitting linear models: Section 1.1-1.2 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
 <li><p>Section 1.2.5 up to equation 1.65 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
-</section><section id="multi-dimensional-inputs" class="slide level2">
+</section>
+<section id="multi-dimensional-inputs" class="slide level2">
 <h2>Multi-dimensional Inputs</h2>
 <ul>
 <li>Multivariate functions involve more than one input.</li>
@@ -998,23 +953,26 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <li>Place these factors in a feature vector <span class="math inline">\(\inputVector_i\)</span>.</li>
 <li>Linear function is now defined as <span class="math display">\[\mappingFunction(\inputVector_i) = \sum_{j=1}^p w_j \inputScalar_{i, j} + c\]</span></li>
 </ul>
-</section><section id="vector-notation" class="slide level2">
+</section>
+<section id="vector-notation" class="slide level2">
 <h2>Vector Notation</h2>
 <ul>
 <li>Write in vector notation, <span class="math display">\[\mappingFunction(\inputVector_i) = \mappingVector^\top \inputVector_i + c\]</span></li>
 <li>Can absorb <span class="math inline">\(c\)</span> into <span class="math inline">\(\mappingVector\)</span> by assuming extra input <span class="math inline">\(\inputScalar_0\)</span> which is always 1. <span class="math display">\[\mappingFunction(\inputVector_i) = \mappingVector^\top \inputVector_i\]</span></li>
 </ul>
-</section><section id="objective-functions-and-regression" class="slide level2">
+</section>
+<section id="objective-functions-and-regression" class="slide level2">
 <h2>Objective Functions and Regression</h2>
 <ul>
-<li>Classification: map feature to class label.</li>
+<li><p>Classification: map feature to class label.</p></li>
 <li><p>Regression: map feature to real value our <em>prediction function</em> is</p>
 <p><span class="math display">\[\mappingFunction(\inputScalar_i) = m\inputScalar_i + c\]</span></p></li>
 <li><p>Need an <em>algorithm</em> to fit it.</p></li>
 <li><p>Least squares: minimize an error.</p></li>
 </ul>
 <p><span class="math display">\[\errorFunction(m, c) = \sum_{i=1}^\numData (\dataScalar_i * \mappingFunction(\inputScalar_i))^2\]</span></p>
-</section><section id="regression" class="slide level2">
+</section>
+<section id="regression" class="slide level2">
 <h2>Regression</h2>
 <ul>
 <li>Create an artifical data set.</li>
@@ -1025,7 +983,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <p>m_true = 1.4 c_true = -3.1</p>
 <p>We can use these values to create our artificial data. The formula <span class="math display">\[\dataScalar_i = m\inputScalar_i + c\]</span> is translated to code as follows:</p>
 <p>y = m_true*x+c_true</p>
-</section><section id="plot-of-data" class="slide level2">
+</section>
+<section id="plot-of-data" class="slide level2">
 <h2>Plot of Data</h2>
 <p>We can now plot the artifical data we’ve created.</p>
 <div class="figure">
@@ -1035,7 +994,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 </div>
 </div>
 <p>These points lie exactly on a straight line, that’s not very realistic, let’s corrupt them with a bit of Gaussian ‘noise’.</p>
-</section><section id="noise-corrupted-plot" class="slide level2">
+</section>
+<section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
 <p>noise = np.random.normal(scale=0.5, size=4) # standard deviation of the noise is 0.5 y = m_true*x + c_true + noise plt.plot(x, y, ‘r.’, markersize=10) plt.xlim([-3, 3]) mlai.write_figure(filename=“../slides/diagrams/ml/regression_noise.svg”, transparent=True)</p>
 <div class="figure">
@@ -1044,13 +1004,27 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 </object>
 </div>
 </div>
-</section><section id="contour-plot-of-error-function" class="slide level2">
+</section>
+<section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
 <ul>
 <li>Visualise the error function surface, create vectors of values.</li>
 </ul>
 </section></section>
-<section><section id="create-an-array-of-linearly-separated-values-around-m_true" class="title-slide slide level1"><h1>create an array of linearly separated values around m_true</h1></section><section id="contour-plot-of-error" class="slide level2">
+<section>
+<section id="create-an-array-of-linearly-separated-values-around-m_true" class="title-slide slide level1">
+<h1>create an array of linearly separated values around m_true</h1>
+<p>m_vals = np.linspace(m_true-3, m_true+3, 100) # create an array of linearly separated values ae c_vals = np.linspace(c_true-3, c_true+3, 100)</p>
+<ul>
+<li>create a grid of values to evaluate the error function in 2D.</li>
+</ul>
+<p>m_grid, c_grid = np.meshgrid(m_vals, c_vals)</p>
+<ul>
+<li>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</li>
+</ul>
+<p>E_grid = np.zeros((100, 100)) for i in range(100): for j in range(100): E_grid[i, j] = ((y - m_grid[i, j]*x - c_grid[i, j])**2).sum()</p>
+</section>
+<section id="contour-plot-of-error" class="slide level2">
 <h2>Contour Plot of Error</h2>
 <ul>
 <li>We can now make a contour plot.</li>
@@ -1062,7 +1036,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 </object>
 </div>
 </div>
-</section><section id="steepest-descent" class="slide level2">
+</section>
+<section id="steepest-descent" class="slide level2">
 <h2>Steepest Descent</h2>
 <ul>
 <li>Minimize the sum of squares error function.</li>
@@ -1071,13 +1046,15 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <li>update that guess by subtracting a portion of the gradient from the guess.</li>
 <li>Like walking down a hill in the steepest direction of the hill to get to the bottom.</li>
 </ul>
-</section><section id="algorithm" class="slide level2">
+</section>
+<section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
 <li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 </ul>
 <p>m_star = 0.0 c_star = -5.0</p>
-</section><section id="offset-gradient" class="slide level2">
+</section>
+<section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
 <li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>,</p>
@@ -1086,17 +1063,20 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <li><p>This is computed in python as follows</p></li>
 </ul>
 <p>c_grad = -2<em>(y-m_star</em>x - c_star).sum() print(“Gradient with respect to c is”, c_grad)</p>
-</section><section id="deriving-the-gradient" class="slide level2">
+</section>
+<section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
 <p>To see how the gradient was derived, first note that the <span class="math inline">\(c\)</span> appears in every term in the sum. So we are just differentiating <span class="math inline">\((\dataScalar_i - m\inputScalar_i - c)^2\)</span> for each term in the sum. The gradient of this term with respect to <span class="math inline">\(c\)</span> is simply the gradient of the outer quadratic, multiplied by the gradient with respect to <span class="math inline">\(c\)</span> of the part inside the quadratic. The gradient of a quadratic is two times the argument of the quadratic, and the gradient of the inside linear term is just minus one. This is true for all terms in the sum, so we are left with the sum in the gradient.</p>
-</section><section id="slope-gradient" class="slide level2">
+</section>
+<section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
 <p>The gradient with respect tom <span class="math inline">\(m\)</span> is similar, but now the gradient of the quadratic’s argument is <span class="math inline">\(-\inputScalar_i\)</span> so the gradient with respect to <span class="math inline">\(m\)</span> is</p>
 <p><span class="math display">\[\frac{\text{d}\errorFunction(m, c)}{\text{d} m} = -2\sum_{i=1}^\numData \inputScalar_i(\dataScalar_i - m\inputScalar_i -
 c)\]</span></p>
 <p>which can be implemented in python (numpy) as</p>
 <p>m_grad = -2<em>(x</em>(y-m_star*x - c_star)).sum() print(“Gradient with respect to m is”, m_grad)</p>
-</section><section id="update-equations" class="slide level2">
+</section>
+<section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
 <li>Now we have gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
@@ -1106,7 +1086,8 @@ c)\]</span></p>
 <li>Otherwise we might overshoot the minimum.</li>
 <li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
 </ul>
-</section><section id="move-in-direction-of-gradient" class="slide level2">
+</section>
+<section id="move-in-direction-of-gradient" class="slide level2">
 <h2>Move in Direction of Gradient</h2>
 <div class="figure">
 <div id="regression-contour-step-1-figure" class="figure-frame">
@@ -1114,232 +1095,265 @@ c)\]</span></p>
 </object>
 </div>
 </div>
-</section><section id="update-equations-1" class="slide level2">
+</section>
+<section id="update-equations-1" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
 <li><p>The step size has already been introduced, it’s again known as the learning rate and is denoted by <span class="math inline">\(\learnRate\)</span>. <span class="math display">\[
 c_\text{new}\leftarrow c_{\text{old}} - \learnRate \frac{\text{d}\errorFunction(m, c)}{\text{d}c}
 \]</span></p></li>
-<li>gives us an update for our estimate of <span class="math inline">\(c\)</span> (which in the code we’ve been calling <code>c_star</code> to represent a common way of writing a parameter estimate, <span class="math inline">\(c^*\)</span>) and <span class="math display">\[
+<li><p>gives us an update for our estimate of <span class="math inline">\(c\)</span> (which in the code we’ve been calling <code>c_star</code> to represent a common way of writing a parameter estimate, <span class="math inline">\(c^*\)</span>) and <span class="math display">\[
 m_\text{new} \leftarrow m_{\text{old}} - \learnRate \frac{\text{d}\errorFunction(m, c)}{\text{d}m}
-\]</span></li>
+\]</span></p></li>
 <li><p>Giving us an update for <span class="math inline">\(m\)</span>.</p></li>
 </ul>
-</section><section id="update-code" class="slide level2">
+</section>
+<section id="update-code" class="slide level2">
 <h2>Update Code</h2>
 <ul>
 <li>These updates can be coded as</li>
 </ul>
 <p>print(“Original m was”, m_star, “and original c was”, c_star) learn_rate = 0.01 c_star = c_star - learn_rate<em>c_grad m_star = m_star - learn_rate</em>m_grad print(“New m is”, m_star, “and new c is”, c_star)</p>
 <!-- SECTION Iterating Updates -->
-</section><section id="iterating-updates" class="slide level2">
+</section>
+<section id="iterating-updates" class="slide level2">
 <h2>Iterating Updates</h2>
 <ul>
 <li>Fit model by descending gradient.</li>
 </ul>
-</section><section id="gradient-descent-algorithm" class="slide level2">
+</section>
+<section id="gradient-descent-algorithm" class="slide level2">
 <h2>Gradient Descent Algorithm</h2>
 <p>num_plots = plot.regression_contour_fit(x, y, diagrams=‘../slides/diagrams/ml’)</p>
 <script>
 showDivs(1, 'regression_contour_fit');
 </script>
 <p><small></small> <input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')"> <button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
-</section><section id="section-19" class="slide level2">
+</section>
+<section id="section-19" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit000.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-20" class="slide level2">
+</section>
+<section id="section-20" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit001.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-21" class="slide level2">
+</section>
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit002.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-22" class="slide level2">
+</section>
+<section id="section-22" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit003.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-23" class="slide level2">
+</section>
+<section id="section-23" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit004.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-24" class="slide level2">
+</section>
+<section id="section-24" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit005.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-25" class="slide level2">
+</section>
+<section id="section-25" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit006.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-26" class="slide level2">
+</section>
+<section id="section-26" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit007.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-27" class="slide level2">
+</section>
+<section id="section-27" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit008.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-28" class="slide level2">
+</section>
+<section id="section-28" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit009.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-29" class="slide level2">
+</section>
+<section id="section-29" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit010.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-30" class="slide level2">
+</section>
+<section id="section-30" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit011.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-31" class="slide level2">
+</section>
+<section id="section-31" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit012.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-32" class="slide level2">
+</section>
+<section id="section-32" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit013.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-33" class="slide level2">
+</section>
+<section id="section-33" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit014.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-34" class="slide level2">
+</section>
+<section id="section-34" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit015.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-35" class="slide level2">
+</section>
+<section id="section-35" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit016.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-36" class="slide level2">
+</section>
+<section id="section-36" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit017.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-37" class="slide level2">
+</section>
+<section id="section-37" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit018.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-38" class="slide level2">
+</section>
+<section id="section-38" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit019.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-39" class="slide level2">
+</section>
+<section id="section-39" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit020.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-40" class="slide level2">
+</section>
+<section id="section-40" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit021.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-41" class="slide level2">
+</section>
+<section id="section-41" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit022.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-42" class="slide level2">
+</section>
+<section id="section-42" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit023.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-43" class="slide level2">
+</section>
+<section id="section-43" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit024.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-44" class="slide level2">
+</section>
+<section id="section-44" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit025.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-45" class="slide level2">
+</section>
+<section id="section-45" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit026.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-46" class="slide level2">
+</section>
+<section id="section-46" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit027.svg" width="60%" style=" ">
 </object>
 </div>
-</section><section id="section-47" class="slide level2">
+</section>
+<section id="section-47" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
 </object>
 </div>
-
-
-
 <p>import scipy as sp</p>
 <p>Q, R = np.linalg.qr(X) w = sp.linalg.solve_triangular(R, np.dot(Q.T, y)) w = pd.DataFrame(w, index=X.columns) w</p>
-</section><section id="reading" class="slide level2">
+</section>
+<section id="reading" class="slide level2">
 <h2>Reading</h2>
 <ul>
 <li>Section 1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span> for Matrix &amp; Vector Review.</li>
 </ul>
-</section><section id="thanks" class="slide level2 scrollable">
-<h2>Thanks!</h2>
+</section>
+<section id="thanks" class="slide level2 scrollable">
+<h2 class="scrollable">Thanks!</h2>
 <ul>
-<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
+<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
+<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
 <li><p>blog posts:</p>
 <p><a href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What is Machine Learning?</a></p></li>
 </ul>
-</section><section id="references" class="slide level2 unnumbered scrollable">
-<h2>References</h2>
-<div id="refs" class="references">
+</section>
+<section id="references" class="slide level2 unnumbered scrollable">
+<h2 class="unnumbered scrollable">References</h2>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-Bishop:book06">
 <p>Bishop, C.M., 2006. Pattern recognition and machine learning. springer.</p>
 </div>

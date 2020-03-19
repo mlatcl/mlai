@@ -356,7 +356,6 @@
 </section>
 <section id="nonlinear-regression" class="slide level2">
 <h2>Nonlinear Regression</h2>
-
 <ul>
 <li>Problem with Linear Regression—<span class="math inline">\(\inputVector\)</span> may not be linearly related to <span class="math inline">\(\dataVector\)</span>.</li>
 <li>Potential solution: create a feature space: define <span class="math inline">\(\basisFunc(\inputVector)\)</span> where <span class="math inline">\(\basisFunc(\cdot)\)</span> is a nonlinear function of <span class="math inline">\(\inputVector\)</span>.</li>
@@ -365,7 +364,6 @@
 </section>
 <section id="non-linear-in-the-inputs" class="slide level2">
 <h2>Non-linear in the Inputs</h2>
-
 <p><span class="math display">\[
 \mappingFunction(\inputVector) = \mappingVector^\top \inputVector
 \]</span> </p>
@@ -385,7 +383,6 @@
 \basisVector = [1, \inputScalar, \inputScalar^2]
 \]</span></li>
 </ul>
-
 <p><span class="math display">\[
 \begin{align*}
 \basisFunc_1(\inputScalar) = 1, \\
@@ -398,7 +395,6 @@
 </section>
 <section id="matrix-valued-function" class="slide level2">
 <h2>Matrix Valued Function</h2>
-
 <p><span class="math display">\[
 \basisMatrix(\inputVector) = 
 \begin{bmatrix} 1 &amp; \inputScalar_1 &amp;
@@ -408,9 +404,8 @@
 1 &amp; \inputScalar_n &amp; \inputScalar_n^2
 \end{bmatrix}
 \]</span> </p>
-
 <p>import numpy as np</p>
-<p>def quadratic(x, **kwargs): &quot;&quot;“Take in a vector of input values and return the design matrix associated with the basis functions.”&quot;&quot; return np.hstack([np.ones((x.shape[0], 1)), x, x**2])</p>
+<p>def quadratic(x, **kwargs): ""“Take in a vector of input values and return the design matrix associated with the basis functions.”"" return np.hstack([np.ones((x.shape[0], 1)), x, x**2])</p>
 </section>
 <section id="functions-derived-from-quadratic-basis" class="slide level2">
 <h2>Functions Derived from Quadratic Basis</h2>
@@ -449,8 +444,6 @@ showDivs(0, 'quadratic_basis');
 </object>
 </div>
 </div>
-
-
 </section>
 <section id="quadratic-functions" class="slide level2">
 <h2>Quadratic Functions</h2>
@@ -479,11 +472,9 @@ showDivs(0, 'quadratic_function');
 <object class="svgplot " data="../slides/diagrams/ml/quadratic_function002.svg" width="80%" style=" ">
 </object>
 </div>
-
 </section>
 <section id="different-bases" class="slide level2">
 <h2>Different Bases</h2>
-
 <p><span class="math display">\[
 \basisFunc_j(\inputScalar_i) = \inputScalar_i^j
 \]</span> </p>
@@ -523,18 +514,13 @@ showDivs(1, 'polynomial_basis');
 <object class="svgplot " data="../slides/diagrams/ml/polynomial_basis003.svg" width="80%" style=" ">
 </object>
 </div>
-
-
-
 </section>
 <section id="different-basis" class="slide level2">
 <h2>Different Basis</h2>
 
-
 </section>
 <section id="radial-basis-functions" class="slide level2">
 <h2>Radial Basis Functions</h2>
-
 <ul>
 <li>Basis functions can be local e.g. radial (or Gaussian) basis <span class="math display">\[\basisFunc_j(\inputScalar) = \exp\left(-\frac{(\inputScalar-\mu_j)^2}{\lengthScale^2}\right)\]</span></li>
 </ul>
@@ -572,13 +558,11 @@ showDivs(0, 'radial_function');
 <object class="svgplot " data="../slides/diagrams/ml/radial_function002.svg" width="80%" style=" ">
 </object>
 </div>
-
 </section>
 <section id="rectified-linear-units" class="slide level2">
 <h2>Rectified Linear Units</h2>
 <p>import numpy as np</p>
 <p>%load -s relu mlai.py</p>
-
 <p>import matplotlib.pyplot as plt import teaching_plots as plot import mlai</p>
 </section>
 <section id="functions-derived-from-relu-basis" class="slide level2">
@@ -625,12 +609,10 @@ showDivs(0, 'relu_function');
 <object class="svgplot " data="../slides/diagrams/ml/relu_function004.svg" width="80%" style=" ">
 </object>
 </div>
-
 </section>
 <section id="hyperbolic-tangent-basis" class="slide level2">
 <h2>Hyperbolic Tangent Basis</h2>
 <p>%load -s tanh mlai.py</p>
-
 </section>
 <section id="functions-derived-from-tanh-basis" class="slide level2">
 <h2>Functions Derived from Tanh Basis</h2>
@@ -662,7 +644,6 @@ showDivs(0, 'tanh_function');
 <object class="svgplot " data="../slides/diagrams/ml/tanh_function002.svg" width="80%" style=" ">
 </object>
 </div>
-
 <p>import pods from ipywidgets import IntSlider</p>
 </section>
 <section id="fourier-basis" class="slide level2">
@@ -674,7 +655,6 @@ showDivs(0, 'tanh_function');
 <p>%load -s fourier mlai.py</p>
 <p>import matplotlib.pyplot as plt import mlai import teaching_plots as plot</p>
 <p>import pods from ipywidgets import IntSlider</p>
-
 </section>
 <section id="functions-derived-from-fourier-basis" class="slide level2">
 <h2>Functions Derived from Fourier Basis</h2>
@@ -706,7 +686,6 @@ showDivs(0, 'fourier_function');
 <object class="svgplot " data="../slides/diagrams/ml/fourier_function002.svg" width="80%" style=" ">
 </object>
 </div>
-
 </section>
 <section id="section-23" class="slide level2">
 <h2></h2>
@@ -846,7 +825,6 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </section>
 <section id="non-linear-but-linear-in-the-parameters" class="slide level2">
 <h2>Non-linear but Linear in the Parameters</h2>
-
 <ul>
 <li>Model is non-linear, but linear in parameters <span class="math display">\[
 \mappingFunction(\inputVector) = \mappingVector^\top \basisVector(\inputVector)
@@ -868,7 +846,6 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 <li><p><span class="math inline">\(\mappingFunction(\inputScalar) = \exp(-\sum_i(\inputScalar_i - \mappingScalar_i)^2)\)</span></p></li>
 <li><p><span class="math inline">\(\mappingFunction(\inputScalar) = \exp(-\mappingVector^\top \inputVector)\)</span></p></li>
 </ol>
-
 </section>
 <section id="section-27" class="slide level2">
 <h2></h2>
@@ -878,7 +855,7 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 \]</span> Compute the corresponding error on the training data. How does it compare to the error you were able to achieve fitting the basis above? Plot the form of your prediction function from the least squares estimate alongside the form of you prediction function you fitted by hand.</p>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
-<h2>Further Reading</h2>
+<h2 class="scrollable">Further Reading</h2>
 <ul>
 <li><p>Section 1.4 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
 <li><p>Chapter 1, pg 1-6 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
@@ -892,7 +869,6 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </section>
 <section id="use-of-qr-decomposition-for-numerical-stability" class="slide level2">
 <h2>Use of QR Decomposition for Numerical Stability</h2>
-
 <p><em>TODO</em> example with polynomials.</p>
 <p>import numpy as np</p>
 <p>x = np.random.normal(size=(10, 1))</p>
@@ -901,7 +877,7 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 <p>Phi*Phi</p>
 </section>
 <section id="thanks" class="slide level2 scrollable">
-<h2>Thanks!</h2>
+<h2 class="scrollable">Thanks!</h2>
 <ul>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
 <li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
@@ -910,8 +886,8 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
-<h2>References</h2>
-<div id="refs" class="references">
+<h2 class="unnumbered scrollable">References</h2>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-Bishop:book06">
 <p>Bishop, C.M., 2006. Pattern recognition and machine learning. springer.</p>
 </div>
