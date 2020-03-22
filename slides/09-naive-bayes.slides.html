@@ -678,9 +678,8 @@ p(\dataVector|\pi) = \prod_{i=1}^{\numData} \pi^{\dataScalar_i} (1-\pi)^{1-\data
 <li><p>What’s your best guess of probability for coin toss is heads when you get 47 heads from 100 tosses?</p></li>
 </ul>
 </section>
-<section id="section-11" class="slide level2">
-<h2></h2>
-<p>Exercise 2</p>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>Show that the maximum likelihood solution we have found is a <em>minimum</em> for our objective.</p>
 </section>
 <section id="bayes-rule-reminder" class="slide level2">
@@ -930,14 +929,12 @@ return v
 <p>correct = y_test.eq(p_y&gt;0.5) total_correct = sum(correct) print(“Total correct”, total_correct, " out of “, len(y_test),”which is“, float(total_correct)/len(y_test),”%")</p>
 <p>confusion_matrix = pd.DataFrame(data=np.zeros((2,2)), columns=[‘predicted no maternity’, ‘predicted maternity’], index =[‘actual no maternity’,‘actual maternity’]) confusion_matrix[‘predicted maternity’][‘actual maternity’] = (y_test &amp; (p_y&gt;0.5)).sum() confusion_matrix[‘predicted maternity’][‘actual no maternity’] = (~y_test &amp; (p_y&gt;0.5)).sum() confusion_matrix[‘predicted no maternity’][‘actual maternity’] = (y_test &amp; ~(p_y&gt;0.5)).sum() confusion_matrix[‘predicted no maternity’][‘actual no maternity’] = (~y_test &amp; ~(p_y&gt;0.5)).sum() confusion_matrix</p>
 </section>
-<section id="section-12" class="slide level2">
-<h2></h2>
-<p>Exercise 3</p>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise 3</h2>
 <p>How can you improve your classification, are all the features equally valid? Are some features more helpful than others? What happens if you remove features that appear to be less helpful. How might you select such features?</p>
 </section>
-<section id="section-13" class="slide level2">
-<h2></h2>
-<p>Exercise 4</p>
+<section id="exercise-4" class="slide level2">
+<h2>Exercise 4</h2>
 <p>We have decided to classify positive if probability of maternity is greater than 0.5. This has led us to accidentally classify some facilities as havien’t facilities for maternity when in fact they don’t. Imagine you wish to ensure that a facility handles maternity. With your test set how low do you have to set the threshold to avoid all the false negatives (i.e. facilities where you predicted there was no maternity, but in actuality there were?</p>
 </section>
 <section id="naive-bayes-summary" class="slide level2">
@@ -995,8 +992,6 @@ return v
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',

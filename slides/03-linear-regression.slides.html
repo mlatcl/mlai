@@ -883,9 +883,8 @@ L(m,c,\dataStd^{2})=-\frac{\numData}{2}\log 2\pi -\frac{\numData}{2}\log \dataSt
 </ul>
 <p><span class="math display">\[m^* = \frac{\sum_{i=1}^\numData (\dataScalar_i - c)\inputScalar_i}{\sum_{i=1}^\numData \inputScalar_i^2}\]</span></p>
 </section>
-<section id="section-16" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Convert the following python code expressions into <span class="math inline">\(\LaTeX\)</span>j, writing your answers below. In each case write your answer as a single equality (i.e. your maths should only contain one expression, not several lines of expressions). For the purposes of your <span class="math inline">\(\LaTeX\)</span> please assume that <code>x</code> and <code>w</code> are <span class="math inline">\(n\)</span> dimensional vectors.</p>
 <p><code>(a) f = x.sum()</code></p>
 <p><code>(b) m = x.mean()</code></p>
@@ -904,9 +903,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 \end{aligned}
 \]</span></p>
 </section>
-<section id="section-17" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Derive the the gradient of the objective function with respect to the slope, <span class="math inline">\(m\)</span>. Rearrange it to show that the update equation written above does find the stationary points of the objective function. By computing its derivative show that it’s a minimum.</p>
 <p>m = ((y - c)*x).sum()/(x**2).sum() print(m)</p>
 <p>import numpy as np</p>
@@ -915,9 +913,8 @@ _{i=1}^{\numData}\left(\dataScalar_i-m^{*}\inputScalar_i-c^{*}\right)^{2}}{\numD
 <p>for i in np.arange(10): m = ((y - c)<em>x).sum()/(x</em>x).sum() c = (y-m*x).sum()/y.shape[0] print(m) print(c)</p>
 <p>f_test = m*x_test + c plt.plot(x_test, f_test, ‘b-’) plt.plot(x, y, ‘rx’)</p>
 </section>
-<section id="section-18" class="slide level2">
-<h2></h2>
-<p>Exercise 2</p>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>There is a problem here, we seem to need many interations to get to a good solution. Let’s explore what’s going on. Write code which alternates between updates of <code>c</code> and <code>m</code>. Include the following features in your code.</p>
 <ol type="1">
 <li>Initialise with <code>m=-0.4</code> and <code>c=80</code>.</li>
@@ -1130,203 +1127,203 @@ showDivs(1, 'regression_contour_fit');
 </script>
 <p><small></small> <input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')"> <button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
 </section>
-<section id="section-19" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit000.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-20" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit001.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-21" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit002.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-22" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit003.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-23" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit004.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-24" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit005.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-25" class="slide level2">
+<section id="section-22" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit006.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-26" class="slide level2">
+<section id="section-23" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit007.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-27" class="slide level2">
+<section id="section-24" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit008.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-28" class="slide level2">
+<section id="section-25" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit009.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-29" class="slide level2">
+<section id="section-26" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit010.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-30" class="slide level2">
+<section id="section-27" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit011.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-31" class="slide level2">
+<section id="section-28" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit012.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-32" class="slide level2">
+<section id="section-29" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit013.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-33" class="slide level2">
+<section id="section-30" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit014.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-34" class="slide level2">
+<section id="section-31" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit015.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-35" class="slide level2">
+<section id="section-32" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit016.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-36" class="slide level2">
+<section id="section-33" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit017.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-37" class="slide level2">
+<section id="section-34" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit018.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-38" class="slide level2">
+<section id="section-35" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit019.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-39" class="slide level2">
+<section id="section-36" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit020.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-40" class="slide level2">
+<section id="section-37" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit021.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-41" class="slide level2">
+<section id="section-38" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit022.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-42" class="slide level2">
+<section id="section-39" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit023.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-43" class="slide level2">
+<section id="section-40" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit024.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-44" class="slide level2">
+<section id="section-41" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit025.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-45" class="slide level2">
+<section id="section-42" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit026.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-46" class="slide level2">
+<section id="section-43" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit027.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-47" class="slide level2">
+<section id="section-44" class="slide level2">
 <h2></h2>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
@@ -1378,8 +1375,6 @@ showDivs(1, 'regression_contour_fit');
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',

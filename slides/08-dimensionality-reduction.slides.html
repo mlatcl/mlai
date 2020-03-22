@@ -615,9 +615,8 @@ f_j(\latentVector) =
 \mathbf{F} = \latentMatrix\mappingMatrix^\top,
 \]</span> </p>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Show that, given all the definitions above, if, <span class="math display">\[
 \mathbf{F} = \latentMatrix\mappingMatrix^\top
 \]</span> and the elements of the vector valued function <span class="math inline">\(\mathbf{F}\)</span> are given by <span class="math display">\[
@@ -670,7 +669,7 @@ p(\dataVector_{i, :}|\mappingMatrix) =
 \]</span> is <em>not</em> valid for <span class="math inline">\(q&lt;p\)</span> (where <span class="math inline">\(\mappingMatrix\in \Re^{p\times q}\)</span>). This mathematical consequence is a probability density which has no ‘support’ in large regions of the space for <span class="math inline">\(\dataVector_{i, :}\)</span>. There are regions for which the probability of <span class="math inline">\(\dataVector_{i, :}\)</span> is zero. These are any regions that lie off the hyperplane defined by mapping from <span class="math inline">\(\latentVector\)</span> to <span class="math inline">\(\dataVector\)</span> with the matrix <span class="math inline">\(\mappingMatrix\)</span>. In factor analysis the noise corruption, <span class="math inline">\(\noiseVector\)</span>, allows for points to be found away from the hyperplane. In Hotelling’s PCA the noise variance is zero, so there is only support for points that fall precisely on the hyperplane. Secondly, Hotelling explicity chose to rename factor analysis as principal component analysis, arguing that the factors social scientist sought were different in nature to the concept of a mathematical factor. This was unfortunate because the factor loadings, <span class="math inline">\(\mappingMatrix\)</span> can also be seen as factors in the mathematical sense because the model Hotelling defined is a Gaussian model with covariance given by <span class="math inline">\(\covarianceMatrix = \mappingMatrix\mappingMatrix^\top\)</span> so <span class="math inline">\(\mappingMatrix\)</span> is a <em>factor</em> of the covariance in the mathematical sense, as well as a factor loading.</p>
 <p>However, the paper had one great advantage over standard approaches to factor analysis. Despite the fact that the model was a special case that is subsumed by the more general approach of factor analysis it is this special case that leads to a particular algorithm, namely that the factor loadings (or principal components as Hotelling referred to them) are given by an <em>eigenvalue decomposition</em> of the empirical covariance matrix.</p>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section" class="slide level2">
 <h2></h2>
 <p>Eigenvalue Decomposition</p>
 <p>Eigenvalue problems are widespreads in physics and mathematics, they are often written as a matrix/vector equation but we prefer to write them as a full matrix equation. In an eigenvalue problem you are looking to find a matrix of eigenvectors, <span class="math inline">\(\mathbf{U}\)</span> and a <em>diagonal</em> matrix of eigenvalues, <span class="math inline">\(\boldsymbol{\Lambda}\)</span> that satisfy the <em>matrix</em> equation <span class="math display">\[
@@ -697,9 +696,8 @@ p(\dataVector_{i, :}|\mappingMatrix) =
 b_i^2
 \]</span> which, since it is a sum of squares, is positive or zero. The constraint that <span class="math inline">\(\mathbf{A}\)</span> must be <em>full rank</em> ensures that there is no vector <span class="math inline">\(\weightVector\)</span>, other than the zero vector, which causes the vector <span class="math inline">\(\mathbf{b}\)</span> to be all zeros.</p>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>If <span class="math inline">\(\covarianceMatrix=\mathbf{A}^\top \mathbf{A}\)</span> then express <span class="math inline">\(c_{i,j}\)</span>, the value of the element at the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\covarianceMatrix\)</span>, in terms of the columns of <span class="math inline">\(\mathbf{A}\)</span>. Use this to show that (i) the matrix is symmetric and (ii) the matrix has positive elements along its diagonal.</p>
 <!-- SECTION Eigenvectors of a Symmetric Matric -->
 </section>
@@ -763,9 +761,8 @@ p(\latentVector_{i, :} | \dataVector_{i, :}) = \log p(\dataVector_{i, :}|\mappin
 \latentVector_{i, :}^\top \latentVector_{i, :} + \text{const}
 \]</span></p>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-2" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Multiply out the terms in the brackets. Then collect the quadratic term and the linear terms together. Show that the posterior has the form <span class="math display">\[
 \latentVector_{i, :} | \mappingMatrix \sim \gaussianSamp{\meanVector_x}{\covarianceMatrix_x}
 \]</span> where <span class="math display">\[
@@ -780,9 +777,8 @@ p(\latentVector_{i, :} | \dataVector_{i, :}) = \log p(\dataVector_{i, :}|\mappin
 <h2>Python Implementation of the Posterior</h2>
 <p>Now let’s implement the system in code.</p>
 </section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<p>Exercise 2</p>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>Use the values for <span class="math inline">\(\mappingMatrix\)</span> and <span class="math inline">\(\noiseStd^2\)</span> you have computed, along with the data set <span class="math inline">\(\dataMatrix\)</span> to compute the posterior density over <span class="math inline">\(\latentMatrix\)</span>. Write a function of the form</p>
 <p>python mu_x, C_x = posterior(Y, W, sigma2)} where <code>mu_x</code> and <code>C_x</code> are the posterior mean and posterior covariance for the given <span class="math inline">\(\dataMatrix\)</span>.</p>
 <p>Don’t forget to subtract the mean of the data <code>Y</code> inside your function before computing the posterior: remember we assumed at the beginning of our analysis that the data had been centred (i.e. the mean was removed).}{20}</p>
@@ -948,9 +944,8 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
 <p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
 <p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
 </section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-3" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Project the motion capture data onto its principal components, and then use the <em>mean posterior estimate</em> to reconstruct the data from the latent variables at the data points. Use two latent dimensions. What is the sum of squares error for the reconstruction?</p>
 </section>
 <section id="other-data-sets-to-explore" class="slide level2">
@@ -1033,8 +1028,6 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',

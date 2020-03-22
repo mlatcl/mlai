@@ -469,9 +469,8 @@ R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
 <h2>Validation on the Olympic Marathon Data</h2>
 
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>Exercise 2</p>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>In this question you will construct some flexible general code for fitting linear models.</p>
 <p>Create a python function that computes <span class="math inline">\(\basisMatrix\)</span> for the linear basis, <span class="math display">\[\basisMatrix = \begin{bmatrix} \dataVector &amp; \mathbf{1}\end{bmatrix}\]</span> Name your function <code>linear</code>. <code>Phi</code> should be in the form of a <em>design matrix</em> and <code>x</code> should be in the form of a <code>numpy</code> two dimensional array with <span class="math inline">\(\numData\)</span> rows and 1 column Calls to your function should be in the following form:</p>
 <p><code>Phi = linear(x)</code></p>
@@ -487,9 +486,8 @@ R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
 <h2>Polynomial Fit: Training Error</h2>
 <p>The next thing we’ll do is consider a quadratic fit. We will compute the training error for the two fits.</p>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<p>Exercise 3</p>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise 3</h2>
 <p>In this question we extend the code above to a non- linear basis (a quadratic function).</p>
 <p>Start by creating a python-function called <code>quadratic</code>. It should compute the quadratic basis. <span class="math display">\[
 \basisMatrix = \begin{bmatrix} \mathbf{1} &amp; \dataVector &amp; \dataVector^2\end{bmatrix}
@@ -504,182 +502,182 @@ showDivs(1, 'olympic_LM_polynomial_number');
 </script>
 <p><small></small> <input id="range-olympic_LM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_LM_polynomial_number')" oninput="setDivs('olympic_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_LM_polynomial_number')">❯</button></p>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number011.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number012.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number013.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number014.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number015.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number016.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number017.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-19" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number018.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-20" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number019.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-21" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number020.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-22" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number021.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-23" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number022.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-24" class="slide level2">
+<section id="section-22" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number023.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-25" class="slide level2">
+<section id="section-23" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number024.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-26" class="slide level2">
+<section id="section-24" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number025.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-27" class="slide level2">
+<section id="section-25" class="slide level2">
 <h2></h2>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number026.svg" width="80%" style=" ">
@@ -704,77 +702,77 @@ showDivs(1, 'olympic_val_extra_LM_polynomial_number');
 </script>
 <p><small></small> <input id="range-olympic_val_extra_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_extra_LM_polynomial_number')" oninput="setDivs('olympic_val_extra_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_val_extra_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_val_extra_LM_polynomial_number')">❯</button></p>
 </section>
-<section id="section-28" class="slide level2">
+<section id="section-26" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-29" class="slide level2">
+<section id="section-27" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-30" class="slide level2">
+<section id="section-28" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-31" class="slide level2">
+<section id="section-29" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-32" class="slide level2">
+<section id="section-30" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-33" class="slide level2">
+<section id="section-31" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-34" class="slide level2">
+<section id="section-32" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-35" class="slide level2">
+<section id="section-33" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-36" class="slide level2">
+<section id="section-34" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-37" class="slide level2">
+<section id="section-35" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-38" class="slide level2">
+<section id="section-36" class="slide level2">
 <h2></h2>
 <div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_extra_LM_polynomial_number011.svg" width="80%" style=" ">
@@ -809,77 +807,77 @@ showDivs(1, 'olympic_val_inter_LM_polynomial_number');
 </script>
 <p><small></small> <input id="range-olympic_val_inter_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_inter_LM_polynomial_number')" oninput="setDivs('olympic_val_inter_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_val_inter_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_val_inter_LM_polynomial_number')">❯</button></p>
 </section>
-<section id="section-39" class="slide level2">
+<section id="section-37" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-40" class="slide level2">
+<section id="section-38" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-41" class="slide level2">
+<section id="section-39" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-42" class="slide level2">
+<section id="section-40" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-43" class="slide level2">
+<section id="section-41" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-44" class="slide level2">
+<section id="section-42" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-45" class="slide level2">
+<section id="section-43" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-46" class="slide level2">
+<section id="section-44" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-47" class="slide level2">
+<section id="section-45" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-48" class="slide level2">
+<section id="section-46" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-49" class="slide level2">
+<section id="section-47" class="slide level2">
 <h2></h2>
 <div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_val_inter_LM_polynomial_number011.svg" width="80%" style=" ">
@@ -910,14 +908,12 @@ showDivs(1, 'olympic_val_inter_LM_polynomial_number');
 <h1>Create a hold out set</h1>
 <p>x_valid = np.take(x, indices_hold_out, axis=0) y_valid = np.take(y, indices_hold_out, axis=0)</p>
 </section>
-<section id="section-50" class="slide level2">
-<h2></h2>
-<p>Exercise 4</p>
+<section id="exercise-4" class="slide level2">
+<h2>Exercise 4</h2>
 <p>For both the linear and quadratic models, fit the model to the data up until 1980 and then compute the error on the held out data (from 1980 onwards). Which model performs better on the validation data?</p>
 </section>
-<section id="section-51" class="slide level2">
-<h2></h2>
-<p>Exercise 5</p>
+<section id="exercise-5" class="slide level2">
+<h2>Exercise 5</h2>
 <p>Now we are going to build a more sophisticated form of basis function, one that can accept arguments to its inputs (similar to those we used in <a href="./week4.ipynb">this lab</a>). Here we will start with a polynomial basis.</p>
 <pre><code>def polynomial(x, degree, loc, scale):
     degrees =np.arange(degree+1)
@@ -947,84 +943,84 @@ showDivs(0, 'olympic_loo_LM_polynomial');
 </script>
 <p><small>fold</small> <input id="range-olympic_loo_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_loo_LM_polynomial')" oninput="setDivs('olympic_loo_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo_LM_polynomial')">❯</button></p>
 </section>
-<section id="section-52" class="slide level2">
+<section id="section-48" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo000_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo000_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo000_LM_polynomial')" oninput="setDivs('olympic_loo000_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo000_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo000_LM_polynomial')">❯</button></p>
-<section id="section-53" class="slide level2">
+<section id="section-49" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-54" class="slide level2">
+<section id="section-50" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-55" class="slide level2">
+<section id="section-51" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-56" class="slide level2">
+<section id="section-52" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-57" class="slide level2">
+<section id="section-53" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-58" class="slide level2">
+<section id="section-54" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-59" class="slide level2">
+<section id="section-55" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-60" class="slide level2">
+<section id="section-56" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo000_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-61" class="slide level2">
+<section id="section-57" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-62" class="slide level2">
+<section id="section-58" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-63" class="slide level2">
+<section id="section-59" class="slide level2">
 <h2></h2>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number011.svg" width style=" ">
@@ -1033,84 +1029,84 @@ showDivs(1, 'olympic_loo000_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-64" class="slide level2">
+<section id="section-60" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo001_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo001_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo001_LM_polynomial')" oninput="setDivs('olympic_loo001_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo001_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo001_LM_polynomial')">❯</button></p>
-<section id="section-65" class="slide level2">
+<section id="section-61" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-66" class="slide level2">
+<section id="section-62" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-67" class="slide level2">
+<section id="section-63" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-68" class="slide level2">
+<section id="section-64" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-69" class="slide level2">
+<section id="section-65" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-70" class="slide level2">
+<section id="section-66" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-71" class="slide level2">
+<section id="section-67" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-72" class="slide level2">
+<section id="section-68" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-73" class="slide level2">
+<section id="section-69" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-74" class="slide level2">
+<section id="section-70" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-75" class="slide level2">
+<section id="section-71" class="slide level2">
 <h2></h2>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo001_LM_polynomial_number011.svg" width style=" ">
@@ -1119,84 +1115,84 @@ showDivs(1, 'olympic_loo001_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-76" class="slide level2">
+<section id="section-72" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo002_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo002_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo002_LM_polynomial')" oninput="setDivs('olympic_loo002_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo002_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo002_LM_polynomial')">❯</button></p>
-<section id="section-77" class="slide level2">
+<section id="section-73" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-78" class="slide level2">
+<section id="section-74" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-79" class="slide level2">
+<section id="section-75" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-80" class="slide level2">
+<section id="section-76" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-81" class="slide level2">
+<section id="section-77" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-82" class="slide level2">
+<section id="section-78" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-83" class="slide level2">
+<section id="section-79" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-84" class="slide level2">
+<section id="section-80" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-85" class="slide level2">
+<section id="section-81" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-86" class="slide level2">
+<section id="section-82" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-87" class="slide level2">
+<section id="section-83" class="slide level2">
 <h2></h2>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo002_LM_polynomial_number011.svg" width style=" ">
@@ -1205,84 +1201,84 @@ showDivs(1, 'olympic_loo002_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-88" class="slide level2">
+<section id="section-84" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo003_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo003_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo003_LM_polynomial')" oninput="setDivs('olympic_loo003_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo003_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo003_LM_polynomial')">❯</button></p>
-<section id="section-89" class="slide level2">
+<section id="section-85" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-90" class="slide level2">
+<section id="section-86" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-91" class="slide level2">
+<section id="section-87" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-92" class="slide level2">
+<section id="section-88" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-93" class="slide level2">
+<section id="section-89" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-94" class="slide level2">
+<section id="section-90" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-95" class="slide level2">
+<section id="section-91" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-96" class="slide level2">
+<section id="section-92" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-97" class="slide level2">
+<section id="section-93" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-98" class="slide level2">
+<section id="section-94" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-99" class="slide level2">
+<section id="section-95" class="slide level2">
 <h2></h2>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo003_LM_polynomial_number011.svg" width style=" ">
@@ -1291,84 +1287,84 @@ showDivs(1, 'olympic_loo003_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-100" class="slide level2">
+<section id="section-96" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo004_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo004_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo004_LM_polynomial')" oninput="setDivs('olympic_loo004_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo004_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo004_LM_polynomial')">❯</button></p>
-<section id="section-101" class="slide level2">
+<section id="section-97" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-102" class="slide level2">
+<section id="section-98" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-103" class="slide level2">
+<section id="section-99" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-104" class="slide level2">
+<section id="section-100" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-105" class="slide level2">
+<section id="section-101" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-106" class="slide level2">
+<section id="section-102" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-107" class="slide level2">
+<section id="section-103" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-108" class="slide level2">
+<section id="section-104" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-109" class="slide level2">
+<section id="section-105" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-110" class="slide level2">
+<section id="section-106" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-111" class="slide level2">
+<section id="section-107" class="slide level2">
 <h2></h2>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo004_LM_polynomial_number011.svg" width style=" ">
@@ -1377,84 +1373,84 @@ showDivs(1, 'olympic_loo004_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-112" class="slide level2">
+<section id="section-108" class="slide level2">
 <h2></h2>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo005_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_loo005_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo005_LM_polynomial')" oninput="setDivs('olympic_loo005_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo005_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo005_LM_polynomial')">❯</button></p>
-<section id="section-113" class="slide level2">
+<section id="section-109" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-114" class="slide level2">
+<section id="section-110" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-115" class="slide level2">
+<section id="section-111" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-116" class="slide level2">
+<section id="section-112" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-117" class="slide level2">
+<section id="section-113" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-118" class="slide level2">
+<section id="section-114" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-119" class="slide level2">
+<section id="section-115" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-120" class="slide level2">
+<section id="section-116" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-121" class="slide level2">
+<section id="section-117" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-122" class="slide level2">
+<section id="section-118" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-123" class="slide level2">
+<section id="section-119" class="slide level2">
 <h2></h2>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_loo005_LM_polynomial_number011.svg" width style=" ">
@@ -1463,9 +1459,8 @@ showDivs(1, 'olympic_loo005_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-124" class="slide level2">
-<h2></h2>
-<p>Exercise 6</p>
+<section id="exercise-6" class="slide level2">
+<h2>Exercise 6</h2>
 <p>Write code that computes the <em>leave one out</em> validation error for the olympic data and the polynomial basis. Use the functions you have created above: <code>objective</code>, <code>fit</code>, <code>polynomial</code>. Compute the <em>leave-one-out</em> cross validation error for basis functions containing a maximum degree from 0 to 17.</p>
 </section>
 <section id="k-fold-cross-validation" class="slide level2">
@@ -1483,84 +1478,84 @@ showDivs(0, 'olympic_5cv_LM_polynomial');
 </script>
 <p><small>fold</small> <input id="range-olympic_5cv_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_5cv_LM_polynomial')" oninput="setDivs('olympic_5cv_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv_LM_polynomial')">❯</button></p>
 </section>
-<section id="section-125" class="slide level2">
+<section id="section-120" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv00_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv00_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv00_LM_polynomial')" oninput="setDivs('olympic_5cv00_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv00_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv00_LM_polynomial')">❯</button></p>
-<section id="section-126" class="slide level2">
+<section id="section-121" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-127" class="slide level2">
+<section id="section-122" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-128" class="slide level2">
+<section id="section-123" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-129" class="slide level2">
+<section id="section-124" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-130" class="slide level2">
+<section id="section-125" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-131" class="slide level2">
+<section id="section-126" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-132" class="slide level2">
+<section id="section-127" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-133" class="slide level2">
+<section id="section-128" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv00_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-134" class="slide level2">
+<section id="section-129" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-135" class="slide level2">
+<section id="section-130" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-136" class="slide level2">
+<section id="section-131" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number011.svg" width style=" ">
@@ -1569,84 +1564,84 @@ showDivs(1, 'olympic_5cv00_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-137" class="slide level2">
+<section id="section-132" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv01_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv01_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv01_LM_polynomial')" oninput="setDivs('olympic_5cv01_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv01_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv01_LM_polynomial')">❯</button></p>
-<section id="section-138" class="slide level2">
+<section id="section-133" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-139" class="slide level2">
+<section id="section-134" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-140" class="slide level2">
+<section id="section-135" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-141" class="slide level2">
+<section id="section-136" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-142" class="slide level2">
+<section id="section-137" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-143" class="slide level2">
+<section id="section-138" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-144" class="slide level2">
+<section id="section-139" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-145" class="slide level2">
+<section id="section-140" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-146" class="slide level2">
+<section id="section-141" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-147" class="slide level2">
+<section id="section-142" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-148" class="slide level2">
+<section id="section-143" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv01_LM_polynomial_number011.svg" width style=" ">
@@ -1655,84 +1650,84 @@ showDivs(1, 'olympic_5cv01_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-149" class="slide level2">
+<section id="section-144" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv02_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv02_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv02_LM_polynomial')" oninput="setDivs('olympic_5cv02_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv02_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv02_LM_polynomial')">❯</button></p>
-<section id="section-150" class="slide level2">
+<section id="section-145" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-151" class="slide level2">
+<section id="section-146" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-152" class="slide level2">
+<section id="section-147" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-153" class="slide level2">
+<section id="section-148" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-154" class="slide level2">
+<section id="section-149" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-155" class="slide level2">
+<section id="section-150" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-156" class="slide level2">
+<section id="section-151" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-157" class="slide level2">
+<section id="section-152" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-158" class="slide level2">
+<section id="section-153" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-159" class="slide level2">
+<section id="section-154" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-160" class="slide level2">
+<section id="section-155" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv02_LM_polynomial_number011.svg" width style=" ">
@@ -1741,84 +1736,84 @@ showDivs(1, 'olympic_5cv02_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-161" class="slide level2">
+<section id="section-156" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv03_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv03_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv03_LM_polynomial')" oninput="setDivs('olympic_5cv03_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv03_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv03_LM_polynomial')">❯</button></p>
-<section id="section-162" class="slide level2">
+<section id="section-157" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-163" class="slide level2">
+<section id="section-158" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-164" class="slide level2">
+<section id="section-159" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-165" class="slide level2">
+<section id="section-160" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-166" class="slide level2">
+<section id="section-161" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-167" class="slide level2">
+<section id="section-162" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-168" class="slide level2">
+<section id="section-163" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-169" class="slide level2">
+<section id="section-164" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-170" class="slide level2">
+<section id="section-165" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-171" class="slide level2">
+<section id="section-166" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-172" class="slide level2">
+<section id="section-167" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv03_LM_polynomial_number011.svg" width style=" ">
@@ -1827,84 +1822,84 @@ showDivs(1, 'olympic_5cv03_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-173" class="slide level2">
+<section id="section-168" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv04_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv04_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv04_LM_polynomial')" oninput="setDivs('olympic_5cv04_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv04_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv04_LM_polynomial')">❯</button></p>
-<section id="section-174" class="slide level2">
+<section id="section-169" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-175" class="slide level2">
+<section id="section-170" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-176" class="slide level2">
+<section id="section-171" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-177" class="slide level2">
+<section id="section-172" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-178" class="slide level2">
+<section id="section-173" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-179" class="slide level2">
+<section id="section-174" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-180" class="slide level2">
+<section id="section-175" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-181" class="slide level2">
+<section id="section-176" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-182" class="slide level2">
+<section id="section-177" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-183" class="slide level2">
+<section id="section-178" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-184" class="slide level2">
+<section id="section-179" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv04_LM_polynomial_number011.svg" width style=" ">
@@ -1913,84 +1908,84 @@ showDivs(1, 'olympic_5cv04_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-185" class="slide level2">
+<section id="section-180" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv05_LM_polynomial');
 </script>
 <p><small>num basis</small> <input id="range-olympic_5cv05_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv05_LM_polynomial')" oninput="setDivs('olympic_5cv05_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv05_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv05_LM_polynomial')">❯</button></p>
-<section id="section-186" class="slide level2">
+<section id="section-181" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number001.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-187" class="slide level2">
+<section id="section-182" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number002.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-188" class="slide level2">
+<section id="section-183" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number003.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-189" class="slide level2">
+<section id="section-184" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number004.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-190" class="slide level2">
+<section id="section-185" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number005.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-191" class="slide level2">
+<section id="section-186" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number006.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-192" class="slide level2">
+<section id="section-187" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number007.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-193" class="slide level2">
+<section id="section-188" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number008.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-194" class="slide level2">
+<section id="section-189" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number009.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-195" class="slide level2">
+<section id="section-190" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number010.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="section-196" class="slide level2">
+<section id="section-191" class="slide level2">
 <h2></h2>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_5cv05_LM_polynomial_number011.svg" width style=" ">
@@ -1999,9 +1994,8 @@ showDivs(1, 'olympic_5cv05_LM_polynomial');
 </section>
 </div>
 </section>
-<section id="section-197" class="slide level2">
-<h2></h2>
-<p>Exercise 7</p>
+<section id="exercise-7" class="slide level2">
+<h2>Exercise 7</h2>
 <p>Perform <span class="math inline">\(k\)</span>-fold cross validation on the olympic data with your polynomial basis. Use <span class="math inline">\(k\)</span> set to 5 (e.g. five fold cross validation). Do the different forms of validation select different models? Does five fold cross validation always select the same model?</p>
 <p><em>Note</em>: The data doesn’t divide into 5 equal size partitions for the five fold cross validation error. Don’t worry about this too much. Two of the partitions will have an extra data point. You might find <code>np.random.permutation?</code> useful.</p>
 </section>
@@ -2033,7 +2027,7 @@ showDivs(1, 'olympic_5cv05_LM_polynomial');
 <p>C = 100.0 # SVM regularization parameter gammas = [0.001, 0.01, 0.1, 1]</p>
 <p>per_class=30 num_samps = 20 # Set-up 2x2 grid for plotting. fig, ax = plt.subplots(1, 4, figsize=(10,3)) xlim=None ylim=None for samp in range(num_samps): X, y=create_data(per_class) models = [] titles = [] for gamma in gammas: models.append(svm.SVC(kernel=‘rbf’, gamma=gamma, C=C)) titles.append(‘<span class="math inline">\(\gamma={}\)</span>’.format(gamma)) models = (cl.fit(X, y) for cl in models) xlim, ylim = decision_boundary_plot(models, X, y, axs=ax, filename=‘../slides/diagrams/ml/bias-variance{samp:0&gt;3}.svg’.format(samp=samp), titles=titles, xlim=xlim, ylim=ylim)</p>
 </section>
-<section id="section-198" class="slide level2">
+<section id="section-192" class="slide level2">
 <h2></h2>
 <!--
  
@@ -2138,7 +2132,7 @@ showDivs(0, 'bias-variance-plots');
 <div class="caption" style="">Figure: simple models on left complex models on right</div>
 -->
 </section>
-<section id="section-199" class="slide level2">
+<section id="section-193" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2148,7 +2142,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-200" class="slide level2">
+<section id="section-194" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2158,7 +2152,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-201" class="slide level2">
+<section id="section-195" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2168,7 +2162,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-202" class="slide level2">
+<section id="section-196" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2178,7 +2172,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-203" class="slide level2">
+<section id="section-197" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2188,7 +2182,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-204" class="slide level2">
+<section id="section-198" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2198,7 +2192,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-205" class="slide level2">
+<section id="section-199" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2208,7 +2202,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-206" class="slide level2">
+<section id="section-200" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2218,7 +2212,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-207" class="slide level2">
+<section id="section-201" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2228,7 +2222,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-208" class="slide level2">
+<section id="section-202" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2238,7 +2232,7 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </section>
-<section id="section-209" class="slide level2">
+<section id="section-203" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="bias-variance-figure" class="figure-frame">
@@ -2284,8 +2278,6 @@ showDivs(0, 'bias-variance-plots');
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',

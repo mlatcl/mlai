@@ -1531,15 +1531,13 @@ showDivs(0, 'regression_sgd_contour_fit');
 <p>data[data[‘Body_Count’]&gt;200].sort_values(by=‘Body_Count’, ascending=False)</p>
 <p>data[‘Body_Count’].hist(bins=20) # histogram the data with 20 bins. plt.title(‘Histogram of Film Kill Count’)</p>
 </section>
-<section id="section-103" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Read on the internet about the following python libraries: <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code> and <code>pandas</code>. What functionality does each provide python. What is the <code>pylab</code> library and how does it relate to the other libraries?</p>
 <p>plt.plot(data[‘Year’], data[‘Body_Count’], ‘rx’) ax = plt.gca() # obtain a handle to the current axis ax.set_yscale(‘log’) # use a logarithmic death scale # give the plot some titles and labels plt.title(‘Film Deaths against Year’) plt.ylabel(‘deaths’) plt.xlabel(‘year’)</p>
 </section>
-<section id="section-104" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>Data ethics. If you find data available on the internet, can you simply use it without consequence? If you are given data by a fellow researcher can you publish that data on line?</p>
 <!-- SECTION Recommender Systems -->
 </section>
@@ -1606,9 +1604,8 @@ showDivs(0, 'regression_sgd_contour_fit');
 <h1>uncomment the line below if you are doing this task by self study.</h1>
 <p>pods.util.download_url(‘https://dl.dropboxusercontent.com/u/4347554/mlai_movies.csv’, store_directory = ‘class_movie’, save_name=‘movies.csv’) #pods.util.download_url(‘https://www.dropbox.com/s/s6gqvp9b383b59y/movies.csv?dl=0&amp;raw=1’, store_directory = ‘class_movie’, save_name=‘movies.csv’) movies = pd.read_csv(os.path.join(‘class_movie’, ‘movies.csv’),encoding=‘latin-1’).set_index(‘index’)</p>
 </section>
-<section id="section-105" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-2" class="slide level2">
+<h2>Exercise 1</h2>
 <p>The movies data is now in a data frame which contains one column for each user rating the movie. There are some entries that contain ‘NaN’. What does the ‘NaN’ mean in this context?</p>
 </section>
 <section id="processing-the-data" class="slide level2">
@@ -1650,9 +1647,8 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 \sum_j s_{k,j}v_{j,\ell}(y_{k, j} - \mathbf{u}_k^\top\mathbf{v}_{j}).
 \]</span> Similarly each parameter <span class="math inline">\(v_{i,j}\)</span> needs to be updated according to its gradient.</p>
 </section>
-<section id="section-106" class="slide level2">
-<h2></h2>
-<p>Exercise 1</p>
+<section id="exercise-1-3" class="slide level2">
+<h2>Exercise 1</h2>
 <p>What is the gradient of the objective function with respect to <span class="math inline">\(v_{k, \ell}\)</span>? Write your answer in the box below, and explain which differentiation techniques you used to get there. You will be expected to justify your answer in class by oral questioning. Create a function for computing this gradient that is used in the algorithm below.</p>
 </section>
 <section id="steepest-descent-algorithm" class="slide level2">
@@ -1671,18 +1667,16 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <p>Now we can write our simple optimisation route. This allows us to observe the objective function as the optimization proceeds.</p>
 <p>import sys iterations = 100 for i in range(iterations): obj, gU, gV = objective_gradient(Y, U, V) print(“Iteration”, i, “Objective function:”, obj) U -= learn_rate<em>gU V -= learn_rate</em>gV</p>
 </section>
-<section id="section-107" class="slide level2">
-<h2></h2>
-<p>Exercise 2</p>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>What happens as you increase the number of iterations? What happens if you increase the learning rate?</p>
 </section>
 <section id="stochastic-gradient-descent-or-robbins-monroe-algorithm" class="slide level2">
 <h2>Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
 <p>Stochastic gradient descent <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves updating separating each gradient update according to each separate observation, rather than summing over them all. It is an approximate optimization method, but it has proven convergence under certain conditions and can be much faster in practice. It is used widely by internet companies for doing machine learning in practice. For example, Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
 </section>
-<section id="section-108" class="slide level2">
-<h2></h2>
-<p>Exercise 3</p>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise 3</h2>
 <p>Create a stochastic gradient descent version of the algorithm. Monitor the objective function after every 1000 updates to ensure that it is decreasing. When you have finished, plot the movie map and the user map in two dimensions. Label the plots with the name of the movie or user.</p>
 </section>
 <section id="making-predictions" class="slide level2">
@@ -1700,9 +1694,8 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <p>import pods</p>
 <p>d = pods.datasets.movielens100k() Y=d[‘Y’]</p>
 </section>
-<section id="section-109" class="slide level2">
-<h2></h2>
-<p>Exercise 4</p>
+<section id="exercise-4" class="slide level2">
+<h2>Exercise 4</h2>
 <p>Use stochastic gradient descent to make a movie map for the movielens data. Plot the map of the movies when you are finished.</p>
 </section>
 <section id="thanks" class="slide level2 scrollable">
@@ -1739,8 +1732,6 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',
