@@ -1,6 +1,7 @@
 ---
 title: "Special Topics: Gaussian Processes"
 venue: "University of Sheffield"
+abstract: "null"
 author:
 - given: Neil D.
   family: Lawrence
@@ -178,7 +179,7 @@ $$</span><br /> </large></p></li>
 $$</span><br /></p></li>
 </ul>
 </div>
-<h2 id="marginal-likelihood-edit">Marginal Likelihood <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/tmp.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/tmp.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
+<h2 id="marginal-likelihood-edit">Marginal Likelihood <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/gaussian-processes.mdtmp.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/gaussian-processes.mdtmp.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>To understand the Gaussian process we’re going to build on our understanding of the marginal likelihood for Bayesian regression. In the session on  we sampled directly from the weight vector, <span class="math inline">$\mappingVector$</span> and applied it to the basis matrix <span class="math inline">$\basisMatrix$</span> to obtain a sample from the prior and a sample from the posterior. It is often helpful to think of modeling techniques as <em>generative</em> models. To give some thought as to what the process for obtaining data from the model is. From the perspective of Gaussian processes, we want to start by thinking of basis function models, where the parameters are sampled from a prior, but move to thinking about sampling from the marginal likelihood directly.</p>
 <h2 id="sampling-from-the-prior">Sampling from the Prior</h2>
 <p>The first thing we’ll do is to set up the parameters of the model, these include the parameters of the prior, the parameters of the basis functions and the noise level.</p>
