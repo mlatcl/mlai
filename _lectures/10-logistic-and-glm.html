@@ -48,6 +48,13 @@ categories:
 <!--
 
 -->
+<h2 id="setup-edit">Setup <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
+<p>First we download some libraries and files to support the notebook.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py&#39;</span>,<span class="st">&#39;teaching_plots.py&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py&#39;</span>,<span class="st">&#39;gp_tutorial.py&#39;</span>)</span></code></pre></div>
 <h2 id="review">Review</h2>
 <p>The  allowed us to specify a class conditional density, <span class="math inline">$p(\inputVector_i|\dataScalar_i, \parameterVector)$</span>, through assuming that the features were conditionally independent given the label. Combined with our assumption that the data points are conditionally independent given the parameters, <span class="math inline">$\parameterVector$</span>, this allowed us to specify a joint density over the entire data set, <span class="math inline">$p(\dataVector, \inputMatrix)$</span>. We argued that modeling the joint density is a powerful approach because we can answer any particular question we have about the data through the sum rule and the product rule of probability. We can condition on the training data and query the value of an unseen test point. If we have missing data, then we can integrate over the missing point (marginalise) and obtain our best prediction despite the absence of some of the features for a point. However, it comes at the cost of a particular modeling assumption. Namely, to make modeling practical we assumed that the features were conditionally independent given the feature label. In other words, for any given point, if we know its class, then its features will be independent. This is a very strong assumption. For example, if we were classifying the sex of an individual given their height and weight, naive Bayes would assume that if we knew their sex, then the height and weight would be independent. This is clearly wrong, the dependence between height and weight is not dictated only by the sex of an individual, there is a natural correlation between them.</p>
 <p>Modeling the entire joint density allows us to deal with different questions, that we may not have envisaged at the model <em>design time</em>. It contrasts with the approach we took for regression where we specifically chose to model the conditional density for the target values, <span class="math inline">$\dataVector$</span>, given the input locations, <span class="math inline">$\inputMatrix$</span>. That density, <span class="math inline">$p(\dataVector|\inputMatrix)$</span>, effectively assumes that the question we’ll be asked at <em>run time</em> is known. In particular, we expect to be asked about the value of the function, <span class="math inline"><em>y</em><sup>*</sup></span>, given a particular input location, <span class="math inline">$\inputVector^*$</span>. We don’t expect to be asked about the value of an input given a particular observation. That would require placing an additional prior over the input location for each point, <span class="math inline">$p(\inputVector_i)$</span>. Of course, it’s possible to conceive of a model like this, and indeed that is how we proceeded for . However, if we know we will always have all the inputs at run time, it may make sense to <em>directly</em> model the conditional density, <span class="math inline">$p(\dataVector|\inputMatrix)$</span>.</p>
@@ -71,16 +78,16 @@ $$</span><br /> we can write <span class="math inline"><em>π</em></span> in ter
 $$</span><br /></p>
 <h2 id="basis-function">Basis Function</h2>
 <p>We’ll define our prediction, objective and gradient functions below. But before we start, we need to define a basis function for our model. Let’s start with the linear basis.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%</span>load <span class="op">-</span>s linear mlai.py</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">%</span>load <span class="op">-</span>s linear mlai.py</span></code></pre></div>
 <h2 id="prediction-function">Prediction Function</h2>
 <p>Now we have the basis function let’s define the prediction function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> predict(w, x, basis<span class="op">=</span>linear, <span class="op">**</span>kwargs):</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    <span class="co">&quot;Generates the prediction function and the basis matrix.&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>    Phi <span class="op">=</span> basis(x, <span class="op">**</span>kwargs)</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    f <span class="op">=</span> np.dot(Phi, w)</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    <span class="cf">return</span> <span class="fl">1.</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>f)), Phi</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">def</span> predict(w, x, basis<span class="op">=</span>linear, <span class="op">**</span>kwargs):</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="co">&quot;Generates the prediction function and the basis matrix.&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    Phi <span class="op">=</span> basis(x, <span class="op">**</span>kwargs)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    f <span class="op">=</span> np.dot(Phi, w)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="cf">return</span> <span class="fl">1.</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>f)), Phi</span></code></pre></div>
 <p>This inverse of the link function is known as the <a href="http://en.wikipedia.org/wiki/Logistic_function">logistic</a> (thus the name logistic regression) or sometimes it is called the sigmoid function. For a particular value of the input to the link function, <span class="math inline">$\mappingFunction_i = \mappingVector^\top \basisVector(\inputVector_i)$</span> we can plot the value of the inverse link function as below.</p>
 <h3 id="sigmoid-function-edit">Sigmoid Function <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/sigmoid-function.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/sigmoid-function.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h3>
 <div class="figure">
@@ -103,11 +110,11 @@ $$</span><br /> The process for logistic regression is as follows. Compute the o
 P(\dataScalar_i|\mappingVector, \inputVector) =
 \pi_i^{\dataScalar_i} (1-\pi_i)^{1-\dataScalar_i}
 $$</span><br /> which we can think of as clever trick for mathematically switching between two probabilities if we were to write it as code it would be better described as</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> bernoulli(x, y, pi):</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> y <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb5-3"><a href="#cb5-3"></a>        <span class="cf">return</span> pi(x)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-5"><a href="#cb5-5"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>pi(x)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> bernoulli(x, y, pi):</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="cf">if</span> y <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb10-3"><a href="#cb10-3"></a>        <span class="cf">return</span> pi(x)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>pi(x)</span></code></pre></div>
 <p>but writing it mathematically makes it easier to write our objective function within a single mathematical equation.</p>
 <h2 id="maximum-likelihood">Maximum Likelihood</h2>
 <p>To obtain the parameters of the model, we need to maximize the likelihood, or minimize the objective function, normally taken to be the negative log likelihood. With a data conditional independence assumption the likelihood has the form, <br /><span class="math display">$$
@@ -125,13 +132,13 @@ g\left(\mappingVector^\top \basisVector(\inputVector_i)\right) -
 \sum_{i=1}^\numData(1-\dataScalar_i)\log \left(1-g\left(\mappingVector^\top
 \basisVector(\inputVector_i)\right)\right).
 $$</span><br /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">def</span> objective(g, y):</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co">&quot;Computes the objective function.&quot;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span>)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="cf">return</span> <span class="op">-</span>np.log(g[posind, :]).<span class="bu">sum</span>() <span class="op">-</span> np.log(<span class="dv">1</span><span class="op">-</span>g[negind, :]).<span class="bu">sum</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">def</span> objective(g, y):</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="co">&quot;Computes the objective function.&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="cf">return</span> <span class="op">-</span>np.log(g[posind, :]).<span class="bu">sum</span>() <span class="op">-</span> np.log(<span class="dv">1</span><span class="op">-</span>g[negind, :]).<span class="bu">sum</span>()</span></code></pre></div>
 <p>As normal, we would like to minimize this objective. This can be done by differentiating with respect to the parameters of our prediction function, <span class="math inline">$\pi(\inputVector;\mappingVector)$</span>, for optimisation. The gradient of the likelihood with respect to <span class="math inline">$\pi(\inputVector;\mappingVector)$</span> is of the form, <br /><span class="math display">$$
 \frac{\text{d}E(\mappingVector)}{\text{d}\mappingVector} = -\sum_{i=1}^\numData
 \frac{\dataScalar_i}{g\left(\mappingVector^\top
@@ -158,51 +165,51 @@ g(\mappingFunction_i) &amp;= \frac{1}{1+\exp(-\mappingFunction_i)}\\
 (1-\dataScalar_i)\left(g\left(\mappingVector^\top \basisVector(\inputVector)\right)\right)
 \basisVector(\inputVector_i).
 $$</span><br /></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">def</span> gradient(g, Phi, y):</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    <span class="co">&quot;Generates the gradient of the parameter vector.&quot;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    dw <span class="op">=</span> <span class="op">-</span>(Phi[posind]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>g[posind])).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span> )</span>
-<span id="cb9-7"><a href="#cb9-7"></a>    dw <span class="op">+=</span> (Phi[negind]<span class="op">*</span>g[negind]).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    <span class="cf">return</span> dw[:, <span class="va">None</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">def</span> gradient(g, Phi, y):</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="co">&quot;Generates the gradient of the parameter vector.&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    dw <span class="op">=</span> <span class="op">-</span>(Phi[posind]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>g[posind])).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span> )</span>
+<span id="cb14-7"><a href="#cb14-7"></a>    dw <span class="op">+=</span> (Phi[negind]<span class="op">*</span>g[negind]).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="cf">return</span> dw[:, <span class="va">None</span>]</span></code></pre></div>
 <h2 id="optimization-of-the-function">Optimization of the Function</h2>
 <p>Reorganizing the gradient to find a stationary point of the function with respect to the parameters <span class="math inline">$\mappingVector$</span> turns out to be impossible. Optimization has to proceed by <em>numerical methods</em>. Options include the multidimensional variant of <a href="http://en.wikipedia.org/wiki/Newton%27s_method">Newton’s method</a> or <a href="http://en.wikipedia.org/wiki/Gradient_method">gradient based optimization methods</a> like we used for optimizing matrix factorization for the movie recommender system. We recall from matrix factorization that, for large data, <em>stochastic gradient descent</em> or the Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro 1951)</span> optimization procedure worked best for function minimization.</p>
 <p>{ ## Olivetti Glasses Data</p>
 <p>Let’s classify images with logistic regression. We’ll look at a data set of individuals with glasses. We can load in the data from <code>pods</code> as follows.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Change this example for 2016#data = pods.datasets.movie_body_count_r_classify()</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>data <span class="op">=</span> pods.datasets.olivetti_glasses()</span>
-<span id="cb11-3"><a href="#cb11-3"></a>X <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb11-4"><a href="#cb11-4"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Change this example for 2016#data = pods.datasets.movie_body_count_r_classify()</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>data <span class="op">=</span> pods.datasets.olivetti_glasses()</span>
+<span id="cb16-3"><a href="#cb16-3"></a>X <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb16-4"><a href="#cb16-4"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <h2 id="batch-gradient-descent-edit">Batch Gradient Descent <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/logistic-regression-gradient-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/logistic-regression-gradient-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>We will need to define some initial random values for our vector and then minimize the objective by descending the gradient.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Separate train and test</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
-<span id="cb12-3"><a href="#cb12-3"></a>num_train <span class="op">=</span> np.ceil(X.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>)r</span>
-<span id="cb12-4"><a href="#cb12-4"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
-<span id="cb12-5"><a href="#cb12-5"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
-<span id="cb12-6"><a href="#cb12-6"></a>X_train <span class="op">=</span> X.iloc[train_indices]</span>
-<span id="cb12-7"><a href="#cb12-7"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
-<span id="cb12-9"><a href="#cb12-9"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># gradient descent algorithm</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>w <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a>eta <span class="op">=</span> <span class="fl">1e-9</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>iters <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
-<span id="cb14-6"><a href="#cb14-6"></a>    g, Phi <span class="op">=</span> predict(w, X_train, linear)</span>
-<span id="cb14-7"><a href="#cb14-7"></a>    w <span class="op">-=</span> eta<span class="op">*</span>gradient(g, Phi, y_train) <span class="op">+</span> <span class="fl">0.001</span><span class="op">*</span>w</span>
-<span id="cb14-8"><a href="#cb14-8"></a>    <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">100</span>:</span>
-<span id="cb14-9"><a href="#cb14-9"></a>        <span class="bu">print</span>(<span class="st">&quot;Iter&quot;</span>, i, <span class="st">&quot;Objective&quot;</span>, objective(g, y_train))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Separate train and test</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
+<span id="cb17-3"><a href="#cb17-3"></a>num_train <span class="op">=</span> np.ceil(X.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>)r</span>
+<span id="cb17-4"><a href="#cb17-4"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
+<span id="cb17-5"><a href="#cb17-5"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
+<span id="cb17-6"><a href="#cb17-6"></a>X_train <span class="op">=</span> X.iloc[train_indices]</span>
+<span id="cb17-7"><a href="#cb17-7"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
+<span id="cb17-9"><a href="#cb17-9"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># gradient descent algorithm</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>w <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a>eta <span class="op">=</span> <span class="fl">1e-9</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>iters <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    g, Phi <span class="op">=</span> predict(w, X_train, linear)</span>
+<span id="cb19-7"><a href="#cb19-7"></a>    w <span class="op">-=</span> eta<span class="op">*</span>gradient(g, Phi, y_train) <span class="op">+</span> <span class="fl">0.001</span><span class="op">*</span>w</span>
+<span id="cb19-8"><a href="#cb19-8"></a>    <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">100</span>:</span>
+<span id="cb19-9"><a href="#cb19-9"></a>        <span class="bu">print</span>(<span class="st">&quot;Iter&quot;</span>, i, <span class="st">&quot;Objective&quot;</span>, objective(g, y_train))</span></code></pre></div>
 <p>Let’s look at the weights and how they relate to the inputs.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="bu">print</span>(w)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="bu">print</span>(w)</span></code></pre></div>
 <p>What does the magnitude of the weight vectors tell you about the different parameters and their influence on outcome? Are the weights of roughly the same size, if not, how might you fix this?</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
 <h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
 <h3 id="exercise-2">Exercise 2</h3>
 <p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
