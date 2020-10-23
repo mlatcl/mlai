@@ -113,7 +113,7 @@ categories:
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="carthaginian-empire-caption" class="caption-frame">
-<p>Figure: The Carhaginian Empire at its peak.</p>
+<p>Figure: The Carthaginian Empire at its peak.</p>
 </div>
 </div>
 <p>We now need to make a decision about whether Roman Histories are European or African, ideally we’d like them to be somewhere between the two, but we can’t place them there in the Dewey Decimal system because between Europe and Africa is Asia, which has less to do with the Roman Empire than either Europe or Africa. Of course the fact that we’ve used a map provides a clue as to what to do next. Libraries are actually laid out on floors, so what if we were to use the spatial lay out to organise the sujbects of the books in two dimensions. Books on Geography could be laid out according to where in the world they are referring to.</p>
@@ -216,7 +216,7 @@ $$</span><br /> Similarly each parameter <span class="math inline"><em>v</em><su
 <span id="cb24-2"><a href="#cb24-2"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="cb24-3"><a href="#cb24-3"></a>U <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="bu">len</span>(user_names), q))<span class="op">*</span><span class="fl">0.001</span>, index<span class="op">=</span>user_names)</span>
 <span id="cb24-4"><a href="#cb24-4"></a>V <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="bu">len</span>(movies.index), q))<span class="op">*</span><span class="fl">0.001</span>, index<span class="op">=</span>movies.index)</span></code></pre></div>
-<p>We also will subtract the mean from the rating before we try and predict them predictions. Have a think about why this might be a good idea (hint, what will the gradients be if we don’t subtract the mean).</p>
+<p>We also will subtract the mean from the rating before we try and predict them predictions. Have a think about why this might be a good idea (<em>Hint</em>: what will the gradients be if we don’t subtract the mean?).</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>Y[<span class="st">&#39;rating&#39;</span>] <span class="op">-=</span> Y[<span class="st">&#39;rating&#39;</span>].mean()</span></code></pre></div>
 <p>Now that we have the initial values set, we can start the optimization. First we define a function for the gradient of the objective and the objective function itself.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">def</span> objective_gradient(Y, U, V):</span>
