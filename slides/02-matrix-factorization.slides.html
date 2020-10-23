@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-10-06">
   <title>Objective Functions: A Simple Example with Matrix Factorisation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -100,7 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -404,8 +403,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="title-slide">
   <h1 class="title">Objective Functions: A Simple Example with Matrix Factorisation</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-10-06</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -417,11 +414,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
@@ -436,14 +428,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="classification" class="slide level2">
 <h2>Classification</h2>
 <ul>
-<li><em>Wake word</em> classification (<a href="https://radio.unglobalpulse.net/uganda/">Global Pulse Project</a>).</li>
-<li>Breakthrough in 2012 with ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a></li>
-</ul>
-<ul>
-<li>We are given a data set containing ‘inputs’, <span class="math inline">\(\inputMatrix\)</span> and ‘targets’, <span class="math inline">\(\dataVector\)</span>.</li>
-<li>Each data point consists of an input vector <span class="math inline">\(\inputVector_i\)</span> and a class label, <span class="math inline">\(\dataScalar_i\)</span>.</li>
-<li>For binary classification assume <span class="math inline">\(\dataScalar_i\)</span> should be either <span class="math inline">\(1\)</span> (yes) or <span class="math inline">\(-1\)</span> (no).</li>
-<li>Input vector can be thought of as features.</li>
+<li><p><em>Wake word</em> classification (<a href="https://radio.unglobalpulse.net/uganda/">Global Pulse Project</a>).</p></li>
+<li><p>Breakthrough in 2012 with ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a></p></li>
+<li><p>We are given a data set containing ‘inputs’, <span class="math inline">\(\inputMatrix\)</span> and ‘targets’, <span class="math inline">\(\dataVector\)</span>.</p></li>
+<li><p>Each data point consists of an input vector <span class="math inline">\(\inputVector_i\)</span> and a class label, <span class="math inline">\(\dataScalar_i\)</span>.</p></li>
+<li><p>For binary classification assume <span class="math inline">\(\dataScalar_i\)</span> should be either <span class="math inline">\(1\)</span> (yes) or <span class="math inline">\(-1\)</span> (no).</p></li>
+<li><p>Input vector can be thought of as features.</p></li>
 </ul>
 </section>
 <section id="discrete-probability" class="slide level2">
@@ -460,7 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Inputs, <span class="math inline">\(\inputVector\)</span>, mapped to a label, <span class="math inline">\(\dataScalar\)</span>, through a function <span class="math inline">\(\mappingFunction(\cdot)\)</span> dependent on parameters, <span class="math inline">\(\weightVector\)</span>, <span class="math display">\[
 \dataScalar = \mappingFunction(\inputVector; \weightVector).
 \]</span></li>
-<li><span class="math inline">\(\mappingFunction(\cdot)\)</span> is known as the <em>prediction function</em>. </li>
+<li><span class="math inline">\(\mappingFunction(\cdot)\)</span> is known as the <em>prediction function</em>.</li>
 </ul>
 </section>
 <section id="classification-examples" class="slide level2">
@@ -517,23 +507,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>If predicted label of the <span class="math inline">\(i\)</span>th point is <span class="math display">\[\text{sign}(\mappingVector^\top\inputVector_i)\]</span></p></li>
 <li><p>Setting <span class="math inline">\(\mappingVector\)</span> to <span class="math inline">\(\dataScalar_i\inputVector_i\)</span> implies <span class="math display">\[\text{sign}(\mappingVector^\top\inputVector_i) = \text{sign}(\dataScalar_i\inputVector_i^\top \inputVector_i) = \dataScalar_i\]</span></p></li>
 </ul>
-<p>%load -s init_perceptron mlai.py</p>
 </section>
 <section id="computing-decision-boundary" class="slide level2">
 <h2>Computing Decision Boundary</h2>
 </section>
 <section id="drawing-decision-boundary" class="slide level2">
 <h2>Drawing Decision Boundary</h2>
-
 </section>
 <section id="switching-formulae" class="slide level2">
 <h2>Switching Formulae</h2>
-
 </section>
 <section id="code-for-perceptron" class="slide level2">
 <h2>Code for Perceptron</h2>
-<p>%load -s update_perceptron mlai.py</p>
-<p>import pods</p>
 <script>
 showDivs(0, 'perceptron');
 </script>
@@ -660,12 +645,8 @@ showDivs(0, 'perceptron');
 <ul>
 <li>Create an artifical data set.</li>
 </ul>
-<p>import numpy as np import matplotlib.pyplot as plt import mlai</p>
-<p>x = np.random.normal(size=4)</p>
 <p>We now need to decide on a <em>true</em> value for <span class="math inline">\(m\)</span> and a <em>true</em> value for <span class="math inline">\(c\)</span> to use for generating the data.</p>
-<p>m_true = 1.4 c_true = -3.1</p>
 <p>We can use these values to create our artificial data. The formula <span class="math display">\[\dataScalar_i = m\inputScalar_i + c\]</span> is translated to code as follows:</p>
-<p>y = m_true*x+c_true</p>
 </section>
 <section id="plot-of-data" class="slide level2">
 <h2>Plot of Data</h2>
@@ -676,49 +657,45 @@ showDivs(0, 'perceptron');
 </object>
 </div>
 </div>
+<aside class="notes">
+A simple linear regression.
+</aside>
 <p>These points lie exactly on a straight line, that’s not very realistic, let’s corrupt them with a bit of Gaussian ‘noise’.</p>
 </section>
 <section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
-<p>noise = np.random.normal(scale=0.5, size=4) # standard deviation of the noise is 0.5 y = m_true*x + c_true + noise plt.plot(x, y, ‘r.’, markersize=10) plt.xlim([-3, 3]) mlai.write_figure(filename=“../slides/diagrams/ml/regression_noise.svg”, transparent=True)</p>
 <div class="figure">
 <div id="linear-regression-noise-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/regression_noise.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
+<aside class="notes">
+A simple linear regression with noise.
+</aside>
 </section>
 <section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
 <ul>
-<li>Visualise the error function surface, create vectors of values.</li>
+<li><p>Visualise the error function surface, create vectors of values.</p></li>
+<li><p>create a grid of values to evaluate the error function in 2D.</p></li>
+<li><p>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</p></li>
 </ul>
-</section>
-<section>
-<section id="create-an-array-of-linearly-separated-values-around-m_true" class="title-slide slide level1">
-<h1>create an array of linearly separated values around m_true</h1>
-<p>m_vals = np.linspace(m_true-3, m_true+3, 100) # create an array of linearly separated values ae c_vals = np.linspace(c_true-3, c_true+3, 100)</p>
-<ul>
-<li>create a grid of values to evaluate the error function in 2D.</li>
-</ul>
-<p>m_grid, c_grid = np.meshgrid(m_vals, c_vals)</p>
-<ul>
-<li>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</li>
-</ul>
-<p>E_grid = np.zeros((100, 100)) for i in range(100): for j in range(100): E_grid[i, j] = ((y - m_grid[i, j]*x - c_grid[i, j])**2).sum()</p>
 </section>
 <section id="contour-plot-of-error" class="slide level2">
 <h2>Contour Plot of Error</h2>
 <ul>
 <li>We can now make a contour plot.</li>
 </ul>
-<p>%load -s regression_contour teaching_plots.py</p>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
+<aside class="notes">
+Contours of the objective function for linear regression by minimizing least squares.
+</aside>
 </section>
 <section id="steepest-descent" class="slide level2">
 <h2>Steepest Descent</h2>
@@ -735,7 +712,6 @@ showDivs(0, 'perceptron');
 <ul>
 <li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 </ul>
-<p>m_star = 0.0 c_star = -5.0</p>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
@@ -745,7 +721,6 @@ showDivs(0, 'perceptron');
 -2\sum_{i=1}^\numData (\dataScalar_i - m\inputScalar_i - c)\]</span></p></li>
 <li><p>This is computed in python as follows</p></li>
 </ul>
-<p>c_grad = -2<em>(y-m_star</em>x - c_star).sum() print(“Gradient with respect to c is”, c_grad)</p>
 </section>
 <section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
@@ -757,7 +732,6 @@ showDivs(0, 'perceptron');
 <p><span class="math display">\[\frac{\text{d}\errorFunction(m, c)}{\text{d} m} = -2\sum_{i=1}^\numData \inputScalar_i(\dataScalar_i - m\inputScalar_i -
 c)\]</span></p>
 <p>which can be implemented in python (numpy) as</p>
-<p>m_grad = -2<em>(x</em>(y-m_star*x - c_star)).sum() print(“Gradient with respect to m is”, m_grad)</p>
 </section>
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
@@ -778,6 +752,9 @@ c)\]</span></p>
 </object>
 </div>
 </div>
+<aside class="notes">
+Single update descending the contours of the error surface for regression.
+</aside>
 </section>
 <section id="update-equations-1" class="slide level2">
 <h2>Update Equations</h2>
@@ -796,7 +773,6 @@ m_\text{new} \leftarrow m_{\text{old}} - \learnRate \frac{\text{d}\errorFunction
 <ul>
 <li>These updates can be coded as</li>
 </ul>
-<p>print(“Original m was”, m_star, “and original c was”, c_star) learn_rate = 0.01 c_star = c_star - learn_rate<em>c_grad m_star = m_star - learn_rate</em>m_grad print(“New m is”, m_star, “and new c is”, c_star)</p>
 <!-- SECTION Iterating Updates -->
 </section>
 <section id="iterating-updates" class="slide level2">
@@ -807,7 +783,6 @@ m_\text{new} \leftarrow m_{\text{old}} - \learnRate \frac{\text{d}\errorFunction
 </section>
 <section id="gradient-descent-algorithm" class="slide level2">
 <h2>Gradient Descent Algorithm</h2>
-<p>num_plots = plot.regression_contour_fit(x, y, diagrams=‘../slides/diagrams/ml’)</p>
 <script>
 showDivs(1, 'regression_contour_fit');
 </script>
@@ -1015,13 +990,16 @@ showDivs(1, 'regression_contour_fit');
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
 </object>
 </div>
-\notes{
+{
 <div class="figure">
 <div id="regression-contour-fit-28-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
+<aside class="notes">
+Stochastic gradient descent for linear regression
+</aside>
 </section>
 <section id="stochastic-gradient-descent" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
@@ -1067,11 +1045,6 @@ m_\text{old}\inputScalar_n - c_\text{old})\right]\]</span></p></li>
 m_\text{new} = m_\text{old} + 2\learnRate\left[\inputScalar_i (\dataScalar_i - m_\text{old}\inputScalar_i - c_\text{old})\right]
 \]</span></li>
 </ul>
-</section></section>
-<section>
-<section id="choose-a-random-point-for-the-update" class="title-slide slide level1">
-<h1>choose a random point for the update</h1>
-<p>i = np.random.randint(x.shape[0]-1) # update m m_star = m_star + 2<em>learn_rate</em>(x[i]<em>(y[i]-m_star</em>x[i] - c_star)) # update c c_star = c_star + 2<em>learn_rate</em>(y[i]-m_star*x[i] - c_star)</p>
 </section>
 <section id="sgd-for-linear-regression" class="slide level2">
 <h2>SGD for Linear Regression</h2>
@@ -1516,30 +1489,14 @@ showDivs(0, 'regression_sgd_contour_fit');
 <ul>
 <li>Section 1.1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
-<p>import pods</p>
 <!-- SECTION Movie Body Count Example -->
 </section>
 <section id="movie-body-count-example" class="slide level2">
 <h2>Movie Body Count Example</h2>
-<p>data = pods.datasets.movie_body_count()[‘Y’] data.head()</p>
-<p>data.describe()</p>
-<p>data.describe?</p>
-<p>print(data[‘Year’]) #print(data[‘Body_Count’])</p>
-</section></section>
-<section>
-<section id="this-ensures-the-plot-appears-in-the-web-browser" class="title-slide slide level1">
-<h1>this ensures the plot appears in the web browser</h1>
-<p>%matplotlib inline import matplotlib.pyplot as plt # this imports the plotting library in python</p>
-<p>plt.plot(data[‘Year’], data[‘Body_Count’], ‘rx’)</p>
-<p>plt.plot?</p>
-<p>data[data[‘Body_Count’]&gt;200]</p>
-<p>data[data[‘Body_Count’]&gt;200].sort_values(by=‘Body_Count’, ascending=False)</p>
-<p>data[‘Body_Count’].hist(bins=20) # histogram the data with 20 bins. plt.title(‘Histogram of Film Kill Count’)</p>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise 1</h2>
 <p>Read on the internet about the following python libraries: <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code> and <code>pandas</code>. What functionality does each provide python. What is the <code>pylab</code> library and how does it relate to the other libraries?</p>
-<p>plt.plot(data[‘Year’], data[‘Body_Count’], ‘rx’) ax = plt.gca() # obtain a handle to the current axis ax.set_yscale(‘log’) # use a logarithmic death scale # give the plot some titles and labels plt.title(‘Film Deaths against Year’) plt.ylabel(‘deaths’) plt.xlabel(‘year’)</p>
 </section>
 <section id="exercise-1-1" class="slide level2">
 <h2>Exercise 1</h2>
@@ -1555,18 +1512,21 @@ showDivs(0, 'regression_sgd_contour_fit');
 </div>
 </div>
 </div>
+<aside class="notes">
+The Carhaginian Empire at its peak.
+</aside>
 </section>
 <section id="inner-products-for-representing-similarity" class="slide level2">
 <h2>Inner Products for Representing Similarity</h2>
-
 </section>
 <section id="the-library-on-an-infinite-plane" class="slide level2">
 <h2>The Library on an Infinite Plane</h2>
 <p><span class="math display">\[
 \mathbf{v}_j = \begin{bmatrix} v_{j,1} \\ v_{j,2}\end{bmatrix},
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{u}_i = \begin{bmatrix} u_{i,1} \\ u_{i,2}\end{bmatrix}.
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="obtaining-the-data" class="slide level2">
 <h2>Obtaining the Data</h2>
@@ -1602,12 +1562,6 @@ showDivs(0, 'regression_sgd_contour_fit');
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Store the csv on disk where it will be shared through dropbox.</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), index_label<span class="op">=</span><span class="st">&#39;index&#39;</span>)</span></code></pre></div>
 <p>Now we will convert our data structure into a form that is appropriate for processing. We will convert the <code>movies</code> object into a data base which contains the movie, the user and the score using the following command.</p>
-<p>import pandas as pd import os</p>
-</section></section>
-<section>
-<section id="uncomment-the-line-below-if-you-are-doing-this-task-by-self-study." class="title-slide slide level1">
-<h1>uncomment the line below if you are doing this task by self study.</h1>
-<p>pods.util.download_url(‘https://dl.dropboxusercontent.com/u/4347554/mlai_movies.csv’, store_directory = ‘class_movie’, save_name=‘movies.csv’) #pods.util.download_url(‘https://www.dropbox.com/s/s6gqvp9b383b59y/movies.csv?dl=0&amp;raw=1’, store_directory = ‘class_movie’, save_name=‘movies.csv’) movies = pd.read_csv(os.path.join(‘class_movie’, ‘movies.csv’),encoding=‘latin-1’).set_index(‘index’)</p>
 </section>
 <section id="exercise-1-2" class="slide level2">
 <h2>Exercise 1</h2>
@@ -1616,7 +1570,6 @@ showDivs(0, 'regression_sgd_contour_fit');
 <section id="processing-the-data" class="slide level2">
 <h2>Processing the Data</h2>
 <p>We will now prepare the data set for processing. To do this we are going to conver the data into a new format using the <code>melt</code> command.</p>
-<p>user_names = list(set(movies.columns)-set(movies.columns[:9])) Y = pd.melt(movies.reset_index(), id_vars=[‘Film’, ‘index’], var_name=‘user’, value_name=‘rating’, value_vars=user_names) Y = Y.dropna(axis=0)</p>
 </section>
 <section id="what-is-a-pivot-table-what-does-the-pandas-command" class="slide level2">
 <h2>What is a pivot table? What does the <code>pandas</code> command</h2>
@@ -1626,9 +1579,10 @@ showDivs(0, 'regression_sgd_contour_fit');
 <h2>Measuring Similarity</h2>
 <p><span class="math display">\[
 \mathbf{a}^\top\mathbf{b} = \sum_{i} a_i b_i
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{a}^\top\mathbf{b} = |\mathbf{a}||\mathbf{b}| \cos(\theta)
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="objective-function-1" class="slide level2">
 <h2>Objective Function</h2>
@@ -1663,14 +1617,9 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <section id="initialisation" class="slide level2">
 <h2>Initialisation</h2>
 <p>To start with though, we need initial values for the matrix <span class="math inline">\(\mathbf{U}\)</span> and the matrix <span class="math inline">\(\mathbf{V}\)</span>. Let’s create them as <code>pandas</code> data frames and initialise them randomly with small values.</p>
-<p>import numpy as np</p>
-<p>q = 2 # the dimension of our map of the ‘library’ learn_rate = 0.01 U = pd.DataFrame(np.random.normal(size=(len(user_names), q))<em>0.001, index=user_names) V = pd.DataFrame(np.random.normal(size=(len(movies.index), q))</em>0.001, index=movies.index)</p>
 <p>We also will subtract the mean from the rating before we try and predict them predictions. Have a think about why this might be a good idea (hint, what will the gradients be if we don’t subtract the mean).</p>
-<p>Y[‘rating’] -= Y[‘rating’].mean()</p>
 <p>Now that we have the initial values set, we can start the optimization. First we define a function for the gradient of the objective and the objective function itself.</p>
-<p>def objective_gradient(Y, U, V): gU = pd.DataFrame(np.zeros((U.shape)), index=U.index) gV = pd.DataFrame(np.zeros((V.shape)), index=V.index) obj = 0. for ind, series in Y.iterrows(): film = series[‘index’] user = series[‘user’] rating = series[‘rating’] prediction = np.dot(U.loc[user], V.loc[film]) # vTu diff = prediction - rating # vTu - y obj += diff<em>diff gU.loc[user] += 2</em>diff<em>V.loc[film] gV.loc[film] += 2</em>diff*U.loc[user] return obj, gU, gV</p>
 <p>Now we can write our simple optimisation route. This allows us to observe the objective function as the optimization proceeds.</p>
-<p>import sys iterations = 100 for i in range(iterations): obj, gU, gV = objective_gradient(Y, U, V) print(“Iteration”, i, “Objective function:”, obj) U -= learn_rate<em>gU V -= learn_rate</em>gV</p>
 </section>
 <section id="exercise-2" class="slide level2">
 <h2>Exercise 2</h2>
@@ -1696,8 +1645,6 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <h2>Going Further</h2>
 <p>If you want to take this model further then you’ll need more data. One possible source of data is the <a href="http://grouplens.org/datasets/movielens/"><code>movielens</code> data set</a>. They have data sets containing up to ten million movie ratings. The few ratings we were able to collect in the class are not enough to capture the rich structure underlying these films. Imagine if we assume that the ratings are uniformly distributed between 1 and 5. If you know something about information theory then you could use that to work out the maximum number of <em>bits</em> of information we could gain per rating.</p>
 <p>Now we’ll download the movielens 100k data and see if we can extract information about these movies.</p>
-<p>import pods</p>
-<p>d = pods.datasets.movielens100k() Y=d[‘Y’]</p>
 </section>
 <section id="exercise-4" class="slide level2">
 <h2>Exercise 4</h2>
@@ -1706,11 +1653,10 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
-<li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
+<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
+<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
@@ -1723,7 +1669,7 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1737,8 +1683,10 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

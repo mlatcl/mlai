@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-10-27">
   <title>Generalization: Model Validation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +35,7 @@
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -340,8 +339,6 @@
 <section id="title-slide">
   <h1 class="title">Generalization: Model Validation</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-10-27</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -353,11 +350,6 @@
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
@@ -370,7 +362,7 @@
 <section id="alan-turing" class="slide level2">
 <h2>Alan Turing</h2>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="turing-run-times-figure" class="figure-frame">
 <table>
 <tr>
 <td width="50%">
@@ -387,7 +379,9 @@
 </table>
 </div>
 </div>
-<p>.}{turing-run-times}</p>
+<aside class="notes">
+Alan Turing, in 1946 he was only 11 minutes slower than the winner of the 1948 games. Would he have won a hypothetical games held in 1946? Source: <a href="http://www.turing.org.uk/scrapbook/run.html" target="_blank" >Alan Turing Internet Scrapbook</a>.
+</aside>
 </section>
 <section id="probability-winning-olympics" class="slide level2">
 <h2>Probability Winning Olympics?</h2>
@@ -405,37 +399,36 @@
 <p><span class="math display">\[
 R(\mappingVector) = \int L(\dataScalar, \inputScalar, \mappingVector) \mathbb{P}(\dataScalar, \inputScalar) \text{d}\dataScalar
 \text{d}\inputScalar.
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="sample-based-approximations" class="slide level2">
 <h2>Sample Based Approximations</h2>
 <ul>
-<li>Sample based approximation: replace true expectation with sum over samples. <span class="math display">\[
+<li><p>Sample based approximation: replace true expectation with sum over samples. <span class="math display">\[
 \int \mappingFunction(z) p(z) \text{d}z\approx \frac{1}{s}\sum_{i=1}^s \mappingFunction(z_i).
-\]</span> </li>
-</ul>
-<p>* Allows us to approximate true integral with a sum <span class="math display">\[
+\]</span></p></li>
+<li><p>Allows us to approximate true integral with a sum <span class="math display">\[
 R(\mappingVector) \approx \frac{1}{\numData}\sum_{i=1}^{\numData} L(\dataScalar_i, \inputScalar_i, \mappingVector).
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section id="empirical-risk-minimization" class="slide level2">
 <h2>Empirical Risk Minimization</h2>
 <ul>
 <li>If the loss is the <em>squared loss</em> <span class="math display">\[
 L(\dataScalar, \inputScalar, \mappingVector) = (\dataScalar-\mappingVector^\top\boldsymbol{\phi}(\inputScalar))^2,
-\]</span> * This recovers the <em>empirical risk</em> <span class="math display">\[
+\]</span></li>
+<li>This recovers the <em>empirical risk</em> <span class="math display">\[
 R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
 (\dataScalar_i - \mappingVector^\top \boldsymbol{\phi}(\inputScalar_i))^2
-\]</span> </li>
+\]</span></li>
 </ul>
 </section>
 <section id="estimating-risk-through-validation" class="slide level2">
 <h2>Estimating Risk through Validation</h2>
-
 </section>
 <section id="validation" class="slide level2">
 <h2>Validation</h2>
-
 </section>
 <section id="olympic-marathon-data" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -457,9 +450,6 @@ R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
 </td>
 </tr>
 </table>
-<p>import numpy as np import pods</p>
-<p>data = pods.datasets.olympic_marathon_men() x = data[‘X’] y = data[‘Y’]</p>
-<p>offset = y.mean() scale = np.sqrt(y.var())</p>
 </section>
 <section id="olympic-marathon-data-1" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -469,10 +459,12 @@ R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
 </object>
 </div>
 </div>
+<aside class="notes">
+Olympic marathon pace times since 1892.
+</aside>
 </section>
 <section id="validation-on-the-olympic-marathon-data" class="slide level2">
 <h2>Validation on the Olympic Marathon Data</h2>
-
 </section>
 <section id="exercise-2" class="slide level2">
 <h2>Exercise 2</h2>
@@ -897,21 +889,6 @@ showDivs(1, 'olympic_val_inter_LM_polynomial_number');
 <li>For interpolation we chose validation set from data.</li>
 <li>For different validation sets we could get different results.</li>
 </ul>
-</section>
-<section id="select-indices-of-data-to-hold-out" class="title-slide slide level1">
-<h1>select indices of data to ‘hold out’</h1>
-<p>indices_hold_out = np.flatnonzero(x&gt;1980)</p>
-</section>
-
-<section id="create-a-training-set" class="title-slide slide level1">
-<h1>Create a training set</h1>
-<p>x_train = np.delete(x, indices_hold_out, axis=0) y_train = np.delete(y, indices_hold_out, axis=0)</p>
-</section>
-
-<section>
-<section id="create-a-hold-out-set" class="title-slide slide level1">
-<h1>Create a hold out set</h1>
-<p>x_valid = np.take(x, indices_hold_out, axis=0) y_valid = np.take(y, indices_hold_out, axis=0)</p>
 </section>
 <section id="exercise-4" class="slide level2">
 <h2>Exercise 4</h2>
@@ -2006,31 +1983,31 @@ showDivs(1, 'olympic_5cv05_LM_polynomial');
 </section>
 <section id="bias-variance-decomposition" class="slide level2">
 <h2>Bias Variance Decomposition</h2>
-<p>Expected test error for different variations of the <em>training data</em> sampled from, <span class="math inline">\(\Pr(\dataVector, \dataScalar)\)</span> <span class="math display">\[\mathbb{E}\left[ \left(\dataScalar - \mappingFunction^*(\dataVector)\right)^2 \right]\]</span> Decompose as <span class="math display">\[\mathbb{E}\left[ \left(\dataScalar - \mappingFunction(\dataVector)\right)^2 \right] = \text{bias}\left[\mappingFunction^*(\dataVector)\right]^2 + \text{variance}\left[\mappingFunction^*(\dataVector)\right] +\sigma^2\]</span></p>
+<p>Generalisation error <span class="math display">\[
+\mathbb{E}\left[ \left(\dataScalar - \mappingFunction^*(\dataVector)\right)^2 \right].
+\]</span> Decompose as <span class="math display">\[
+\mathbb{E}\left[ \left(\dataScalar - \mappingFunction(\dataVector)\right)^2 \right] = \text{bias}\left[\mappingFunction^*(\dataVector)\right]^2 + \text{variance}\left[\mappingFunction^*(\dataVector)\right] +\sigma^2,
+\]</span></p>
 </section>
 <section id="bias" class="slide level2">
 <h2>Bias</h2>
 <ul>
-<li>Given by <span class="math display">\[\text{bias}\left[\mappingFunction^*(\dataVector)\right] =
-\mathbb{E}\left[\mappingFunction^*(\dataVector)\right] * \mappingFunction(\dataVector)\]</span></li>
-<li>Error due to bias comes from a model that’s too simple.</li>
+<li><p>Given by <span class="math display">\[
+\text{bias}\left[\mappingFunction^*(\dataVector)\right] =
+\mathbb{E}\left[\mappingFunction^*(\dataVector)\right] * \mappingFunction(\dataVector)
+\]</span></p></li>
+<li><p>Error due to bias comes from a model that’s too simple.</p></li>
 </ul>
 </section>
 <section id="variance" class="slide level2">
 <h2>Variance</h2>
 <ul>
-<li>Given by <span class="math display">\[\text{variance}\left[\mappingFunction^*(\dataVector)\right] = \mathbb{E}\left[\left(\mappingFunction^*(\dataVector) - \mathbb{E}\left[\mappingFunction^*(\dataVector)\right]\right)^2\right]\]</span></li>
-<li>Slight variations in the training set cause changes in the prediction. Error due to variance is error in the model due to an overly complex model.</li>
+<li><p>Given by <span class="math display">\[
+\text{variance}\left[\mappingFunction^*(\dataVector)\right] = \mathbb{E}\left[\left(\mappingFunction^*(\dataVector) - \mathbb{E}\left[\mappingFunction^*(\dataVector)\right]\right)^2\right].
+\]</span></p></li>
+<li><p>Slight variations in the training set cause changes in the prediction. Error due to variance is error in the model due to an overly complex model.</p></li>
 </ul>
-<p>import numpy as np</p>
-<p>import matplotlib font = {‘family’ : ‘sans’, ‘weight’ : ‘bold’, ‘size’ : 22}</p>
-<p>matplotlib.rc(‘font’, **font) import matplotlib.pyplot as plt</p>
-</section></section>
-<section>
-<section id="create-an-instance-of-svm-and-fit-the-data." class="title-slide slide level1">
-<h1>Create an instance of SVM and fit the data.</h1>
-<p>C = 100.0 # SVM regularization parameter gammas = [0.001, 0.01, 0.1, 1]</p>
-<p>per_class=30 num_samps = 20 # Set-up 2x2 grid for plotting. fig, ax = plt.subplots(1, 4, figsize=(10,3)) xlim=None ylim=None for samp in range(num_samps): X, y=create_data(per_class) models = [] titles = [] for gamma in gammas: models.append(svm.SVC(kernel=‘rbf’, gamma=gamma, C=C)) titles.append(‘<span class="math inline">\(\gamma={}\)</span>’.format(gamma)) models = (cl.fit(X, y) for cl in models) xlim, ylim = decision_boundary_plot(models, X, y, axs=ax, filename=‘../slides/diagrams/ml/bias-variance{samp:0&gt;3}.svg’.format(samp=samp), titles=titles, xlim=xlim, ylim=ylim)</p>
+<p>.</p>
 </section>
 <section id="section-192" class="slide level2">
 <h2></h2>
@@ -2146,6 +2123,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-194" class="slide level2">
 <h2></h2>
@@ -2156,6 +2135,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-195" class="slide level2">
 <h2></h2>
@@ -2166,6 +2147,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-196" class="slide level2">
 <h2></h2>
@@ -2176,6 +2159,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-197" class="slide level2">
 <h2></h2>
@@ -2186,6 +2171,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-198" class="slide level2">
 <h2></h2>
@@ -2196,6 +2183,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-199" class="slide level2">
 <h2></h2>
@@ -2206,6 +2195,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-200" class="slide level2">
 <h2></h2>
@@ -2216,6 +2207,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-201" class="slide level2">
 <h2></h2>
@@ -2226,6 +2219,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-202" class="slide level2">
 <h2></h2>
@@ -2236,6 +2231,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="section-203" class="slide level2">
 <h2></h2>
@@ -2246,6 +2243,8 @@ showDivs(0, 'bias-variance-plots');
 </div>
 </div>
 </div>
+<aside class="notes">
+</aside>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
@@ -2269,7 +2268,7 @@ showDivs(0, 'bias-variance-plots');
 <p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -2283,8 +2282,10 @@ showDivs(0, 'bias-variance-plots');
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

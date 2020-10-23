@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-11-03">
   <title>Bayesian Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +35,7 @@
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -340,8 +339,6 @@
 <section id="title-slide">
   <h1 class="title">Bayesian Regression</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-11-03</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -353,11 +350,6 @@
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="overdetermined-system" class="slide level2">
 <h2>Overdetermined System</h2>
@@ -415,7 +407,6 @@
 </section>
 <section id="underdetermined-system" class="slide level2">
 <h2>Underdetermined System</h2>
-
 </section>
 <section id="underdetermined-system-1" class="slide level2">
 <h2>Underdetermined System</h2>
@@ -512,6 +503,9 @@ showDivs(0, 'under_determined_system');
 </iframe>
 </div>
 </div>
+<aside class="notes">
+The philosophical underpinnings of uncertainty, as discussed in 2012 MLAI lecture.
+</aside>
 </section>
 <section id="noise-models" class="slide level2">
 <h2>Noise Models</h2>
@@ -557,10 +551,12 @@ showDivs(0, 'under_determined_system');
 <h2>Sum of Squares and Probability</h2>
 <div class="figure">
 <div id="gauss-theoria-ls-figure" class="figure-frame">
-<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA213&amp;output=embed" width="700" height="500">
-</iframe>
+<p><a href="https://play.google.com/books/reader?id=ORUOAAAAQAAJ&amp;pg=PA213"><img data-src="../slides/diagrams/books/ORUOAAAAQAAJ-PA213.png" /></a></p>
 </div>
 </div>
+<aside class="notes">
+Gauss’s book <em>Theoria Motus Corprum Coelestium</em> <span class="citation" data-cites="Gauss:theoria09">(Gauss, 1809)</span> motivates the use of least squares through a probabilistic forumation.
+</aside>
 <blockquote>
 <p>… It is clear, that for the product <span class="math inline">\(\Omega = h^\mu \pi^{-\frac{1}{2}\mu} e^{-hh(vv + v^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \dots)}\)</span> to be maximised the sum <span class="math inline">\(vv + v ^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \text{etc}.\)</span> ought to be minimized. <em>Therefore, the most probable values of the unknown quantities <span class="math inline">\(p , q, r , s \text{etc}.\)</span>, should be that in which the sum of the squares of the differences between the functions <span class="math inline">\(V, V^\prime, V^{\prime\prime} \text{etc}\)</span>, and the observed values is minimized</em>, for all observations of the same degree of precision is presumed.</p>
 </blockquote>
@@ -568,21 +564,23 @@ showDivs(0, 'under_determined_system');
 <section id="prior-distribution" class="slide level2">
 <h2>Prior Distribution</h2>
 <ul>
-<li>Bayesian inference requires a prior on the parameters.</li>
-<li>The prior represents your belief <em>before</em> you see the data of the likely value of the parameters.</li>
-<li>For linear regression, consider a Gaussian prior on the intercept:  <span class="math display">\[c \sim \gaussianSamp{0}{\alpha_1}\]</span> </li>
+<li><p>Bayesian inference requires a prior on the parameters.</p></li>
+<li><p>The prior represents your belief <em>before</em> you see the data of the likely value of the parameters.</p></li>
+<li><p>For linear regression, consider a Gaussian prior on the intercept:</p>
+<p><span class="math display">\[c \sim \gaussianSamp{0}{\alpha_1}\]</span></p></li>
 </ul>
 </section>
 <section id="posterior-distribution" class="slide level2">
 <h2>Posterior Distribution</h2>
 <ul>
-<li>Posterior distribution is found by combining the prior with the likelihood.</li>
-<li>Posterior distribution is your belief <em>after</em> you see the data of the likely value of the parameters.</li>
-<li>The posterior is found through <strong>Bayes’ Rule</strong> <span class="math display">\[
+<li><p>Posterior distribution is found by combining the prior with the likelihood.</p></li>
+<li><p>Posterior distribution is your belief <em>after</em> you see the data of the likely value of the parameters.</p></li>
+<li><p>The posterior is found through <strong>Bayes’ Rule</strong> <span class="math display">\[
 p(c|\dataScalar) = \frac{p(\dataScalar|c)p(c)}{p(\dataScalar)}
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}.
-\]</span></li>
+\]</span></p></li>
 </ul>
 </section>
 <section id="bayes-update" class="slide level2">
@@ -621,9 +619,7 @@ showDivs(1, 'dem_gaussian');
 <li>they are “exponentiated quadratics”, the answer is always also an exponentiated quadratic because <span class="math inline">\(\exp(a^2)\exp(b^2) = \exp(a^2 + b^2)\)</span>.</li>
 </ul></li>
 <li>Complete the square to get the resulting density in the form of a Gaussian.</li>
-<li>Recognise the mean and (co)variance of the Gaussian. This is the estimate of the posterior. \notes{For the Gaussian case, the normalisation of the posterior can be performed analytically. This is because both the prior and the likelihood have the form of an <em>exponentiated quadratic</em>, <span class="math display">\[
-\exp(a^2)\exp(b^2) = \exp(a^2 + b^2),
-\]</span> and the properties of the exponential mean that the product of two exponentiated quadratics is also an exponentiated quadratic. That implies that the posterior is also Gaussian, because a normalized exponentiated quadratic is a Gaussian distribution.<a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Recognise the mean and (co)variance of the Gaussian. This is the estimate of the posterior.</li>
 </ul>
 </section>
 <section id="main-trick" class="slide level2">
@@ -684,7 +680,7 @@ p(c| \dataVector, \inputVector, m, \dataStd^2) \propto  p(\dataVector|\inputVect
 <li>Could sample height from a distribution: <span class="math display">\[
 p(h) \sim \gaussianSamp{1.7}{0.0225}.
 \]</span></li>
-<li>And similarly weight:  <span class="math display">\[
+<li>And similarly weight: <span class="math display">\[
 p(w) \sim \gaussianSamp{75}{36}.
 \]</span></li>
 </ul>
@@ -697,13 +693,17 @@ p(w) \sim \gaussianSamp{75}{36}.
 </object>
 </div>
 </div>
+<aside class="notes">
+Gaussian distributions for height and weight.
+</aside>
 </section>
 <section id="independence-assumption" class="slide level2">
 <h2>Independence Assumption</h2>
 <ul>
-<li>We assume height and weight are independent.  <span class="math display">\[
+<li><p>We assume height and weight are independent.</p>
+<p><span class="math display">\[
 p(w, h) = p(w)p(h).
-\]</span> </li>
+\]</span></p></li>
 </ul>
 </section>
 <section id="sampling-two-dimensional-variables" class="slide level2">
@@ -903,11 +903,6 @@ p(\dataVector) = \frac{1}{\det{2\pi\covarianceMatrix}^{\frac{1}{2}}} \exp\left(-
 \mappingScalar_i \sim \gaussianSamp{0}{\alpha}
 \]</span> Let’s start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, <span class="math inline">\(\alpha\)</span>.</p>
 </section>
-<section>
-<section id="set-prior-variance-on-w" class="title-slide slide level1">
-<h1>set prior variance on w</h1>
-<p>alpha = 4. # set the order of the polynomial basis set order = 5 # set the noise variance sigma2 = 0.01</p>
-</section>
 <section id="further-reading-1" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
@@ -942,7 +937,7 @@ p(\mappingVector | \dataVector, \inputVector, \dataStd^2) = \gaussianDist{\mappi
 \covarianceMatrix_\mappingScalar = \left(\dataStd^{-2}\basisMatrix^\top \basisMatrix + \alpha^{-1}\eye\right)^{-1}
 \]</span> and <span class="math display">\[
 \meanVector_\mappingScalar = \covarianceMatrix_\mappingScalar \dataStd^{-2}\basisMatrix^\top \dataVector
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="exercise-2" class="slide level2">
 <h2>Exercise 2</h2>
@@ -968,9 +963,6 @@ p(\mappingVector | \dataVector, \inputVector, \dataStd^2) = \gaussianDist{\mappi
 </td>
 </tr>
 </table>
-<p>import numpy as np import pods</p>
-<p>data = pods.datasets.olympic_marathon_men() x = data[‘X’] y = data[‘Y’]</p>
-<p>offset = y.mean() scale = np.sqrt(y.var())</p>
 </section>
 <section id="olympic-marathon-data-1" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -980,10 +972,12 @@ p(\mappingVector | \dataVector, \inputVector, \dataStd^2) = \gaussianDist{\mappi
 </object>
 </div>
 </div>
+<aside class="notes">
+Olympic marathon pace times since 1892.
+</aside>
 </section>
 <section id="olympic-data-with-bayesian-polynomials" class="slide level2">
 <h2>Olympic Data with Bayesian Polynomials</h2>
-<p>import mlai import pods</p>
 <script>
 showDivs(1, 'olympic_BLM_polynomial_number');
 </script>
@@ -1636,16 +1630,13 @@ p(\dataVector|\inputMatrix, \dataStd^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\le
 <div id="ref-Bishop:book06">
 <p>Bishop, C.M., 2006. Pattern recognition and machine learning. springer.</p>
 </div>
+<div id="ref-Gauss:theoria09">
+<p>Gauss, C.F., 1809. Theoria motus corporum coelestium in sectionibus conicis solem ambientium. F. Perthes und I. H. Besser, Hamburg.</p>
+</div>
 <div id="ref-Rogers:book11">
 <p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
 </div>
-</section></section>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>Note not all exponentiated quadratics can be normalized, to do so, the coefficient associated with the variable squared, <span class="math inline">\(\dataScalar^2\)</span>, must be strictly positive.}<a href="#/fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
     </div>
   </div>
@@ -1660,8 +1651,10 @@ p(\dataVector|\inputMatrix, \dataStd^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\le
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

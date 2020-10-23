@@ -19,6 +19,21 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Machine Learning and Adaptive Intelligence module
+author:
+  name: Neil D. Lawrence
+  email:
+  twitter: lawrennd
+description: >- # this means to ignore newlines until "baseurl:"
+  This is the website of the Machine Learning and Adaptive Intelligence
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/mlai" # the subpath of your site, e.g. /blog
+twitter_username:
+github_username: mlatcl
+colab: https://colab.research.google.com
+nbviewer: https://nbviewer.jupyter.org
+
+
+title: 
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   This is the website of the Machine Learning and Adaptive Intelligence
@@ -28,6 +43,7 @@ twitter_username:
 github_username: mlatcl
 colab: https://colab.research.google.com
 nbviewer: https://nbviewer.jupyter.org
+
 slidesdir: slides
 reveal:
   width: 512
@@ -35,7 +51,7 @@ reveal:
 youtube:
   width: 512
   height: 384
-  
+
 collections:
   updates:
     output: true
@@ -47,17 +63,23 @@ collections:
     permalink: /special_topics/:title:output_ext
     output: true
     sort_by: label
+  practicals:
+    permalink: /practicals/:title:output_ext
+    output: true
+    sort_by: week
 
-github:
+ghub:
   edit: true
   repository: mlai
 
 future: true
 
 # Build settings
-theme: minima
 plugins:
-  - jekyll-feed
+- jekyll-feed
+- jekyll-seo-tag
+- jekyll-remote-theme
+remote_theme: lawrennd/proceedings
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -67,12 +89,17 @@ plugins:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
+exclude:
+  - slides/reveal.js/plugin/markdown/example
+  - slides/reveal.js/plugin/markdown/example
+  - slides/reveal.js-3.8.0/plugin/markdown/example
+  - slides/reveal.js-3.8.0/test/
+  - slides/reveal.js-3.8.0/css/theme/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
 #   - node_modules/
 #   - vendor/bundle/
 #   - vendor/cache/

@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-10-20">
   <title>Basis Functions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +35,7 @@
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -340,8 +339,6 @@
 <section id="title-slide">
   <h1 class="title">Basis Functions</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-10-20</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -353,11 +350,6 @@
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods%pip install pods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="nonlinear-regression" class="slide level2">
 <h2>Nonlinear Regression</h2>
@@ -371,7 +363,7 @@
 <h2>Non-linear in the Inputs</h2>
 <p><span class="math display">\[
 \mappingFunction(\inputVector) = \mappingVector^\top \inputVector
-\]</span> </p>
+\]</span></p>
 <!-- SECTION Basis Functions -->
 </section>
 <section id="basis-functions" class="slide level2">
@@ -379,7 +371,6 @@
 </section>
 <section id="basis-functions-1" class="slide level2">
 <h2>Basis Functions</h2>
-
 </section>
 <section id="quadratic-basis" class="slide level2">
 <h2>Quadratic Basis</h2>
@@ -394,9 +385,10 @@
 \basisFunc_2(\inputScalar) = x, \\
 \basisFunc_3(\inputScalar) = \inputScalar^2.
 \end{align*}
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \basisVector(\inputScalar) = \begin{bmatrix} 1\\ x \\ \inputScalar^2\end{bmatrix}.
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="matrix-valued-function" class="slide level2">
 <h2>Matrix Valued Function</h2>
@@ -408,9 +400,7 @@
 \vdots &amp; \vdots &amp; \vdots \\
 1 &amp; \inputScalar_n &amp; \inputScalar_n^2
 \end{bmatrix}
-\]</span> </p>
-<p>import numpy as np</p>
-<p>def quadratic(x, **kwargs): ""“Take in a vector of input values and return the design matrix associated with the basis functions.”"" return np.hstack([np.ones((x.shape[0], 1)), x, x**2])</p>
+\]</span></p>
 </section>
 <section id="functions-derived-from-quadratic-basis" class="slide level2">
 <h2>Functions Derived from Quadratic Basis</h2>
@@ -475,12 +465,10 @@ showDivs(0, 'quadratic_function');
 <h2>Different Bases</h2>
 <p><span class="math display">\[
 \basisFunc_j(\inputScalar_i) = \inputScalar_i^j
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="polynomial-basis" class="slide level2">
 <h2>Polynomial Basis</h2>
-<p>import matplotlib.pyplot as plt import mlai import teaching_plots as plot</p>
-<p>%load -s polynomial mlai.py</p>
 </section>
 <section id="functions-derived-from-polynomial-basis" class="slide level2">
 <h2>Functions Derived from Polynomial Basis</h2>
@@ -529,16 +517,12 @@ showDivs(0, 'polynomial_basis');
 </section>
 <section id="different-basis" class="slide level2">
 <h2>Different Basis</h2>
-
 </section>
 <section id="radial-basis-functions" class="slide level2">
 <h2>Radial Basis Functions</h2>
 <ul>
 <li>Basis functions can be local e.g. radial (or Gaussian) basis <span class="math display">\[\basisFunc_j(\inputScalar) = \exp\left(-\frac{(\inputScalar-\mu_j)^2}{\lengthScale^2}\right)\]</span></li>
 </ul>
-<p>import matplotlib.pyplot as plt import mlai import teaching_plots as plot</p>
-<p>%load -s radial mlai.py</p>
-<p>from ipywidgets import IntSlider import pods</p>
 </section>
 <section id="functions-derived-from-radial-basis" class="slide level2">
 <h2>Functions Derived from Radial Basis</h2>
@@ -573,9 +557,6 @@ showDivs(0, 'radial_function');
 </section>
 <section id="rectified-linear-units" class="slide level2">
 <h2>Rectified Linear Units</h2>
-<p>import numpy as np</p>
-<p>%load -s relu mlai.py</p>
-<p>import matplotlib.pyplot as plt import teaching_plots as plot import mlai</p>
 </section>
 <section id="functions-derived-from-relu-basis" class="slide level2">
 <h2>Functions Derived from Relu Basis</h2>
@@ -624,7 +605,6 @@ showDivs(0, 'relu_function');
 </section>
 <section id="hyperbolic-tangent-basis" class="slide level2">
 <h2>Hyperbolic Tangent Basis</h2>
-<p>%load -s tanh mlai.py</p>
 </section>
 <section id="functions-derived-from-tanh-basis" class="slide level2">
 <h2>Functions Derived from Tanh Basis</h2>
@@ -656,17 +636,12 @@ showDivs(0, 'tanh_function');
 <object class="svgplot " data="../slides/diagrams/ml/tanh_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<p>import pods from ipywidgets import IntSlider</p>
 </section>
 <section id="fourier-basis" class="slide level2">
 <h2>Fourier Basis</h2>
 <ul>
 <li><span class="math display">\[\basisFunc_j(\inputScalar) = \mappingScalar_0  + \mappingScalar_1 \sin(\inputScalar) + \mappingScalar_2 \cos(\inputScalar) + \mappingScalar_3 \sin(2\inputScalar) + \mappingScalar_4 \cos(2\inputScalar)\]</span></li>
 </ul>
-<p>import numpy as np</p>
-<p>%load -s fourier mlai.py</p>
-<p>import matplotlib.pyplot as plt import mlai import teaching_plots as plot</p>
-<p>import pods from ipywidgets import IntSlider</p>
 </section>
 <section id="functions-derived-from-fourier-basis" class="slide level2">
 <h2>Functions Derived from Fourier Basis</h2>
@@ -706,17 +681,10 @@ showDivs(0, 'fourier_function');
 <section id="fitting-to-data" class="slide level2">
 <h2>Fitting to Data</h2>
 <p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
-<p>import pods</p>
-<p>data = pods.datasets.olympic_marathon_men() y = data[‘Y’] x = data[‘X’] y -= y.mean() y /= y.std()</p>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise 1</h2>
 <p>Now we are going to redefine our polynomial basis. Have a careful look at the operations we perform on <code>x</code> to create <code>z</code>. We use <code>z</code> in the polynomial computation. What are we doing to the inputs? Why do you think we are changing <code>x</code> in this manner?</p>
-<p>import numpy as np</p>
-<p>%load -s polynomial mlai.py</p>
-<p>import matplotlib.pyplot as plt</p>
-<p>#x[:, 0] = np.linspace(1888, 2020, 1000) fig, ax = plt.subplots(figsize=plot.big_wide_figsize)</p>
-<p>ax.plot(x, y, ‘rx’)</p>
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise 3</h2>
@@ -727,7 +695,6 @@ showDivs(0, 'fourier_function');
 <li>Fourier basis</li>
 </ol>
 <p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
-<p>np.asarray([[1, 2, 3, 4]]).shape</p>
 </section>
 <section id="basis-function-models" class="slide level2">
 <h2>Basis Function Models</h2>
@@ -783,11 +750,13 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </section>
 <section id="design-matrices" class="slide level2">
 <h2>Design Matrices</h2>
-<p>* Design matrix notation <span class="math display">\[
-  \basisMatrix = \begin{bmatrix} \mathbf{1} &amp; \inputVector &amp; \inputVector^2\end{bmatrix}
-  \]</span> so that <span class="math display">\[
-  \basisMatrix \in \Re^{\numData \times \dataDim}.
-  \]</span></p>
+<ul>
+<li>Design matrix notation <span class="math display">\[
+\basisMatrix = \begin{bmatrix} \mathbf{1} &amp; \inputVector &amp; \inputVector^2\end{bmatrix}
+\]</span> so that <span class="math display">\[
+\basisMatrix \in \Re^{\numData \times \dataDim}.
+\]</span></li>
+</ul>
 </section>
 <section id="multivariate-derivatives-reminder" class="slide level2">
 <h2>Multivariate Derivatives Reminder</h2>
@@ -846,9 +815,6 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </td>
 </tr>
 </table>
-<p>import numpy as np import pods</p>
-<p>data = pods.datasets.olympic_marathon_men() x = data[‘X’] y = data[‘Y’]</p>
-<p>offset = y.mean() scale = np.sqrt(y.var())</p>
 </section>
 <section id="olympic-marathon-data-1" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -858,22 +824,12 @@ L(\mappingVector,\dataStd^2)= -\frac{\numData}{2}\log \dataStd^2-\frac{\numData}
 </object>
 </div>
 </div>
+<aside class="notes">
+Olympic marathon pace times since 1892.
+</aside>
 </section>
 <section id="polynomial-fits-to-olympic-data" class="slide level2">
 <h2>Polynomial Fits to Olympic Data</h2>
-<p>import numpy as np from matplotlib import pyplot as plt import mlai import pods</p>
-<p>basis = mlai.polynomial</p>
-<p>data = pods.datasets.olympic_marathon_men()</p>
-<p>x = data[‘X’] y = data[‘Y’]</p>
-<p>xlim = [1892, 2020]</p>
-<p>basis=mlai.Basis(mlai.polynomial, number=1, data_limits=xlim)</p>
-<p>import numpy as np from matplotlib import pyplot as plt import teaching_plots as plot import mlai import pods</p>
-<p>basis = mlai.polynomial</p>
-<p>data = pods.datasets.olympic_marathon_men()</p>
-<p>x = data[‘X’] y = data[‘Y’]</p>
-<p>xlim = [1892, 2020] max_basis = 27</p>
-<p>ll = np.array([np.nan]<em>(max_basis)) sum_squares = np.array([np.nan]</em>(max_basis)) basis=mlai.Basis(mlai.polynomial, number=1, data_limits=xlim)</p>
-<p>plot.rmse_fit(x, y, param_name=‘number’, param_range=(1, 28), model=mlai.LM, basis=basis, xlim=xlim, objective_ylim=[0, 0.8], diagrams=‘../slides/diagrams/ml’)</p>
 <script>
 showDivs(1, 'olympic_LM_polynomial_number');
 </script>
@@ -1070,7 +1026,7 @@ showDivs(1, 'olympic_LM_polynomial_number');
 <li><span class="math inline">\(\inputVector\)</span> is inside the non-linearity, but <span class="math inline">\(\mappingVector\)</span> is outside. <span class="math display">\[
 \mappingFunction(\inputVector) = \mappingVector^\top \basisVector(\inputVector;
 \boldsymbol{\theta}),
-\]</span> </li>
+\]</span></li>
 </ul>
 </section>
 <section id="exercise-1-1" class="slide level2">
@@ -1106,11 +1062,6 @@ showDivs(1, 'olympic_LM_polynomial_number');
 <section id="use-of-qr-decomposition-for-numerical-stability" class="slide level2">
 <h2>Use of QR Decomposition for Numerical Stability</h2>
 <p><em>TODO</em> example with polynomials.</p>
-<p>import numpy as np</p>
-<p>x = np.random.normal(size=(10, 1))</p>
-<p>Phi = fourier(x, 5)</p>
-<p>(np.dot(Phi.T,Phi))</p>
-<p>Phi*Phi</p>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
@@ -1145,8 +1096,10 @@ showDivs(1, 'olympic_LM_polynomial_number');
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
