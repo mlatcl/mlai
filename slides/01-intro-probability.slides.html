@@ -557,11 +557,11 @@ Laplace’s determinsim in English translation.
 </div>
 <aside class="notes">
 </aside>
-<p>p <!--<object data="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf" width="80%" height="">
+<!--<object data="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf" width="80%" height="">
     <embed src="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf">
         <p>This browser does not support PDF viewing. Please download the PDF to view it: <a href="../slides/diagrams/physics/philosophicaless00lapliala.pdf">Download PDF</a>.</p>
     </embed>
-</object>--></p>
+</object>-->
 </section>
 <section id="section-13" class="slide level2">
 <h2></h2>
@@ -591,12 +591,12 @@ To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to 
 </div>
 <aside class="notes">
 </aside>
-<p>p <!--<object data="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf" width="80%" height="">
+<!--<object data="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf" width="80%" height="">
     <embed src="../slides/diagrams/physics/philosophicaless00lapliala.pdf" type="application/pdf">
         <p>This browser does not support PDF viewing. Please download the PDF to view it: <a href="../slides/diagrams/physics/philosophicaless00lapliala.pdf">Download PDF</a>.</p>
     </embed>
 </object>
---></p>
+-->
 </section>
 <section id="datascalar-minputscalar-c-noisescalar" class="slide level2">
 <h2><span class="math inline">\(\dataScalar = m\inputScalar + c + \noiseScalar\)</span></h2>
@@ -619,8 +619,8 @@ To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to 
 <section id="a-probabilistic-process" class="slide level2">
 <h2>A Probabilistic Process</h2>
 <div class="fragment">
-<p>Set the mean of Gaussian to be a function. <span class="math display">\[p
-\left(\dataScalar_i|\inputScalar_i\right)=\frac{1}{\sqrt{2\pi\dataStd^2}}\exp \left(-\frac{\left(\dataScalar_i-\mappingFunction\left(\inputScalar_i\right)\right)^{2}}{2\dataStd^2}\right).
+<p>Set the mean of Gaussian to be a function. <span class="math display">\[
+p\left(\dataScalar_i|\inputScalar_i\right)=\frac{1}{\sqrt{2\pi\dataStd^2}}\exp \left(-\frac{\left(\dataScalar_i-\mappingFunction\left(\inputScalar_i\right)\right)^{2}}{2\dataStd^2}\right).
 \]</span></p>
 </div>
 <div class="fragment">
@@ -774,11 +774,16 @@ P\left(x,y\right)=P\left(x|y\right)P\left(y\right).
 </section>
 <section id="the-sum-rule" class="slide level2">
 <h2>The Sum Rule</h2>
-<p>Ignoring the limit in our definitions: * The marginal probability <span class="math inline">\(P\left(y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}\)</span> . * The joint distribution <span class="math inline">\(P\left(x,y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{N}\)</span>. * <span class="math inline">\(n_{y}=\sum_{x}n_{x,y}\)</span> so <span class="math display">\[
-  {\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}={\lim_{N\rightarrow\infty}}\sum_{x}\frac{n_{x,y}}{N},
-  \]</span> in other words <span class="math display">\[
-  P\left(y\right)=\sum_{x}P\left(x,y\right).
-  \]</span> This is known as the sum rule of probability.</p>
+<p>Ignoring the limit in our definitions:</p>
+<ul>
+<li><p>The marginal probability <span class="math inline">\(P\left(y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}\)</span> .</p></li>
+<li><p>The joint distribution <span class="math inline">\(P\left(x,y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{N}\)</span>.</p></li>
+<li><p><span class="math inline">\(n_{y}=\sum_{x}n_{x,y}\)</span> so <span class="math display">\[
+{\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}={\lim_{N\rightarrow\infty}}\sum_{x}\frac{n_{x,y}}{N},
+\]</span> in other words <span class="math display">\[
+P\left(y\right)=\sum_{x}P\left(x,y\right).
+\]</span> This is known as the sum rule of probability.</p></li>
+</ul>
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise 3</h2>
@@ -1072,6 +1077,9 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <h2>Exercise 1</h2>
 <p>Now we see we have several additional features. Let’s assume we want to predict <code>maternal_health_delivery_services</code>. How would we go about doing it?</p>
 <p>Using what you’ve learnt about joint, conditional and marginal probabilities, as well as the sum and product rule, how would you formulate the question you want to answer in terms of probabilities? Should you be using a joint or a conditional distribution? If it’s conditional, what should the distribution be over, and what should it be conditioned on?</p>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="mlai-lecture-2012-figure" class="figure-frame">
 <iframe width="800" height="600" src="https://www.youtube.com/embed/GX8VLYUYScM?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
