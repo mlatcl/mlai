@@ -50,7 +50,7 @@ categories:
 -->
 <h2 id="setup-edit">Setup <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>First we download some libraries and files to support the notebook.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods<span class="op">%</span>pip install pods</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py&#39;</span>,<span class="st">&#39;teaching_plots.py&#39;</span>)</span></code></pre></div>
@@ -292,9 +292,7 @@ $$</span><br /></p>
 <p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 <h2 id="fitting-to-data-edit">Fitting to Data <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
 <p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> pods</span>
-<span id="cb45-2"><a href="#cb45-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb45-3"><a href="#cb45-3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
 <span id="cb46-2"><a href="#cb46-2"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb46-3"><a href="#cb46-3"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
@@ -302,17 +300,23 @@ $$</span><br /></p>
 <span id="cb46-5"><a href="#cb46-5"></a>y <span class="op">/=</span> y.std()</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>Now we are going to redefine our polynomial basis. Have a careful look at the operations we perform on <code>x</code> to create <code>z</code>. We use <code>z</code> in the polynomial computation. What are we doing to the inputs? Why do you think we are changing <code>x</code> in this manner?</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="op">%</span>load <span class="op">-</span>s polynomial mlai.py</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>pods.notebook.display_prediction(basis<span class="op">=</span><span class="bu">dict</span>(radial<span class="op">=</span>mlai.radial, </span>
-<span id="cb49-2"><a href="#cb49-2"></a>                                            polynomial<span class="op">=</span>mlai.polynomial, </span>
-<span id="cb49-3"><a href="#cb49-3"></a>                                            fourier<span class="op">=</span>mlai.fourier, </span>
-<span id="cb49-4"><a href="#cb49-4"></a>                                            relu<span class="op">=</span>mlai.relu), </span>
-<span id="cb49-5"><a href="#cb49-5"></a>                                 data_limits<span class="op">=</span>(<span class="dv">1888</span>, <span class="dv">2020</span>),</span>
-<span id="cb49-6"><a href="#cb49-6"></a>                                 fig<span class="op">=</span>fig, ax<span class="op">=</span>ax,</span>
-<span id="cb49-7"><a href="#cb49-7"></a>                                 offset<span class="op">=</span><span class="fl">0.</span>,</span>
-<span id="cb49-8"><a href="#cb49-8"></a>                                 wlim <span class="op">=</span> (<span class="op">-</span><span class="fl">4.</span>, <span class="fl">4.</span>),</span>
-<span id="cb49-9"><a href="#cb49-9"></a>                                 num_basis<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a><span class="op">%</span>load <span class="op">-</span>s polynomial mlai.py</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="co">#x[:, 0] = np.linspace(1888, 2020, 1000)</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a>ax.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>pods.notebook.display_prediction(basis<span class="op">=</span><span class="bu">dict</span>(radial<span class="op">=</span>mlai.radial, </span>
+<span id="cb52-2"><a href="#cb52-2"></a>                                            polynomial<span class="op">=</span>mlai.polynomial, </span>
+<span id="cb52-3"><a href="#cb52-3"></a>                                            fourier<span class="op">=</span>mlai.fourier, </span>
+<span id="cb52-4"><a href="#cb52-4"></a>                                            relu<span class="op">=</span>mlai.relu), </span>
+<span id="cb52-5"><a href="#cb52-5"></a>                                 data_limits<span class="op">=</span>(<span class="dv">1888</span>, <span class="dv">2020</span>),</span>
+<span id="cb52-6"><a href="#cb52-6"></a>                                 fig<span class="op">=</span>fig, ax<span class="op">=</span>ax,</span>
+<span id="cb52-7"><a href="#cb52-7"></a>                                 offset<span class="op">=</span><span class="fl">0.</span>,</span>
+<span id="cb52-8"><a href="#cb52-8"></a>                                 wlim <span class="op">=</span> (<span class="op">-</span><span class="fl">4.</span>, <span class="fl">4.</span>),</span>
+<span id="cb52-9"><a href="#cb52-9"></a>                                 num_basis<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
 <ol type="a">
@@ -321,7 +325,7 @@ $$</span><br /></p>
 <li>Fourier basis</li>
 </ol>
 <p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
 <h2 id="basis-function-models">Basis Function Models</h2>
 <p><br /><span class="math display">$$
   \mappingFunction(\inputVector_i) = \sum_{j=1}^\numBasisFunc \mappingScalar_j \basisFunc_{i, j}
@@ -363,45 +367,144 @@ $$</span><br /></p>
 \sum_{i=1}^{\numData}\basisVector_i\basisVector_i^\top = \basisMatrix^\top \basisMatrix$$</span><br /> <br /><span class="math display">$$\sum _{i=1}^{\numData}\basisVector_i\dataScalar_i = \basisMatrix^\top \dataVector
 $$</span><br /></p>
 <h2 id="update-equations">Update Equations</h2>
+<p><br /><span class="math display">$$
+  \mappingVector^{*} = \left(\basisMatrix^\top \basisMatrix\right)^{-1} \basisMatrix^\top \dataVector
+  $$</span><br /></p>
+<p><br /><span class="math display">$$
+  \left.\dataStd^2\right.^{{*}}=\frac{\sum_{i=1}^{\numData}\left(\dataScalar_i-\left.\mappingVector^{*}\right.^{\top}\basisVector_i\right)^{2}}{\numData}.
+  $$</span><br /></p>
+<p><br /><span class="math display">$$
+  \left(\basisMatrix^\top \basisMatrix\right)\mappingVector = \basisMatrix^\top \dataVector
+  $$</span><br /></p>
+<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
+<table>
+<tr>
+<td width="70%">
 <ul>
-<li>Update for <span class="math inline">$\mappingVector^{*}$</span> <br /><span class="math display">$$
-\mappingVector^{*} = \left(\basisMatrix^\top \basisMatrix\right)^{-1} \basisMatrix^\top \dataVector
-$$</span><br /></li>
-<li>The equation for <span class="math inline">$\left.\dataStd^2\right.^{*}$</span> may also be found <br /><span class="math display">$$
-\left.\dataStd^2\right.^{{*}}=\frac{\sum_{i=1}^{\numData}\left(\dataScalar_i-\left.\mappingVector^{*}\right.^{\top}\basisVector_i\right)^{2}}{\numData}.
-$$</span><br /></li>
+<li>Gold medal times for Olympic Marathon since 1896.</li>
+<li>Marathons before 1924 didn’t have a standardised distance.</li>
+<li>Present results using pace per km.</li>
+<li>In 1904 Marathon was badly organised leading to very slow times.</li>
 </ul>
-<h2 id="avoid-direct-inverse">Avoid Direct Inverse</h2>
-<ul>
-<li>E.g. Solve for <span class="math inline">$\mappingVector$</span> <br /><span class="math display">$$
-\left(\basisMatrix^\top \basisMatrix\right)\mappingVector = \basisMatrix^\top \dataVector
-$$</span><br /></li>
-<li>See <code>np.linalg.solve</code></li>
-<li>In practice use <span class="math inline"><strong>Q</strong><strong>R</strong></span> decomposition (see lab class notes).</li>
-</ul>
-<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb51-2"><a href="#cb51-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb51-3"><a href="#cb51-3"></a><span class="im">import</span> teaching_plots <span class="im">as</span> plot</span>
-<span id="cb51-4"><a href="#cb51-4"></a><span class="im">import</span> mlai</span>
-<span id="cb51-5"><a href="#cb51-5"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
-<span id="cb52-2"><a href="#cb52-2"></a></span>
-<span id="cb52-3"><a href="#cb52-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb52-4"><a href="#cb52-4"></a></span>
-<span id="cb52-5"><a href="#cb52-5"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb52-6"><a href="#cb52-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb52-7"><a href="#cb52-7"></a></span>
-<span id="cb52-8"><a href="#cb52-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
-<span id="cb52-9"><a href="#cb52-9"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
-<span id="cb52-10"><a href="#cb52-10"></a></span>
-<span id="cb52-11"><a href="#cb52-11"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb52-12"><a href="#cb52-12"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb52-13"><a href="#cb52-13"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>pods.notebook.display_plots(<span class="st">&#39;olympic_LM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>,</span>
-<span id="cb54-2"><a href="#cb54-2"></a>                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </span>
-<span id="cb54-3"><a href="#cb54-3"></a>                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">28</span>,<span class="dv">1</span>))</span></code></pre></div>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="../slides/diagrams/Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+</td>
+</tr>
+</table>
+<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb55-2"><a href="#cb55-2"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb55-3"><a href="#cb55-3"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb55-4"><a href="#cb55-4"></a></span>
+<span id="cb55-5"><a href="#cb55-5"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb55-6"><a href="#cb55-6"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="im">import</span> teaching_plots <span class="im">as</span> plot</span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a></span>
+<span id="cb57-2"><a href="#cb57-2"></a>xlim <span class="op">=</span> (<span class="dv">1875</span>,<span class="dv">2030</span>)</span>
+<span id="cb57-3"><a href="#cb57-3"></a>ylim <span class="op">=</span> (<span class="fl">2.5</span>, <span class="fl">6.5</span>)</span>
+<span id="cb57-4"><a href="#cb57-4"></a>yhat <span class="op">=</span> (y<span class="op">-</span>offset)<span class="op">/</span>scale</span>
+<span id="cb57-5"><a href="#cb57-5"></a></span>
+<span id="cb57-6"><a href="#cb57-6"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb57-7"><a href="#cb57-7"></a>_ <span class="op">=</span> ax.plot(x, y, <span class="st">&#39;r.&#39;</span>,markersize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb57-8"><a href="#cb57-8"></a>ax.set_xlabel(<span class="st">&#39;year&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb57-9"><a href="#cb57-9"></a>ax.set_ylabel(<span class="st">&#39;pace min/km&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb57-10"><a href="#cb57-10"></a>ax.set_xlim(xlim)</span>
+<span id="cb57-11"><a href="#cb57-11"></a>ax.set_ylim(ylim)</span>
+<span id="cb57-12"><a href="#cb57-12"></a></span>
+<span id="cb57-13"><a href="#cb57-13"></a>mlai.write_figure(figure<span class="op">=</span>fig, </span>
+<span id="cb57-14"><a href="#cb57-14"></a>                  filename<span class="op">=</span><span class="st">&#39;../slides/diagrams/datasets/olympic-marathon.svg&#39;</span>, </span>
+<span id="cb57-15"><a href="#cb57-15"></a>                  transparent<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb57-16"><a href="#cb57-16"></a>                  frameon<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="figure">
+<div id="olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
+</object>
+</div>
+<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
+<p><img class="img-button" src="/icons/Magnify_Large.svg" style="width:1.5ex"></p>
+</div>
+<div id="olympic-marathon-caption" class="caption-frame">
+<p>Figure: Olympic marathon pace times since 1892.</p>
+</div>
+</div>
+<p>Things to notice about the data include the outlier in 1904, in this year, the olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed.</p>
+<p>More recent years see more consistently quick marathons.</p>
+<h2 id="polynomial-fits-to-olympic-data-edit">Polynomial Fits to Olympic Data <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="im">import</span> mlai</span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb59-4"><a href="#cb59-4"></a></span>
+<span id="cb59-5"><a href="#cb59-5"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb59-6"><a href="#cb59-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb59-7"><a href="#cb59-7"></a></span>
+<span id="cb59-8"><a href="#cb59-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb59-9"><a href="#cb59-9"></a></span>
+<span id="cb59-10"><a href="#cb59-10"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> IntSlider</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a>pods.notebook.display_plots(<span class="st">&#39;olympic_LM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>,</span>
+<span id="cb61-2"><a href="#cb61-2"></a>                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </span>
+<span id="cb61-3"><a href="#cb61-3"></a>                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">27</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="im">import</span> teaching_plots <span class="im">as</span> plot</span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="im">import</span> mlai</span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<span id="cb63-2"><a href="#cb63-2"></a></span>
+<span id="cb63-3"><a href="#cb63-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb63-4"><a href="#cb63-4"></a></span>
+<span id="cb63-5"><a href="#cb63-5"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb63-6"><a href="#cb63-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb63-7"><a href="#cb63-7"></a></span>
+<span id="cb63-8"><a href="#cb63-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb63-9"><a href="#cb63-9"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
+<span id="cb63-10"><a href="#cb63-10"></a></span>
+<span id="cb63-11"><a href="#cb63-11"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb63-12"><a href="#cb63-12"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb63-13"><a href="#cb63-13"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a>plot.rmse_fit(x, y, param_name<span class="op">=</span><span class="st">&#39;number&#39;</span>, param_range<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">28</span>), </span>
+<span id="cb64-2"><a href="#cb64-2"></a>              model<span class="op">=</span>mlai.LM, basis<span class="op">=</span>basis, </span>
+<span id="cb64-3"><a href="#cb64-3"></a>              xlim<span class="op">=</span>xlim, objective_ylim<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.8</span>],</span>
+<span id="cb64-4"><a href="#cb64-4"></a>              diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a>pods.notebook.display_plots(<span class="st">&#39;olympic_LM_polynomial_number</span><span class="sc">{num_basis:0&gt;3}</span><span class="st">.svg&#39;</span>,</span>
+<span id="cb65-2"><a href="#cb65-2"></a>                            directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>, </span>
+<span id="cb65-3"><a href="#cb65-3"></a>                            num_basis<span class="op">=</span>IntSlider(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">28</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
+<p><img class="img-button" src="/icons/Magnify_Large.svg" style="width:1.5ex"></p>
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-caption" class="caption-frame">
+<p>Figure: Fit of a 1 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-03-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
+<p><img class="img-button" src="/icons/Magnify_Large.svg" style="width:1.5ex"></p>
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-caption" class="caption-frame">
+<p>Figure: Fit of a 2 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
 <h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear in the Parameters</h2>
 <p>One rather nice aspect of our model is that whilst it is non-linear in the inputs, it is still linear in the parameters <span class="math inline">$\mappingVector$</span>. This means that our derivations from before continue to operate to allow us to work with this model. In fact, although this is a non-linear regression it is still known as a <em>linear model</em> because it is linear in the parameters,</p>
 <p><br /><span class="math display">$$
@@ -437,11 +540,11 @@ $$</span><br /> Compute the corresponding error on the training data. How does i
 <h2 id="use-of-qr-decomposition-for-numerical-stability">Use of QR Decomposition for Numerical Stability</h2>
 <p>In the last session we showed how rather than computing <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> as an intermediate step to our solution, we could compute the solution to the regressiond directly through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>. Now we will consider an example with non linear basis functions where such computation is critical for forming the right answer.</p>
 <p><em>TODO</em> example with polynomials.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>Phi <span class="op">=</span> fourier(x, <span class="dv">5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1"></a>Phi <span class="op">=</span> fourier(x, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
