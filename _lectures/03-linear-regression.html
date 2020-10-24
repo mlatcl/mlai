@@ -766,19 +766,13 @@ $$</span><br /> so we see that each element of the result, <span class="math inl
 \mappingFunctionVector = \inputMatrix\mappingVector.
 $$</span><br /></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a></span>
-<span id="cb44-2"><a href="#cb44-2"></a>```{f <span class="op">=</span> X<span class="op">@</span>w <span class="co"># The @ sign performs matrix multiplication</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a>Combining this result <span class="cf">with</span> our objective function,</span>
-<span id="cb44-5"><a href="#cb44-5"></a>$$</span>
-<span id="cb44-6"><a href="#cb44-6"></a><span class="op">\</span>errorFunction(<span class="op">\</span>mappingVector) <span class="op">=</span> (<span class="op">\</span>dataVector <span class="op">-</span> <span class="op">\</span>mappingFunctionVector)<span class="op">^\</span>top(<span class="op">\</span>dataVector <span class="op">-</span> <span class="op">\</span>mappingFunctionVector)</span>
-<span id="cb44-7"><a href="#cb44-7"></a>$$</span>
-<span id="cb44-8"><a href="#cb44-8"></a>we find we have defined the <span class="op">*</span>model<span class="op">*</span> <span class="cf">with</span> two equations. One equation tells us the form of our predictive function <span class="kw">and</span> how it depends on its parameters, the other tells us the form of our objective function.</span>
-<span id="cb44-9"><a href="#cb44-9"></a></span>
-<span id="cb44-10"><a href="#cb44-10"></a>```{.python}</span>
-<span id="cb44-11"><a href="#cb44-11"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
-<span id="cb44-12"><a href="#cb44-12"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
-<span id="cb44-13"><a href="#cb44-13"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>f <span class="op">=</span> X<span class="op">@</span>w <span class="co"># The @ sign performs matrix multiplication</span></span></code></pre></div>
+<p>Combining this result with our objective function, <br /><span class="math display">$$
+\errorFunction(\mappingVector) = (\dataVector - \mappingFunctionVector)^\top(\dataVector - \mappingFunctionVector)
+$$</span><br /> we find we have defined the <em>model</em> with two equations. One equation tells us the form of our predictive function and how it depends on its parameters, the other tells us the form of our objective function.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
 <h3 id="exercise-1-2">Exercise 1</h3>
 <p>The prediction for our movie recommender system had the form <br /><span class="math display"><em>f</em><sub><em>i</em>, <em>j</em></sub> = <strong>u</strong><sub><em>i</em></sub><sup>⊤</sup><strong>v</strong><sub><em>j</em></sub></span><br /> and the objective function was then <br /><span class="math display">$$
 E = \sum_{i,j} s_{i,j}(\dataScalar_{i,j} - f_{i, j})^2
@@ -845,37 +839,37 @@ $$</span><br /> where <span class="math inline"><strong>0</strong></span> is a <
 $$</span><br /> where <span class="math inline"><strong>A</strong><sup> − 1</sup></span> denotes <a href="http://en.wikipedia.org/wiki/Invertible_matrix"><em>matrix inverse</em></a>.</p>
 <h2 id="solving-the-multivariate-system">Solving the Multivariate System</h2>
 <p>The solution for <span class="math inline">$\mappingVector$</span> is given in terms of a matrix inverse, but computation of a matrix inverse requires, in itself, an algorithm to resolve it. You’ll know this if you had to invert, by hand, a <span class="math inline">3 × 3</span> matrix in high school. From a numerical stability perspective, it is also best not to compute the matrix inverse directly, but rather to ask the computer to <em>solve</em> the system of linear equations given by <br /><span class="math display">$$\inputMatrix^\top\inputMatrix \mappingVector = \inputMatrix^\top\dataVector$$</span><br /> for <span class="math inline">$\mappingVector$</span>. This can be done in <code>numpy</code> using the command</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>np.linalg.solve?</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>np.linalg.solve?</span></code></pre></div>
 <p>so we can obtain the solution using</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>w <span class="op">=</span> np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y)</span>
-<span id="cb47-2"><a href="#cb47-2"></a><span class="bu">print</span>(w)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>w <span class="op">=</span> np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y)</span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="bu">print</span>(w)</span></code></pre></div>
 <p>We can map it back to the liner regression and plot the fit as follows</p>
 <h2 id="multivariate-linear-regression">Multivariate Linear Regression</h2>
 <p>A major advantage of the new system is that we can build a linear regression on a multivariate system. The matrix calculus didn’t specify what the length of the vector <span class="math inline">$\inputVector$</span> should be, or equivalently the size of the design matrix.</p>
 <h2 id="movie-body-count-data">Movie Body Count Data</h2>
 <p>Let’s consider the movie body count data.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
-<span id="cb49-2"><a href="#cb49-2"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
+<span id="cb50-2"><a href="#cb50-2"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <p>Let’s remind ourselves of the features we’ve been provided with.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
 <p>Now we will build a design matrix based on the numeric features: year, Body_Count, Length_Minutes in an effort to predict the rating. We build the design matrix as follows:</p>
 <h2 id="relation-to-single-input-system">Relation to Single Input System</h2>
 <p>Bias as an additional feature.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
-<span id="cb51-2"><a href="#cb51-2"></a>X <span class="op">=</span> movies[select_features]</span>
-<span id="cb51-3"><a href="#cb51-3"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
+<span id="cb52-2"><a href="#cb52-2"></a>X <span class="op">=</span> movies[select_features]</span>
+<span id="cb52-3"><a href="#cb52-3"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
 <p>Now let’s perform a linear regression. But this time, we will create a pandas data frame for the result so we can store it in a form that we can visualise easily.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y),  <span class="co"># solve linear regression here</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
-<span id="cb53-3"><a href="#cb53-3"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y),  <span class="co"># solve linear regression here</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
 <p>We can check the residuals to see how good our estimates are</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>(y <span class="op">-</span> X<span class="op">@</span>w).hist()</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>(y <span class="op">-</span> X<span class="op">@</span>w).hist()</span></code></pre></div>
 <p>Which shows our model <em>hasn’t</em> yet done a great job of representation, because the spread of values is large. We can check what the rating is dominated by in terms of regression coefficients.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>w</span></code></pre></div>
 <p>Although we have to be a little careful about interpretation because our input values live on different scales, however it looks like we are dominated by the bias, with a small negative effect for later films (but bear in mind the years are large, so this effect is probably larger than it looks) and a positive effect for length. So it looks like long earlier films generally do better, but the residuals are so high that we probably haven’t modelled the system very well.</p>
 <div class="figure">
 <div id="mlai-15-multivariate-regression-figure" class="figure-frame">
@@ -919,11 +913,11 @@ $$</span><br /> <br /><span class="math display">$$
 \mathbf{R} \boldsymbol{\beta} = \mathbf{Q}^\top \dataVector
 $$</span><br /> This is a more numerically stable solution because it removes the need to compute <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> as an intermediate. Computing <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> is a bad idea because it involves squaring all the elements of <span class="math inline">$\inputMatrix$</span> and thereby potentially reducing the numerical precision with which we can represent the solution. Operating on <span class="math inline">$\inputMatrix$</span> directly preserves the numerical precision of the model.</p>
 <p>This can be more particularly seen when we begin to work with <em>basis functions</em> in the next session. Some systems that can be resolved with the QR decomposition can not be resolved by using solve directly.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
-<span id="cb57-2"><a href="#cb57-2"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
-<span id="cb57-3"><a href="#cb57-3"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
-<span id="cb57-4"><a href="#cb57-4"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
+<span id="cb58-2"><a href="#cb58-2"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
+<span id="cb58-3"><a href="#cb58-3"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
+<span id="cb58-4"><a href="#cb58-4"></a>w</span></code></pre></div>
 <h2 id="reading">Reading</h2>
 <ul>
 <li>Section 1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span> for Matrix &amp; Vector Review.</li>
