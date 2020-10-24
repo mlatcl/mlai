@@ -515,8 +515,6 @@ $$</span><br /></p>
 <span id="cb29-3"><a href="#cb29-3"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
 <span id="cb29-4"><a href="#cb29-4"></a>        E_grid[i, j] <span class="op">=</span> ((y <span class="op">-</span> m_grid[i, j]<span class="op">*</span>x <span class="op">-</span> c_grid[i, j])<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code></pre></div>
 <h2 id="contour-plot-of-error">Contour Plot of Error</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="im">from</span> teaching_plots <span class="im">import</span> regression_contour</span></code></pre></div>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour.svg" width="60%" style=" ">
@@ -534,8 +532,8 @@ $$</span><br /></p>
 <ul>
 <li>We start with a guess for <span class="math inline"><em>m</em></span> and <span class="math inline"><em>c</em></span>.</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>m_star <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>m_star <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
 <h2 id="offset-gradient">Offset Gradient</h2>
 <ul>
 <li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline"><em>c</em></span>, <br /><span class="math display">$$
@@ -543,8 +541,8 @@ $$</span><br /></p>
   $$</span><br /></p></li>
 <li><p>This is computed in python as follows</p></li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
 <h2 id="deriving-the-gradient">Deriving the Gradient</h2>
 <p>To see how the gradient was derived, first note that the <span class="math inline"><em>c</em></span> appears in every term in the sum. So we are just differentiating <span class="math inline">$(\dataScalar_i - m\inputScalar_i - c)^2$</span> for each term in the sum. The gradient of this term with respect to <span class="math inline"><em>c</em></span> is simply the gradient of the outer quadratic, multiplied by the gradient with respect to <span class="math inline"><em>c</em></span> of the part inside the quadratic. The gradient of a quadratic is two times the argument of the quadratic, and the gradient of the inside linear term is just minus one. This is true for all terms in the sum, so we are left with the sum in the gradient.</p>
 <h2 id="slope-gradient">Slope Gradient</h2>
@@ -552,8 +550,8 @@ $$</span><br /></p>
 <p><br /><span class="math display">$$\frac{\text{d}\errorFunction(m, c)}{\text{d} m} = -2\sum_{i=1}^\numData \inputScalar_i(\dataScalar_i - m\inputScalar_i -
 c)$$</span><br /></p>
 <p>which can be implemented in python (numpy) as</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>m_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(x<span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star)).<span class="bu">sum</span>()</span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to m is &quot;</span>, m_grad)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>m_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(x<span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star)).<span class="bu">sum</span>()</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to m is &quot;</span>, m_grad)</span></code></pre></div>
 <h2 id="update-equations">Update Equations</h2>
 <ul>
 <li>Now we have gradients with respect to <span class="math inline"><em>m</em></span> and <span class="math inline"><em>c</em></span>.</li>
@@ -590,18 +588,17 @@ $$</span><br /></p></li>
 <ul>
 <li>These updates can be coded as</li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="bu">print</span>(<span class="st">&quot;Original m was&quot;</span>, m_star, <span class="st">&quot;and original c was&quot;</span>, c_star)</span>
-<span id="cb34-2"><a href="#cb34-2"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a>c_star <span class="op">=</span> c_star <span class="op">-</span> learn_rate<span class="op">*</span>c_grad</span>
-<span id="cb34-4"><a href="#cb34-4"></a>m_star <span class="op">=</span> m_star <span class="op">-</span> learn_rate<span class="op">*</span>m_grad</span>
-<span id="cb34-5"><a href="#cb34-5"></a><span class="bu">print</span>(<span class="st">&quot;New m is&quot;</span>, m_star, <span class="st">&quot;and new c is&quot;</span>, c_star)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="bu">print</span>(<span class="st">&quot;Original m was&quot;</span>, m_star, <span class="st">&quot;and original c was&quot;</span>, c_star)</span>
+<span id="cb33-2"><a href="#cb33-2"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>c_star <span class="op">=</span> c_star <span class="op">-</span> learn_rate<span class="op">*</span>c_grad</span>
+<span id="cb33-4"><a href="#cb33-4"></a>m_star <span class="op">=</span> m_star <span class="op">-</span> learn_rate<span class="op">*</span>m_grad</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="bu">print</span>(<span class="st">&quot;New m is&quot;</span>, m_star, <span class="st">&quot;and new c is&quot;</span>, c_star)</span></code></pre></div>
 <h1 id="iterating-updates">Iterating Updates</h1>
 <ul>
 <li>Fit model by descending gradient.</li>
 </ul>
 <h2 id="gradient-descent-algorithm">Gradient Descent Algorithm</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>num_plots <span class="op">=</span> plot.regression_contour_fit(x, y, diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>)</span></code></pre></div>
-{
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>num_plots <span class="op">=</span> plot.regression_contour_fit(x, y, diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="regression-contour-fit-28-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
@@ -611,7 +608,7 @@ $$</span><br /></p></li>
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="regression-contour-fit-28-caption" class="caption-frame">
-<p>Figure: Stochastic gradient descent for linear regression</p>
+<p>Figure: Batch gradient descent for linear regression</p>
 </div>
 </div>
 <h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
@@ -651,12 +648,12 @@ m_\text{old}\inputScalar_n - c_\text{old})\right]$$</span><br /></p></li>
 m_\text{new} = m_\text{old} + 2\learnRate\left[\inputScalar_i (\dataScalar_i - m_\text{old}\inputScalar_i - c_\text{old})\right]
 $$</span><br /></li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># choose a random point for the update </span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="co"># update m</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="co"># update c</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># choose a random point for the update </span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="co"># update m</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="co"># update c</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
 <h2 id="sgd-for-linear-regression">SGD for Linear Regression</h2>
 <p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
 <div class="figure">
@@ -693,11 +690,11 @@ $$</span><br /></p>
 $$</span><br /> because if we now take the inner product between these to vectors we recover <br /><span class="math display">$$
 \inputVector\cdot\mappingVector = 1 \times c + x \times m = mx + c
 $$</span><br /> In <code>numpy</code> we can define this vector as follows</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># define the vector w</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>w <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb38-3"><a href="#cb38-3"></a>w[<span class="dv">0</span>] <span class="op">=</span> m</span>
-<span id="cb38-4"><a href="#cb38-4"></a>w[<span class="dv">1</span>] <span class="op">=</span> c</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># define the vector w</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>w <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb37-3"><a href="#cb37-3"></a>w[<span class="dv">0</span>] <span class="op">=</span> m</span>
+<span id="cb37-4"><a href="#cb37-4"></a>w[<span class="dv">1</span>] <span class="op">=</span> c</span></code></pre></div>
 <p>This gives us the equivalence between original operation and an operation in vector space. Whilst the notation here isn’t a lot shorter, the beauty is that we will be able to add as many features as we like and still keep the seame representation. In general, we are now moving to a system where each of our predictions is given by an inner product. When we want to represent a linear product in linear algebra, we tend to do it with the transpose operation, so since we have <span class="math inline"><strong>a</strong> ⋅ <strong>b</strong> = <strong>a</strong><sup>⊤</sup><strong>b</strong></span> we can write <br /><span class="math display">$$
 \mappingFunction(\inputVector_i) = \inputVector_i^\top\mappingVector.
 $$</span><br /> Where we’ve assumed that each data point, <span class="math inline">$\inputVector_i$</span>, is now written by appending a 1 onto the original vector <br /><span class="math display">$$
@@ -722,9 +719,9 @@ $$</span><br /></p>
 1 &amp; \inputScalar_\numData 
 \end{bmatrix},$$</span><br /></p>
 <p>which in <code>numpy</code> can be done with the following commands:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>X <span class="op">=</span> np.hstack((np.ones_like(x), x))</span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="bu">print</span>(X)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>X <span class="op">=</span> np.hstack((np.ones_like(x), x))</span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="bu">print</span>(X)</span></code></pre></div>
 <h2 id="writing-the-objective-with-linear-algebra">Writing the Objective with Linear Algebra</h2>
 <p>When we think of the objective function, we can think of it as the errors where the error is defined in a similar way to what it was in Legendre’s day <span class="math inline">$\dataScalar_i - \mappingFunction(\inputVector_i)$</span>, in statistics these errors are also sometimes called <a href="http://en.wikipedia.org/wiki/Errors_and_residuals_in_statistics"><em>residuals</em></a>. So we can think as the objective and the prediction function as two separate parts, first we have, <br /><span class="math display">$$
 \errorFunction(\mappingVector) = \sum_{i=1}^\numData (\dataScalar_i - \mappingFunction(\inputVector_i; \mappingVector))^2,
@@ -759,14 +756,14 @@ b_{k, 1}a_1 + b_{k, 2}a_2 + \dots + b_{k, k}a_k\end{bmatrix}
 $$</span><br /> so we see that each element of the result, <span class="math inline"><strong>a</strong></span> is simply the inner product between each <em>row</em> of <span class="math inline"><strong>B</strong></span> and the vector <span class="math inline"><strong>c</strong></span>. Because we have defined each element of <span class="math inline">$\mappingFunctionVector$</span> to be given by the inner product between each <em>row</em> of the design matrix and the vector <span class="math inline">$\mappingVector$</span> we now can write the full operation in one matrix multiplication, <br /><span class="math display">$$
 \mappingFunctionVector = \inputMatrix\mappingVector.
 $$</span><br /></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>f <span class="op">=</span> np.dot(X, w) <span class="co"># np.dot does matrix multiplication in python</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>f <span class="op">=</span> np.dot(X, w) <span class="co"># np.dot does matrix multiplication in python</span></span></code></pre></div>
 <p>Combining this result with our objective function, <br /><span class="math display">$$
 \errorFunction(\mappingVector) = (\dataVector - \mappingFunctionVector)^\top(\dataVector - \mappingFunctionVector)
 $$</span><br /> we find we have defined the <em>model</em> with two equations. One equation tells us the form of our predictive function and how it depends on its parameters, the other tells us the form of our objective function.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
-<span id="cb43-2"><a href="#cb43-2"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
+<span id="cb42-2"><a href="#cb42-2"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
 <h3 id="exercise-1-2">Exercise 1</h3>
 <p>The prediction for our movie recommender system had the form <br /><span class="math display"><em>f</em><sub><em>i</em>, <em>j</em></sub> = <strong>u</strong><sub><em>i</em></sub><sup>⊤</sup><strong>v</strong><sub><em>j</em></sub></span><br /> and the objective function was then <br /><span class="math display">$$
 E = \sum_{i,j} s_{i,j}(\dataScalar_{i,j} - f_{i, j})^2
@@ -833,37 +830,37 @@ $$</span><br /> where <span class="math inline"><strong>0</strong></span> is a <
 $$</span><br /> where <span class="math inline"><strong>A</strong><sup> − 1</sup></span> denotes <a href="http://en.wikipedia.org/wiki/Invertible_matrix"><em>matrix inverse</em></a>.</p>
 <h2 id="solving-the-multivariate-system">Solving the Multivariate System</h2>
 <p>The solution for <span class="math inline">$\mappingVector$</span> is given in terms of a matrix inverse, but computation of a matrix inverse requires, in itself, an algorithm to resolve it. You’ll know this if you had to invert, by hand, a <span class="math inline">3 × 3</span> matrix in high school. From a numerical stability perspective, it is also best not to compute the matrix inverse directly, but rather to ask the computer to <em>solve</em> the system of linear equations given by <br /><span class="math display">$$\inputMatrix^\top\inputMatrix \mappingVector = \inputMatrix^\top\dataVector$$</span><br /> for <span class="math inline">$\mappingVector$</span>. This can be done in <code>numpy</code> using the command</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>np.linalg.solve?</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>np.linalg.solve?</span></code></pre></div>
 <p>so we can obtain the solution using</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>w <span class="op">=</span> np.linalg.solve(np.dot(X.T, X), np.dot(X.T, y))</span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="bu">print</span>(w)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>w <span class="op">=</span> np.linalg.solve(np.dot(X.T, X), np.dot(X.T, y))</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="bu">print</span>(w)</span></code></pre></div>
 <p>We can map it back to the liner regression and plot the fit as follows</p>
 <h2 id="multivariate-linear-regression">Multivariate Linear Regression</h2>
 <p>A major advantage of the new system is that we can build a linear regression on a multivariate system. The matrix calculus didn’t specify what the length of the vector <span class="math inline">$\inputVector$</span> should be, or equivalently the size of the design matrix.</p>
 <h2 id="movie-body-count-data">Movie Body Count Data</h2>
 <p>Let’s consider the movie body count data.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
-<span id="cb48-2"><a href="#cb48-2"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
+<span id="cb47-2"><a href="#cb47-2"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <p>Let’s remind ourselves of the features we’ve been provided with.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
 <p>Now we will build a design matrix based on the numeric features: year, Body_Count, Length_Minutes in an effort to predict the rating. We build the design matrix as follows:</p>
 <h2 id="relation-to-single-input-system">Relation to Single Input System</h2>
 <p>Bias as an additional feature.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
-<span id="cb50-2"><a href="#cb50-2"></a>X <span class="op">=</span> movies[select_features]</span>
-<span id="cb50-3"><a href="#cb50-3"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
+<span id="cb49-2"><a href="#cb49-2"></a>X <span class="op">=</span> movies[select_features]</span>
+<span id="cb49-3"><a href="#cb49-3"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
 <p>Now let’s perform a linear regression. But this time, we will create a pandas data frame for the result so we can store it in a form that we can visualise easily.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(np.dot(X.T, X), np.dot(X.T, y)),  <span class="co"># solve linear regression here</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
-<span id="cb52-3"><a href="#cb52-3"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(np.dot(X.T, X), np.dot(X.T, y)),  <span class="co"># solve linear regression here</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
 <p>We can check the residuals to see how good our estimates are</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>(y <span class="op">-</span> np.dot(X, w)).hist()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>(y <span class="op">-</span> np.dot(X, w)).hist()</span></code></pre></div>
 <p>Which shows our model <em>hasn’t</em> yet done a great job of representation, because the spread of values is large. We can check what the rating is dominated by in terms of regression coefficients.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>w</span></code></pre></div>
 <p>Although we have to be a little careful about interpretation because our input values live on different scales, however it looks like we are dominated by the bias, with a small negative effect for later films (but bear in mind the years are large, so this effect is probably larger than it looks) and a positive effect for length. So it looks like long earlier films generally do better, but the residuals are so high that we probably haven’t modelled the system very well.</p>
 <div class="figure">
 <div id="mlai-15-multivariate-regression-figure" class="figure-frame">
@@ -908,11 +905,11 @@ $$</span><br /> <br /><span class="math display">$$
 \mathbf{R} \boldsymbol{\beta} = \mathbf{Q}^\top \dataVector
 $$</span><br /> This is a more numerically stable solution because it removes the need to compute <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> as an intermediate. Computing <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> is a bad idea because it involves squaring all the elements of <span class="math inline">$\inputMatrix$</span> and thereby potentially reducing the numerical precision with which we can represent the solution. Operating on <span class="math inline">$\inputMatrix$</span> directly preserves the numerical precision of the model.</p>
 <p>This can be more particularly seen when we begin to work with <em>basis functions</em> in the next session. Some systems that can be resolved with the QR decomposition can not be resolved by using solve directly.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
-<span id="cb56-2"><a href="#cb56-2"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, np.dot(Q.T, y)) </span>
-<span id="cb56-3"><a href="#cb56-3"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
-<span id="cb56-4"><a href="#cb56-4"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
+<span id="cb55-2"><a href="#cb55-2"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, np.dot(Q.T, y)) </span>
+<span id="cb55-3"><a href="#cb55-3"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
+<span id="cb55-4"><a href="#cb55-4"></a>w</span></code></pre></div>
 <h2 id="reading">Reading</h2>
 <ul>
 <li>Section 1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span> for Matrix &amp; Vector Review.</li>
