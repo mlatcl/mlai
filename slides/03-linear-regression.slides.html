@@ -1042,9 +1042,9 @@ Contours of the objective function for linear regression by minimizing least squ
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
-<li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>,</p>
-<p><span class="math display">\[\frac{\text{d}\errorFunction(m, c)}{\text{d} c} =
--2\sum_{i=1}^\numData (\dataScalar_i - m\inputScalar_i - c)\]</span></p></li>
+<li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>, <span class="math display">\[
+  \frac{\text{d}\errorFunction(m, c)}{\text{d} c} = -2\sum_{i=1}^\numData (\dataScalar_i - m\inputScalar_i - c)
+  \]</span></p></li>
 <li><p>This is computed in python as follows</p></li>
 </ul>
 </section>
