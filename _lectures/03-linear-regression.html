@@ -487,7 +487,7 @@ $$</span><br /></p>
 </div>
 </div>
 <h2 id="noise-corrupted-plot">Noise Corrupted Plot</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>noise <span class="op">=</span> np.random.normal(scale<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">4</span>)) <span class="co"># standard deviation of the noise is 0.5</span></span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>noise <span class="op">=</span> np.random.normal(scale<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">1</span>)) <span class="co"># standard deviation of the noise is 0.5</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>y <span class="op">=</span> m_true<span class="op">*</span>x <span class="op">+</span> c_true <span class="op">+</span> noise</span>
 <span id="cb29-3"><a href="#cb29-3"></a>plt.plot(x, y, <span class="st">&#39;r.&#39;</span>, markersize<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb29-4"><a href="#cb29-4"></a>plt.xlim([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>])</span>
@@ -873,7 +873,7 @@ $$</span><br /> where <span class="math inline"><strong>A</strong><sup> − 
 <span id="cb53-2"><a href="#cb53-2"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
 <span id="cb53-3"><a href="#cb53-3"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
 <p>We can check the residuals to see how good our estimates are</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>(y <span class="op">-</span> np.dot(X, w)).hist()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>(y <span class="op">-</span> X<span class="op">@</span>w).hist()</span></code></pre></div>
 <p>Which shows our model <em>hasn’t</em> yet done a great job of representation, because the spread of values is large. We can check what the rating is dominated by in terms of regression coefficients.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>w</span></code></pre></div>
 <p>Although we have to be a little careful about interpretation because our input values live on different scales, however it looks like we are dominated by the bias, with a small negative effect for later films (but bear in mind the years are large, so this effect is probably larger than it looks) and a positive effect for length. So it looks like long earlier films generally do better, but the residuals are so high that we probably haven’t modelled the system very well.</p>
