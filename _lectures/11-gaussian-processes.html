@@ -9,9 +9,9 @@ author:
   twitter: lawrennd
   gscholar: r3SJcvoAAAAJ
   orchid: 
-week: 10
-reveal: 10-gaussian-processes.slides.html
-ipynb: 10-gaussian-processes.ipynb
+week: 11
+reveal: 11-gaussian-processes.slides.html
+ipynb: 11-gaussian-processes.ipynb
 youtube: "B2XhFoCehy8"
 layout: lecture
 categories:
@@ -35,10 +35,10 @@ categories:
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py&#39;</span>,<span class="st">&#39;teaching_plots.py&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py&#39;</span>,<span class="st">&#39;gp_tutorial.py&#39;</span>)</span></code></pre></div>
-<h2 id="pods"><code>pods</code></h2>
+<h2 id="pods">pods</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>In Sheffield we created a suite of software tools for ‘Open Data Science’. Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
-<p>You can also check my blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
+<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
 <p>The software can be installed using</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
@@ -557,7 +557,7 @@ $$</span><br /> where <span class="math inline">ℓ</span> is the <em>length sca
 </tr>
 </table>
 <p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a></span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>

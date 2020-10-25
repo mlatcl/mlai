@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-11-24">
   <title>Probabilistic Classification: Naive Bayes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -100,7 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -404,8 +403,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="title-slide">
   <h1 class="title">Probabilistic Classification: Naive Bayes</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-11-24</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -417,11 +414,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
@@ -437,14 +429,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="classification" class="slide level2">
 <h2>Classification</h2>
 <ul>
-<li><em>Wake word</em> classification (<a href="https://radio.unglobalpulse.net/uganda/">Global Pulse Project</a>).</li>
-<li>Breakthrough in 2012 with ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a></li>
-</ul>
-<ul>
-<li>We are given a data set containing ‘inputs’, <span class="math inline">\(\inputMatrix\)</span> and ‘targets’, <span class="math inline">\(\dataVector\)</span>.</li>
-<li>Each data point consists of an input vector <span class="math inline">\(\inputVector_i\)</span> and a class label, <span class="math inline">\(\dataScalar_i\)</span>.</li>
-<li>For binary classification assume <span class="math inline">\(\dataScalar_i\)</span> should be either <span class="math inline">\(1\)</span> (yes) or <span class="math inline">\(-1\)</span> (no).</li>
-<li>Input vector can be thought of as features.</li>
+<li><p><em>Wake word</em> classification (<a href="https://radio.unglobalpulse.net/uganda/">Global Pulse Project</a>).</p></li>
+<li><p>Breakthrough in 2012 with ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a></p></li>
+<li><p>We are given a data set containing ‘inputs’, <span class="math inline">\(\inputMatrix\)</span> and ‘targets’, <span class="math inline">\(\dataVector\)</span>.</p></li>
+<li><p>Each data point consists of an input vector <span class="math inline">\(\inputVector_i\)</span> and a class label, <span class="math inline">\(\dataScalar_i\)</span>.</p></li>
+<li><p>For binary classification assume <span class="math inline">\(\dataScalar_i\)</span> should be either <span class="math inline">\(1\)</span> (yes) or <span class="math inline">\(-1\)</span> (no).</p></li>
+<li><p>Input vector can be thought of as features.</p></li>
 </ul>
 </section>
 <section id="discrete-probability" class="slide level2">
@@ -461,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Inputs, <span class="math inline">\(\inputVector\)</span>, mapped to a label, <span class="math inline">\(\dataScalar\)</span>, through a function <span class="math inline">\(\mappingFunction(\cdot)\)</span> dependent on parameters, <span class="math inline">\(\weightVector\)</span>, <span class="math display">\[
 \dataScalar = \mappingFunction(\inputVector; \weightVector).
 \]</span></li>
-<li><span class="math inline">\(\mappingFunction(\cdot)\)</span> is known as the <em>prediction function</em>. </li>
+<li><span class="math inline">\(\mappingFunction(\cdot)\)</span> is known as the <em>prediction function</em>.</li>
 </ul>
 </section>
 <section id="classification-examples" class="slide level2">
@@ -500,7 +490,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Binary classification: need a probability distribution for discrete variables.</li>
 <li>Discrete probability is in some ways easier: <span class="math inline">\(P(\dataScalar=1) = \pi\)</span> &amp; specify distribution as a table.</li>
-<li>Instead of <span class="math inline">\(\dataScalar=-1\)</span> for negative class we take <span class="math inline">\(\dataScalar=0\)</span>. </li>
+<li>Instead of <span class="math inline">\(\dataScalar=-1\)</span> for negative class we take <span class="math inline">\(\dataScalar=0\)</span>.</li>
 </ul>
 <table>
 <thead>
@@ -523,10 +513,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="mathematical-switch" class="slide level2">
 <h2>Mathematical Switch</h2>
 <ul>
-<li>The Bernoulli distribution <span class="math display">\[
+<li><p>The Bernoulli distribution <span class="math display">\[
 P(\dataScalar) = \pi^\dataScalar (1-\pi)^{(1-\dataScalar)}
-\]</span> </li>
-<li>Is a clever trick for switching probabilities, as code it would be</li>
+\]</span></p></li>
+<li><p>Is a clever trick for switching probabilities, as code it would be</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> bernoulli(y_i, pi):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="cf">if</span> y_i <span class="op">==</span> <span class="dv">1</span>:</span>
@@ -540,13 +530,12 @@ P(\dataScalar) = \pi^\dataScalar (1-\pi)^{(1-\dataScalar)}
 <li>Bernoulli described the Bernoulli distribution in terms of an ‘urn’ filled with balls.</li>
 <li>There are red and black balls. There is a fixed number of balls in the urn.</li>
 <li>The portion of red balls is given by <span class="math inline">\(\pi\)</span>.</li>
-<li>For this reason in Bernoulli’s distribution there is <em>epistemic</em> uncertainty about the distribution parameter. </li>
+<li>For this reason in Bernoulli’s distribution there is <em>epistemic</em> uncertainty about the distribution parameter.</li>
 </ul>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=CF4UAAAAQAAJ&amp;pg=PA87&amp;output=embed" width="700" height="500">
-</iframe>
+<p><a href="https://play.google.com/books/reader?id=CF4UAAAAQAAJ&amp;pg=PA87"><img data-src="../slides/diagrams/books/CF4UAAAAQAAJ-PA87.png" /></a></p>
 </section>
 <section id="jacob-bernoullis-bernoulli-1" class="slide level2">
 <h2>Jacob Bernoulli’s Bernoulli</h2>
@@ -556,6 +545,9 @@ P(\dataScalar) = \pi^\dataScalar (1-\pi)^{(1-\dataScalar)}
 </object>
 </div>
 </div>
+<aside class="notes">
+Jacob Bernoulli described the Bernoulli distribution through an urn in which there are black and red balls.
+</aside>
 </section>
 <section id="thomas-bayess-bernoulli" class="slide level2">
 <h2>Thomas Bayes’s Bernoulli</h2>
@@ -564,11 +556,8 @@ P(\dataScalar) = \pi^\dataScalar (1-\pi)^{(1-\dataScalar)}
 <li>Each ball is rolled so it comes to rest at a uniform distribution across the table.</li>
 <li>The first ball comes to rest at a position that is a <span class="math inline">\(\pi\)</span> times the width of table.</li>
 <li>After placing the first ball you consider whether a second would land to the left or the right.</li>
-<li>For this reason in Bayes’s distribution there is considered to be <em>aleatoric</em> uncertainty about the distribution parameter. \notes{Thomas Bayes also described the Bernoulli distribution, only he didn’t refer to Jacob Bernoulli’s work, so he didn’t call it by that name. He described the distribution in terms of a table (think of a <em>billiard table</em>) and two balls. Bayes suggests that each ball can be rolled across the table such that it comes to rest at a position that is <em>uniformly distributed</em> between the sides of the table.</li>
+<li>For this reason in Bayes’s distribution there is considered to be <em>aleatoric</em> uncertainty about the distribution parameter.</li>
 </ul>
-<p>Let’s assume that the first ball is rolled, and that it comes to reset at a position that is <span class="math inline">\(\pi\)</span> times the width of the table from the left hand side.</p>
-<p>Now, we roll the second ball. We are interested if the second ball ends up on the left side (+ve result) or the right side (-ve result) of the first ball. We use the Bernoulli distribution to determine this.</p>
-<p>For this reason in Bayes’s distribution there is considered to be <em>aleatoric</em> uncertainty about the distribution parameter.}</p>
 </section>
 <section id="thomas-bayes-bernoulli" class="slide level2">
 <h2>Thomas Bayes’ Bernoulli</h2>
@@ -653,7 +642,7 @@ showDivs(1, 'bayes_billiard');
 <li>Assume data, <span class="math inline">\(\dataVector\)</span> is binary vector length <span class="math inline">\(\numData\)</span>.</li>
 <li>Assume each value was sampled independently from the Bernoulli distribution, given probability <span class="math inline">\(\pi\)</span> <span class="math display">\[
 p(\dataVector|\pi) = \prod_{i=1}^{\numData} \pi^{\dataScalar_i} (1-\pi)^{1-\dataScalar_i}.
-\]</span> </li>
+\]</span></li>
 </ul>
 </section>
 <section id="negative-log-likelihood" class="slide level2">
@@ -669,9 +658,9 @@ p(\dataVector|\pi) = \prod_{i=1}^{\numData} \pi^{\dataScalar_i} (1-\pi)^{1-\data
 <section id="fixed-point" class="slide level2">
 <h2>Fixed Point</h2>
 <ul>
-<li>Stationary point: set derivative to zero <span class="math display">\[0 = -\frac{\sum_{i=1}^{\numData} \dataScalar_i}{\pi}  + \frac{\sum_{i=1}^{\numData} (1-\dataScalar_i)}{1-\pi},\]</span> </li>
-<li>Rearrange to form <span class="math display">\[(1-\pi)\sum_{i=1}^{\numData} \dataScalar_i =   \pi\sum_{i=1}^{\numData} (1-\dataScalar_i),\]</span> </li>
-<li>Giving <span class="math display">\[\sum_{i=1}^{\numData} \dataScalar_i =   \pi\left(\sum_{i=1}^{\numData} (1-\dataScalar_i) + \sum_{i=1}^{\numData} \dataScalar_i\right),\]</span></li>
+<li><p>Stationary point: set derivative to zero <span class="math display">\[0 = -\frac{\sum_{i=1}^{\numData} \dataScalar_i}{\pi}  + \frac{\sum_{i=1}^{\numData} (1-\dataScalar_i)}{1-\pi},\]</span></p></li>
+<li><p>Rearrange to form <span class="math display">\[(1-\pi)\sum_{i=1}^{\numData} \dataScalar_i =   \pi\sum_{i=1}^{\numData} (1-\dataScalar_i),\]</span></p></li>
+<li><p>Giving <span class="math display">\[\sum_{i=1}^{\numData} \dataScalar_i =   \pi\left(\sum_{i=1}^{\numData} (1-\dataScalar_i) + \sum_{i=1}^{\numData} \dataScalar_i\right),\]</span></p></li>
 </ul>
 </section>
 <section id="solution" class="slide level2">
@@ -704,14 +693,10 @@ p(\dataVector|\pi) = \prod_{i=1}^{\numData} \pi^{\dataScalar_i} (1-\pi)^{1-\data
 <section id="naive-bayes-classifiers" class="slide level2">
 <h2>Naive Bayes Classifiers</h2>
 <ul>
-<li>Probabilistic Machine Learning: place probability distributions (or densities) over all the variables of interest.</li>
-<li>In <em>naive Bayes</em> this is exactly what we do.</li>
-</ul>
-<ul>
-<li>Form a classification algorithm by modelling the <em>joint</em> density of our observations. </li>
-</ul>
-<ul>
-<li>Need to make assumption about joint density.</li>
+<li><p>Probabilistic Machine Learning: place probability distributions (or densities) over all the variables of interest.</p></li>
+<li><p>In <em>naive Bayes</em> this is exactly what we do.</p></li>
+<li><p>Form a classification algorithm by modelling the <em>joint</em> density of our observations.</p></li>
+<li><p>Need to make assumption about joint density.</p></li>
 </ul>
 </section>
 <section id="assumptions-about-density" class="slide level2">
@@ -749,12 +734,12 @@ p(\dataScalar^*|\inputMatrix, \dataVector, \inputVector^*),
 <section id="data-conditional-independence" class="slide level2">
 <h2>Data Conditional Independence</h2>
 <ul>
-<li>Given model parameters <span class="math inline">\(\paramVector\)</span> we assume that all data points in the model are independent. <span class="math display">\[
+<li><p>Given model parameters <span class="math inline">\(\paramVector\)</span> we assume that all data points in the model are independent. <span class="math display">\[
 p(\dataScalar^*, \inputVector^*, \dataVector, \inputMatrix|\paramVector) = p(\dataScalar^*, \inputVector^*|\paramVector)\prod_{i=1}^{\numData} p(\dataScalar_i, \inputVector_i | \paramVector).
-\]</span> </li>
-<li>This is a conditional independence assumption. </li>
-<li>We also make similar assumptions for regression (where <span class="math inline">\(\paramVector = \left\{\mappingVector,\dataStd^2\right\}\)</span>). </li>
-<li>Here we assume <em>joint</em> density of <span class="math inline">\(\dataVector\)</span> and <span class="math inline">\(\inputMatrix\)</span> is independent across the data given the parameters.</li>
+\]</span></p></li>
+<li><p>This is a conditional independence assumption.</p></li>
+<li><p>We also make similar assumptions for regression (where <span class="math inline">\(\paramVector = \left\{\mappingVector,\dataStd^2\right\}\)</span>).</p></li>
+<li><p>Here we assume <em>joint</em> density of <span class="math inline">\(\dataVector\)</span> and <span class="math inline">\(\inputMatrix\)</span> is independent across the data given the parameters.</p></li>
 </ul>
 </section>
 <section id="bayes-classifier" class="slide level2">
@@ -772,8 +757,8 @@ p(\dataScalar^*, \inputVector^*, \dataVector, \inputMatrix|\paramVector) = p(\da
 <section id="marginal-density-for-datascalar_i" class="slide level2">
 <h2>Marginal Density for <span class="math inline">\(\dataScalar_i\)</span></h2>
 <ul>
-<li>To specify the joint distribution we also need the marginal for <span class="math inline">\(p(\dataScalar_i)\)</span> <span class="math display">\[p(\inputScalar_{i,j},\dataScalar_i| \paramVector) = p(\inputScalar_{i,j}|\dataScalar_i, \paramVector)p(\dataScalar_i).\]</span> </li>
-<li>Because <span class="math inline">\(\dataScalar_i\)</span> is binary the <em>Bernoulli</em> density makes a suitable choice for our prior over <span class="math inline">\(\dataScalar_i\)</span>, <span class="math display">\[p(\dataScalar_i|\pi) = \pi^{\dataScalar_i} (1-\pi)^{1-\dataScalar_i}\]</span> where <span class="math inline">\(\pi\)</span> now has the interpretation as being the <em>prior</em> probability that the classification should be positive.</li>
+<li><p>To specify the joint distribution we also need the marginal for <span class="math inline">\(p(\dataScalar_i)\)</span> <span class="math display">\[p(\inputScalar_{i,j},\dataScalar_i| \paramVector) = p(\inputScalar_{i,j}|\dataScalar_i, \paramVector)p(\dataScalar_i).\]</span></p></li>
+<li><p>Because <span class="math inline">\(\dataScalar_i\)</span> is binary the <em>Bernoulli</em> density makes a suitable choice for our prior over <span class="math inline">\(\dataScalar_i\)</span>, <span class="math display">\[p(\dataScalar_i|\pi) = \pi^{\dataScalar_i} (1-\pi)^{1-\dataScalar_i}\]</span> where <span class="math inline">\(\pi\)</span> now has the interpretation as being the <em>prior</em> probability that the classification should be positive.</p></li>
 </ul>
 </section>
 <section id="joint-density-for-naive-bayes" class="slide level2">
@@ -781,18 +766,17 @@ p(\dataScalar^*, \inputVector^*, \dataVector, \inputMatrix|\paramVector) = p(\da
 <ul>
 <li>This allows us to write down the full joint density of the training data, <span class="math display">\[
 p(\dataVector, \inputMatrix|\paramVector, \pi) = \prod_{i=1}^{\numData} \prod_{j=1}^{\dataDim} p(\inputScalar_{i,j}|\dataScalar_i, \paramVector)p(\dataScalar_i|\pi)
-\]</span> which can now be fit by maximum likelihood. </li>
+\]</span> which can now be fit by maximum likelihood.</li>
 </ul>
 </section>
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <p><span class="math display">\[\begin{align*}
 \errorFunction(\paramVector, \pi)&amp; =  -\log p(\dataVector, \inputMatrix|\paramVector, \pi) \\ &amp;= -\sum_{i=1}^{\numData} \sum_{j=1}^{\dataDim} \log p(\inputScalar_{i, j}|\dataScalar_i, \paramVector) -  \sum_{i=1}^{\numData} \log p(\dataScalar_i|\pi),
-\end{align*}\]</span> </p>
+\end{align*}\]</span></p>
 </section>
 <section id="maximum-likelihood" class="slide level2">
 <h2>Maximum Likelihood</h2>
-
 </section>
 <section id="fit-prior" class="slide level2">
 <h2>Fit Prior</h2>
@@ -819,47 +803,10 @@ p(\inputScalar_{i, j} | \dataScalar_i,\paramVector) =
 j})^2}{\dataStd_{\dataScalar_i,j}^2}\right),
 \]</span></li>
 </ul>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv’, ‘healthmopupandbaselinenmisfacility.csv’)</p>
-<p>import pandas as pd</p>
-<p>data = pd.read_csv(‘healthmopupandbaselinenmisfacility.csv’)</p>
-<p>data.head()</p>
-<p>import pandas as pd import numpy as np</p>
-<p>data = data[~pd.isnull(data[‘maternal_health_delivery_services’])] data = data.dropna() # Remove entries with missing values X = data[[‘emergency_transport’, ‘num_chews_fulltime’, ‘phcn_electricity’, ‘child_health_measles_immun_calc’, ‘num_nurses_fulltime’, ‘num_doctors_fulltime’, ‘improved_water_supply’, ‘improved_sanitation’, ‘antenatal_care_yn’, ‘family_planning_yn’, ‘malaria_treatment_artemisinin’, ‘latitude’, ‘longitude’]].copy() y = data[‘maternal_health_delivery_services’]==True # set label to be whether there’s a maternal health delivery service</p>
-</section>
-<section id="create-series-of-health-center-types-with-the-relevant-index" class="title-slide slide level1">
-<h1>Create series of health center types with the relevant index</h1>
-<p>s = data[‘facility_type_display’].apply(pd.Series, 1).stack() s.index = s.index.droplevel(-1) # to line up with df’s index</p>
-</section>
-
-<section id="extract-from-the-series-the-unique-list-of-types." class="title-slide slide level1">
-<h1>Extract from the series the unique list of types.</h1>
-<p>types = s.unique()</p>
-</section>
-
-<section id="for-each-type-extract-the-indices-where-it-is-present-and-add-a-column-to-x" class="title-slide slide level1">
-<h1>For each type extract the indices where it is present and add a column to X</h1>
-<p>type_names = [] for htype in types: index = s[s==htype].index.tolist() type_col=htype.replace(’ ‘,’_‘).replace(’/‘,’-’).lower() type_names.append(type_col) X.loc[:, type_col] = 0.0 X.loc[index, type_col] = 1.0</p>
-<p>X.describe()</p>
-</section>
-
-<section id="assume-data-is-binary-or-real." class="title-slide slide level1">
-<h1>assume data is binary or real.</h1>
-
-</section>
-
-<section>
-<section id="this-list-encodes-whether-it-is-binary-or-real-1-for-binary-0-for-real" class="title-slide slide level1">
-<h1>this list encodes whether it is binary or real (1 for binary, 0 for real)</h1>
-<p>binary_columns = [‘emergency_transport’, ‘phcn_electricity’, ‘child_health_measles_immun_calc’, ‘improved_water_supply’, ‘improved_sanitation’, ‘antenatal_care_yn’, ‘family_planning_yn’, ‘malaria_treatment_artemisinin’] + type_names real_columns = [‘num_chews_fulltime’, ‘num_nurses_fulltime’, ‘num_doctors_fulltime’, ‘latitude’, ‘longitude’] Bernoulli = pd.DataFrame(data=np.zeros((2,len(binary_columns))), columns=binary_columns, index=[‘theta_0’, ‘theta_1’]) Gaussian = pd.DataFrame(data=np.zeros((4,len(real_columns))), columns=real_columns, index=[‘mu_0’, ‘sigma2_0’, ‘mu_1’, ‘sigma2_1’])</p>
-<p>num_train = 20000 indices = np.random.permutation(X.shape[0]) train_indices = indices[:num_train] test_indices = indices[num_train:] X_train = X.iloc[train_indices] y_train = y.iloc[train_indices]==True X_test = X.iloc[test_indices] y_test = y.iloc[test_indices]==True</p>
-<p>for column in X_train: if column in Gaussian: Gaussian[column][‘mu_0’] = X_train[column][~y_train].mean() Gaussian[column][‘mu_1’] = X_train[column][y_train].mean() Gaussian[column][‘sigma2_0’] = X_train[column][~y_train].var(ddof=0) Gaussian[column][‘sigma2_1’] = X_train[column][y_train].var(ddof=0) if column in Bernoulli: Bernoulli[column][‘theta_0’] = X_train[column][~y_train].sum()/(~y_train).sum() Bernoulli[column][‘theta_1’] = X_train[column][y_train].sum()/(y_train).sum()</p>
-<p>Bernoulli</p>
+<p>data.head()}</p>
 <p>The distributions show the parameters of the <em>independent</em> class conditional probabilities for no maternity services. It is a Bernoulli distribution with the parameter, <span class="math inline">\(\pi\)</span>, given by (<code>theta_0</code>) for the facilities without maternity services and <code>theta_1</code> for the facilities with maternity services. The parameters whow that, facilities with maternity services also are more likely to have other services such as grid electricity, emergency transport, immunization programs etc.</p>
 <p>The naive Bayes assumption says that the joint probability for these services is given by the product of each of these Bernoulli distributions.</p>
-<p>Gaussian</p>
 <p>We have modelled the numbers in our table with a Gaussian density. Since several of these numbers are counts, a more appropriate distribution might be the Poisson distribution. But here we can see that the average number of nurses, healthworkers and doctors is <em>higher</em> in the facilities with maternal services (<code>mu_1</code>) than those without maternal services (<code>mu_0</code>). There is also a small difference between the mean latitude and longitudes. However, the <em>standard deviation</em> which would be given by the square root of the variance parameters (<code>sigma_0</code> and <code>sigma_1</code>) is large, implying that a difference in latitude and longitude may be due to sampling error. To be sure more analysis would be required.</p>
-<p>prior = float(y_train.sum())/len(y_train)</p>
 </section>
 <section id="compute-posterior-for-test-point-label" class="slide level2">
 <h2>Compute Posterior for Test Point Label</h2>
@@ -908,31 +855,13 @@ p(\dataScalar^*| \inputVector^*, \paramVector) = \frac{\prod_{j=1}^{\dataDim} p(
 </section>
 <section id="laplace-smoothing" class="slide level2">
 <h2>Laplace Smoothing</h2>
-<iframe frameborder="0" scrolling="no" style="border:0px" src="http://books.google.co.uk/books?id=1YQPAAAAQAAJ&amp;pg=PA16&amp;output=embed" width="700" height="500">
-</iframe>
+<p><a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PA16"><img data-src="../slides/diagrams/books/1YQPAAAAQAAJ-PA16.png" /></a></p>
 </section>
 <section id="pseudo-counts" class="slide level2">
 <h2>Pseudo Counts</h2>
 <p><span class="math display">\[
 \pi = \frac{\sum_{i=1}^{\numData} \dataScalar_i + 1}{\numData + 2}
-\]</span> </p>
-</section></section>
-<section>
-<section id="fit-the-bernoulli-with-laplace-smoothing." class="title-slide slide level1">
-<h1>fit the Bernoulli with Laplace smoothing.</h1>
-<p>for column in X_train: if column in Bernoulli: Bernoulli[column][‘theta_0’] = (X_train[column][~y_train].sum() + 1)/((~y_train).sum() + 2) Bernoulli[column][‘theta_1’] = (X_train[column][y_train].sum() + 1)/((y_train).sum() + 2)</p>
-<p>import numpy as np import pandas as pd</p>
-<p>def predict(X_test, Gaussian, Bernoulli, prior): log_positive = pd.Series(data = np.zeros(X_test.shape[0]), index=X_test.index) log_negative = pd.Series(data = np.zeros(X_test.shape[0]), index=X_test.index) for column in X_test.columns: if column in Gaussian: log_positive += log_gaussian(X_test[column], Gaussian[column][‘mu_1’], Gaussian[column][‘sigma2_1’]) log_negative += log_gaussian(X_test[column], Gaussian[column][‘mu_0’], Gaussian[column][‘sigma2_0’]) elif column in Bernoulli: log_positive += log_bernoulli(X_test[column], Bernoulli[column][‘theta_1’]) log_negative += log_bernoulli(X_test[column], Bernoulli[column][‘theta_0’])</p>
-<pre><code>v = np.zeros_like(log_positive.values)
-for i in range(X_test.shape[0]):
-    v[i] = np.exp(log_positive.values[i] + np.log(prior))/(np.exp(log_positive.values[i] + np.log(prior)) 
-                                                           + np.exp(log_negative.values[i] + np.log(1-prior)))
-return v
-#return np.exp(log_positive + np.log(prior))/(np.exp(log_positive + np.log(prior)) + np.exp(log_negative + np.log(1-prior)))</code></pre>
-<p>p_y = predict(X_test, Gaussian, Bernoulli, prior)</p>
-<p>\notes{We can test the quality of the predictions in the following way. Firstly, we can threshold our probabilities at 0.5, allocating points with greater than 50% probability of membership of the positive class to the positive class. We can then compare to the true values, and see how many of these values we got correct. This is our total number correct.}</p>
-<p>correct = y_test.eq(p_y&gt;0.5) total_correct = sum(correct) print(“Total correct”, total_correct, " out of “, len(y_test),”which is“, float(total_correct)/len(y_test),”%")</p>
-<p>confusion_matrix = pd.DataFrame(data=np.zeros((2,2)), columns=[‘predicted no maternity’, ‘predicted maternity’], index =[‘actual no maternity’,‘actual maternity’]) confusion_matrix[‘predicted maternity’][‘actual maternity’] = (y_test &amp; (p_y&gt;0.5)).sum() confusion_matrix[‘predicted maternity’][‘actual no maternity’] = (~y_test &amp; (p_y&gt;0.5)).sum() confusion_matrix[‘predicted no maternity’][‘actual maternity’] = (y_test &amp; ~(p_y&gt;0.5)).sum() confusion_matrix[‘predicted no maternity’][‘actual no maternity’] = (~y_test &amp; ~(p_y&gt;0.5)).sum() confusion_matrix</p>
+\]</span></p>
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise 3</h2>
@@ -964,10 +893,11 @@ return v
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
+<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>blog posts:</p>
+<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
@@ -983,7 +913,7 @@ return v
 <p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -997,8 +927,10 @@ return v
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

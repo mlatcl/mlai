@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-12-01">
   <title>Logistic Regression and GLMs</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -100,7 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -404,8 +403,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="title-slide">
   <h1 class="title">Logistic Regression and GLMs</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-12-01</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -417,11 +414,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
@@ -483,7 +475,6 @@ g^{-1}(\pi(\inputVector)) = \mappingVector^\top\basisVector(\inputVector)
 </section>
 <section id="basis-function" class="slide level2">
 <h2>Basis Function</h2>
-
 </section>
 <section id="prediction-function" class="slide level2">
 <h2>Prediction Function</h2>
@@ -598,6 +589,23 @@ g(\mappingFunction_i) &amp;= \frac{1}{1+\exp(-\mappingFunction_i)}\\
 <li>Logistic regression used in combination with <a href="">decision trees</a></li>
 <li><a href="http://www.herbrich.me/papers/adclicksfacebook.pdf">Paper available here</a></li>
 </ul>
+<p>{ ## Olivetti Glasses Data</p>
+<p>Let’s classify images with logistic regression. We’ll look at a data set of individuals with glasses. We can load in the data from <code>pods</code> as follows.</p>
+</section>
+<section id="batch-gradient-descent" class="slide level2">
+<h2>Batch Gradient Descent</h2>
+</section>
+<section id="stochastic-gradient-descent" class="slide level2">
+<h2>Stochastic Gradient Descent</h2>
+</section>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
+<p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
+</section>
+<section id="going-further-optimization" class="slide level2">
+<h2>Going Further: Optimization</h2>
+<p>Other optimization techniques for generalized linear models include <a href="http://en.wikipedia.org/wiki/Newton%27s_method">Newton’s method</a>, it requires you to compute the Hessian, or second derivative of the objective function.</p>
+<p>Methods that are based on gradients only include <a href="http://en.wikipedia.org/wiki/Limited-memory_BFGS">L-BFGS</a> and <a href="http://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradients</a>. Can you find these in python? Are they suitable for very large data sets? }</p>
 </section>
 <section id="other-glms" class="slide level2">
 <h2>Other GLMs</h2>
@@ -623,6 +631,9 @@ g(\mappingFunction_i) &amp;= \frac{1}{1+\exp(-\mappingFunction_i)}\\
 </object>
 </div>
 </div>
+<aside class="notes">
+The Poisson distribution.
+</aside>
 </section>
 <section id="poisson-regression" class="slide level2">
 <h2>Poisson Regression</h2>
@@ -659,10 +670,11 @@ g(\mappingFunction_i) &amp;= \frac{1}{1+\exp(-\mappingFunction_i)}\\
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
+<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>blog posts:</p>
+<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
@@ -689,8 +701,10 @@ g(\mappingFunction_i) &amp;= \frac{1}{1+\exp(-\mappingFunction_i)}\\
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

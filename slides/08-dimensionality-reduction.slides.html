@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2015-11-17">
   <title>Dimensionality Reduction: Latent Variable Modelling</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +35,7 @@
       }
     });
   </script>
-  <script src="figure-animate.js"></script>
+  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
 </head>
 <body>
 \[\newcommand{\tk}[1]{}
@@ -340,8 +339,6 @@
 <section id="title-slide">
   <h1 class="title">Dimensionality Reduction: Latent Variable Modelling</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
-  <p class="date" style="text-align:center"><time>2015-11-17</time></p>
-  <p class="venue" style="text-align:center">University of Sheffield</p>
 </section>
 
 <section class="slide level2">
@@ -353,11 +350,6 @@
 <!--
 
 -->
-<p>%pip install –upgrade git+https://github.com/sods/ods</p>
-<p>import urllib.request</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py’,‘mlai.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py’,‘teaching_plots.py’)</p>
-<p>urllib.request.urlretrieve(‘https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py’,‘gp_tutorial.py’)</p>
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
@@ -472,8 +464,6 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\dataVector_{i, :} - \mea
 <ul>
 <li>Rotate a prototype</li>
 </ul>
-<p>from scipy.misc import imrotate</p>
-<p>six_image = np.hstack([np.zeros((rows, 3)), six_image, np.zeros((rows, 4))]) dim_one = np.asarray(six_image.shape) angles = range(360) i = 0 Y = np.zeros((len(angles), np.prod(dim_one))) for angle in angles: rot_image = imrotate(six_image, angle, interp=‘nearest’) dim_two = np.asarray(rot_image.shape) start = [int(round((dim_two[0] - dim_one[0])/2)), int(round((dim_two[1] - dim_one[1])/2))] crop_image = rot_image[start[0]+np.array(range(dim_one[0])), start[1]+np.array(range(dim_one[1]))] Y[i, :] = crop_image.flatten()</p>
 </section>
 <section id="low-dimensional-manifolds" class="slide level2">
 <h2>Low Dimensional Manifolds</h2>
@@ -566,13 +556,13 @@ p\left(\dataMatrix|\mappingMatrix\right)=\prod_{i=1}^{\numData}\gaussianDist{\da
 </section>
 <section id="linear-latent-variable-model-ii" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999a)</span>)</p>
+<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999)</span>)</p>
 %
 <p><span class="math display">\[p\left(\dataMatrix|\mappingMatrix\right)=\prod_{i=1}^{\numData}\gaussianDist{\dataVector_{i, :}}{\zerosVector}{\mappingMatrix\mappingMatrix^{\top}+\noiseStd^{2}\eye}\]</span></p>
 </section>
 <section id="linear-latent-variable-model-ii-1" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999a)</span>) <span class="math display">\[
+<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999)</span>) <span class="math display">\[
   p\left(\dataMatrix|\mappingMatrix\right)=\prod_{i=1}^{\numData}\gaussianDist{\dataVector_{i,:}}{\zerosVector}{\covarianceMatrix},\quad \covarianceMatrix=\mappingMatrix\mappingMatrix^{\top}+\noiseStd^{2}\eye
   \]</span> <span class="math display">\[
   \log p\left(\dataMatrix|\mappingMatrix\right)=-\frac{\numData}{2}\log\left|\covarianceMatrix\right|-\frac{1}{2}\text{tr}\left(\covarianceMatrix^{-1}\dataMatrix^{\top}\dataMatrix\right)+\text{const.}
@@ -593,30 +583,35 @@ p\left(\dataMatrix|\mappingMatrix\right)=\prod_{i=1}^{\numData}\gaussianDist{\da
 </section>
 <section id="your-personality" class="slide level2">
 <h2>Your Personality</h2>
-
 </section>
 <section id="factor-analysis-model" class="slide level2">
 <h2>Factor Analysis Model</h2>
 <p><span class="math display">\[
 \dataVector = \mathbf{f}(\latentVector) + \noiseVector,
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{f}(\latentVector) = \mappingMatrix\latentVector
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{f}(\latentVector) =
 \begin{bmatrix} f_1(\latentVector) \\ f_2(\latentVector) \\ \vdots \\
 f_p(\latentVector)\end{bmatrix}
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 f_j(\latentVector) =
 \weightVector_{j, :}^\top \latentVector,
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \epsilon_j \sim \gaussianSamp{0}{\noiseStd^2_j}.
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \dataMatrix
 = \begin{bmatrix} \dataVector_{1, :}^\top \\ \dataVector_{2, :}^\top \\ \vdots \\
 \dataVector_{n, :}^\top\end{bmatrix},
-\]</span>  <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{F} = \latentMatrix\mappingMatrix^\top,
-\]</span> </p>
+\]</span></p>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise 1</h2>
@@ -672,9 +667,8 @@ p(\dataVector_{i, :}|\mappingMatrix) =
 \]</span> is <em>not</em> valid for <span class="math inline">\(q&lt;p\)</span> (where <span class="math inline">\(\mappingMatrix\in \Re^{p\times q}\)</span>). This mathematical consequence is a probability density which has no ‘support’ in large regions of the space for <span class="math inline">\(\dataVector_{i, :}\)</span>. There are regions for which the probability of <span class="math inline">\(\dataVector_{i, :}\)</span> is zero. These are any regions that lie off the hyperplane defined by mapping from <span class="math inline">\(\latentVector\)</span> to <span class="math inline">\(\dataVector\)</span> with the matrix <span class="math inline">\(\mappingMatrix\)</span>. In factor analysis the noise corruption, <span class="math inline">\(\noiseVector\)</span>, allows for points to be found away from the hyperplane. In Hotelling’s PCA the noise variance is zero, so there is only support for points that fall precisely on the hyperplane. Secondly, Hotelling explicity chose to rename factor analysis as principal component analysis, arguing that the factors social scientist sought were different in nature to the concept of a mathematical factor. This was unfortunate because the factor loadings, <span class="math inline">\(\mappingMatrix\)</span> can also be seen as factors in the mathematical sense because the model Hotelling defined is a Gaussian model with covariance given by <span class="math inline">\(\covarianceMatrix = \mappingMatrix\mappingMatrix^\top\)</span> so <span class="math inline">\(\mappingMatrix\)</span> is a <em>factor</em> of the covariance in the mathematical sense, as well as a factor loading.</p>
 <p>However, the paper had one great advantage over standard approaches to factor analysis. Despite the fact that the model was a special case that is subsumed by the more general approach of factor analysis it is this special case that leads to a particular algorithm, namely that the factor loadings (or principal components as Hotelling referred to them) are given by an <em>eigenvalue decomposition</em> of the empirical covariance matrix.</p>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>Eigenvalue Decomposition</p>
+<section id="eigenvalue-decomposition" class="slide level2">
+<h2>Eigenvalue Decomposition</h2>
 <p>Eigenvalue problems are widespreads in physics and mathematics, they are often written as a matrix/vector equation but we prefer to write them as a full matrix equation. In an eigenvalue problem you are looking to find a matrix of eigenvectors, <span class="math inline">\(\mathbf{U}\)</span> and a <em>diagonal</em> matrix of eigenvalues, <span class="math inline">\(\boldsymbol{\Lambda}\)</span> that satisfy the <em>matrix</em> equation <span class="math display">\[
 \mathbf{A}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}.
 \]</span> where <span class="math inline">\(\mathbf{A}\)</span> is your matrix of interest. This equation is not trivially solvable through matrix inverse because matrix multiplication is not <a href="http://en.wikipedia.org/wiki/Commutative_property">commutative</a>, so premultiplying by <span class="math inline">\(\mathbf{U}^{-1}\)</span> gives <span class="math display">\[
@@ -702,7 +696,6 @@ b_i^2
 <section id="exercise-1-1" class="slide level2">
 <h2>Exercise 1</h2>
 <p>If <span class="math inline">\(\covarianceMatrix=\mathbf{A}^\top \mathbf{A}\)</span> then express <span class="math inline">\(c_{i,j}\)</span>, the value of the element at the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\covarianceMatrix\)</span>, in terms of the columns of <span class="math inline">\(\mathbf{A}\)</span>. Use this to show that (i) the matrix is symmetric and (ii) the matrix has positive elements along its diagonal.</p>
-<!-- SECTION Eigenvectors of a Symmetric Matric -->
 </section>
 <section id="eigenvectors-of-a-symmetric-matric" class="slide level2">
 <h2>Eigenvectors of a Symmetric Matric</h2>
@@ -711,53 +704,43 @@ b_i^2
 </section>
 <section id="probabilistic-pca" class="slide level2">
 <h2>Probabilistic PCA</h2>
-<p>In 1997 <a href="http://research.microsoft.com/pubs/67218/bishop-ppca-jrss.pdf">Tipping and Bishop</a> <span class="citation" data-cites="Tipping:pca97">(Tipping and Bishop, 1999b)</span> and <a href="https://www.cs.nyu.edu/~roweis/papers/empca.pdf">Roweis</a> <span class="citation" data-cites="Roweis:SPCA97">(Roweis, n.d.)</span> independently revisited Hotelling’s model and considered the case where the noise variance was finite, but <em>shared</em> across all output dimensons. Their model can be thought of as a factor analysis where <span class="math display">\[
+<p><span class="math display">\[
 \boldsymbol{\Sigma} = \noiseStd^2 \eye.
-\]</span> This leads to a marginal likelihood of the form <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 p(\dataMatrix|\mappingMatrix, \noiseStd^2)
 = \prod_{i=1}^\numData\gaussianDist{\dataVector_{i, :}}{\zerosVector}{\mappingMatrix\mappingMatrix^\top + \noiseStd^2 \eye}
-\]</span> where the limit of <span class="math inline">\(\noiseStd^2\rightarrow 0\)</span> is <em>not</em> taken. This defines a proper probabilistic model. Tippping and Bishop then went on to prove that the <em>maximum likelihood</em> solution of this model with respect to <span class="math inline">\(\mappingMatrix\)</span> is given by an eigenvalue problem. In the probabilistic PCA case the eigenvalues and eigenvectors are given as follows. <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mappingMatrix = \mathbf{U}\mathbf{L} \mathbf{R}^\top
-\]</span> where <span class="math inline">\(\mathbf{U}\)</span> is the eigenvectors of the empirical covariance matrix <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{S} = \sum_{i=1}^\numData (\dataVector_{i, :} - \meanVector)(\dataVector_{i,
 :} - \meanVector)^\top,
-\]</span> which can be written <span class="math inline">\(\mathbf{S} = \frac{1}{\numData} \dataMatrix^\top\dataMatrix\)</span> if the data is zero mean. The matrix <span class="math inline">\(\mathbf{L}\)</span> is diagonal and is dependent on the <em>eigenvalues</em> of <span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\boldsymbol{\Lambda}\)</span>. If the <span class="math inline">\(i\)</span>th diagonal element of this matrix is given by <span class="math inline">\(\lambda_i\)</span> then the corresponding element of <span class="math inline">\(\mathbf{L}\)</span> is <span class="math display">\[
-\ell_i =
-\sqrt{\lambda_i - \noiseStd^2}
-\]</span> where <span class="math inline">\(\noiseStd^2\)</span> is the noise variance. Note that if <span class="math inline">\(\noiseStd^2\)</span> is larger than any particular eigenvalue, then that eigenvalue (along with its corresponding eigenvector) is <em>discarded</em> from the solution.</p>
+\]</span></p>
+<p><span class="math display">\[
+\ell_i = \sqrt{\lambda_i - \noiseStd^2}
+\]</span></p>
 </section>
 <section id="python-implementation-of-probabilistic-pca" class="slide level2">
 <h2>Python Implementation of Probabilistic PCA</h2>
 <p>We will now implement this algorithm in python.</p>
-</section>
-<section>
-<section id="probabilistic-pca-algorithm" class="title-slide slide level1">
-<h1>probabilistic PCA algorithm</h1>
-<p>def ppca(Y, q): # remove mean Y_cent = Y - Y.mean(0) import numpy as np</p>
-<pre><code># Comute covariance
-S = np.dot(Y_cent.T, Y_cent)/Y.shape[0]
-lambd, U = np.linalg.eig(S)
-
-# Choose number of eigenvectors
-sigma2 = np.sum(lambd[q:])/(Y.shape[1]-q)
-l = np.sqrt(lambd[:q]-sigma2)
-W = U[:, :q]*l[None, :]
-return W, sigma2</code></pre>
-<p>In practice we may not wish to compute the eigenvectors of the covariance matrix directly. This is because it requires us to estimate the covariance, which involves a sum of squares term, before estimating the eigenvectors. We can estimate the eigenvectors directly either through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> or <a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a>. We saw a similar issue arise when , where we also wished to avoid computation of <span class="math inline">\(\latentMatrix^\top\latentMatrix\)</span> (or in the case of  <span class="math inline">\(\boldsymbol{\Phi}^\top\boldsymbol{\Phi}\)</span>).</p>
 <!-- SECTION Posterior for Principal Component Analysis -->
 </section>
 <section id="posterior-for-principal-component-analysis" class="slide level2">
 <h2>Posterior for Principal Component Analysis</h2>
-<p>Under the latent variable model justification for principal component analysis, we are normally interested in inferring something about the latent variables given the data. This is the distribution, <span class="math display">\[
+<p><span class="math display">\[
 p(\latentVector_{i, :} | \dataVector_{i, :})
-\]</span> for any given data point. Determining this density turns out to be very similar to the approach for determining the Bayesian posterior of <span class="math inline">\(\weightVector\)</span> in Bayesian linear regression, only this time we place the prior density over <span class="math inline">\(\latentVector_{i, :}\)</span> instead of <span class="math inline">\(\weightVector\)</span>. The posterior is proportional to the joint density as follows, <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 p(\latentVector_{i, :} | \dataVector_{i, :}) \propto p(\dataVector_{i,
 :}|\mappingMatrix, \latentVector_{i, :}, \noiseStd^2) p(\latentVector_{i, :})
-\]</span> And as in the Bayesian linear regression case we first consider the log posterior, <span class="math display">\[
-\log
-p(\latentVector_{i, :} | \dataVector_{i, :}) = \log p(\dataVector_{i, :}|\mappingMatrix,
+\]</span></p>
+<p><span class="math display">\[
+\log p(\latentVector_{i, :} | \dataVector_{i, :}) = \log p(\dataVector_{i, :}|\mappingMatrix,
 \latentVector_{i, :}, \noiseStd^2) + \log p(\latentVector_{i, :}) + \text{const}
-\]</span> where the constant is not dependent on <span class="math inline">\(\latentVector\)</span>. As before we collect the quadratic terms in <span class="math inline">\(\latentVector_{i, :}\)</span> and we assemble them into a Gaussian density over <span class="math inline">\(\latentVector\)</span>. <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \log p(\latentVector_{i, :} | \dataVector_{i, :}) =
 -\frac{1}{2\noiseStd^2} (\dataVector_{i, :} - \mappingMatrix\latentVector_{i,
 :})^\top(\dataVector_{i, :} - \mappingMatrix\latentVector_{i, :}) - \frac{1}{2}
@@ -785,27 +768,7 @@ p(\latentVector_{i, :} | \dataVector_{i, :}) = \log p(\dataVector_{i, :}|\mappin
 <p>Use the values for <span class="math inline">\(\mappingMatrix\)</span> and <span class="math inline">\(\noiseStd^2\)</span> you have computed, along with the data set <span class="math inline">\(\dataMatrix\)</span> to compute the posterior density over <span class="math inline">\(\latentMatrix\)</span>. Write a function of the form</p>
 <p>python mu_x, C_x = posterior(Y, W, sigma2)} where <code>mu_x</code> and <code>C_x</code> are the posterior mean and posterior covariance for the given <span class="math inline">\(\dataMatrix\)</span>.</p>
 <p>Don’t forget to subtract the mean of the data <code>Y</code> inside your function before computing the posterior: remember we assumed at the beginning of our analysis that the data had been centred (i.e. the mean was removed).}{20}</p>
-</section></section>
-<section id="question-4-answer-code" class="title-slide slide level1">
-<h1>Question 4 Answer Code</h1>
-
 </section>
-
-<section id="write-code-for-you-answer-to-this-question-in-this-box" class="title-slide slide level1">
-<h1>Write code for you answer to this question in this box</h1>
-
-</section>
-
-<section id="do-not-delete-these-comments-otherwise-you-will-get-zero-for-this-answer." class="title-slide slide level1">
-<h1>Do not delete these comments, otherwise you will get zero for this answer.</h1>
-
-</section>
-
-<section id="make-sure-your-code-has-run-and-the-answer-is-correct-before-submitting-your-notebook-for-marking." class="title-slide slide level1">
-<h1>Make sure your code has run and the answer is correct <em>before</em> submitting your notebook for marking.</h1>
-<p>import numpy as np import scipy as sp def posterior(Y, W, sigma2): Y_cent = Y - Y.mean(0) # Compute posterior over X C_x = mu_x = return mu_x, C_x</p>
-</section>
-
 <section>
 <section id="numerically-stable-and-efficient-version" class="title-slide slide level1">
 <h1>Numerically Stable and Efficient Version</h1>
@@ -832,45 +795,17 @@ c_i = \frac{\noiseStd^2}{\noiseStd^2 + \ell^2_i}
 \]</span> <span class="math display">\[
 \meanVector_x = \mathbf{D}\mathbf{U}^\top \dataVector_{i, :}
 \]</span> where <span class="math inline">\(\mathbf{D}\)</span> is a diagonal matrix with diagonal elements given by <span class="math inline">\(d_{i} = \frac{\ell_i}{\noiseStd^2 + \ell_i^2}\)</span>.</p>
-<p>import scipy as sp import numpy as np</p>
-</section></section>
-<section>
-<section id="probabilistic-pca-algorithm-using-svd" class="title-slide slide level1">
-<h1>probabilistic PCA algorithm using SVD</h1>
-<p>def ppca(Y, q, center=True): ""“Probabilistic PCA through singular value decomposition”"" # remove mean if center: Y_cent = Y - Y.mean(0) else: Y_cent = Y</p>
-<pre><code># Comute singluar values, discard &#39;R&#39; as we will assume orthogonal
-U, sqlambd, _ = sp.linalg.svd(Y_cent.T,full_matrices=False)
-lambd = (sqlambd**2)/Y.shape[0]
-# Compute residual and extract eigenvectors
-sigma2 = np.sum(lambd[q:])/(Y.shape[1]-q)
-ell = np.sqrt(lambd[:q]-sigma2)
-return U[:, :q], ell, sigma2</code></pre>
-<p>def posterior(Y, U, ell, sigma2, center=True): ""“Posterior computation for the latent variables given the eigendecomposition.”"" if center: Y_cent = Y - Y.mean(0) else: Y_cent = Y C_x = np.diag(sigma2/(sigma2+ell<strong>2)) d = ell/(sigma2+ell</strong>2) mu_x = np.dot(Y_cent, U)*d[None, :] return mu_x, C_x</p>
-<!-- SECTION Examples -->
 </section>
-<section id="examples" class="slide level2">
-<h2>Examples</h2>
-<p>For our first example we’ll consider some motion capture data of a man breaking into a run. <a href="http://en.wikipedia.org/wiki/Motion_capture">Motion capture data</a> involves capturing a 3-d point cloud to represent a character, often by an underlying skeleton. For this data set, from Ohio State University, we have 54 frame of motion capture, each frame containing 102 values, which are the 3-d locations of 34 different points from the subjects skeleton.</p>
-<p>import pods</p>
-<p>data = pods.datasets.osu_run1() Y = data[‘Y’]</p>
+<section id="examples-motion-capture-data" class="slide level2">
+<h2>Examples: Motion Capture Data</h2>
+<p>For our first example we’ll consider some motion capture data of a man breaking into a run. <a href="http://en.wikipedia.org/wiki/Motion_capture">Motion capture data</a> involves capturing a 3-d point cloud to represent a character, often by an underlying skeleton. For this data set, from Ohio State University, we have 54 frame of motion capture, each frame containing 102 values, which are the 3-d locations of 34 different points from the subject’s skeleton.</p>
 <p>Once the data is loaded in we can examine the first two principal components as follows,</p>
-<p>q = 2 U, ell, sigma2 = ppca(Y, q) mu_x, C_x = posterior(Y, U, ell, sigma2)</p>
-<p>import matplotlib.pyplot as plt</p>
-<p>plt.plot(mu_x[:, 0], mu_x[:, 1], ‘rx-’)</p>
 <p>Here because the data is a time course, we have connected points that are neighbouring in time. This highlights the form of the run, which involves 3 paces. This projects in our low dimensional space to 3 loops. We can examin how much residual variance there is in the system by looking at <code>sigma2</code>.</p>
-<p>print(sigma2)</p>
-<!-- SECTION Robot Navigation Example -->
 </section>
 <section id="robot-navigation-example" class="slide level2">
 <h2>Robot Navigation Example</h2>
 <p>In the next example we will load in data from a robot navigation problem. The data consists of wireless access point strengths as recorded by a robot performing a loop around the University of Washington’s Computer Science department in Seattle. The robot records all the wireless access points it can cache and stores their signal strength.</p>
-<p>import pods</p>
-<p>data = pods.datasets.robot_wireless() Y = data[‘Y’] Y.shape</p>
 <p>There are 215 observations of 30 different access points. In this case the model is suggesting that the access point signal strength should be linearly dependent on the location in the map. In other words we are expecting the access point strength for the <span class="math inline">\(j\)</span>th access point at robot position <span class="math inline">\(x_{i, :}\)</span> to be represented by <span class="math inline">\(y_{i, j} = \weightVector_{j, :}^\top \latentVector_{i, :} + \epsilon_{i,j}\)</span>.</p>
-<p>import matplotlib.pyplot as plt</p>
-<p>q = 2 U, ell, sigma2 = ppca(Y, q) mu_x, C_x = posterior(Y, U, ell, sigma2)</p>
-<p>fig, ax = plt.subplots(figsize=(8,8)) ax.plot(mu_x[:, 0], mu_x[:, 1], ‘rx-’) ax.set_title(‘Latent Variable: Robot Inferred Locations’) fig, ax = plt.subplots(figsize=(8,8)) W = U*ell[None, :] ax.plot(W[:, 0], W[:, 1], ‘bo’) ax.set_title(‘Access Point Inferred Locations’)</p>
-<p>U, ell, sigma2 = ppca(Y.T, q)</p>
 <!-- SECTION Relationship to Matrix Factorization -->
 </section>
 <section id="relationship-to-matrix-factorization" class="slide level2">
@@ -977,8 +912,6 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
 <section id="olivetti-faces" class="slide level2">
 <h2>Olivetti Faces</h2>
 <p>You too can create your own eigenfaces. In this example we load in the ‘Olivetti Face’ data set, a small data set of 200 faces from the <a href="http://en.wikipedia.org/wiki/Olivetti_Research_Laboratory">Olivetti Research Laboratory</a>. Below we load in the data and display an image of the second face in the data set (i.e., indexed by 1).</p>
-<p>import pods import matplotlib.pyplot as plt</p>
-<p>data = pods.datasets.olivetti_glasses() Y = data[‘X’] # this data set is set up for classification, but we will model the outputs. lbls = data[‘Y’] import matplotlib.cm as cm # import color map display_index = 0 plt.imshow(np.reshape(Y[display_index, :].flatten(), (64, 64)).T, cmap = cm.Greys_r)</p>
 <p>Note that to display the face we had to reshape the appropriate row of the data matrix. This is because the images are turned into vectors by stacking columns of the image on top of each other to form a vector. The operation</p>
 <p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
 <p>recovers the original image into a matrix <code>im</code> by using the <code>np.reshape</code> function to return the vector to a matrix.</p>
@@ -986,31 +919,20 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
 <section id="visualizing-the-eigenvectors" class="slide level2">
 <h2>Visualizing the Eigenvectors</h2>
 <p>Each retained eigenvector is stored in the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\mathbf{U}\)</span>. Each of these eigenvectors is associated with particular directions of variation in the original data. Principal component analysis implies that we can reconstruct any face by using a weighted sum of these eigenvectors where the weights for each face are given by the relevant vector of the latent variables, <span class="math inline">\(\latentVector_{i, :}\)</span> and the diagonal elements of the matrix <span class="math inline">\(\mathbf{L}\)</span>. We can visualize the eigenvectors <span class="math inline">\(\mathbf{U}\)</span> as images by performing the same reshape operation we used to recover the image associated with a data point above. Below we do this for the first nine eigenvectors of the Olivetti Faces data.</p>
-<p>width=3 height=3 q = width*height fig, ax = plt.subplots(width,height,figsize=(12,12))</p>
-<p>U, ell, sigma2 = ppca(Y, q) lat = 0 for i in range(width): for j in range(height): ax[i, j].imshow(np.reshape(U[:, lat].flatten(), (64, 64)).T, cmap = cm.Greys_r) ax[i, j].set_title(‘Principle Component’ + str(lat+1)) lat += 1</p>
 </section>
 <section id="reconstruction" class="slide level2">
 <h2>Reconstruction</h2>
 <p>We can now attempt to reconstruct a given training point from these eigenvectors. As we mentioned above, the reconstruction is dependent on the value of the latent variable and the weights from the matrix <span class="math inline">\(\mathbf{L}\)</span>. First let’s compute the value of the latent variables for the point we want to construct. Then we’ll use them to compute the weightings of each of the eigenvectors.</p>
-<p>mu_x, C_x = posterior(Y, U, ell, sigma2) reconstruction_weights = mu_x[display_index, :]*ell print(reconstruction_weights)</p>
 <p>This vector of reconstruction weights is applied to the ‘template images’ given by the eigenvectors to give us our reconstruction. Below we weight these templates and combine to form the reconstructed image, and show the comparison to the original image.</p>
-<p>fig, ax = plt.subplots(1, 2,figsize=(12,6)) ax[0].imshow(np.reshape(Y[display_index, :].flatten(), (64, 64)).T, cmap = cm.Greys_r) ax[0].set_title(‘Original Example no’ + str(display_index)) ax[1].imshow(np.reshape(np.dot(U,reconstruction_weights) + Y.mean(axis=0)[None, :], (64, 64)).T, cmap = cm.Greys_r) ax[1].set_title(‘Reconstruction of Example from’ + str(len(reconstruction_weights)) + ’ Latent Variables’)</p>
 <p>The quality of the reconstruction is a bit blurry, it can be improved by increasing the number of template images used (i.e. increasing the <em>latent dimensionality</em>).</p>
 </section>
 <section id="gene-expression" class="slide level2">
 <h2>Gene Expression</h2>
 <p>Each of the cells in your body stores your entire genetic code in your DNA, but at any one moment it is only ‘expressing’ a small portion of that code. Your cells are mainly constructed of protein, and these proteins are manufactured by first transcribing the DNA to RNA and then translating the RNA to protein. If the DNA is the cells hard drive, then one role of the RNA is to act like a cache of data that is being read from the hard drive at any one time. Gene expression arrays allow us to measure the quantity of different types of RNA in the cell, effectively analyzing what’s in the cache (although we have to destroy the cell or the tissue to access it). A gene expression experiment often consists of a time course or a series of experiments that characterise the gene expression of cells at any given time.</p>
 <p>We will now load in one of the earliest gene expression data sets from a <a href="http://www.ncbi.nlm.nih.gov/pubmed/9843569">1998 paper by Spellman et al.</a>, it consists of gene expression measurements of over six thousand genes in a range of conditions for brewer’s yeast. The experiment was designed for understanding the cell cycle of the genes. The expectation is that there should be oscillating signals inside the cell.</p>
-<p>First we extract the principale components of the gene expression.</p>
-</section></section>
-<section id="load-in-data-and-replace-missing-values-with-zero" class="title-slide slide level1">
-<h1>load in data and replace missing values with zero</h1>
-<p>data=pods.datasets.spellman_yeast_cdc15() Y = data[‘Y’].fillna(0) q = 5 U, ell, sigma2 = ppca(Y, q) mu_x, C_x = posterior(Y, U, ell, sigma2)</p>
+<p>First we extract the principal components of the gene expression.</p>
 <p>Now, looking through, we find that there is indeed a latent variable that appears to oscilate at approximately the right frequency. The 4th latent dimension (<code>index=3</code>) can be plotted across the time course as follows.</p>
-<p>import matplotlib.pyplot as plt</p>
-<p>plt.plot(mu_x[:, 3])</p>
 <p>To reveal an oscillating shape. We can see which genes correspond to this shape by examining the associated column of <span class="math inline">\(\mathbf{U}\)</span>. Let’s augment our data matrix with this score.</p>
-<p>gene_list = Y.T gene_list[‘oscilation’] = np.sqrt(U[:, 3]**2) gene_list.sort(columns=‘oscilation’, ascending=False).index[:4]</p>
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-Hastie:pcurves89">
 <p>Hastie, T., Stuetzle, W., 1989. Principal curves. Journal of the American Statistical Association 84, 502–516.</p>
@@ -1033,9 +955,6 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
 <div id="ref-Rogers:book11">
 <p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
-<div id="ref-Roweis:SPCA97">
-<p>Roweis, S.T., n.d. EM algorithms for PCA and SPCA, in:. pp. 626–632.</p>
-</div>
 <div id="ref-Scholkopf:nonlinear98">
 <p>Schölkopf, B., Smola, A., Müller, K.-R., 1998. Nonlinear component analysis as a kernel eigenvalue problem. Neural Computation 10, 1299–1319. <a href="https://doi.org/10.1162/089976698300017467">https://doi.org/10.1162/089976698300017467</a></p>
 </div>
@@ -1043,13 +962,10 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
 <p>Shi, J., Malik, J., 2000. Normalized cuts and image segmentation. IEEE Transactions on Pattern Analysis and Machine Intelligence 22, 888–905.</p>
 </div>
 <div id="ref-Tipping:probpca99">
-<p>Tipping, M.E., Bishop, C.M., 1999a. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a></p>
-</div>
-<div id="ref-Tipping:pca97">
-<p>Tipping, M.E., Bishop, C.M., 1999b. Mixtures of probabilistic principal component analysers. Neural Computation 11, 443–482.</p>
+<p>Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a></p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -1063,8 +979,10 @@ p(\dataMatrix|\mappingMatrix) = \prod_{i=1}^\numData \gaussianDist{\dataVector_{
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
