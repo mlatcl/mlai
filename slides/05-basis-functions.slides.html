@@ -163,12 +163,12 @@ showDivs(0, 'quadratic_function');
 <section id="functions-derived-from-polynomial-basis" class="slide level2">
 <h2>Functions Derived from Polynomial Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}w_0} + {\color{green}w_1 x} + {\color{yellow}w_2 x^2} + {\color{magenta}w_3 x^3} + {\color{red}w_4 x^4}
+f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}} + {\color{magenta}{w_3 x^3}} + {\color{red}{w_4 x^4}}
 \]</span></p>
 <script>
 showDivs(0, 'polynomial_basis');
 </script>
-<p><small></small> <input id="range-polynomial_basis" type="range" min="0" max="4" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')"> <button onclick="plusDivs(-1, 'polynomial_basis')">❮</button> <button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
+<p><small></small> <input id="range-polynomial_basis" type="range" min="0" max="5" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')"> <button onclick="plusDivs(-1, 'polynomial_basis')">❮</button> <button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
 <div class="polynomial_basis" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/polynomial_basis000.svg" width="80%" style=" ">
 </object>
@@ -189,6 +189,10 @@ showDivs(0, 'polynomial_basis');
 <object class="svgplot " data="../slides/diagrams/ml/polynomial_basis004.svg" width="80%" style=" ">
 </object>
 </div>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
+<p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 </section>
 <section id="different-basis" class="slide level2">
 <h2>Different Basis</h2>
@@ -260,7 +264,7 @@ showDivs(0, 'relu_function');
 <section id="functions-derived-from-tanh-basis" class="slide level2">
 <h2>Functions Derived from Tanh Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}w_0}   + {\color{green}w_1 \text{tanh}\left(x+1\right)}  + {\color{yellow}w_2 \text{tanh}\left(x+0.33\right)}  + {\color{magenta}w_3 \text{tanh}\left(x-0.33\right)} + {\color{red}w_4 \text{tanh}\left(x-1\right)}
+f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 \text{tanh}\left(x+1\right)}}  + {\color{yellow}{w_2 \text{tanh}\left(x+0.33\right)}}  + {\color{magenta}{w_3 \text{tanh}\left(x-0.33\right)}} + {\color{red}{w_4 \text{tanh}\left(x-1\right)}}
 \]</span></p>
 <script>
 showDivs(0, 'tanh_function');
@@ -288,7 +292,7 @@ showDivs(0, 'tanh_function');
 <section id="functions-derived-from-fourier-basis" class="slide level2">
 <h2>Functions Derived from Fourier Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}w_0}  + {\color{green}w_1 \sin(x)} + {\color{yellow}w_2 \cos(x)} + {\color{magenta}w_3 \sin(2x)} + {\color{red}w_4 \cos(2x)}
+f(x) = {\color{cyan}{w_0}}  + {\color{green}{w_1 \sin(x)}} + {\color{yellow}{w_2 \cos(x)}} + {\color{magenta}{w_3 \sin(2x)}} + {\color{red}{w_4 \cos(2x)}}
 \]</span></p>
 <script>
 showDivs(0, 'fourier_function');
@@ -307,13 +311,42 @@ showDivs(0, 'fourier_function');
 </object>
 </div>
 </section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise 1</h2>
-<p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
-</section>
 <section id="fitting-to-data" class="slide level2">
 <h2>Fitting to Data</h2>
 <p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
+</section>
+<section id="olympic-marathon-data" class="slide level2">
+<h2>Olympic Marathon Data</h2>
+<table>
+<tr>
+<td width="70%">
+<ul>
+<li>Gold medal times for Olympic Marathon since 1896.</li>
+<li>Marathons before 1924 didn’t have a standardised distance.</li>
+<li>Present results using pace per km.</li>
+<li>In 1904 Marathon was badly organised leading to very slow times.</li>
+</ul>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="../slides/diagrams/Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+</td>
+</tr>
+</table>
+</section>
+<section id="olympic-marathon-data-1" class="slide level2">
+<h2>Olympic Marathon Data</h2>
+<div class="figure">
+<div id="olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Olympic marathon pace times since 1892.
+</aside>
 </section>
 <section id="exercise-0" class="slide level2">
 <h2>Exercise 0</h2>
@@ -427,39 +460,6 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <li>See <code>np.linalg.solve</code></li>
 <li>In practice use <span class="math inline">\(\mathbf{Q}\mathbf{R}\)</span> decomposition (see lab class notes).</li>
 </ul>
-</section>
-<section id="olympic-marathon-data" class="slide level2">
-<h2>Olympic Marathon Data</h2>
-<table>
-<tr>
-<td width="70%">
-<ul>
-<li>Gold medal times for Olympic Marathon since 1896.</li>
-<li>Marathons before 1924 didn’t have a standardised distance.</li>
-<li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organised leading to very slow times.</li>
-</ul>
-</td>
-<td width="30%">
-<div class="centered centered" style="">
-<img class="" src="../slides/diagrams/Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
-</td>
-</tr>
-</table>
-</section>
-<section id="olympic-marathon-data-1" class="slide level2">
-<h2>Olympic Marathon Data</h2>
-<div class="figure">
-<div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Olympic marathon pace times since 1892.
-</aside>
 </section>
 <section id="polynomial-fits-to-olympic-data" class="slide level2">
 <h2>Polynomial Fits to Olympic Data</h2>
@@ -611,8 +611,15 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </section>
 <section id="lecture-on-basis-functions-from-gprs-uganda" class="slide level2">
 <h2>Lecture on Basis Functions from GPRS Uganda</h2>
+<div class="figure">
+<div id="basis-functions-gprs-uganda-figure" class="figure-frame">
 <iframe width="600" height="450" src="https://www.youtube.com/embed/PoNbOnUnOao?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
+</div>
+</div>
+<aside class="notes">
+Lecture on Basis functions from GPRS in Uganda in 2013.
+</aside>
 </section>
 <section id="use-of-qr-decomposition-for-numerical-stability" class="slide level2">
 <h2>Use of QR Decomposition for Numerical Stability</h2>

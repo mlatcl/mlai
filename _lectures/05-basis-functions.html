@@ -126,7 +126,7 @@ $$</span><br /> which is known as the <em>polynomial basis</em>.</p>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <h2 id="functions-derived-from-polynomial-basis">Functions Derived from Polynomial Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_0} + {\color{magenta}\mappingScalar_1 \inputScalar} + {\color{blue}\mappingScalar_2 \inputScalar^2} + {\color{green}\mappingScalar_3 \inputScalar^3} + {\color{cyan}\mappingScalar_4 \inputScalar^4}
+\mappingFunction(\inputScalar) = {\color{red}{\mappingScalar_0}} + {\color{magenta}{\mappingScalar_1 \inputScalar}} + {\color{blue}{\mappingScalar_2 \inputScalar^2}} + {\color{green}{\mappingScalar_3 \inputScalar^3}} + {\color{cyan}{\mappingScalar_4 \inputScalar^4}}
 $$</span><br /></p>
 <div class="figure">
 <div id="polynomial-basis-4-figure" class="figure-frame">
@@ -142,6 +142,8 @@ $$</span><br /></p>
 </div>
 <p>To aid in understanding how a basis works, we’ve provided you with a small interactive tool for exploring this polynomial basis. The tool can be summoned with the following command.</p>
 <p>Try moving the sliders around to change the weight of each basis function. Click the control box <code>display_basis</code> to show the underlying basis functions (in red). The prediction function is shown in a thick blue line. <em>Warning</em> the sliders aren’t presented quite in the correct order. <code>w_0</code> is associated with the bias, <code>w_1</code> is the linear term, <code>w_2</code> the quadratic and here (because we have four basis functions) we have <code>w_3</code> for the <em>cubic</em> term. So the subscript of the weight parameter is always associated with the corresponding polynomial’s degree.</p>
+<h3 id="exercise-1">Exercise 1</h3>
+<p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 <h2 id="different-basis">Different Basis</h2>
 <p>The polynomial basis is widely used in Engineering and graphics, but it has some drawbacks in machine learning: outside the input region between -1 and 1, the values of the polynomial basis rise very quickly.</p>
 <p>Now we look at basis functions that have been used as the <em>activation</em> functions in neural network model.</p>
@@ -203,7 +205,7 @@ $$</span><br /></p>
 <p>Sigmoid or hyperbolic tangent basis was popular in the original generation of multilayer perceptron models, or deep networks. These basis functions start flat, rise and then saturate.</p>
 <h2 id="functions-derived-from-tanh-basis">Functions Derived from Tanh Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_0}   + {\color{magenta}\mappingScalar_1 \text{tanh}\left(\inputScalar+1\right)}  + {\color{blue}\mappingScalar_2 \text{tanh}\left(\inputScalar+0.33\right)}  + {\color{green}\mappingScalar_3 \text{tanh}\left(\inputScalar-0.33\right)} + {\color{cyan}\mappingScalar_4 \text{tanh}\left(\inputScalar-1\right)}
+\mappingFunction(\inputScalar) = {\color{red}{\mappingScalar_0}}   + {\color{magenta}{\mappingScalar_1 \text{tanh}\left(\inputScalar+1\right)}}  + {\color{blue}{\mappingScalar_2 \text{tanh}\left(\inputScalar+0.33\right)}}  + {\color{green}{\mappingScalar_3 \text{tanh}\left(\inputScalar-0.33\right)}} + {\color{cyan}{\mappingScalar_4 \text{tanh}\left(\inputScalar-1\right)}}
 $$</span><br /></p>
 <div class="figure">
 <div id="tanh-basis-4-figure" class="figure-frame">
@@ -232,7 +234,7 @@ $$</span><br /></p>
 <p>In this code, basis functions with an <em>odd</em> index are sine and basis functions with an <em>even</em> index are cosine. The first basis function (index 0, so cosine) has a frequency of 0 and then frequencies increase every time a sine and cosine are included.</p>
 <h2 id="functions-derived-from-fourier-basis">Functions Derived from Fourier Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_0}  + {\color{magenta}\mappingScalar_1 \sin(\inputScalar)} + {\color{blue}\mappingScalar_2 \cos(\inputScalar)} + {\color{green}\mappingScalar_3 \sin(2\inputScalar)} + {\color{cyan}\mappingScalar_4 \cos(2\inputScalar)}
+\mappingFunction(\inputScalar) = {\color{red}{\mappingScalar_0}}  + {\color{magenta}{\mappingScalar_1 \sin(\inputScalar)}} + {\color{blue}{\mappingScalar_2 \cos(\inputScalar)}} + {\color{green}{\mappingScalar_3 \sin(2\inputScalar)}} + {\color{cyan}{\mappingScalar_4 \cos(2\inputScalar)}}
 $$</span><br /></p>
 <div class="figure">
 <div id="fourier-basis-4-figure" class="figure-frame">
@@ -246,28 +248,64 @@ $$</span><br /></p>
 <p>Figure: A Fourier basis is made up of sine and cosine functions with different frequencies.</p>
 </div>
 </div>
-<h3 id="exercise-1">Exercise 1</h3>
-<p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 <h2 id="fitting-to-data">Fitting to Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb24-2"><a href="#cb24-2"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb24-3"><a href="#cb24-3"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb24-4"><a href="#cb24-4"></a>y <span class="op">-=</span> y.mean()</span>
-<span id="cb24-5"><a href="#cb24-5"></a>y <span class="op">/=</span> y.std()</span></code></pre></div>
+<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
+<table>
+<tr>
+<td width="70%">
+<ul>
+<li>Gold medal times for Olympic Marathon since 1896.</li>
+<li>Marathons before 1924 didn’t have a standardised distance.</li>
+<li>Present results using pace per km.</li>
+<li>In 1904 Marathon was badly organised leading to very slow times.</li>
+</ul>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="../slides/diagrams/Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+</td>
+</tr>
+</table>
+<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb25-2"><a href="#cb25-2"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb25-3"><a href="#cb25-3"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb25-6"><a href="#cb25-6"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
+<div class="figure">
+<div id="olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
+</object>
+</div>
+<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-marathon-caption" class="caption-frame">
+<p>Figure: Olympic marathon pace times since 1892.</p>
+</div>
+</div>
+<p>Things to notice about the data include the outlier in 1904, in this year, the olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed.</p>
+<p>More recent years see more consistently quick marathons.</p>
 <h3 id="exercise-0">Exercise 0</h3>
 <p>Now we are going to redefine our polynomial basis. Have a careful look at the operations we perform on <code>x</code> to create <code>z</code>. We use <code>z</code> in the polynomial computation. What are we doing to the inputs? Why do you think we are changing <code>x</code> in this manner?</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">#x[:, 0] = np.linspace(1888, 2020, 1000)</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a>ax.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">#x[:, 0] = np.linspace(1888, 2020, 1000)</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a>ax.plot(x, yhat, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <h3 id="exercise-2">Exercise 2</h3>
+<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
 <ol type="a">
 <li>polynomial basis</li>
@@ -275,7 +313,7 @@ $$</span><br /></p>
 <li>Fourier basis</li>
 </ol>
 <p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
 <h2 id="basis-function-models">Basis Function Models</h2>
 <p><br /><span class="math display">$$
   \mappingFunction(\inputVector_i) = \sum_{j=1}^\numBasisFunc \mappingScalar_j \basisFunc_{i, j}
@@ -326,55 +364,27 @@ $$</span><br /></p>
 <p><br /><span class="math display">$$
   \left(\basisMatrix^\top \basisMatrix\right)\mappingVector = \basisMatrix^\top \dataVector
   $$</span><br /></p>
-<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
-<table>
-<tr>
-<td width="70%">
-<ul>
-<li>Gold medal times for Olympic Marathon since 1896.</li>
-<li>Marathons before 1924 didn’t have a standardised distance.</li>
-<li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organised leading to very slow times.</li>
-</ul>
-</td>
-<td width="30%">
-<div class="centered centered" style="">
-<img class="" src="../slides/diagrams/Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
-</td>
-</tr>
-</table>
-<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb32-2"><a href="#cb32-2"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb32-3"><a href="#cb32-3"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb32-4"><a href="#cb32-4"></a></span>
-<span id="cb32-5"><a href="#cb32-5"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb32-6"><a href="#cb32-6"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
-<div class="figure">
-<div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
-</object>
-</div>
-<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-marathon-caption" class="caption-frame">
-<p>Figure: Olympic marathon pace times since 1892.</p>
-</div>
-</div>
-<p>Things to notice about the data include the outlier in 1904, in this year, the olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed.</p>
-<p>More recent years see more consistently quick marathons.</p>
 <h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="im">import</span> mlai</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb32-4"><a href="#cb32-4"></a></span>
+<span id="cb32-5"><a href="#cb32-5"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb32-6"><a href="#cb32-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb32-7"><a href="#cb32-7"></a></span>
+<span id="cb32-8"><a href="#cb32-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb33-2"><a href="#cb33-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="im">import</span> mlai</span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="im">import</span> pods</span></code></pre></div>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="im">import</span> teaching_plots <span class="im">as</span> plot</span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="im">import</span> mlai</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
 <span id="cb34-2"><a href="#cb34-2"></a></span>
 <span id="cb34-3"><a href="#cb34-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
@@ -383,30 +393,15 @@ $$</span><br /></p>
 <span id="cb34-6"><a href="#cb34-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb34-7"><a href="#cb34-7"></a></span>
 <span id="cb34-8"><a href="#cb34-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
-<span id="cb34-9"><a href="#cb34-9"></a></span>
-<span id="cb34-10"><a href="#cb34-10"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="im">import</span> teaching_plots <span class="im">as</span> plot</span>
-<span id="cb35-4"><a href="#cb35-4"></a><span class="im">import</span> mlai</span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
-<span id="cb36-2"><a href="#cb36-2"></a></span>
-<span id="cb36-3"><a href="#cb36-3"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb36-4"><a href="#cb36-4"></a></span>
-<span id="cb36-5"><a href="#cb36-5"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb36-6"><a href="#cb36-6"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb36-7"><a href="#cb36-7"></a></span>
-<span id="cb36-8"><a href="#cb36-8"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
-<span id="cb36-9"><a href="#cb36-9"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a></span>
-<span id="cb36-11"><a href="#cb36-11"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb36-12"><a href="#cb36-12"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb36-13"><a href="#cb36-13"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>plot.rmse_fit(x, y, param_name<span class="op">=</span><span class="st">&#39;number&#39;</span>, param_range<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">28</span>), </span>
-<span id="cb37-2"><a href="#cb37-2"></a>              model<span class="op">=</span>mlai.LM, basis<span class="op">=</span>basis, </span>
-<span id="cb37-3"><a href="#cb37-3"></a>              xlim<span class="op">=</span>xlim, objective_ylim<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.8</span>],</span>
-<span id="cb37-4"><a href="#cb37-4"></a>              diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>)</span></code></pre></div>
+<span id="cb34-9"><a href="#cb34-9"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
+<span id="cb34-10"><a href="#cb34-10"></a></span>
+<span id="cb34-11"><a href="#cb34-11"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb34-12"><a href="#cb34-12"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb34-13"><a href="#cb34-13"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>plot.rmse_fit(x, y, param_name<span class="op">=</span><span class="st">&#39;number&#39;</span>, param_range<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">28</span>), </span>
+<span id="cb35-2"><a href="#cb35-2"></a>              model<span class="op">=</span>mlai.LM, basis<span class="op">=</span>basis, </span>
+<span id="cb35-3"><a href="#cb35-3"></a>              xlim<span class="op">=</span>xlim, objective_ylim<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.8</span>],</span>
+<span id="cb35-4"><a href="#cb35-4"></a>              diagrams<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
@@ -461,16 +456,26 @@ $$</span><br /> Compute the corresponding error on the training data. How does i
 <li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 <h2 id="lecture-on-basis-functions-from-gprs-uganda">Lecture on Basis Functions from GPRS Uganda</h2>
+<div class="figure">
+<div id="basis-functions-gprs-uganda-figure" class="figure-frame">
 <iframe width="600" height="450" src="https://www.youtube.com/embed/PoNbOnUnOao?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
+</div>
+<div id="basis-functions-gprs-uganda-magnify" class="magnify" onclick="magnifyFigure(&#39;basis-functions-gprs-uganda&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="basis-functions-gprs-uganda-caption" class="caption-frame">
+<p>Figure: Lecture on Basis functions from GPRS in Uganda in 2013.</p>
+</div>
+</div>
 <h2 id="use-of-qr-decomposition-for-numerical-stability">Use of QR Decomposition for Numerical Stability</h2>
 <p>In the last session we showed how rather than computing <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> as an intermediate step to our solution, we could compute the solution to the regressiond directly through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>. Now we will consider an example with non linear basis functions where such computation is critical for forming the right answer.</p>
 <p><em>TODO</em> example with polynomials.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>Phi <span class="op">=</span> fourier(x, <span class="dv">5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>Phi <span class="op">=</span> fourier(x, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
