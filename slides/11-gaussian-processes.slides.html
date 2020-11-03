@@ -14,8 +14,72 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
-  <link rel="stylesheet" href="talks.css"/>
+  <link rel="stylesheet" href="../assets/css/talks.css"/>
   <!-- Printing and PDF exports -->
   <script>
     var link = document.createElement( 'link' );
@@ -35,304 +99,9 @@
       }
     });
   </script>
-  <script src="http://inverseprobability.com/talks/assets/js/figure-animate.js"></script>
+  <script src="../assets/js/figure-animate.js"></script>
 </head>
 <body>
-\[\newcommand{\tk}[1]{}
-%\newcommand{\tk}[1]{\textbf{TK}: #1}
-\newcommand{\Amatrix}{\mathbf{A}}
-\newcommand{\KL}[2]{\text{KL}\left( #1\,\|\,#2 \right)}
-\newcommand{\Kaast}{\kernelMatrix_{\mathbf{ \ast}\mathbf{ \ast}}}
-\newcommand{\Kastu}{\kernelMatrix_{\mathbf{ \ast} \inducingVector}}
-\newcommand{\Kff}{\kernelMatrix_{\mappingFunctionVector \mappingFunctionVector}}
-\newcommand{\Kfu}{\kernelMatrix_{\mappingFunctionVector \inducingVector}}
-\newcommand{\Kuast}{\kernelMatrix_{\inducingVector \bf\ast}}
-\newcommand{\Kuf}{\kernelMatrix_{\inducingVector \mappingFunctionVector}}
-\newcommand{\Kuu}{\kernelMatrix_{\inducingVector \inducingVector}}
-\newcommand{\Kuui}{\Kuu^{-1}}
-\newcommand{\Qaast}{\mathbf{Q}_{\bf \ast \ast}}
-\newcommand{\Qastf}{\mathbf{Q}_{\ast \mappingFunction}}
-\newcommand{\Qfast}{\mathbf{Q}_{\mappingFunctionVector \bf \ast}}
-\newcommand{\Qff}{\mathbf{Q}_{\mappingFunctionVector \mappingFunctionVector}}
-\newcommand{\aMatrix}{\mathbf{A}}
-\newcommand{\aScalar}{a}
-\newcommand{\aVector}{\mathbf{a}}
-\newcommand{\acceleration}{a}
-\newcommand{\bMatrix}{\mathbf{B}}
-\newcommand{\bScalar}{b}
-\newcommand{\bVector}{\mathbf{b}}
-\newcommand{\basisFunc}{\phi}
-\newcommand{\basisFuncVector}{\boldsymbol{ \basisFunc}}
-\newcommand{\basisFunction}{\phi}
-\newcommand{\basisLocation}{\mu}
-\newcommand{\basisMatrix}{\boldsymbol{ \Phi}}
-\newcommand{\basisScalar}{\basisFunction}
-\newcommand{\basisVector}{\boldsymbol{ \basisFunction}}
-\newcommand{\activationFunction}{\phi}
-\newcommand{\activationMatrix}{\boldsymbol{ \Phi}}
-\newcommand{\activationScalar}{\basisFunction}
-\newcommand{\activationVector}{\boldsymbol{ \basisFunction}}
-\newcommand{\bigO}{\mathcal{O}}
-\newcommand{\binomProb}{\pi}
-\newcommand{\cMatrix}{\mathbf{C}}
-\newcommand{\cbasisMatrix}{\hat{\boldsymbol{ \Phi}}}
-\newcommand{\cdataMatrix}{\hat{\dataMatrix}}
-\newcommand{\cdataScalar}{\hat{\dataScalar}}
-\newcommand{\cdataVector}{\hat{\dataVector}}
-\newcommand{\centeredKernelMatrix}{\mathbf{ \MakeUppercase{\centeredKernelScalar}}}
-\newcommand{\centeredKernelScalar}{b}
-\newcommand{\centeredKernelVector}{\centeredKernelScalar}
-\newcommand{\centeringMatrix}{\mathbf{H}}
-\newcommand{\chiSquaredDist}[2]{\chi_{#1}^{2}\left(#2\right)}
-\newcommand{\chiSquaredSamp}[1]{\chi_{#1}^{2}}
-\newcommand{\conditionalCovariance}{\boldsymbol{ \Sigma}}
-\newcommand{\coregionalizationMatrix}{\mathbf{B}}
-\newcommand{\coregionalizationScalar}{b}
-\newcommand{\coregionalizationVector}{\mathbf{ \coregionalizationScalar}}
-\newcommand{\covDist}[2]{\text{cov}_{#2}\left(#1\right)}
-\newcommand{\covSamp}[1]{\text{cov}\left(#1\right)}
-\newcommand{\covarianceScalar}{c}
-\newcommand{\covarianceVector}{\mathbf{ \covarianceScalar}}
-\newcommand{\covarianceMatrix}{\mathbf{C}}
-\newcommand{\covarianceMatrixTwo}{\boldsymbol{ \Sigma}}
-\newcommand{\croupierScalar}{s}
-\newcommand{\croupierVector}{\mathbf{ \croupierScalar}}
-\newcommand{\croupierMatrix}{\mathbf{ \MakeUppercase{\croupierScalar}}}
-\newcommand{\dataDim}{p}
-\newcommand{\dataIndex}{i}
-\newcommand{\dataIndexTwo}{j}
-\newcommand{\dataMatrix}{\mathbf{Y}}
-\newcommand{\dataScalar}{y}
-\newcommand{\dataSet}{\mathcal{D}}
-\newcommand{\dataStd}{\sigma}
-\newcommand{\dataVector}{\mathbf{ \dataScalar}}
-\newcommand{\decayRate}{d}
-\newcommand{\degreeMatrix}{\mathbf{ \MakeUppercase{\degreeScalar}}}
-\newcommand{\degreeScalar}{d}
-\newcommand{\degreeVector}{\mathbf{ \degreeScalar}}
-% Already defined by latex
-%\newcommand{\det}[1]{\left|#1\right|}
-\newcommand{\diag}[1]{\text{diag}\left(#1\right)}
-\newcommand{\diagonalMatrix}{\mathbf{D}}
-\newcommand{\diff}[2]{\frac{\text{d}#1}{\text{d}#2}}
-\newcommand{\diffTwo}[2]{\frac{\text{d}^2#1}{\text{d}#2^2}}
-\newcommand{\displacement}{x}
-\newcommand{\displacementVector}{\textbf{\displacement}}
-\newcommand{\distanceMatrix}{\mathbf{ \MakeUppercase{\distanceScalar}}}
-\newcommand{\distanceScalar}{d}
-\newcommand{\distanceVector}{\mathbf{ \distanceScalar}}
-\newcommand{\eigenvaltwo}{\ell}
-\newcommand{\eigenvaltwoMatrix}{\mathbf{L}}
-\newcommand{\eigenvaltwoVector}{\mathbf{l}}
-\newcommand{\eigenvalue}{\lambda}
-\newcommand{\eigenvalueMatrix}{\boldsymbol{ \Lambda}}
-\newcommand{\eigenvalueVector}{\boldsymbol{ \lambda}}
-\newcommand{\eigenvector}{\mathbf{ \eigenvectorScalar}}
-\newcommand{\eigenvectorMatrix}{\mathbf{U}}
-\newcommand{\eigenvectorScalar}{u}
-\newcommand{\eigenvectwo}{\mathbf{v}}
-\newcommand{\eigenvectwoMatrix}{\mathbf{V}}
-\newcommand{\eigenvectwoScalar}{v}
-\newcommand{\entropy}[1]{\mathcal{H}\left(#1\right)}
-\newcommand{\errorFunction}{E}
-\newcommand{\expDist}[2]{\left<#1\right>_{#2}}
-\newcommand{\expSamp}[1]{\left<#1\right>}
-\newcommand{\expectation}[1]{\left\langle #1 \right\rangle }
-\newcommand{\expectationDist}[2]{\left\langle #1 \right\rangle _{#2}}
-\newcommand{\expectedDistanceMatrix}{\mathcal{D}}
-\newcommand{\eye}{\mathbf{I}}
-\newcommand{\fantasyDim}{r}
-\newcommand{\fantasyMatrix}{\mathbf{ \MakeUppercase{\fantasyScalar}}}
-\newcommand{\fantasyScalar}{z}
-\newcommand{\fantasyVector}{\mathbf{ \fantasyScalar}}
-\newcommand{\featureStd}{\varsigma}
-\newcommand{\gammaCdf}[3]{\mathcal{GAMMA CDF}\left(#1|#2,#3\right)}
-\newcommand{\gammaDist}[3]{\mathcal{G}\left(#1|#2,#3\right)}
-\newcommand{\gammaSamp}[2]{\mathcal{G}\left(#1,#2\right)}
-\newcommand{\gaussianDist}[3]{\mathcal{N}\left(#1|#2,#3\right)}
-\newcommand{\gaussianSamp}[2]{\mathcal{N}\left(#1,#2\right)}
-\newcommand{\given}{|}
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\heaviside}{H}
-\newcommand{\hiddenMatrix}{\mathbf{ \MakeUppercase{\hiddenScalar}}}
-\newcommand{\hiddenScalar}{h}
-\newcommand{\hiddenVector}{\mathbf{ \hiddenScalar}}
-\newcommand{\identityMatrix}{\eye}
-\newcommand{\inducingInputScalar}{z}
-\newcommand{\inducingInputVector}{\mathbf{ \inducingInputScalar}}
-\newcommand{\inducingInputMatrix}{\mathbf{Z}}
-\newcommand{\inducingScalar}{u}
-\newcommand{\inducingVector}{\mathbf{ \inducingScalar}}
-\newcommand{\inducingMatrix}{\mathbf{U}}
-\newcommand{\inlineDiff}[2]{\text{d}#1/\text{d}#2}
-\newcommand{\inputDim}{q}
-\newcommand{\inputMatrix}{\mathbf{X}}
-\newcommand{\inputScalar}{x}
-\newcommand{\inputSpace}{\mathcal{X}}
-\newcommand{\inputVals}{\inputVector}
-\newcommand{\inputVector}{\mathbf{ \inputScalar}}
-\newcommand{\iterNum}{k}
-\newcommand{\kernel}{\kernelScalar}
-\newcommand{\kernelMatrix}{\mathbf{K}}
-\newcommand{\kernelScalar}{k}
-\newcommand{\kernelVector}{\mathbf{ \kernelScalar}}
-\newcommand{\kff}{\kernelScalar_{\mappingFunction \mappingFunction}}
-\newcommand{\kfu}{\kernelVector_{\mappingFunction \inducingScalar}}
-\newcommand{\kuf}{\kernelVector_{\inducingScalar \mappingFunction}}
-\newcommand{\kuu}{\kernelVector_{\inducingScalar \inducingScalar}}
-\newcommand{\lagrangeMultiplier}{\lambda}
-\newcommand{\lagrangeMultiplierMatrix}{\boldsymbol{ \Lambda}}
-\newcommand{\lagrangian}{L}
-\newcommand{\laplacianFactor}{\mathbf{ \MakeUppercase{\laplacianFactorScalar}}}
-\newcommand{\laplacianFactorScalar}{m}
-\newcommand{\laplacianFactorVector}{\mathbf{ \laplacianFactorScalar}}
-\newcommand{\laplacianMatrix}{\mathbf{L}}
-\newcommand{\laplacianScalar}{\ell}
-\newcommand{\laplacianVector}{\mathbf{ \ell}}
-\newcommand{\latentDim}{q}
-\newcommand{\latentDistanceMatrix}{\boldsymbol{ \Delta}}
-\newcommand{\latentDistanceScalar}{\delta}
-\newcommand{\latentDistanceVector}{\boldsymbol{ \delta}}
-\newcommand{\latentForce}{f}
-\newcommand{\latentFunction}{u}
-\newcommand{\latentFunctionVector}{\mathbf{ \latentFunction}}
-\newcommand{\latentFunctionMatrix}{\mathbf{ \MakeUppercase{\latentFunction}}}
-\newcommand{\latentIndex}{j}
-\newcommand{\latentScalar}{z}
-\newcommand{\latentVector}{\mathbf{ \latentScalar}}
-\newcommand{\latentMatrix}{\mathbf{Z}}
-\newcommand{\learnRate}{\eta}
-\newcommand{\lengthScale}{\ell}
-\newcommand{\rbfWidth}{\ell}
-\newcommand{\likelihoodBound}{\mathcal{L}}
-\newcommand{\likelihoodFunction}{L}
-\newcommand{\locationScalar}{\mu}
-\newcommand{\locationVector}{\boldsymbol{ \locationScalar}}
-\newcommand{\locationMatrix}{\mathbf{M}}
-\newcommand{\variance}[1]{\text{var}\left( #1 \right)}
-\newcommand{\mappingFunction}{f}
-\newcommand{\mappingFunctionMatrix}{\mathbf{F}}
-\newcommand{\mappingFunctionTwo}{g}
-\newcommand{\mappingFunctionTwoMatrix}{\mathbf{G}}
-\newcommand{\mappingFunctionTwoVector}{\mathbf{ \mappingFunctionTwo}}
-\newcommand{\mappingFunctionVector}{\mathbf{ \mappingFunction}}
-\newcommand{\scaleScalar}{s}
-\newcommand{\mappingScalar}{w}
-\newcommand{\mappingVector}{\mathbf{ \mappingScalar}}
-\newcommand{\mappingMatrix}{\mathbf{W}}
-\newcommand{\mappingScalarTwo}{v}
-\newcommand{\mappingVectorTwo}{\mathbf{ \mappingScalarTwo}}
-\newcommand{\mappingMatrixTwo}{\mathbf{V}}
-\newcommand{\maxIters}{K}
-\newcommand{\meanMatrix}{\mathbf{M}}
-\newcommand{\meanScalar}{\mu}
-\newcommand{\meanTwoMatrix}{\mathbf{M}}
-\newcommand{\meanTwoScalar}{m}
-\newcommand{\meanTwoVector}{\mathbf{ \meanTwoScalar}}
-\newcommand{\meanVector}{\boldsymbol{ \meanScalar}}
-\newcommand{\mrnaConcentration}{m}
-\newcommand{\naturalFrequency}{\omega}
-\newcommand{\neighborhood}[1]{\mathcal{N}\left( #1 \right)}
-\newcommand{\neilurl}{http://inverseprobability.com/}
-\newcommand{\noiseMatrix}{\boldsymbol{ E}}
-\newcommand{\noiseScalar}{\epsilon}
-\newcommand{\noiseVector}{\boldsymbol{ \epsilon}}
-\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
-\newcommand{\normalizedLaplacianMatrix}{\hat{\mathbf{L}}}
-\newcommand{\normalizedLaplacianScalar}{\hat{\ell}}
-\newcommand{\normalizedLaplacianVector}{\hat{\mathbf{ \ell}}}
-\newcommand{\numActive}{m}
-\newcommand{\numBasisFunc}{m}
-\newcommand{\numComponents}{m}
-\newcommand{\numComps}{K}
-\newcommand{\numData}{n}
-\newcommand{\numFeatures}{K}
-\newcommand{\numHidden}{h}
-\newcommand{\numInducing}{m}
-\newcommand{\numLayers}{\ell}
-\newcommand{\numNeighbors}{K}
-\newcommand{\numSequences}{s}
-\newcommand{\numSuccess}{s}
-\newcommand{\numTasks}{m}
-\newcommand{\numTime}{T}
-\newcommand{\numTrials}{S}
-\newcommand{\outputIndex}{j}
-\newcommand{\paramVector}{\boldsymbol{ \theta}}
-\newcommand{\parameterMatrix}{\boldsymbol{ \Theta}}
-\newcommand{\parameterScalar}{\theta}
-\newcommand{\parameterVector}{\boldsymbol{ \parameterScalar}}
-\newcommand{\partDiff}[2]{\frac{\partial#1}{\partial#2}}
-\newcommand{\precisionScalar}{j}
-\newcommand{\precisionVector}{\mathbf{ \precisionScalar}}
-\newcommand{\precisionMatrix}{\mathbf{J}}
-\newcommand{\pseudotargetScalar}{\widetilde{y}}
-\newcommand{\pseudotargetVector}{\mathbf{ \pseudotargetScalar}}
-\newcommand{\pseudotargetMatrix}{\mathbf{ \widetilde{Y}}}
-\newcommand{\rank}[1]{\text{rank}\left(#1\right)}
-\newcommand{\rayleighDist}[2]{\mathcal{R}\left(#1|#2\right)}
-\newcommand{\rayleighSamp}[1]{\mathcal{R}\left(#1\right)}
-\newcommand{\responsibility}{r}
-\newcommand{\rotationScalar}{r}
-\newcommand{\rotationVector}{\mathbf{ \rotationScalar}}
-\newcommand{\rotationMatrix}{\mathbf{R}}
-\newcommand{\sampleCovScalar}{s}
-\newcommand{\sampleCovVector}{\mathbf{ \sampleCovScalar}}
-\newcommand{\sampleCovMatrix}{\mathbf{s}}
-\newcommand{\scalarProduct}[2]{\left\langle{#1},{#2}\right\rangle}
-\newcommand{\sign}[1]{\text{sign}\left(#1\right)}
-\newcommand{\sigmoid}[1]{\sigma\left(#1\right)}
-\newcommand{\singularvalue}{\ell}
-\newcommand{\singularvalueMatrix}{\mathbf{L}}
-\newcommand{\singularvalueVector}{\mathbf{l}}
-\newcommand{\sorth}{\mathbf{u}}
-\newcommand{\spar}{\lambda}
-\newcommand{\trace}[1]{\text{tr}\left(#1\right)}
-\newcommand{\BasalRate}{B}
-\newcommand{\DampingCoefficient}{C}
-\newcommand{\DecayRate}{D}
-\newcommand{\Displacement}{X}
-\newcommand{\LatentForce}{F}
-\newcommand{\Mass}{M}
-\newcommand{\Sensitivity}{S}
-\newcommand{\basalRate}{b}
-\newcommand{\dampingCoefficient}{c}
-\newcommand{\mass}{m}
-\newcommand{\sensitivity}{s}
-\newcommand{\springScalar}{\kappa}
-\newcommand{\springVector}{\boldsymbol{ \kappa}}
-\newcommand{\springMatrix}{\boldsymbol{ \mathcal{K}}}
-\newcommand{\tfConcentration}{p}
-\newcommand{\tfDecayRate}{\delta}
-\newcommand{\tfMrnaConcentration}{f}
-\newcommand{\tfVector}{\mathbf{ \tfConcentration}}
-\newcommand{\velocity}{v}
-\newcommand{\sufficientStatsScalar}{g}
-\newcommand{\sufficientStatsVector}{\mathbf{ \sufficientStatsScalar}}
-\newcommand{\sufficientStatsMatrix}{\mathbf{G}}
-\newcommand{\switchScalar}{s}
-\newcommand{\switchVector}{\mathbf{ \switchScalar}}
-\newcommand{\switchMatrix}{\mathbf{S}}
-\newcommand{\tr}[1]{\text{tr}\left(#1\right)}
-\newcommand{\loneNorm}[1]{\left\Vert #1 \right\Vert_1}
-\newcommand{\ltwoNorm}[1]{\left\Vert #1 \right\Vert_2}
-\newcommand{\onenorm}[1]{\left\vert#1\right\vert_1}
-\newcommand{\twonorm}[1]{\left\Vert #1 \right\Vert}
-\newcommand{\vScalar}{v}
-\newcommand{\vVector}{\mathbf{v}}
-\newcommand{\vMatrix}{\mathbf{V}}
-\newcommand{\varianceDist}[2]{\text{var}_{#2}\left( #1 \right)}
-% Already defined by latex
-%\newcommand{\vec}{#1:}
-\newcommand{\vecb}[1]{\left(#1\right):}
-\newcommand{\weightScalar}{w}
-\newcommand{\weightVector}{\mathbf{ \weightScalar}}
-\newcommand{\weightMatrix}{\mathbf{W}}
-\newcommand{\weightedAdjacencyMatrix}{\mathbf{A}}
-\newcommand{\weightedAdjacencyScalar}{a}
-\newcommand{\weightedAdjacencyVector}{\mathbf{ \weightedAdjacencyScalar}}
-\newcommand{\onesVector}{\mathbf{1}}
-\newcommand{\zerosVector}{\mathbf{0}}
-\]
   <div class="reveal">
     <div class="slides">
 
@@ -366,16 +135,13 @@
 <section id="generalized-linear-models" class="slide level2">
 <h2>Generalized Linear Models</h2>
 <p>Logistic regression is part of a wider class of models known as <em>generalized linear models</em>. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that <span class="math display">\[
-\log \frac{p(\inputVector)}{1-p(\inputVector)} = \mappingFunction(\inputVector; \mappingVector)
-\]</span> where <span class="math inline">\(\mappingFunction(\inputVector; \mappingVector)\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mappingVector\)</span>, which is generally non-linear in the inputs. So far we have considered basis function models of the form <span class="math display">\[
-\mappingFunction(\inputVector) =
-\mappingVector^\top \basisVector(\inputVector).
+\log \frac{p(\mathbf{ x})}{1-p(\mathbf{ x})} = f(\mathbf{ x}; \mathbf{ w})
+\]</span> where <span class="math inline">\(f(\mathbf{ x}; \mathbf{ w})\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mathbf{ w}\)</span>, which is generally non-linear in the inputs. So far we have considered basis function models of the form <span class="math display">\[
+f(\mathbf{ x}) =
+\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 \]</span></p>
 </section>
 <section id="gaussian-processes" class="slide level2">
-<h2>Gaussian Processes</h2>
-</section>
-<section id="gaussian-processes-1" class="slide level2">
 <h2>Gaussian Processes</h2>
 <ul>
 <li>Basis function models give non-linear predictions.</li>
@@ -383,104 +149,84 @@
 <li>Gaussian processes is a general framework (basis functions special case)</li>
 <li>Within the framework you can consider models with infinite basis functions.</li>
 </ul>
+<p><span class="math display">\[
+p(\mathbf{ y}|\mathbf{X}, \mathbf{ w}) =
+\prod_{i=1}^{n} p(y_i | \mathbf{ x}_i, \mathbf{ w})
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{ y}|\mathbf{X}\sim \mathcal{N}\left(\mathbf{m}(\mathbf{X}),\mathbf{K}(\mathbf{X})\right),
+\]</span></p>
 </section>
-<section id="prediction-of-mappingfunction_2-from-mappingfunction_1" class="slide level2">
-<h2>Prediction of <span class="math inline">\(\mappingFunction_{2}\)</span> from <span class="math inline">\(\mappingFunction_{1}\)</span></h2>
+<section id="prediction-of-f_2-from-f_1" class="slide level2">
+<h2>Prediction of <span class="math inline">\(f_{2}\)</span> from <span class="math inline">\(f_{1}\)</span></h2>
 <script>
 showDivs(9, 'two_point_sample2');
 </script>
 <p><small></small> <input id="range-two_point_sample2" type="range" min="9" max="12" value="9" onchange="setDivs('two_point_sample2')" oninput="setDivs('two_point_sample2')"> <button onclick="plusDivs(-1, 'two_point_sample2')">❮</button> <button onclick="plusDivs(1, 'two_point_sample2')">❯</button></p>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
 <div class="two_point_sample2" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample009.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
 <div class="two_point_sample2" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample010.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
 <div class="two_point_sample2" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample011.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-3" class="slide level2">
-<h2></h2>
 <div class="two_point_sample2" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample012.svg" width style=" ">
 </object>
 </div>
 </section>
-<section id="prediction-of-mappingfunction_2-from-mappingfunction_1-1" class="slide level2">
-<h2>Prediction of <span class="math inline">\(\mappingFunction_{2}\)</span> from <span class="math inline">\(\mappingFunction_{1}\)</span></h2>
-<p><small> * The single contour of the Gaussian density represents the <font color="cyan">joint distribution, <span class="math inline">\(p(\mappingFunction_1, \mappingFunction_2)\)</span></font></p>
+<section id="prediction-of-f_2-from-f_1-1" class="slide level2">
+<h2>Prediction of <span class="math inline">\(f_{2}\)</span> from <span class="math inline">\(f_{1}\)</span></h2>
+<p><small> * The single contour of the Gaussian density represents the <font color="cyan">joint distribution, <span class="math inline">\(p(f_1, f_2)\)</span></font></p>
 <div class="fragment">
 <ul>
-<li>We observe that <font color="magenta"><span class="math inline">\(\mappingFunction_1=?\)</span></font></li>
+<li>We observe that <font color="magenta"><span class="math inline">\(f_1=?\)</span></font></li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>Conditional density: <font color="cyan"><span class="math inline">\(p(\mappingFunction_2|\mappingFunction_1=?)\)</span></font> </small></li>
+<li>Conditional density: <font color="cyan"><span class="math inline">\(p(f_2|f_1=?)\)</span></font> </small></li>
 </ul>
 </div>
 </section>
 <section id="prediction-with-correlated-gaussians" class="slide level2">
 <h2>Prediction with Correlated Gaussians</h2>
 <ul>
-<li><p>Prediction of <span class="math inline">\(\mappingFunction_2\)</span> from <span class="math inline">\(\mappingFunction_1\)</span> requires <em>conditional density</em>.</p></li>
+<li><p>Prediction of <span class="math inline">\(f_2\)</span> from <span class="math inline">\(f_1\)</span> requires <em>conditional density</em>.</p></li>
 <li><p>Conditional density is <em>also</em> Gaussian. <span class="math display">\[
-p(\mappingFunction_2|\mappingFunction_1) = {\mathcal{N}\left(\mappingFunction_2|\frac{\kernelScalar_{1, 2}}{\kernelScalar_{1, 1}}\mappingFunction_1,\kernelScalar_{2, 2} - \frac{\kernelScalar_{1,2}^2}{\kernelScalar_{1,1}}\right)}
+p(f_2|f_1) = {\mathcal{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1,k_{2, 2} - \frac{k_{1,2}^2}{k_{1,1}}\right)}
 \]</span> where covariance of joint density is given by <span class="math display">\[
-\kernelMatrix= \begin{bmatrix} \kernelScalar_{1, 1} &amp; \kernelScalar_{1, 2}\\ \kernelScalar_{2, 1} &amp; \kernelScalar_{2, 2}\end{bmatrix}
+\mathbf{K}= \begin{bmatrix} k_{1, 1} &amp; k_{1, 2}\\ k_{2, 1} &amp; k_{2, 2}\end{bmatrix}
 \]</span></p></li>
 </ul>
 </section>
-<section id="prediction-of-mappingfunction_8-from-mappingfunction_1" class="slide level2">
-<h2>Prediction of <span class="math inline">\(\mappingFunction_{8}\)</span> from <span class="math inline">\(\mappingFunction_{1}\)</span></h2>
+<section id="prediction-of-f_8-from-f_1" class="slide level2">
+<h2>Prediction of <span class="math inline">\(f_{8}\)</span> from <span class="math inline">\(f_{1}\)</span></h2>
 <script>
 showDivs(13, 'two_point_sample3');
 </script>
 <p><small></small> <input id="range-two_point_sample3" type="range" min="13" max="17" value="13" onchange="setDivs('two_point_sample3')" oninput="setDivs('two_point_sample3')"> <button onclick="plusDivs(-1, 'two_point_sample3')">❮</button> <button onclick="plusDivs(1, 'two_point_sample3')">❯</button></p>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
 <div class="two_point_sample3" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample013.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-5" class="slide level2">
-<h2></h2>
 <div class="two_point_sample3" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample014.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-6" class="slide level2">
-<h2></h2>
 <div class="two_point_sample3" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample015.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-7" class="slide level2">
-<h2></h2>
 <div class="two_point_sample3" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample016.svg" width style=" ">
 </object>
 </div>
-</section>
-<section id="section-8" class="slide level2">
-<h2></h2>
 <div class="two_point_sample3" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/gp/two_point_sample017.svg" width style=" ">
 </object>
@@ -489,43 +235,44 @@ showDivs(13, 'two_point_sample3');
 <section id="details" class="slide level2">
 <h2>Details</h2>
 <ul>
-<li>The single contour of the Gaussian density represents the <font color="yellow">joint distribution, <span class="math inline">\(p(\mappingFunction_1, \mappingFunction_8)\)</span></font></li>
+<li>The single contour of the Gaussian density represents the <font color="yellow">joint distribution, <span class="math inline">\(p(f_1, f_8)\)</span></font></li>
 </ul>
 <div class="fragment">
 <ul>
-<li>We observe a value for <font color="magenta"><span class="math inline">\(\mappingFunction_1=-?\)</span></font></li>
+<li>We observe a value for <font color="magenta"><span class="math inline">\(f_1=-?\)</span></font></li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>Conditional density: <font color="cyan"><span class="math inline">\(p(\mappingFunction_5|\mappingFunction_1=?)\)</span></font>.</li>
+<li>Conditional density: <font color="cyan"><span class="math inline">\(p(f_5|f_1=?)\)</span></font>.</li>
 </ul>
 </div>
 </section>
 <section id="prediction-with-correlated-gaussians-1" class="slide level2">
 <h2>Prediction with Correlated Gaussians</h2>
 <ul>
-<li><p>Prediction of <span class="math inline">\(\mappingFunctionVector_*\)</span> from <span class="math inline">\(\mappingFunctionVector\)</span> requires multivariate <em>conditional density</em>.</p></li>
+<li><p>Prediction of <span class="math inline">\(\mathbf{ f}_*\)</span> from <span class="math inline">\(\mathbf{ f}\)</span> requires multivariate <em>conditional density</em>.</p></li>
 <li><p>Multivariate conditional density is <em>also</em> Gaussian. <large> <span class="math display">\[
-p(\mappingFunctionVector_*|\mappingFunctionVector) = {\mathcal{N}\left(\mappingFunctionVector_*|\kernelMatrix_{*,\mappingFunctionVector}\kernelMatrix_{\mappingFunctionVector,\mappingFunctionVector}^{-1}\mappingFunctionVector,\kernelMatrix_{*,*}-\kernelMatrix_{*,\mappingFunctionVector} \kernelMatrix_{\mappingFunctionVector,\mappingFunctionVector}^{-1}\kernelMatrix_{\mappingFunctionVector,*}\right)}
+p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\mathbf{K}_{*,\mathbf{ f}}\mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{ f},\mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}\right)}
 \]</span> </large></p></li>
 <li><p>Here covariance of joint density is given by <span class="math display">\[
-\kernelMatrix= \begin{bmatrix} \kernelMatrix_{\mappingFunctionVector, \mappingFunctionVector} &amp; \kernelMatrix_{*, \mappingFunctionVector}\\ \kernelMatrix_{\mappingFunctionVector, *} &amp; \kernelMatrix_{*, *}\end{bmatrix}
+\mathbf{K}= \begin{bmatrix} \mathbf{K}_{\mathbf{ f}, \mathbf{ f}} &amp; \mathbf{K}_{*, \mathbf{ f}}\\ \mathbf{K}_{\mathbf{ f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
 \]</span></p></li>
 </ul>
 </section>
 <section id="prediction-with-correlated-gaussians-2" class="slide level2">
 <h2>Prediction with Correlated Gaussians</h2>
 <ul>
-<li><p>Prediction of <span class="math inline">\(\mappingFunctionVector_*\)</span> from <span class="math inline">\(\mappingFunctionVector\)</span> requires multivariate <em>conditional density</em>.</p></li>
+<li><p>Prediction of <span class="math inline">\(\mathbf{ f}_*\)</span> from <span class="math inline">\(\mathbf{ f}\)</span> requires multivariate <em>conditional density</em>.</p></li>
 <li><p>Multivariate conditional density is <em>also</em> Gaussian. <large> <span class="math display">\[
-p(\mappingFunctionVector_*|\mappingFunctionVector) = {\mathcal{N}\left(\mappingFunctionVector_*|{\boldsymbol{{\mu}}},\boldsymbol{\Sigma}\right)}
+p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\boldsymbol{ \mu},\boldsymbol{ \Sigma}\right)}
 \]</span> <span class="math display">\[
-{\boldsymbol{{\mu}}}= \kernelMatrix_{*,\mappingFunctionVector}\kernelMatrix_{\mappingFunctionVector,\mappingFunctionVector}^{-1}\mappingFunctionVector
-\]</span> <span class="math display">\[\boldsymbol{\Sigma} = \kernelMatrix_{*,*}-\kernelMatrix_{*,\mappingFunctionVector} \kernelMatrix_{\mappingFunctionVector,\mappingFunctionVector}^{-1}\kernelMatrix_{\mappingFunctionVector,*}
+\boldsymbol{ \mu}= \mathbf{K}_{*,\mathbf{ f}}\mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{ f}
+\]</span> <span class="math display">\[
+\boldsymbol{ \Sigma}= \mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}
 \]</span> </large></p></li>
 <li><p>Here covariance of joint density is given by <span class="math display">\[
-\kernelMatrix= \begin{bmatrix} \kernelMatrix_{\mappingFunctionVector, \mappingFunctionVector} &amp; \kernelMatrix_{*, \mappingFunctionVector}\\ \kernelMatrix_{\mappingFunctionVector, *} &amp; \kernelMatrix_{*, *}\end{bmatrix}
+\mathbf{K}= \begin{bmatrix} \mathbf{K}_{\mathbf{ f}, \mathbf{ f}} &amp; \mathbf{K}_{*, \mathbf{ f}}\\ \mathbf{K}_{\mathbf{ f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
 \]</span></p></li>
 </ul>
 </section>
@@ -538,63 +285,134 @@ p(\mappingFunctionVector_*|\mappingFunctionVector) = {\mathcal{N}\left(\mappingF
 <section id="weight-space-view" class="slide level2">
 <h2>Weight Space View</h2>
 <p><span class="math display">\[
-\weightVector \sim \gaussianSamp{\zerosVector}{\alpha\eye},
+\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha\mathbf{I}\right),
 \]</span></p>
 <p><span class="math display">\[
-\mappingFunction(\inputVector) =
-\weightVector^\top \basisVector(\inputVector).
+f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 \]</span></p>
 </section>
 <section id="function-space-view" class="slide level2">
 <h2>Function Space View</h2>
 <p><span class="math display">\[
-\weightVector \sim \gaussianSamp{\zerosVector}{\alpha \eye}
+\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
 \]</span></p>
 <p><span class="math display">\[
-\basisMatrix = \begin{bmatrix}\basisVector(\inputVector_1) \\ \vdots \\
-\basisVector(\inputVector_n)\end{bmatrix}
+\boldsymbol{ \Phi}= \begin{bmatrix}\boldsymbol{ \phi}(\mathbf{ x}_1) \\ \vdots \\
+\boldsymbol{ \phi}(\mathbf{ x}_n)\end{bmatrix}
 \]</span></p>
 <p><span class="math display">\[
-\mappingFunctionVector = \begin{bmatrix} \mappingFunction_1
-\\ \vdots \mappingFunction_n\end{bmatrix}
-\]</span> in the form <span class="math display">\[
-\mappingFunctionVector = \basisMatrix
-\weightVector.
-\]</span>}</p>
-<p><span class="math display">\[
-\mappingFunctionVector \sim \gaussianSamp{\zerosVector}{\alpha \basisMatrix\basisMatrix^\top}.
+\mathbf{ f}= \begin{bmatrix} f_1
+\\ \vdots f_n\end{bmatrix}
 \]</span></p>
 <p><span class="math display">\[
-\kernelMatrix = \alpha
-\basisMatrix\basisMatrix^\top.
-\]</span></p>
-<p>{This image is the covariance expressed between different points on the function. In regression we normally also add independent Gaussian noise to obtain our observations <span class="math inline">\(\dataVector\)</span>, <span class="math display">\[
-\dataVector = \mappingFunctionVector + \boldsymbol{\epsilon}
-\]</span></p>
-<p><span class="math display">\[
-\epsilon \sim \gaussianSamp{\zerosVector}{\dataStd^2\eye}.
-\]</span></p>
-<p><span class="math display">\[
-\dataVector \sim \gaussianSamp{\zerosVector}{\basisMatrix\basisMatrix^\top +\dataStd^2\eye}.
+\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
 \]</span></p>
 </section>
-<section id="exercise-2" class="slide level2">
-<h2>Exercise 2</h2>
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[
+\mathbf{ f}\sim \mathcal{N}\left(\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right).
+\]</span></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[
+\mathbf{K}= \alpha
+\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top.
+\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>K <span class="op">=</span> alpha<span class="op">*</span>Phi_pred<span class="op">@</span>Phi_pred.T</span></code></pre></div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>K <span class="op">=</span> alpha<span class="op">*</span>Phi_pred<span class="op">@</span>Phi_pred.T</span>
+<span id="cb2-2"><a href="#cb2-2"></a>f_sample <span class="op">=</span> np.random.multivariate_normal(mean<span class="op">=</span>np.zeros(x_pred.size), cov<span class="op">=</span>K)</span></code></pre></div>
+<div class="figure">
+<div id="gp-sample-basis-function-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/kern/gp-sample-basis-function.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Samples directly from the covariance function implied by the basis function based covariance, <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>.
+</aside>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="basis-covariance-function-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/kern/basis-covariance-function.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Covariance of the function implied by the basis set <span class="math inline">\(\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>.
+</aside>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[
+\mathbf{ y}= \mathbf{ f}+ \boldsymbol{\epsilon}
+\]</span></p>
+<p><span class="math display">\[
+\epsilon \sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right).
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{ y}\sim \mathcal{N}\left(\mathbf{0},\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top +\sigma^2\mathbf{I}\right).
+\]</span></p>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="gp-sample-basis-functions-plus-noise-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/kern/gp-sample-basis-function-plus-noise.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Samples directly from the covariance function implied by the noise corrupted basis function based covariance, <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.
+</aside>
+<div class="figure">
+<div id="gp-sample-basis-functions-plus-large-noise-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/kern/gp-sample-basis-function-plus-large-noise.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Samples directly from the covariance function implied by the noise corrupted basis function based covariance, <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \mathbf{I}\)</span>.
+</aside>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p><strong>Function Space Reflection</strong> How do you include the noise term when sampling in the weight space point of view?</p>
 </section>
 <section id="non-degenerate-gaussian-processes" class="slide level2">
 <h2>Non-degenerate Gaussian Processes</h2>
 <ul>
 <li>This process is <em>degenerate</em>.</li>
-<li>Covariance function is of rank at most <span class="math inline">\(\numHidden\)</span>.</li>
-<li>As <span class="math inline">\(\numData \rightarrow \infty\)</span>, covariance matrix is not full rank.</li>
-<li>Leading to <span class="math inline">\(\det{\kernelMatrix} = 0\)</span></li>
+<li>Covariance function is of rank at most <span class="math inline">\(h\)</span>.</li>
+<li>As <span class="math inline">\(n\rightarrow \infty\)</span>, covariance matrix is not full rank.</li>
+<li>Leading to <span class="math inline">\(\det{\mathbf{K}} = 0\)</span></li>
 </ul>
 </section>
 <section id="infinite-networks" class="slide level2">
 <h2>Infinite Networks</h2>
+<div class="centered" style="">
+<svg viewBox="0 0 200 200" style="width:15%">
+<defs> <clipPath id="clip0">
+<style>
+circle {
+  fill: black;
+}
+</style>
+<circle cx="100" cy="100" r="100"/> </clipPath> </defs>
+<title>
+Radford Neal
+</title>
+<image preserveAspectRatio="xMinYMin slice" width="100%" xlink:href="../slides/diagrams/people/radford-neal.jpg" clip-path="url(#clip0)"/>
+</svg>
+</div>
 <ul>
-<li>In ML Radford Neal <span class="citation" data-cites="Neal:bayesian94">(Neal, 1994)</span> asked “what would happen if you took <span class="math inline">\(\numHidden \rightarrow \infty\)</span>?”</li>
+<li>In ML Radford Neal <span class="citation" data-cites="Neal:bayesian94">(Neal, 1994)</span> asked “what would happen if you took <span class="math inline">\(h\rightarrow \infty\)</span>?”</li>
 </ul>
 <div class="figure">
 <div id="neal-infinite-priors-figure" class="figure-frame">
@@ -610,20 +428,16 @@ Page 37 of <a href="http://www.cs.toronto.edu/~radford/ftp/thesis.pdf">Radford N
 <section id="roughly-speaking" class="slide level2">
 <h2>Roughly Speaking</h2>
 <ul>
-<li><p>Instead of</p>
-<p><span class="math display">\[
+<li>Instead of <span class="math display">\[
 \begin{align*}
-\kernel_\mappingFunction\left(\inputVector_i, \inputVector_j\right) &amp; = \alpha \activationVector\left(\mappingMatrix_1, \inputVector_i\right)^\top \activationVector\left(\mappingMatrix_1, \inputVector_j\right)\\
-&amp; = \alpha \sum_k \activationScalar\left(\mappingVector^{(1)}_k, \inputVector_i\right) \activationScalar\left(\mappingVector^{(1)}_k, \inputVector_j\right)
+k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) &amp; = \alpha \boldsymbol{ \phi}\left(\mathbf{W}_1, \mathbf{ x}_i\right)^\top \boldsymbol{ \phi}\left(\mathbf{W}_1, \mathbf{ x}_j\right)\\
+&amp; = \alpha \sum_k \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_j\right)
 \end{align*}
-\]</span></p></li>
-<li><p>Sample infinitely many from a prior density, <span class="math inline">\(p(\mappingVector^{(1)})\)</span>,</p></li>
-</ul>
-<p><span class="math display">\[
-\kernel_\mappingFunction\left(\inputVector_i, \inputVector_j\right) = \alpha \int \activationScalar\left(\mappingVector^{(1)}, \inputVector_i\right) \activationScalar\left(\mappingVector^{(1)}, \inputVector_j\right) p(\mappingVector^{(1)}) \text{d}\mappingVector^{(1)}
-\]</span></p>
-<ul>
-<li>Also applies for non-Gaussian <span class="math inline">\(p(\mappingVector^{(1)})\)</span> because of the <em>central limit theorem</em>.</li>
+\]</span></li>
+<li>Sample infinitely many from a prior density, <span class="math inline">\(p(\mathbf{ w}^{(1)})\)</span>, <span class="math display">\[
+k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) = \alpha \int \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_j\right) p(\mathbf{ w}^{(1)}) \text{d}\mathbf{ w}^{(1)}
+\]</span></li>
+<li>Also applies for non-Gaussian <span class="math inline">\(p(\mathbf{ w}^{(1)})\)</span> because of the <em>central limit theorem</em>.</li>
 </ul>
 </section>
 <section id="simple-probabilistic-program" class="slide level2">
@@ -631,7 +445,7 @@ Page 37 of <a href="http://www.cs.toronto.edu/~radford/ftp/thesis.pdf">Radford N
 <ul>
 <li><p>If <span class="math display">\[
 \begin{align*} 
-\mappingVector^{(1)} &amp; \sim p(\cdot)\\ \phi_i &amp; = \activationScalar\left(\mappingVector^{(1)}, \inputVector_i\right), 
+\mathbf{ w}^{(1)} &amp; \sim p(\cdot)\\ \phi_i &amp; = \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_i\right), 
 \end{align*}
 \]</span> has finite variance.</p></li>
 <li><p>Then taking number of hidden units to infinity, is also a Gaussian process.</p></li>
@@ -648,17 +462,17 @@ Page 37 of <a href="http://www.cs.toronto.edu/~radford/ftp/thesis.pdf">Radford N
 <section id="gaussian-process" class="slide level2">
 <h2>Gaussian Process</h2>
 <p><span class="math display">\[
-\kernelScalar(\inputVector, \inputVector^\prime) = \alpha \exp\left( -\frac{\left\Vert \inputVector-\inputVector^\prime\right\Vert^2}{2\ell^2}\right),
+k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf{ x}-\mathbf{ x}^\prime\right\Vert^2}{2\ell^2}\right),
 \]</span></p>
 <p><span class="math display">\[
-\left\Vert\inputVector - \inputVector^\prime\right\Vert^2 = (\inputVector - \inputVector^\prime)^\top (\inputVector - \inputVector^\prime) 
+\left\Vert\mathbf{ x}- \mathbf{ x}^\prime\right\Vert^2 = (\mathbf{ x}- \mathbf{ x}^\prime)^\top (\mathbf{ x}- \mathbf{ x}^\prime) 
 \]</span></p>
 </section>
-<section id="exercise-3" class="slide level2">
-<h2>Exercise 3</h2>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p><strong>Moving Parameters</strong> Have a play with the parameters for this covariance function (the lengthscale and the variance) and see what effects the parameters have on the types of functions you observe.</p>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="../slides/diagrams/gp/gp_rejection_sample001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -667,7 +481,7 @@ Page 37 of <a href="http://www.cs.toronto.edu/~radford/ftp/thesis.pdf">Radford N
 Here we’re showing 20 samples taken from the prior over functions defined by our covarariance
 </aside>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="../slides/diagrams/gp/gp_rejection_sample002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -676,7 +490,7 @@ Here we’re showing 20 samples taken from the prior over functions defined by o
 We can sample many such functions, in this slide there are now 1000 in total. This is a sample from our prior over functions.
 </aside>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="../slides/diagrams/gp/gp_rejection_sample003.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -685,7 +499,7 @@ We can sample many such functions, in this slide there are now 1000 in total. Th
 Now we observe data. Here there are three data points. Conceptually in Bayesian inference we discard all samples that are distant from the data.
 </aside>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="../slides/diagrams/gp/gp_rejection_sample004.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -694,7 +508,7 @@ Now we observe data. Here there are three data points. Conceptually in Bayesian 
 Throwing away such samples we are left with our posterior. This is the collection of samples from the prior that are consistent with the data.
 </aside>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="../slides/diagrams/gp/gp_rejection_sample005.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -706,59 +520,42 @@ The elegance of the Gaussian process is that this result can be computed analyti
 <section id="gaussian-process-1" class="slide level2">
 <h2>Gaussian Process</h2>
 <p><span class="math display">\[
-p(\dataVector|\inputMatrix) =
-\frac{1}{(2\pi)^{\frac{\numData}{2}}|\kernelMatrix|^{\frac{1}{2}}}
-\exp\left(-\frac{1}{2}\dataVector^\top \left(\kernelMatrix+\dataStd^2
-\eye\right)^{-1}\dataVector\right)
+p(\mathbf{ y}|\mathbf{X}) =
+\frac{1}{(2\pi)^{\frac{n}{2}}|\mathbf{K}|^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}\mathbf{ y}^\top \left(\mathbf{K}+\sigma^2
+\mathbf{I}\right)^{-1}\mathbf{ y}\right)
 \]</span></p>
 <p><span class="math display">\[
-\errorFunction(\boldsymbol{\theta}) = \frac{1}{2} \log |\kernelMatrix|
-+ \frac{1}{2} \dataVector^\top \left(\kernelMatrix +
-\dataStd^2\eye\right)^{-1}\dataVector
+E(\boldsymbol{\theta}) = \frac{1}{2} \log |\mathbf{K}|
++ \frac{1}{2} \mathbf{ y}^\top \left(\mathbf{K}+
+\sigma^2\mathbf{I}\right)^{-1}\mathbf{ y}
 \]</span></p>
 </section>
 <section id="making-predictions" class="slide level2">
 <h2>Making Predictions</h2>
 <p><span class="math display">\[
-\begin{bmatrix}\mappingFunctionVector \\ \mappingFunctionVector^*\end{bmatrix} \sim \gaussianSamp{\zerosVector}{\begin{bmatrix} \kernelMatrix &amp; \kernelMatrix_\ast \\
-\kernelMatrix_\ast^\top &amp; \kernelMatrix_{\ast,\ast}\end{bmatrix}}
+\begin{bmatrix}\mathbf{ f}\\ \mathbf{ f}^*\end{bmatrix} \sim \mathcal{N}\left(\mathbf{0},\begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\
+\mathbf{K}_\ast^\top &amp; \mathbf{K}_{\ast,\ast}\end{bmatrix}\right)
 \]</span></p>
 <p><span class="math display">\[
-\begin{bmatrix} \kernelMatrix &amp; \kernelMatrix_\ast \\ \kernelMatrix_\ast^\top
-&amp; \kernelMatrix_{\ast,\ast}\end{bmatrix}
+\begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\ \mathbf{K}_\ast^\top
+&amp; \mathbf{K}_{\ast,\ast}\end{bmatrix}
 \]</span></p>
-</section>
-<section id="conditional-density" class="slide level2">
-<h2>Conditional Density</h2>
-<p><span class="math display">\[
-\mappingFunctionVector^* | \mappingFunctionVector \sim \gaussianSamp{\meanVector_\mappingFunction}{\mathbf{C}_\mappingFunction}
-\]</span> with a mean given by <span class="math display">\[
-\meanVector_\mappingFunction = \kernelMatrix_*^\top \left[\kernelMatrix + \dataStd^2
-\eye\right]^{-1} \dataVector
-\]</span> and a covariance given by <span class="math display">\[
-\mathbf{C}_\mappingFunction
-= \kernelMatrix_{*,*} - \kernelMatrix_*^\top \left[\kernelMatrix + \dataStd^2
-\eye\right]^{-1} \kernelMatrix_\ast.
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{A} = \left[\kernelMatrix + \dataStd^2\eye\right]^{-1}\kernelMatrix_*.
-\]</span></p>
-<p><span class="math display">\[
-\text{data} + \text{model} \rightarrow \text{prediction}.
-\]</span></p>
-</section>
-<section id="exercise-4" class="slide level2">
-<h2>Exercise 4</h2>
-<p>Now try changing the parameters of the covariance function (and the noise) to see how the predictions change.</p>
-<p>Then try sampling from this conditional density to see what your predictions look like. What happens if you sample from the conditional density in regions a long way into the future or the past? How does this compare with the results from the polynomial model?</p>
 </section>
 <section id="the-importance-of-the-covariance-function" class="slide level2">
 <h2>The Importance of the Covariance Function</h2>
 <p><span class="math display">\[
-\meanVector_\mappingFunction = \mathbf{A}^\top \dataVector,
+\boldsymbol{ \mu}_f= \mathbf{A}^\top \mathbf{ y},
 \]</span></p>
-<iframe width height src="https://www.youtube.com/embed/ewJ3AxKclOg?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+<div class="figure">
+<div id="intro-to-gps-figure" class="figure-frame">
+<iframe width="600" height="450" src="https://www.youtube.com/embed/ewJ3AxKclOg?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
+</div>
+</div>
+<aside class="notes">
+Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian process Winter School at the University of Sheffield.
+</aside>
 </section>
 <section id="improving-the-numerics" class="slide level2">
 <h2>Improving the Numerics</h2>
@@ -780,38 +577,38 @@ p(\dataVector|\inputMatrix) =
 <h2>Learning Covariance Parameters</h2>
 <p>Can we determine covariance parameters from the data?</p>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
-\gaussianDist{\dataVector}{\mathbf{0}}{\kernelMatrix}=\frac{1}{(2\pi)^\frac{\numData}{2}{\det{\kernelMatrix}^{\frac{1}{2}}}}{\exp\left(-\frac{\dataVector^{\top}\kernelMatrix^{-1}\dataVector}{2}\right)}
+\mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \]</span></p>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
-    \gaussianDist{\dataVector}{\mathbf{0}}{\kernelMatrix}=\frac{1}{(2\pi)^\frac{\numData}{2}{\color{yellow} \det{\kernelMatrix}^{\frac{1}{2}}}}{\color{cyan}\exp\left(-\frac{\dataVector^{\top}\kernelMatrix^{-1}\dataVector}{2}\right)}
+    \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}\color{yellow}{\det{\mathbf{K}}^{\frac{1}{2}}}}\color{cyan}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
-    \log \gaussianDist{\dataVector}{\mathbf{0}}{\kernelMatrix}=&amp;{\color{yellow}-\frac{1}{2}\log\det{\kernelMatrix}}{\color{cyan}-\frac{\dataVector^{\top}\kernelMatrix^{-1}\dataVector}{2}} \\ &amp;-\frac{\numData}{2}\log2\pi
+    \log \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=&amp;\color{yellow}{-\frac{1}{2}\log\det{\mathbf{K}}}\color{cyan}{-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}} \\ &amp;-\frac{n}{2}\log2\pi
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
-\errorFunction(\parameterVector) = {\color{yellow} \frac{1}{2}\log\det{\kernelMatrix}} + {\color{cyan} \frac{\dataVector^{\top}\kernelMatrix^{-1}\dataVector}{2}}
+E(\boldsymbol{ \theta}) = \color{yellow}{\frac{1}{2}\log\det{\mathbf{K}}} + \color{cyan}{\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}}
 \]</span></p>
 </section>
-<section id="section-17" class="slide level2">
-<h2></h2>
-<p>The parameters are <em>inside</em> the covariance function (matrix).  <span class="math display">\[\kernelScalar_{i, j} = \kernelScalar(\inputVals_i, \inputVals_j; \parameterVector)\]</span></p>
+<section id="capacity-control-through-the-determinant" class="slide level2">
+<h2>Capacity Control through the Determinant</h2>
+<p>The parameters are <em>inside</em> the covariance function (matrix).  <span class="math display">\[k_{i, j} = k(\mathbf{ x}_i, \mathbf{ x}_j; \boldsymbol{ \theta})\]</span></p>
 </section>
 <section id="eigendecomposition-of-covariance" class="slide level2">
 <h2>Eigendecomposition of Covariance</h2>
-<p><span> <span class="math display">\[\kernelMatrix = \rotationMatrix \eigenvalueMatrix^2 \rotationMatrix^\top\]</span></span></p>
+<p><span> <span class="math display">\[\mathbf{K}= \mathbf{R}\boldsymbol{ \Lambda}^2 \mathbf{R}^\top\]</span></span></p>
 <table>
 <tr>
 <td width="50%">
@@ -820,7 +617,7 @@ p(\dataVector|\inputMatrix) =
 </div>
 </td>
 <td width="50%">
-<span class="math inline">\(\eigenvalueMatrix\)</span> represents distance on axes. <span class="math inline">\(\rotationMatrix\)</span> gives rotation.
+<span class="math inline">\(\boldsymbol{ \Lambda}\)</span> represents distance on axes. <span class="math inline">\(\mathbf{R}\)</span> gives rotation.
 </td>
 </tr>
 </table>
@@ -828,30 +625,97 @@ p(\dataVector|\inputMatrix) =
 <section id="eigendecomposition-of-covariance-1" class="slide level2">
 <h2>Eigendecomposition of Covariance</h2>
 <ul>
-<li><span class="math inline">\(\eigenvalueMatrix\)</span> is <em>diagonal</em>, <span class="math inline">\(\rotationMatrix^\top\rotationMatrix = \eye\)</span>.</li>
-<li>Useful representation since <span class="math inline">\(\det{\kernelMatrix} = \det{\eigenvalueMatrix^2} = \det{\eigenvalueMatrix}^2\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{ \Lambda}\)</span> is <em>diagonal</em>, <span class="math inline">\(\mathbf{R}^\top\mathbf{R}= \mathbf{I}\)</span>.</li>
+<li>Useful representation since <span class="math inline">\(\det{\mathbf{K}} = \det{\boldsymbol{ \Lambda}^2} = \det{\boldsymbol{ \Lambda}}^2\)</span>.</li>
 </ul>
 </section>
-<section id="capacity-control-coloryellow-log-detkernelmatrix" class="slide level2">
-<h2>Capacity control: <span class="math inline">\({\color{yellow} \log \det{\kernelMatrix}}\)</span></h2>
-<!--
-\only<1>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant1.svg}}\only<2>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant2.svg}}\only<3>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant3.svg}}\only<4>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant4.svg}}\only<5>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant5.svg}}\only<6>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant6.svg}}\only<7>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant7.svg}}\only<8>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant8.svg}}\only<9>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant9.svg}}\only<10>{\input{../../../gp/tex/diagrams/gpOptimiseDeterminant10.svg}}-->
+<section id="capacity-control-coloryellowlog-detmathbfk" class="slide level2">
+<h2>Capacity control: <span class="math inline">\(\color{yellow}{\log \det{\mathbf{K}}}\)</span></h2>
+<script>
+showDivs(0, 'gp-optimise-determinant');
+</script>
+<p><small></small> <input id="range-gp-optimise-determinant" type="range" min="0" max="10" value="0" onchange="setDivs('gp-optimise-determinant')" oninput="setDivs('gp-optimise-determinant')"> <button onclick="plusDivs(-1, 'gp-optimise-determinant')">❮</button> <button onclick="plusDivs(1, 'gp-optimise-determinant')">❯</button></p>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant004.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant005.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant006.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant007.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant008.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-determinant" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/gp-optimise-determinant009.svg" width="80%" style=" ">
+</object>
+</div>
 </section>
-<section id="data-fit-colorcyan-fracdatavectortopkernelmatrix-1datavector2" class="slide level2">
-<h2>Data Fit: <span class="math inline">\({\color{cyan} \frac{\dataVector^\top\kernelMatrix^{-1}\dataVector}{2}}\)</span></h2>
-<!--
-
-\only<1>{\input{../../../gp/tex/diagrams/gpOptimiseQuadratic1.svg}}\only<2>{\input{../../../gp/tex/diagrams/gpOptimiseQuadratic2.svg}}\only<3>{\input{../../../gp/tex/diagrams/gpOptimiseQuadratic3.svg}}-->
+<section id="data-fit-colorcyanfracmathbf-ytopmathbfk-1mathbf-y2" class="slide level2">
+<h2>Data Fit: <span class="math inline">\(\color{cyan}{\frac{\mathbf{ y}^\top\mathbf{K}^{-1}\mathbf{ y}}{2}}\)</span></h2>
+<script>
+showDivs(0, 'gp-optimise-quadratic');
+</script>
+<p><small></small> <input id="range-gp-optimise-quadratic" type="range" min="0" max="2" value="0" onchange="setDivs('gp-optimise-quadratic')" oninput="setDivs('gp-optimise-quadratic')"> <button onclick="plusDivs(-1, 'gp-optimise-quadratic')">❮</button> <button onclick="plusDivs(1, 'gp-optimise-quadratic')">❯</button></p>
+<div class="gp-optimise-quadratic" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/diagrams/gp-optimise-quadratic000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-quadratic" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/diagrams/gp-optimise-quadratic001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="gp-optimise-quadratic" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/gp/diagrams/gp-optimise-quadratic002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="figure">
+<div id="gp-optimise-quadratic-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/gp/diagrams/gp-optimise-quadratic002.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The data fit term of the Gaussian process is a quadratic loss centered around zero. This has eliptical contours, the principal axes of which are given by the covariance matrix.
+</aside>
 </section>
-<section id="errorfunctionparametervector-coloryellowfrac12logdetkernelmatrixcolorcyanfracdatavectortopkernelmatrix-1datavector2" class="slide level2">
-<h2><span class="math display">\[\errorFunction(\parameterVector) = {\color{yellow}\frac{1}{2}\log\det{\kernelMatrix}}+{\color{cyan}\frac{\dataVector^{\top}\kernelMatrix^{-1}\dataVector}{2}}\]</span></h2>
+<section id="eboldsymbol-theta-coloryellowfrac12logdetmathbfkcolorcyanfracmathbf-ytopmathbfk-1mathbf-y2" class="slide level2">
+<h2><span class="math display">\[E(\boldsymbol{ \theta}) = \color{yellow}{\frac{1}{2}\log\det{\mathbf{K}}}+\color{cyan}{\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}}\]</span></h2>
+</section>
+<section id="quadratic-data-fit" class="slide level2">
+<h2>Quadratic Data Fit</h2>
+</section>
+<section id="data-fit-term" class="slide level2">
+<h2>Data Fit Term</h2>
 <script>
 showDivs(0, 'gp-optimise');
 </script>
 <p><small></small> <input id="range-gp-optimise" type="range" min="0" max="10" value="0" onchange="setDivs('gp-optimise')" oninput="setDivs('gp-optimise')"> <button onclick="plusDivs(-1, 'gp-optimise')">❮</button> <button onclick="plusDivs(1, 'gp-optimise')">❯</button></p>
-</section>
-<section id="section-18" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -866,9 +730,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-19" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -883,9 +744,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-20" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -900,9 +758,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-21" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -917,9 +772,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-22" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -934,9 +786,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-23" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -951,9 +800,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-24" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -968,9 +814,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-25" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -985,9 +828,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-26" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -1002,9 +842,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-27" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -1019,9 +856,6 @@ showDivs(0, 'gp-optimise');
 </tr>
 </table>
 </div>
-</section>
-<section id="section-28" class="slide level2">
-<h2></h2>
 <div class="gp-optimise" style="text-align:center;">
 <table>
 <tr>
@@ -1040,7 +874,7 @@ showDivs(0, 'gp-optimise');
 <section id="exponentiated-quadratic-covariance" class="slide level2">
 <h2>Exponentiated Quadratic Covariance</h2>
 <center>
-<span class="math display">\[\kernelScalar(\inputVector, \inputVector^\prime) = \alpha \exp\left(-\frac{\ltwoNorm{\inputVector-\inputVector^\prime}^2}{2\lengthScale^2}\right)\]</span>
+<span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left(-\frac{\left\Vert \mathbf{ x}-\mathbf{ x}^\prime \right\Vert_2^2}{2\ell^2}\right)\]</span>
 </center>
 <div class="figure">
 <div id="eq-covariance-plot-figure" class="figure-frame">
@@ -1167,7 +1001,7 @@ Gene expression levels over time for a gene from data provided by <span class="c
 <li>Want to detect if a gene is expressed or not, fit a GP to each gene <span class="citation" data-cites="Kalaitzis:simple11">Kalaitzis and Lawrence (2011)</span>.</li>
 </ul>
 </section>
-<section id="section-29" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="a-simple-approach-to-ranking-figure" class="figure-frame">
@@ -1183,7 +1017,7 @@ The example is taken from the paper “A Simple Approach to Ranking Differential
 <a href="http://www.biomedcentral.com/1471-2105/12/180" class="uri">http://www.biomedcentral.com/1471-2105/12/180</a>
 </center>
 </section>
-<section id="section-30" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 </section>
 <section id="tp53-gene-data-gp" class="slide level2">
@@ -1241,13 +1075,47 @@ Result of the fit of the Gaussian process model with the noise initialized low (
 </section>
 <section id="example-prediction-of-malaria-incidence-in-uganda" class="slide level2">
 <h2>Example: Prediction of Malaria Incidence in Uganda</h2>
-<span style="text-align:right"><svg viewBox="2662 600 1110-2662 1780-600" style="width:1.5cm"> <defs> <clipPath id="clip">
+<div class="centered" style="">
+<svg viewBox="0 0 200 200" style="width:15%">
+<defs> <clipPath id="clip1">
 <style>
-  rect {
-      fill: black;
-         }
-  </style>
-<p><rect x="2662" y="600" width="1110-2662" height="1780-600"/> </clipPath> </defs> <image preserveAspectRatio="xMinYMin slice"  xlink:href="../slides/diagrams/people/2013_03_28_180606.JPG" clip-path="url(#clip)" /> </svg></span></p>
+circle {
+  fill: black;
+}
+</style>
+<circle cx="100" cy="100" r="100"/> </clipPath> </defs>
+<title>
+Martin Mubangizi
+</title>
+<image preserveAspectRatio="xMinYMin slice" width="100%" xlink:href="../slides/diagrams/people/martin-mubangizi.png" clip-path="url(#clip1)"/>
+</svg>
+<svg viewBox="0 0 200 200" style="width:15%">
+<defs> <clipPath id="clip2">
+<style>
+circle {
+  fill: black;
+}
+</style>
+<circle cx="100" cy="100" r="100"/> </clipPath> </defs>
+<title>
+Ricardo Andrade Pacheco
+</title>
+<image preserveAspectRatio="xMinYMin slice" width="100%" xlink:href="../slides/diagrams/people/ricardo-andrade-pacheco.png" clip-path="url(#clip2)"/>
+</svg>
+<svg viewBox="0 0 200 200" style="width:15%">
+<defs> <clipPath id="clip3">
+<style>
+circle {
+  fill: black;
+}
+</style>
+<circle cx="100" cy="100" r="100"/> </clipPath> </defs>
+<title>
+John Quinn
+</title>
+<image preserveAspectRatio="xMinYMin slice" width="100%" xlink:href="../slides/diagrams/people/john-quinn.jpg" clip-path="url(#clip3)"/>
+</svg>
+</div>
 <ul>
 <li>Work with Ricardo Andrade Pacheco, John Quinn and Martin Mubaganzi (Makerere University, Uganda)</li>
 <li>See <a href="http://air.ug/research.html">AI-DEV Group</a>.</li>
@@ -1383,7 +1251,7 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 <section id="additive-covariance" class="slide level2">
 <h2>Additive Covariance</h2>
 <center>
-<span class="math display">\[\kernelScalar_f(\inputVector, \inputVector^\prime) = \kernelScalar_g(\inputVector, \inputVector^\prime) + \kernelScalar_h(\inputVector, \inputVector^\prime)\]</span>
+<span class="math display">\[k_f(\mathbf{ x}, \mathbf{ x}^\prime) = k_g(\mathbf{ x}, \mathbf{ x}^\prime) + k_h(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
 </center>
 <div class="figure">
 <div id="add-covariance-plot-figure" class="figure-frame">
@@ -1406,8 +1274,23 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 An additive covariance function formed by combining two exponentiated quadratic covariance functions.
 </aside>
 </section>
-<section id="section-31" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
+<div class="centered" style="">
+<svg viewBox="0 0 200 200" style="width:15%">
+<defs> <clipPath id="clip4">
+<style>
+circle {
+  fill: black;
+}
+</style>
+<circle cx="100" cy="100" r="100"/> </clipPath> </defs>
+<title>
+Aki Vehtari
+</title>
+<image preserveAspectRatio="xMinYMin slice" width="100%" xlink:href="../slides/diagrams/people/aki-vehtari.jpg" clip-path="url(#clip4)"/>
+</svg>
+</div>
 <div class="figure">
 <div id="bialik-friday-the-13th-figure" class="figure-frame">
 <div class="centered" style="">
@@ -1447,7 +1330,7 @@ Two different editions of Bayesian Data Analysis <span class="citation" data-cit
 <section id="basis-function-covariance" class="slide level2">
 <h2>Basis Function Covariance</h2>
 <center>
-<span class="math display">\[\kernel(\inputVector, \inputVector^\prime) = \basisVector(\inputVector)^\top \basisVector(\inputVector^\prime)\]</span>
+<span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \boldsymbol{ \phi}(\mathbf{ x})^\top \boldsymbol{ \phi}(\mathbf{ x}^\prime)\]</span>
 </center>
 <div class="figure">
 <div id="basis-covariance-plot-figure" class="figure-frame">
@@ -1467,13 +1350,13 @@ Two different editions of Bayesian Data Analysis <span class="citation" data-cit
 </div>
 </div>
 <aside class="notes">
-A covariance function based on a non-linear basis given by <span class="math inline">\(\basisVector(\inputVector)\)</span>.
+A covariance function based on a non-linear basis given by <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{ x})\)</span>.
 </aside>
 </section>
 <section id="brownian-covariance" class="slide level2">
 <h2>Brownian Covariance</h2>
 <center>
-<span class="math display">\[\kernelScalar(t, t^\prime)=\alpha \min(t, t^\prime)\]</span>
+<span class="math display">\[k(t, t^\prime)=\alpha \min(t, t^\prime)\]</span>
 </center>
 <div class="figure">
 <div id="brownian-covariance-plot-figure" class="figure-frame">
@@ -1499,7 +1382,7 @@ Brownian motion covariance function.
 <section id="mlp-covariance" class="slide level2">
 <h2>MLP Covariance</h2>
 <center>
-<span class="math display">\[\kernelScalar(\inputVector, \inputVector^\prime) = \alpha \arcsin\left(\frac{w \inputVector^\top \inputVector^\prime + b}{\sqrt{\left(w \inputVector^\top \inputVector + b + 1\right)\left(w \left.\inputVector^\prime\right.^\top \inputVector^\prime + b + 1\right)}}\right)\]</span>
+<span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \arcsin\left(\frac{w \mathbf{ x}^\top \mathbf{ x}^\prime + b}{\sqrt{\left(w \mathbf{ x}^\top \mathbf{ x}+ b + 1\right)\left(w \left.\mathbf{ x}^\prime\right.^\top \mathbf{ x}^\prime + b + 1\right)}}\right)\]</span>
 </center>
 <div class="figure">
 <div id="mlp-covariance-plot-figure" class="figure-frame">

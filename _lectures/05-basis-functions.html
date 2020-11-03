@@ -10,6 +10,7 @@ author:
   twitter: lawrennd
   gscholar: r3SJcvoAAAAJ
   orchid: 
+time: "null"
 week: 5
 reveal: 05-basis-functions.slides.html
 ipynb: 05-basis-functions.ipynb
@@ -58,9 +59,9 @@ $$</span><br /> where <span class="math inline">$\mappingVector$</span> are our 
 <h2 id="quadratic-basis">Quadratic Basis</h2>
 <p>Remember, that a <em>vector-valued function</em> is just a vector that contains functions instead of values. Here’s an example for a one dimensional input space, <span class="math inline"><em>x</em></span>, being projected to a <em>quadratic</em> basis. First we consider each basis function in turn, we can think of the elements of our vector as being indexed so that we have <br /><span class="math display">$$
 \begin{align*}
-\basisFunc_1(\inputScalar) = 1, \\
-\basisFunc_2(\inputScalar) = x, \\
-\basisFunc_3(\inputScalar) = \inputScalar^2.
+\basisFunc_1(\inputScalar) &amp; = 1, \\
+\basisFunc_2(\inputScalar) &amp; = x, \\
+\basisFunc_3(\inputScalar) &amp; = \inputScalar^2.
 \end{align*}
 $$</span><br /> Now we can consider them together by placing them in a vector, <br /><span class="math display">$$
 \basisVector(\inputScalar) = \begin{bmatrix} 1\\ x \\ \inputScalar^2\end{bmatrix}.
@@ -82,18 +83,18 @@ $$</span><br /> where we are still in the one dimensional input setting so <span
 <span id="cb8-4"><a href="#cb8-4"></a>    <span class="cf">return</span> np.hstack([np.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
 <h2 id="functions-derived-from-quadratic-basis">Functions Derived from Quadratic Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_0}   + {\color{magenta}\mappingScalar_1 \inputScalar} + {\color{blue}\mappingScalar_2 \inputScalar^2}
+\mappingFunction(\inputScalar) = {\color{red}{\mappingScalar_0}}   + {\color{magenta}{\mappingScalar_1 \inputScalar}} + {\color{blue}{\mappingScalar_2 \inputScalar^2}}
 $$</span><br /></p>
 <div class="figure">
-<div id="-figure" class="figure-frame">
-<object class="svgplot quadratic-basis-2" data="../slides/diagrams/ml/quadratic_basis002.svg" width="The set of functions which are combined to form a *quadratic* basis." style=" ">
+<div id="quadratic-basis-2-figure" class="figure-frame">
+<object class="svgplot " data="../slides/diagrams/ml/quadratic_basis002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="quadratic-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;quadratic-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
-<p>Figure:</p>
+<div id="quadratic-basis-2-caption" class="caption-frame">
+<p>Figure: The set of functions which are combined to form a <em>quadratic</em> basis.</p>
 </div>
 </div>
 <p>This function takes in an <span class="math inline">$\numData \times 1$</span> dimensional vector and returns an <span class="math inline">$\numData \times 3$</span> dimensional <em>design matrix</em> containing the basis functions. We can plot those basis functions against there input as follows.</p>
@@ -157,7 +158,7 @@ $$</span><br /></p>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="functions-derived-from-radial-basis">Functions Derived from Radial Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_1 e^{-2(\inputScalar+1)^2}}  + {\color{magenta}\mappingScalar_2e^{-2\inputScalar^2}} + {\color{blue}\mappingScalar_3 e^{-2(\inputScalar-1)^2}}
+\mappingFunction(\inputScalar) = \color{red}{\mappingScalar_1 e^{-2(\inputScalar+1)^2}}  + \color{magenta}{\mappingScalar_2e^{-2\inputScalar^2}} + \color{blue}{\mappingScalar_3 e^{-2(\inputScalar-1)^2}}
 $$</span><br /></p>
 <div class="figure">
 <div id="radial-basis-2-figure" class="figure-frame">
@@ -182,7 +183,7 @@ $$</span><br /></p>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="im">import</span> mlai</span></code></pre></div>
 <h2 id="functions-derived-from-relu-basis">Functions Derived from Relu Basis</h2>
 <p><br /><span class="math display">$$
-\mappingFunction(\inputScalar) = {\color{red}\mappingScalar_0}   + {\color{magenta}\mappingScalar_1 xH(x+1.0) } + {\color{blue}\mappingScalar_2 xH(x+0.33) } + {\color{green}\mappingScalar_3 xH(x-0.33)} +  {\color{cyan}\mappingScalar_4 xH(x-1.0)}
+\mappingFunction(\inputScalar) = \color{red}{\mappingScalar_0}   + \color{magenta}{\mappingScalar_1 xH(x+1.0) } + \color{blue}{\mappingScalar_2 xH(x+0.33) } + \color{green}{\mappingScalar_3 xH(x-0.33)} +  \color{cyan}{\mappingScalar_4 xH(x-1.0)}
 $$</span><br /></p>
 <div class="figure">
 <div id="relu-basis-4-figure" class="figure-frame">
@@ -245,7 +246,7 @@ $$</span><br /></p>
 <p>Figure: A Fourier basis is made up of sine and cosine functions with different frequencies.</p>
 </div>
 </div>
-<h3 id="exercise-2">Exercise 2</h3>
+<h3 id="exercise-1">Exercise 1</h3>
 <p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 <h2 id="fitting-to-data">Fitting to Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
@@ -256,7 +257,7 @@ $$</span><br /></p>
 <span id="cb24-3"><a href="#cb24-3"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
 <span id="cb24-4"><a href="#cb24-4"></a>y <span class="op">-=</span> y.mean()</span>
 <span id="cb24-5"><a href="#cb24-5"></a>y <span class="op">/=</span> y.std()</span></code></pre></div>
-<h3 id="exercise-1">Exercise 1</h3>
+<h3 id="exercise-0">Exercise 0</h3>
 <p>Now we are going to redefine our polynomial basis. Have a careful look at the operations we perform on <code>x</code> to create <code>z</code>. We use <code>z</code> in the polynomial computation. What are we doing to the inputs? Why do you think we are changing <code>x</code> in this manner?</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a></span>
@@ -266,7 +267,7 @@ $$</span><br /></p>
 <span id="cb28-2"><a href="#cb28-2"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
 <span id="cb28-3"><a href="#cb28-3"></a></span>
 <span id="cb28-4"><a href="#cb28-4"></a>ax.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
-<h3 id="exercise-3">Exercise 3</h3>
+<h3 id="exercise-2">Exercise 2</h3>
 <p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
 <ol type="a">
 <li>polynomial basis</li>
@@ -438,7 +439,7 @@ $$</span><br /> where the vector <span class="math inline">$\inputVector$</span>
 \mappingFunction(\inputVector) = \mappingVector^\top \basisVector(\inputVector;
 \boldsymbol{\theta}),
 $$</span><br /> that we’ve denoted here as <span class="math inline"><strong>θ</strong></span>. If these parameters appear inside the basis function then our model is <em>non-linear</em> in these parameters.</p>
-<h3 id="exercise-1-1">Exercise 1</h3>
+<h3 id="exercise-0-1">Exercise 0</h3>
 <p>For the following prediction functions state whether the model is linear in the inputs, the parameters or both.</p>
 <ol type="a">
 <li><p><span class="math inline">$\mappingFunction(\inputScalar) = \mappingScalar_1\inputScalar_1 + \mappingScalar_2$</span></p></li>
@@ -449,7 +450,7 @@ $$</span><br /> that we’ve denoted here as <span class="math inline"><strong>�
 </ol>
 <h2 id="fitting-the-model-yourself">Fitting the Model Yourself</h2>
 <p>You now have everything you need to fit a non- linear (in the inputs) basis function model to the marathon data.</p>
-<h3 id="exercise-4">Exercise 4</h3>
+<h3 id="exercise-3">Exercise 3</h3>
 <p>Choose one of the basis functions you have explored above. Compute the design matrix on the covariates (or input data), <code>x</code>. Use the design matrix and the response variable <code>y</code> to solve the following linear system for the model parameters <code>w</code>. <br /><span class="math display">$$
 \basisVector^\top\basisVector\mappingVector = \basisVector^\top \dataVector
 $$</span><br /> Compute the corresponding error on the training data. How does it compare to the error you were able to achieve fitting the basis above? Plot the form of your prediction function from the least squares estimate alongside the form of you prediction function you fitted by hand.</p>
@@ -460,7 +461,7 @@ $$</span><br /> Compute the corresponding error on the training data. How does i
 <li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 <h2 id="lecture-on-basis-functions-from-gprs-uganda">Lecture on Basis Functions from GPRS Uganda</h2>
-<iframe width="800" height="600" src="https://www.youtube.com/embed/PoNbOnUnOao?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/PoNbOnUnOao?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
 <h2 id="use-of-qr-decomposition-for-numerical-stability">Use of QR Decomposition for Numerical Stability</h2>
 <p>In the last session we showed how rather than computing <span class="math inline">$\inputMatrix^\top\inputMatrix$</span> as an intermediate step to our solution, we could compute the solution to the regressiond directly through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>. Now we will consider an example with non linear basis functions where such computation is critical for forming the right answer.</p>
