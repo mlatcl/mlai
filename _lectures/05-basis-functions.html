@@ -120,7 +120,7 @@ $$</span><br /> which is known as the <em>polynomial basis</em>.</p>
 <h2 id="polynomial-basis">Polynomial Basis</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/polynomial-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/polynomial-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>The polynomial basis combines higher order polynomials together to create the function. For example the fourth order polynomial has five components to its basis function. <br /><span class="math display">$$
-\basisFunc_j(\inputScalar) = \mappingScalar_j \inputScalar^j
+\basisFunc_j(\inputScalar) = \inputScalar^j
 $$</span><br /></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a></span>
@@ -199,7 +199,7 @@ $$</span><br /></p>
 <h2 id="rectified-linear-units">Rectified Linear Units</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/relu-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/relu-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>The rectified linear unit is a basis function that emerged out of the deep learning community. Rectified linear units are popular in the current generation of multilayer perceptron models, or deep networks. These basis functions start flat, and then become linear functions at a certain threshold. <br /><span class="math display">$$
-\basisFunc_j(\inputScalar) = \heaviside(\mappingScalarTwo_j \inputScalar + \mappingScalarTwo_0)
+\basisFunc_j(\inputScalar) = \inputScalar\heaviside(\mappingScalarTwo_j \inputScalar + \mappingScalarTwo_0)
 $$</span><br /></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a></span>

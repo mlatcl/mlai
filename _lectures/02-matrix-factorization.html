@@ -9,6 +9,7 @@ author:
   twitter: lawrennd
   gscholar: r3SJcvoAAAAJ
   orchid: 
+time: "null"
 week: 2
 reveal: 02-matrix-factorization.slides.html
 ipynb: 02-matrix-factorization.ipynb
@@ -85,7 +86,7 @@ categories:
 <h2 id="plotting-the-data">Plotting the Data</h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>data[<span class="st">&#39;Body_Count&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>plt.title(<span class="st">&#39;Histogram of Film Kill Count&#39;</span>)</span></code></pre></div>
-<h3 id="exercise-1">Exercise 1</h3>
+<h3 id="exercise-0">Exercise 0</h3>
 <p>Read on the internet about the following python libraries: <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code> and <code>pandas</code>. What functionality does each provide python. What is the <code>pylab</code> library and how does it relate to the other libraries?</p>
 <p>We could try and remove these outliers, but another approach would be plot the logarithm of the counts against the year.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>plt.plot(data[<span class="st">&#39;Year&#39;</span>], data[<span class="st">&#39;Body_Count&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
@@ -96,7 +97,7 @@ categories:
 <span id="cb17-6"><a href="#cb17-6"></a>plt.ylabel(<span class="st">&#39;deaths&#39;</span>)</span>
 <span id="cb17-7"><a href="#cb17-7"></a>plt.xlabel(<span class="st">&#39;year&#39;</span>)</span></code></pre></div>
 <p>Note a few things. We are interacting with our data. In particular, we are replotting the data according to what we have learned so far. We are using the progamming language as a <em>scripting</em> language to give the computer one command or another, and then the next command we enter is dependent on the result of the previous. This is a very different paradigm to classical software engineering. In classical software engineering we normally write many lines of code (entire object classes or functions) before compiling the code and running it. Our approach is more similar to the approach we take whilst debugging. Historically, researchers interacted with data using a <em>console</em>. A command line window which allowed command entry. The notebook format we are using is slightly different. Each of the code entry boxes acts like a separate console window. We can move up and down the notebook and run each part in a different order. The <em>state</em> of the program is always as we left it after running the previous part.</p>
-<h3 id="exercise-1-1">Exercise 1</h3>
+<h3 id="exercise-0-1">Exercise 0</h3>
 <p>Data ethics. If you find data available on the internet, can you simply use it without consequence? If you are given data by a fellow researcher can you publish that data on line?</p>
 <h1 id="recommender-systems">Recommender Systems</h1>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/recommender-systems.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/recommender-systems.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
@@ -150,7 +151,7 @@ $$</span><br /> Finally, we need some way of recording a given user’s affinity
 <span id="cb18-14"><a href="#cb18-14"></a>                  function<span class="op">=</span>function)</span>
 <span id="cb18-15"><a href="#cb18-15"></a>accumulator.write_comment(<span class="st">&#39;Rate Movie Here (score 1-5)&#39;</span>, row<span class="op">=</span><span class="dv">1</span>, column<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb18-16"><a href="#cb18-16"></a>accumulator.share(share_type<span class="op">=</span><span class="st">&#39;writer&#39;</span>, send_notifications<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<p>In your Google docs account you should be able to find a spreadsheet called ‘COM4509/6509 Movie Ratings: Your Name’. In the spreadsheet You should find a number of movies listed according to year. In the column titled ‘rating’ please place your rating using a score of 1-5 for <em>any</em> of the movies you’ve seen from the list.</p>
+<p>In your Google drive account you should be able to find a spreadsheet called ‘COM4509/6509 Movie Ratings: Your Name’. In the spreadsheet You should find a number of movies listed according to year. In the column titled ‘rating’ please place your rating using a score of 1-5 for <em>any</em> of the movies you’ve seen from the list.</p>
 <p>Once you have placed your ratings we can download the data from your spreadsheets to a central file where the ratings of the whole class can be stored. We will build an algorithm on these ratings and use them to make predictions for the rest of the class. Firstly, here’s the code for reading the ratings from each of the spreadsheets.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -173,8 +174,8 @@ $$</span><br /> Finally, we need some way of recording a given user’s affinity
 <span id="cb21-2"><a href="#cb21-2"></a>pods.util.download_url(<span class="st">&#39;https://dl.dropboxusercontent.com/u/4347554/mlai_movies.csv&#39;</span>, store_directory <span class="op">=</span> <span class="st">&#39;class_movie&#39;</span>, save_name<span class="op">=</span><span class="st">&#39;movies.csv&#39;</span>)</span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="co">#pods.util.download_url(&#39;https://www.dropbox.com/s/s6gqvp9b383b59y/movies.csv?dl=0&amp;raw=1&#39;, store_directory = &#39;class_movie&#39;, save_name=&#39;movies.csv&#39;)</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a>movies <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">&#39;class_movie&#39;</span>, <span class="st">&#39;movies.csv&#39;</span>),encoding<span class="op">=</span><span class="st">&#39;latin-1&#39;</span>).set_index(<span class="st">&#39;index&#39;</span>)</span></code></pre></div>
-<h3 id="exercise-1-2">Exercise 1</h3>
-<p>The movies data is now in a data frame which contains one column for each user rating the movie. There are some entries that contain ‘NaN’. What does the ‘NaN’ mean in this context?</p>
+<h3 id="exercise-0-2">Exercise 0</h3>
+<p>The movies data is now in a data frame which contains one column for each user rating the movie. There are some entries that contain <code>NaN</code>. What does the <code>NaN</code> mean in this context?</p>
 <h2 id="processing-the-data">Processing the Data</h2>
 <p>We will now prepare the data set for processing. To do this we are going to conver the data into a new format using the <code>melt</code> command.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>user_names <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(movies.columns)<span class="op">-</span><span class="bu">set</span>(movies.columns[:<span class="dv">9</span>]))</span>
@@ -205,7 +206,7 @@ $$</span><br /> where <span class="math inline"><em>η</em></span> (which is pro
 \frac{\text{d}E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} = -2
 \sum_j s_{k,j}v_{j,\ell}(y_{k, j} - \mathbf{u}_k^\top\mathbf{v}_{j}).
 $$</span><br /> Similarly each parameter <span class="math inline"><em>v</em><sub><em>i</em>, <em>j</em></sub></span> needs to be updated according to its gradient.</p>
-<h3 id="exercise-1-3">Exercise 1</h3>
+<h3 id="exercise-0-3">Exercise 0</h3>
 <p>What is the gradient of the objective function with respect to <span class="math inline"><em>v</em><sub><em>k</em>, ℓ</sub></span>? Write your answer in the box below, and explain which differentiation techniques you used to get there. You will be expected to justify your answer in class by oral questioning. Create a function for computing this gradient that is used in the algorithm below.</p>
 <h2 id="steepest-descent-algorithm">Steepest Descent Algorithm</h2>
 <p>In the steepest descent algorithm we aim to minimize the objective function by subtacting the gradient of the objective function from the parameters.</p>
@@ -241,11 +242,11 @@ $$</span><br /> Similarly each parameter <span class="math inline"><em>v</em><su
 <span id="cb27-5"><a href="#cb27-5"></a>    <span class="bu">print</span>(<span class="st">&quot;Iteration&quot;</span>, i, <span class="st">&quot;Objective function: &quot;</span>, obj)</span>
 <span id="cb27-6"><a href="#cb27-6"></a>    U <span class="op">-=</span> learn_rate<span class="op">*</span>gU</span>
 <span id="cb27-7"><a href="#cb27-7"></a>    V <span class="op">-=</span> learn_rate<span class="op">*</span>gV</span></code></pre></div>
-<h3 id="exercise-2">Exercise 2</h3>
+<h3 id="exercise-1">Exercise 1</h3>
 <p>What happens as you increase the number of iterations? What happens if you increase the learning rate?</p>
 <h2 id="stochastic-gradient-descent-or-robbins-monroe-algorithm">Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
 <p>Stochastic gradient descent <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro 1951)</span> involves updating separating each gradient update according to each separate observation, rather than summing over them all. It is an approximate optimization method, but it has proven convergence under certain conditions and can be much faster in practice. It is used widely by internet companies for doing machine learning in practice. For example, Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
-<h3 id="exercise-3">Exercise 3</h3>
+<h3 id="exercise-2">Exercise 2</h3>
 <p>Create a stochastic gradient descent version of the algorithm. Monitor the objective function after every 1000 updates to ensure that it is decreasing. When you have finished, plot the movie map and the user map in two dimensions. Label the plots with the name of the movie or user.</p>
 <h2 id="making-predictions">Making Predictions</h2>
 <p>Predictions can be made from the model of the appropriate rating for a given user, <span class="math inline"><em>i</em></span>, for a given film, <span class="math inline"><em>j</em></span>, by simply taking the inner product between their vectors <span class="math inline"><strong>u</strong><sub><em>i</em></sub></span> and <span class="math inline"><strong>v</strong><sub><em>j</em></sub></span>.</p>
@@ -257,7 +258,7 @@ $$</span><br /> Similarly each parameter <span class="math inline"><em>v</em><su
 <div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>d <span class="op">=</span> pods.datasets.movielens100k()</span>
 <span id="cb29-2"><a href="#cb29-2"></a>Y<span class="op">=</span>d[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
-<h3 id="exercise-4">Exercise 4</h3>
+<h3 id="exercise-3">Exercise 3</h3>
 <p>Use stochastic gradient descent to make a movie map for the movielens data. Plot the map of the movies when you are finished.</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
