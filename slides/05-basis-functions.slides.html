@@ -159,16 +159,16 @@ showDivs(0, 'quadratic_function');
 </section>
 <section id="polynomial-basis" class="slide level2">
 <h2>Polynomial Basis</h2>
-</section>
-<section id="functions-derived-from-polynomial-basis" class="slide level2">
-<h2>Functions Derived from Polynomial Basis</h2>
+<ul>
+<li></li>
+</ul>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}} + {\color{magenta}{w_3 x^3}} + {\color{red}{w_4 x^4}}
+\phi_j(x) = w_j x^j
 \]</span></p>
 <script>
 showDivs(0, 'polynomial_basis');
 </script>
-<p><small></small> <input id="range-polynomial_basis" type="range" min="0" max="5" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')"> <button onclick="plusDivs(-1, 'polynomial_basis')">❮</button> <button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
+<p><small></small> <input id="range-polynomial_basis" type="range" min="0" max="4" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')"> <button onclick="plusDivs(-1, 'polynomial_basis')">❮</button> <button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
 <div class="polynomial_basis" style="text-align:center;">
 <object class="svgplot " data="../slides/diagrams/ml/polynomial_basis000.svg" width="80%" style=" ">
 </object>
@@ -190,6 +190,28 @@ showDivs(0, 'polynomial_basis');
 </object>
 </div>
 </section>
+<section id="functions-derived-from-polynomial-basis" class="slide level2">
+<h2>Functions Derived from Polynomial Basis</h2>
+<p><span class="math display">\[
+f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}} + {\color{magenta}{w_3 x^3}} + {\color{red}{w_4 x^4}}
+\]</span></p>
+<script>
+showDivs(0, 'polynomial_function');
+</script>
+<p><small></small> <input id="range-polynomial_function" type="range" min="0" max="4" value="0" onchange="setDivs('polynomial_function')" oninput="setDivs('polynomial_function')"> <button onclick="plusDivs(-1, 'polynomial_function')">❮</button> <button onclick="plusDivs(1, 'polynomial_function')">❯</button></p>
+<div class="polynomial_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/polynomial_function000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="polynomial_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/polynomial_function001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="polynomial_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/polynomial_function002.svg" width="80%" style=" ">
+</object>
+</div>
+</section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise 1</h2>
 <p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
@@ -200,8 +222,26 @@ showDivs(0, 'polynomial_basis');
 <section id="radial-basis-functions" class="slide level2">
 <h2>Radial Basis Functions</h2>
 <ul>
-<li>Basis functions can be local e.g. radial (or Gaussian) basis <span class="math display">\[\phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)\]</span></li>
+<li>Basis functions can be local e.g. radial (or Gaussian) basis <span class="math display">\[
+\phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
+\]</span></li>
 </ul>
+<script>
+showDivs(0, 'radial_basis');
+</script>
+<p><small></small> <input id="range-radial_basis" type="range" min="0" max="2" value="0" onchange="setDivs('radial_basis')" oninput="setDivs('radial_basis')"> <button onclick="plusDivs(-1, 'radial_basis')">❮</button> <button onclick="plusDivs(1, 'radial_basis')">❯</button></p>
+<div class="radial_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/radial_basis000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="radial_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/radial_basis001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="radial_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/radial_basis002.svg" width="80%" style=" ">
+</object>
+</div>
 </section>
 <section id="functions-derived-from-radial-basis" class="slide level2">
 <h2>Functions Derived from Radial Basis</h2>
@@ -227,6 +267,36 @@ showDivs(0, 'radial_function');
 </section>
 <section id="rectified-linear-units" class="slide level2">
 <h2>Rectified Linear Units</h2>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[
+\phi_j(x) = w_j H(v_j x+ w_0)
+\]</span></p>
+<script>
+showDivs(0, 'relu_basis');
+</script>
+<p><small></small> <input id="range-relu_basis" type="range" min="0" max="4" value="0" onchange="setDivs('relu_basis')" oninput="setDivs('relu_basis')"> <button onclick="plusDivs(-1, 'relu_basis')">❮</button> <button onclick="plusDivs(1, 'relu_basis')">❯</button></p>
+<div class="relu_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/relu_basis000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="relu_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/relu_basis001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="relu_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/relu_basis002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="relu_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/relu_basis003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="relu_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/relu_basis004.svg" width="80%" style=" ">
+</object>
+</div>
 </section>
 <section id="functions-derived-from-relu-basis" class="slide level2">
 <h2>Functions Derived from Relu Basis</h2>
@@ -249,17 +319,39 @@ showDivs(0, 'relu_function');
 <object class="svgplot " data="../slides/diagrams/ml/relu_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="relu_function" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/relu_function003.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_function" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/relu_function004.svg" width="80%" style=" ">
-</object>
-</div>
 </section>
 <section id="hyperbolic-tangent-basis" class="slide level2">
 <h2>Hyperbolic Tangent Basis</h2>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[
+\phi_j(x) = w_j \tanh(v_j x+ w_0)
+\]</span></p>
+<script>
+showDivs(0, 'tanh_basis');
+</script>
+<p><small></small> <input id="range-tanh_basis" type="range" min="0" max="4" value="0" onchange="setDivs('tanh_basis')" oninput="setDivs('tanh_basis')"> <button onclick="plusDivs(-1, 'tanh_basis')">❮</button> <button onclick="plusDivs(1, 'tanh_basis')">❯</button></p>
+<div class="tanh_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/tanh_basis000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="tanh_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/tanh_basis001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="tanh_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/tanh_basis002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="tanh_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/tanh_basis003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="tanh_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/tanh_basis004.svg" width="80%" style=" ">
+</object>
+</div>
 </section>
 <section id="functions-derived-from-tanh-basis" class="slide level2">
 <h2>Functions Derived from Tanh Basis</h2>
@@ -286,8 +378,35 @@ showDivs(0, 'tanh_function');
 <section id="fourier-basis" class="slide level2">
 <h2>Fourier Basis</h2>
 <ul>
-<li><span class="math display">\[\phi_j(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)\]</span></li>
+<li></li>
 </ul>
+<p><span class="math display">\[
+f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
+\]</span></p>
+<script>
+showDivs(0, 'fourier_basis');
+</script>
+<p><small></small> <input id="range-fourier_basis" type="range" min="0" max="4" value="0" onchange="setDivs('fourier_basis')" oninput="setDivs('fourier_basis')"> <button onclick="plusDivs(-1, 'fourier_basis')">❮</button> <button onclick="plusDivs(1, 'fourier_basis')">❯</button></p>
+<div class="fourier_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/fourier_basis000.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="fourier_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/fourier_basis001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="fourier_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/fourier_basis002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="fourier_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/fourier_basis003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="fourier_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/fourier_basis004.svg" width="80%" style=" ">
+</object>
+</div>
 </section>
 <section id="functions-derived-from-fourier-basis" class="slide level2">
 <h2>Functions Derived from Fourier Basis</h2>
@@ -340,7 +459,7 @@ showDivs(0, 'fourier_function');
 <h2>Olympic Marathon Data</h2>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
+<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
