@@ -64,6 +64,23 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>pip install geopandas</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%</span>pip install pygeos</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">%</span>pip install decarteslabs[complete]</span></code></pre></div>
+<h2 id="setup">Setup</h2>
+<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
+<p>First we download some libraries and files to support the notebook.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py&#39;</span>,<span class="st">&#39;teaching_plots.py&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py&#39;</span>,<span class="st">&#39;gp_tutorial.py&#39;</span>)</span></code></pre></div>
+<h2 id="pods">pods</h2>
+<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
+<p>In Sheffield we created a suite of software tools for ‘Open Data Science’. Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
+<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
+<p>The software can be installed using</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
+<p>from the command prompt where you can access your python installation.</p>
+<p>The code is also available on github: <a href="https://github.com/sods/ods" class="uri">https://github.com/sods/ods</a></p>
+<p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="databases-and-joins">Databases and Joins</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>The main idea we will be working with today is called the ‘join’. A join does exactly what it sounds like, it combines two database tables.</p>
@@ -89,29 +106,19 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Suggested citation: Nigeria NMIS facility database (2014), the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
 </blockquote>
 <p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<h2 id="pods">pods</h2>
-<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>In Sheffield we created a suite of software tools for ‘Open Data Science’. Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
-<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
-<p>The software can be installed using</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>sods<span class="op">/</span>ods</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on github: <a href="https://github.com/sods/ods" class="uri">https://github.com/sods/ods</a></p>
-<p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>data <span class="op">=</span> pods.datasets.nigerian_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb6-2"><a href="#cb6-2"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>data <span class="op">=</span> pods.datasets.nigerian_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb10-2"><a href="#cb10-2"></a>data.head()</span></code></pre></div>
 <p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb7-2"><a href="#cb7-2"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-5"><a href="#cb7-5"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb11-2"><a href="#cb11-2"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-5"><a href="#cb11-5"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
 <p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>data.describe()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>data.describe()</span></code></pre></div>
 <p>In python and jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
 <p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>data.describe?</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/nigerian-health-facilities.svg" width="60%" style=" ">
@@ -124,7 +131,7 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Figure: Location of the over thirty four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>hospital_data <span class="op">=</span> data</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>hospital_data <span class="op">=</span> data</span></code></pre></div>
 <h2 id="administrative-zone-geo-data">Administrative Zone Geo Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>A very common operation is the need to map from locations in a country to the administrative regions. If we were building a ride sharing app, we might also want to map riders to locations in the city, so that we could know how many riders we had in different city areas.</p>
@@ -135,26 +142,26 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <h2 id="nigerian-administrative-zones-data">Nigerian Administrative Zones Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigerian-administrative-zones-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigerian-administrative-zones-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>data <span class="op">=</span> pods.datasets.nigerian_administrative_zones()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb11-2"><a href="#cb11-2"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>data <span class="op">=</span> pods.datasets.nigerian_administrative_zones()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb15-2"><a href="#cb15-2"></a>data.head()</span></code></pre></div>
 <p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> zipfile</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a>admin_zones_url <span class="op">=</span> <span class="st">&#39;https://data.humdata.org/dataset/81ac1d38-f603-4a98-804d-325c658599a3/resource/0bc2f7bb-9ff6-40db-a569-1989b8ffd3bc/download/nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>_, msg <span class="op">=</span> urllib.request.urlretrieve(admin_zones_url, <span class="st">&#39;nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span>)</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="cf">with</span> zipfile.ZipFile(<span class="st">&#39;/content/nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span>, <span class="st">&#39;r&#39;</span>) <span class="im">as</span> zip_ref:</span>
-<span id="cb12-6"><a href="#cb12-6"></a>    zip_ref.extractall(<span class="st">&#39;/content/nga_admbnda_osgof_eha_itos.gdb&#39;</span>)</span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="im">import</span> fiona</span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a>states_file <span class="op">=</span> <span class="st">&quot;./nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/&quot;</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a></span>
-<span id="cb12-13"><a href="#cb12-13"></a>layers <span class="op">=</span> fiona.listlayers(states_file)</span>
-<span id="cb12-14"><a href="#cb12-14"></a>data <span class="op">=</span> gpd.read_file(states_file, layer<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb12-15"><a href="#cb12-15"></a>data.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a>data <span class="op">=</span> data.set_index(<span class="st">&#39;admin1Name_en&#39;</span>)</span>
-<span id="cb12-17"><a href="#cb12-17"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> zipfile</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a>admin_zones_url <span class="op">=</span> <span class="st">&#39;https://data.humdata.org/dataset/81ac1d38-f603-4a98-804d-325c658599a3/resource/0bc2f7bb-9ff6-40db-a569-1989b8ffd3bc/download/nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>_, msg <span class="op">=</span> urllib.request.urlretrieve(admin_zones_url, <span class="st">&#39;nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="cf">with</span> zipfile.ZipFile(<span class="st">&#39;/content/nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span>, <span class="st">&#39;r&#39;</span>) <span class="im">as</span> zip_ref:</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    zip_ref.extractall(<span class="st">&#39;/content/nga_admbnda_osgof_eha_itos.gdb&#39;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="im">import</span> fiona</span>
+<span id="cb16-10"><a href="#cb16-10"></a></span>
+<span id="cb16-11"><a href="#cb16-11"></a>states_file <span class="op">=</span> <span class="st">&quot;./nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/nga_admbnda_osgof_eha_itos.gdb/&quot;</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a></span>
+<span id="cb16-13"><a href="#cb16-13"></a>layers <span class="op">=</span> fiona.listlayers(states_file)</span>
+<span id="cb16-14"><a href="#cb16-14"></a>data <span class="op">=</span> gpd.read_file(states_file, layer<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-15"><a href="#cb16-15"></a>data.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a>data <span class="op">=</span> data.set_index(<span class="st">&#39;admin1Name_en&#39;</span>)</span>
+<span id="cb16-17"><a href="#cb16-17"></a>    </span></code></pre></div>
 <div class="figure">
 <div id="nigerian-state-borders-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/nigerian-state-borders.svg" width="60%" style=" ">
@@ -167,7 +174,7 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Figure: Border locations for the thirty-six different states of Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>zones_gdf <span class="op">=</span> data</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>zones_gdf <span class="op">=</span> data</span></code></pre></div>
 <p>Now we have this data of the outlines of the different states in Nigeria.</p>
 <p>The next thing we need to know is how these health facilities map onto different states in Nigeria. Without “binning” facilities somehow, it’s difficult to effectively see how they are distributed across the country.</p>
 <p>We do this by finding a “geo” dataset that contains the spatial outlay of Nigerian states by latitude/longitude coordinates. The dataset we use is of the “gdb” (GeoDataBase) type and comes as a zip file. We don’t need to worry much about this datatype for this notebook, only noting that geopandas knows how to load in the dataset, and that it contains different “layers” for the same map. In this case, each layer is a different degree of granularity of the political boundaries, with layer 0 being the whole country, 1 is by state, or 2 is by local government. We’ll go with a state level view for simplicity, but as an excercise you can change it to layer 2 to view the distribution by local government.</p>
@@ -177,17 +184,17 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>This join is unusual because it requires some mathematics to get right. The outline files give us the borders of the different states in latitude and longitude, the health facilities have given locations in the country.</p>
 <p>A spatial join involves finding out which state each health facility belongs to. Fortunately, the mathematics you need is already programmed for you in GeoPandas. That means all we need to do is convert our <code>pandas</code> dataframe of health facilities into a <code>GeoDataFrame</code> which allows us to do the spatial join.</p>
 <p>First we convert the hospital data to a <code>geopandas</code> data frame.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>geometry<span class="op">=</span>gpd.points_from_xy(hospital_data.longitude, hospital_data.latitude)</span>
-<span id="cb15-2"><a href="#cb15-2"></a>hosp_gdf <span class="op">=</span> gpd.GeoDataFrame(hospital_data, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>                            geometry<span class="op">=</span>geometry)</span>
-<span id="cb15-4"><a href="#cb15-4"></a>hosp_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>geometry<span class="op">=</span>gpd.points_from_xy(hospital_data.longitude, hospital_data.latitude)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>hosp_gdf <span class="op">=</span> gpd.GeoDataFrame(hospital_data, </span>
+<span id="cb19-3"><a href="#cb19-3"></a>                            geometry<span class="op">=</span>geometry)</span>
+<span id="cb19-4"><a href="#cb19-4"></a>hosp_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span></code></pre></div>
 <p>There are some technial details here: the <code>crs</code> refers to the coordinate system in use by a particular GeoDataFrame. <code>EPSG:4326</code> is the standard coordinate system of latitude/longitude.</p>
 <h2 id="your-first-join-converting-gps-coordinates-to-states">Your First Join: Converting GPS Coordinates to States</h2>
 <p>Now we have the data in the <code>GeoPandas</code> format, we can start converting into states. We will use the <a href="https://pypi.org/project/Fiona/"><code>fiona</code></a> library for reading the right layers from the files. Before we do the join, lets plot the location of health centers and states on the same map.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>world_gdf <span class="op">=</span> gpd.read_file(gpd.datasets.get_path(<span class="st">&#39;natural_lowres&#39;</span>))</span>
-<span id="cb16-2"><a href="#cb16-2"></a>world_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>nigeria_gdf <span class="op">=</span> world_gdf[(world_gdf[<span class="st">&#39;name&#39;</span>] <span class="op">==</span> <span class="st">&#39;Nigeria&#39;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>world_gdf <span class="op">=</span> gpd.read_file(gpd.datasets.get_path(<span class="st">&#39;natural_lowres&#39;</span>))</span>
+<span id="cb20-2"><a href="#cb20-2"></a>world_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>nigeria_gdf <span class="op">=</span> world_gdf[(world_gdf[<span class="st">&#39;name&#39;</span>] <span class="op">==</span> <span class="st">&#39;Nigeria&#39;</span>)]</span></code></pre></div>
 <div class="figure">
 <div id="nigeria-states-and-health-facilities-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/nigeria-states-and-health-facilities.svg" width="60%" style=" ">
@@ -203,24 +210,24 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <h2 id="performing-the-spatial-join">Performing the Spatial Join</h2>
 <p>We’ve now plotted the different health center locations across the states. You can clearly see that each of the dots falls within a different state. For helping the visualisation, we’ve made the dots somewhat transparent (we set the <code>alpha</code> in the plot). This means that we can see the regions where there are more health centers, you should be able to spot where the major cities in Nigeria are given the increased number of health centers in those regions.</p>
 <p>Of course, we can now see by eye, which of the states each of the health centers belongs to. But we want the computer to do our join for us. <code>GeoPandas</code> provides us with the spatial join. Here we’re going to do a <a href="https://en.wikipedia.org/wiki/Join_(SQL)#Left_outer_join"><code>left</code> or <code>outer</code> join</a>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> geopandas.tools <span class="im">import</span> sjoin</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="im">from</span> geopandas.tools <span class="im">import</span> sjoin</span></code></pre></div>
 <p>We have two GeoPandas data frames, <code>hosp_gdf</code> and <code>zones_gdf</code>. Let’s have a look at the columns the contain.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>hosp_gdf.columns</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>hosp_gdf.columns</span></code></pre></div>
 <p>We can see that this is the GeoDataFrame containing the information about the hospital. Now let’s have a look at the <code>zones_gdf</code> data frame.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>zones_gdf.columns</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>zones_gdf.columns</span></code></pre></div>
 <p>You can see that this data frame has a different set of columns. It has all the different administrative regions. But there is one column name that overlaps. We can find it by looking for the intersection between the two sets.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="bu">set</span>(hosp_gdf.columns).intersection(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="bu">set</span>(hosp_gdf.columns).intersection(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
 <p>Here we’ve converted the lists of columns into python ‘sets’, and then looked for the intersection. The <em>join</em> will occur on the intersection between these columns. It will try and match the geometry of the hospitals (their location) to the geometry of the states (their outlines). This match is done in one line in GeoPandas.</p>
 <p>We’re having to use GeoPandas because this join is a special one based on geographical locations, if the join was on customer name or some other discrete variable, we could do the join in pandas or directly in SQL.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>hosp_state_joined <span class="op">=</span> sjoin(hosp_gdf, zones_gdf, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>hosp_state_joined <span class="op">=</span> sjoin(hosp_gdf, zones_gdf, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span></code></pre></div>
 <p>The intersection of the two data frames indicates how the two data frames will be joined (if there’s no intersection, they can’t be joined). It’s like indicating the two holes that would need to be bolted together on two pieces of metal. If the holes don’t match, the join can’t be done. There has to be an intersection.</p>
 <p>But what will the result look like? Well the join should be the ‘union’ of the two data frames. We can have a look at what the union should be by (again) converting the columns to sets.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">set</span>(hosp_gdf.columns).union(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="bu">set</span>(hosp_gdf.columns).union(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
 <p>That gives a list of all the columns (notice that ‘geometry’ only appears once).</p>
 <p>Let’s check that’s what the join command did, by looking at the columns of our new data frame, <code>hosp_state_joined</code>. Notice also that there’s a new column: <code>index_right</code>. The two original data bases had separate indices. The <code>index_right</code> column represents the index from the <code>zones_gdf</code>, which is the Nigerian state.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="bu">set</span>(hosp_state_joined.columns)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">set</span>(hosp_state_joined.columns)</span></code></pre></div>
 <p>Great! They are all there! We have completed our join. We had two separate data frames with information about states and information about hospitals. But by performing an ‘outer’ or a ‘left’ join, we now have a single data frame with all the information in the same place! Let’s have a look at the first frew entries in the new data frame.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>hosp_state_joined.head()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>hosp_state_joined.head()</span></code></pre></div>
 <h2 id="sql-database">SQL Database</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sqlite.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sqlite.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>Our first join was a special one, because it involved spatial data. That meant using the special <code>gdb</code> format and the <code>GeoPandas</code> tool for manipulating that data. But we’ve now saved our updated data in a new file.</p>
@@ -231,15 +238,15 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Today though, we’ll just stick to SQLite which gives you a sense of the database without the time and expense of setting it up on the cloud. As well as showing you the SQL commands (which is often what’s used in a production ML system) we’ll also give the equivalent <code>pandas</code> commands, which would often be what you would use when you’re doing data analysis in <code>python</code> and <code>Jupyter</code>.</p>
 <h2 id="create-the-sqlite-database">Create the SQLite Database</h2>
 <p>The beautiful thing about SQLite is that it allows us to play with SQL without going to the work of setting up a proper SQL server. Creating a data base in SQLite is as simple as writing a new file. To create the database, we’ll first write our joined data to a CSV file, then we’ll use a little utility to convert our hospital database into a SQLite database.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>hosp_state_joined.to_csv(<span class="st">&#39;facilities.csv&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">%</span>pip install csv<span class="op">-</span>to<span class="op">-</span>sqlite</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f facilities.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>hosp_state_joined.to_csv(<span class="st">&#39;facilities.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="op">%</span>pip install csv<span class="op">-</span>to<span class="op">-</span>sqlite</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f facilities.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
 <p>Rather than being installed on a separate server, SQLite simply stores the database locally in a file called <code>db.sqlite</code>.</p>
 <p>In the database there can be several ‘tables’. Each table can be thought of as like a separate dataframe. The table name we’ve just saved is ‘hospitals_zones_joined’.</p>
 <h2 id="accessing-the-sql-database">Accessing the SQL Database</h2>
 <p>Now that we have a SQL database, we can create a connection to it and query it using SQL commands. Let’s try to simply select the data we wrote to it, to make sure its the same.</p>
 <p>Start by making a connection to the database. This will often be done via remote connections, but for this example we’ll connect locally to the database using the filepath directly.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>conn <span class="op">=</span> create_connection(<span class="st">&quot;db.sqlite&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>conn <span class="op">=</span> create_connection(<span class="st">&quot;db.sqlite&quot;</span>)</span></code></pre></div>
 <p>Now that we have a connection, we can write a command and pass it to the database.</p>
 <p>To access a data base, the first thing that is made is a connection. Then SQL is used to extract the information required. A typical SQL command is <code>SELECT</code>. It allows us to extract rows from a given table. It operates a bit like the <code>.head()</code> method in <code>pandas</code>, it will return the first <code>N</code> rows (by default the <code>.head()</code> command returns the first 5 rows, but you can set <code>n</code> to whatever you like. Here we’ve included a default value of 5 to make it match the <code>pandas</code> command.</p>
 <p>The python library, <code>sqlite3</code>, allows us to access the SQL database directly from python. We do this using an <code>execute</code> command on the connection.</p>
@@ -248,11 +255,11 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>in python code. This SQL command selects the first <code>N</code> entries from a given database called <code>table_name</code>.</p>
 <p>We can pass the <code>table_name</code> and number of rows, <code>N</code> to the python command.</p>
 <p>Let’s have a go at calling the command to extract the first three facilities from our health center database. Let’s try creating a function that does the same thing the pandas .head() method does so we can inspect our database.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">def</span> head(conn, table, n<span class="op">=</span><span class="dv">5</span>):</span>
-<span id="cb30-2"><a href="#cb30-2"></a>  rows <span class="op">=</span> select_top(conn, table, n)</span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="cf">for</span> r <span class="kw">in</span> rows:</span>
-<span id="cb30-4"><a href="#cb30-4"></a>      <span class="bu">print</span>(r)</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>head(conn, <span class="st">&#39;facilities&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">def</span> head(conn, table, n<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb34-2"><a href="#cb34-2"></a>  rows <span class="op">=</span> select_top(conn, table, n)</span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="cf">for</span> r <span class="kw">in</span> rows:</span>
+<span id="cb34-4"><a href="#cb34-4"></a>      <span class="bu">print</span>(r)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>head(conn, <span class="st">&#39;facilities&#39;</span>)</span></code></pre></div>
 <p>Great! We now have the data base in SQLite, and some python functions that operate on the data base by wrapping SQL commands.</p>
 <p>We will return to the SQL command style after download and add the other datasets to the database using a combination of <code>pandas</code> and the <code>csv-to-sqlite</code> utility.</p>
 <p>Our next task will be to introduce data on COVID19 so that we can join that to our other data sets.</p>
@@ -265,14 +272,14 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigerian-covid-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigerian-covid-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>At the beginning of the COVID-19 outbreak, the Consortium for Arican COVID-19 Data formed to bring together data from across the African continent on COVID-19 cases <span class="citation" data-cites="Marivate-covid20">(Marivate et al. 2020)</span>. These cases are recorded in the following github repository: <a href="https://github.com/dsfsi/covid19africa" class="uri">https://github.com/dsfsi/covid19africa</a>.</p>
 <p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>data <span class="op">=</span> pods.datasets.nigerian_covid()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb32-2"><a href="#cb32-2"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>data <span class="op">=</span> pods.datasets.nigerian_covid()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb36-2"><a href="#cb36-2"></a>data.head()</span></code></pre></div>
 <p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb33-2"><a href="#cb33-2"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/dsfsi/covid19africa/master/data/line_lists/line-list-nigeria.csv&#39;</span>)</span>
-<span id="cb33-3"><a href="#cb33-3"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;line-list-nigeria.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb37-2"><a href="#cb37-2"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/dsfsi/covid19africa/master/data/line_lists/line-list-nigeria.csv&#39;</span>)</span>
+<span id="cb37-3"><a href="#cb37-3"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;line-list-nigeria.csv&#39;</span>))</span></code></pre></div>
 <p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>data.describe()</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>data.describe()</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-covid-data-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/ml/nigerian-covid-data.svg" width="80%" style=" ">
@@ -285,10 +292,10 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Figure: Evolution of COVID-19 cases in Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>covid_data<span class="op">=</span>data</span>
-<span id="cb35-2"><a href="#cb35-2"></a>covid_data.to_csv(<span class="st">&#39;cases.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>covid_data<span class="op">=</span>data</span>
+<span id="cb39-2"><a href="#cb39-2"></a>covid_data.to_csv(<span class="st">&#39;cases.csv&#39;</span>)</span></code></pre></div>
 <p>Now we convert this CSV file we’ve downloaded into a new table in the database file. We can do this, again, with the csv-to-sqlite script.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f cases.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f cases.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
 <h2 id="population-data">Population Data</h2>
 <p>Now we have information about COVID cases, and we have information about how many health centers and how many doctors and nurses there are in each health center. But unless we understand how many people there are in each state, then we cannot make decisions about where they may be problems with the disease.</p>
 <p>If we were running our ride hailing service, we would also need information about how many people there were in different areas, so we could understand what the <em>demand</em> for the boda boda rides might be.</p>
@@ -304,17 +311,17 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Original 2006 census data can be found <a href="https://data.humdata.org/dataset/nigeria-population-statistics/resource/59261952-cb67-41ad-bec8-c8d3613e63f0">here</a>.</p>
 </blockquote>
 <p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>data <span class="op">=</span> pods.datasets.nigerian_population_2016()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb38-2"><a href="#cb38-2"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>data <span class="op">=</span> pods.datasets.nigerian_population_2016()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb42-2"><a href="#cb42-2"></a>data.head()</span></code></pre></div>
 <p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb39-2"><a href="#cb39-2"></a></span>
-<span id="cb39-3"><a href="#cb39-3"></a>urllib.request.urlretrieve(<span class="st">&#39;https://data.humdata.org/dataset/a7c3de5e-ff27-4746-99cd-05f2ad9b1066/resource/d9fc551a-b5e4-4bed-9d0d-b047b6961817/download/nga_pop_adm1_2016.csv&#39;</span>)</span>
-<span id="cb39-4"><a href="#cb39-4"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;nga_pop_adm1_2016.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>urllib.request.urlretrieve(<span class="st">&#39;https://data.humdata.org/dataset/a7c3de5e-ff27-4746-99cd-05f2ad9b1066/resource/d9fc551a-b5e4-4bed-9d0d-b047b6961817/download/nga_pop_adm1_2016.csv&#39;</span>)</span>
+<span id="cb43-4"><a href="#cb43-4"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;nga_pop_adm1_2016.csv&#39;</span>)</span></code></pre></div>
 <p>To do joins with this data, we must first make sure that the columns have the right names. The name should match the same name of the column in our existing data. So we reset the column names, and the name of the index, as follows.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>data.columns <span class="op">=</span> [<span class="st">&#39;admin1Name_en&#39;</span>, <span class="st">&#39;admin1Pcode&#39;</span>, <span class="st">&#39;admin0Name_en&#39;</span>, <span class="st">&#39;admin0Pcode&#39;</span>, <span class="st">&#39;population&#39;</span>]</span>
-<span id="cb40-2"><a href="#cb40-2"></a>data <span class="op">=</span> pop_data.set_index(<span class="st">&#39;admin1Name_en&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>data.columns <span class="op">=</span> [<span class="st">&#39;admin1Name_en&#39;</span>, <span class="st">&#39;admin1Pcode&#39;</span>, <span class="st">&#39;admin0Name_en&#39;</span>, <span class="st">&#39;admin0Pcode&#39;</span>, <span class="st">&#39;population&#39;</span>]</span>
+<span id="cb44-2"><a href="#cb44-2"></a>data <span class="op">=</span> pop_data.set_index(<span class="st">&#39;admin1Name_en&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="nigeria-population-bar-chart-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/nigerian-population-bar-chart.svg" width="80%" style=" ">
@@ -327,12 +334,12 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>Figure: Bar chart of the projected populations for the thirty six states of Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>pop_data<span class="op">=</span>data</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>pop_data<span class="op">=</span>data</span></code></pre></div>
 <p>When doing this for real world data, you should also make sure that the names used in the rows are the same across the different data bases. For example, has someone decided to use an abbreviation for ‘Federal Capital Territory’ and set it as ‘FCT’. The computer won’t understand these are the same states, and if you do a join with such data you can get duplicate entries or missing entries. This sort of thing happens a lot in real world data and takes a lot of time to sort out. Fortunately, in this case, the data is well curated and we don’t have these problems.</p>
 <h2 id="save-to-database-file">Save to database file</h2>
 <p>The next step is to add this new CSV file as an additional table in our SQLite database. This is done using the script as before.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>pop_data.to_csv(<span class="st">&#39;pop_data.csv&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f pop_data.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>pop_data.to_csv(<span class="st">&#39;pop_data.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="op">!</span>csv<span class="op">-</span>to<span class="op">-</span>sqlite <span class="op">-</span>f pop_data.csv <span class="op">-</span>t full <span class="op">-</span>o db.sqlite</span></code></pre></div>
 <h2 id="computing-per-capita-hospitals-and-covid">Computing per capita hospitals and COVID</h2>
 <p>The Minister of Health in Abuja may be interested in which states are most vulnerable to COVID19. We now have all the information in our SQL data bases to compute what our health center provision is per capita, and what the COVID19 situation is.</p>
 <p>To do this, we will use the <code>JOIN</code> operation from SQL and introduce a new operation called <code>GROUPBY</code>.</p>
@@ -342,39 +349,39 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 <p>In GeoPandas we used an outer join. In an outer join you keep all rows from both tables, even if there is no match on the key. In an inner join, you only keep the rows if the two tables have a matching key.</p>
 <p>This is sometimes where problems can creep in. If in one table Abuja’s state is encoded as ‘FCT’ or ‘FCT-Abuja’, and in another table it’s encoded as ‘Federal Capital Territory’, they won’t match and that data wouldn’t appear in the joined table.</p>
 <p>In simple terms, a JOIN operation takes two tables (or dataframes) and combines them based on some key, in this case the index of the Pandas data frame which is the state name.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>pop_joined <span class="op">=</span> zones_gdf.join(pop_data[<span class="st">&#39;population&#39;</span>], how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>pop_joined <span class="op">=</span> zones_gdf.join(pop_data[<span class="st">&#39;population&#39;</span>], how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)</span></code></pre></div>
 <h2 id="groupby-in-pandas">GroupBy in Pandas</h2>
 <p>Our COVID19 data is in the form of individual cases. But we are interested in total case counts for each state. There is a special data base operation known as <code>GROUP BY</code> for collecting information about the individual states. The type of information you might want could be a sum, the maximum value, an average, the minimum value. We can use a GroupBy operation in <code>pandas</code> and SQL to summarize the counts of covid cases in each state.</p>
 <p>A <code>GROUPBY</code> operation groups rows with the same key (in this case ‘province/state’) into separate objects, that we can operate on further such as to count the rows in each group, or to sum or take the mean over the values in some column (imagine each case row had the age of the patient, and you were interested in the mean age of patients.)</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>covid_cases_by_state <span class="op">=</span> covid_data.groupby([<span class="st">&#39;province/state&#39;</span>]).count()[<span class="st">&#39;case_id&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>covid_cases_by_state <span class="op">=</span> covid_data.groupby([<span class="st">&#39;province/state&#39;</span>]).count()[<span class="st">&#39;case_id&#39;</span>]</span></code></pre></div>
 <p>The <code>.groupby()</code> method on the dataframe has now given us a new data series that contains the total number of covid cases in each state. We can examine it to check we have something sensible.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>covid_cases_by_state</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>covid_cases_by_state</span></code></pre></div>
 <p>Now we have this new data series, it can be added to the pandas data frame as a new column.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>pop_joined[<span class="st">&#39;covid_cases_by_state&#39;</span>] <span class="op">=</span> covid_cases_by_state</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>pop_joined[<span class="st">&#39;covid_cases_by_state&#39;</span>] <span class="op">=</span> covid_cases_by_state</span></code></pre></div>
 <p>The spatial join we did on the original data frame to obtain hosp_state_joined introduced a new column, index_right which contains the state of each of the hospitals. Let’s have a quick look at it below.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>hosp_state_joined[<span class="st">&#39;index_right&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>hosp_state_joined[<span class="st">&#39;index_right&#39;</span>]</span></code></pre></div>
 <p>To count the hospitals in each of the states, we first create a grouped series where we’ve grouped on these states.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>grouped <span class="op">=</span> hosp_state_joined.groupby(<span class="st">&#39;index_right&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>grouped <span class="op">=</span> hosp_state_joined.groupby(<span class="st">&#39;index_right&#39;</span>)</span></code></pre></div>
 <p>This python operation now goes through each of the groups and counts how many hospitals there are in each state. It stores the result in a dictionary. If you’re new to Python, then to understand this code you need to understand what a ‘dictionary comprehension’ is. In this case the dictionary comprehension is being used to create a python dictionary of states and total hospital counts. That’s then being converted into a <code>pandas</code> Data Series and added to the <code>pop_joined</code> dataframe.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>counted_groups <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> grouped.groups.items()}</span>
-<span id="cb50-2"><a href="#cb50-2"></a>pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">=</span> pd.Series(counted_groups)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>counted_groups <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> grouped.groups.items()}</span>
+<span id="cb54-2"><a href="#cb54-2"></a>pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">=</span> pd.Series(counted_groups)</span></code></pre></div>
 <p>For convenience, we can now add a new data series to the data frame that contains the per capita information about hospitals. that makes it easy to retrieve later.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>pop_joined[<span class="st">&#39;hosp_per_capita_10k&#39;</span>] <span class="op">=</span> (pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">*</span> <span class="dv">10000</span> )<span class="op">/</span> pop_joined[<span class="st">&#39;population&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>pop_joined[<span class="st">&#39;hosp_per_capita_10k&#39;</span>] <span class="op">=</span> (pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">*</span> <span class="dv">10000</span> )<span class="op">/</span> pop_joined[<span class="st">&#39;population&#39;</span>]</span></code></pre></div>
 <h2 id="sql-style">SQL-style</h2>
 <p>That’s the <code>pandas</code> approach to doing it. But <code>pandas</code> itself is inspired by database language, in particular relational databases such as SQL. To do these types of joins at scale, e.g. for our ride hailing app, we need to see how to do these joins in a database.</p>
 <p>As before, we’ll wrap the underlying SQL commands with a convenient python command.</p>
 <p>What you see below gives the full SQL command. There is a <a href="https://www.w3schools.com/sql/sql_select.asp"><code>SELECT</code> command</a>, which extracts <code>FROM</code> a particular table. It then completes an <a href="https://www.w3schools.com/sql/sql_join_inner.asp"><code>INNER JOIN</code></a> using particular columns (<code>provice/state</code> and <code>index_right</code>)</p>
 <p>Now we’ve created our python wrapper, we can connect to the data base and run our SQL command on the database using the wrapper.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>conn <span class="op">=</span> create_connection(<span class="st">&quot;db.sqlite&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>state_cases_hosps <span class="op">=</span> join_counts(conn)</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="cf">for</span> row <span class="kw">in</span> state_cases_hosps:</span>
-<span id="cb54-2"><a href="#cb54-2"></a>    <span class="bu">print</span>(<span class="st">&quot;State </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Covid Cases </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Health Facilities </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(row[<span class="dv">0</span>], row[<span class="dv">1</span>], row[<span class="dv">2</span>]))</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
-<span id="cb55-2"><a href="#cb55-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;population&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb55-3"><a href="#cb55-3"></a>base.set_title(<span class="st">&quot;Population of Nigerian States&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
-<span id="cb56-2"><a href="#cb56-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;hosp_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb56-3"><a href="#cb56-3"></a>base.set_title(<span class="st">&quot;Hospitals Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>conn <span class="op">=</span> create_connection(<span class="st">&quot;db.sqlite&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>state_cases_hosps <span class="op">=</span> join_counts(conn)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a><span class="cf">for</span> row <span class="kw">in</span> state_cases_hosps:</span>
+<span id="cb58-2"><a href="#cb58-2"></a>    <span class="bu">print</span>(<span class="st">&quot;State </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Covid Cases </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Health Facilities </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(row[<span class="dv">0</span>], row[<span class="dv">1</span>], row[<span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<span id="cb59-2"><a href="#cb59-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;population&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb59-3"><a href="#cb59-3"></a>base.set_title(<span class="st">&quot;Population of Nigerian States&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<span id="cb60-2"><a href="#cb60-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;hosp_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb60-3"><a href="#cb60-3"></a>base.set_title(<span class="st">&quot;Hospitals Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
 <h2 id="exercise">Exercise</h2>
 <ol type="1">
 <li><p>Add a new column the dataframe for covid cases per 10,000 population, in the same way we computed health facilities per 10k capita.</p></li>
@@ -382,15 +389,15 @@ $$</span><br /> and many machine learning courses focus a lot on the model part.
 </ol>
 <p>Do this in both the SQL and the Pandas styles to get a feel for how they differ.</p>
 <p>{<code>{.python} # pop_joined['cases_per_capita_10k'] = ??? # pop_joined['cases_per_facility'] = ???</code></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
-<span id="cb57-2"><a href="#cb57-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb57-3"><a href="#cb57-3"></a>base.set_title(<span class="st">&quot;Covid Cases Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
-<span id="cb58-2"><a href="#cb58-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;covid_cases_by_state&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb58-3"><a href="#cb58-3"></a>base.set_title(<span class="st">&quot;Covid Cases by State&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
-<span id="cb59-2"><a href="#cb59-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_facility&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb59-3"><a href="#cb59-3"></a>base.set_title(<span class="st">&quot;Covid Cases per Health Facility&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<span id="cb61-2"><a href="#cb61-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb61-3"><a href="#cb61-3"></a>base.set_title(<span class="st">&quot;Covid Cases Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<span id="cb62-2"><a href="#cb62-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;covid_cases_by_state&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb62-3"><a href="#cb62-3"></a>base.set_title(<span class="st">&quot;Covid Cases by State&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a>base <span class="op">=</span> nigeria.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<span id="cb63-2"><a href="#cb63-2"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_facility&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb63-3"><a href="#cb63-3"></a>base.set_title(<span class="st">&quot;Covid Cases per Health Facility&quot;</span>)</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
