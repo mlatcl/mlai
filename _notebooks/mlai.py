@@ -286,18 +286,22 @@ def fourier(x, num_basis=4, data_limits=[-1., 1.], frequency_range=None):
 def relu(x, num_basis=4, data_limits=[-1., 1.], gain=None):
     """Rectified linear units basis"""
     if num_basis>2:
-        centres=linspace(data_limits[0], data_limits[1], num_basis-1)
+        centres=linspace(data_limits[0], data_limits[1], num_basis)[:-1]
     elif num_basis==2:
         centres = asarray([data_limits[0]/2. + data_limits[1]/2.])
     else:
         centres = []
+    if num_basis < 3:
+        basis_gap = (data_limits[1]-data_limits[0])
+    else:
+        basis_gap = (data_limits[1]-data_limits[0])/(num_basis-2)
     if gain is None:
-        gain = ones(num_basis-1)
+        gain = ones(num_basis-1)/basis_gap
     Phi = zeros((x.shape[0], num_basis))
     # Create the bias
     Phi[:, 0] = 1.0
     for i in range(1, num_basis):
-        Phi[:, i:i+1] = (gain[i-1]*asarray(x, dtype=float)>centres[i-1])*(asarray(x, dtype=float)-centres[i-1])
+        Phi[:, i:i+1] = gain[i-1]*(asarray(x, dtype=float)>centres[i-1])*(asarray(x, dtype=float)-centres[i-1])
     return Phi
 
 def hyperbolic_tangent(x, num_basis=4, data_limits=[-1., 1.], gain=None):
