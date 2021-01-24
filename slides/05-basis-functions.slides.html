@@ -55,6 +55,10 @@
 <!--
 
 -->
+<!--setupplotcode{import seaborn as sns
+sns.set_style('darkgrid')
+sns.set_context('paper')
+sns.set_palette('colorblind')}-->
 </section>
 <section id="nonlinear-regression" class="slide level2">
 <h2>Nonlinear Regression</h2>
@@ -92,7 +96,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
 \end{align*}
 \]</span></p>
 <p><span class="math display">\[
-\boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x \\ x^2\end{bmatrix}.
+\boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x\\ x^2\end{bmatrix}.
 \]</span></p>
 </section>
 <section id="matrix-valued-function" class="slide level2">
@@ -103,14 +107,14 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
 x_1^2 \\
 1 &amp; x_2 &amp; x_2^2\\
 \vdots &amp; \vdots &amp; \vdots \\
-1 &amp; x_n &amp; x_n^2
+1 &amp; x_n&amp; x_n^2
 \end{bmatrix}
 \]</span></p>
 </section>
 <section id="functions-derived-from-quadratic-basis" class="slide level2">
 <h2>Functions Derived from Quadratic Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}}
+f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}}
 \]</span></p>
 <script>
 showDivs(0, 'quadratic_basis');
@@ -212,8 +216,8 @@ showDivs(0, 'polynomial_function');
 </object>
 </div>
 </section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise 1</h2>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise 2</h2>
 <p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
 </section>
 <section id="different-basis" class="slide level2">
@@ -329,27 +333,27 @@ showDivs(0, 'relu_function');
 \phi_j(x) = \tanh(v_j x+ v_0)
 \]</span></p>
 <script>
-showDivs(0, 'tanh_basis');
+showDivs(0, 'hyperbolic_tangent_basis');
 </script>
-<p><small></small> <input id="range-tanh_basis" type="range" min="0" max="4" value="0" onchange="setDivs('tanh_basis')" oninput="setDivs('tanh_basis')"> <button onclick="plusDivs(-1, 'tanh_basis')">❮</button> <button onclick="plusDivs(1, 'tanh_basis')">❯</button></p>
-<div class="tanh_basis" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_basis000.svg" width="80%" style=" ">
+<p><small></small> <input id="range-hyperbolic_tangent_basis" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_basis')" oninput="setDivs('hyperbolic_tangent_basis')"> <button onclick="plusDivs(-1, 'hyperbolic_tangent_basis')">❮</button> <button onclick="plusDivs(1, 'hyperbolic_tangent_basis')">❯</button></p>
+<div class="hyperbolic_tangent_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_basis000.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_basis" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_basis001.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_basis001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_basis" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_basis002.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_basis002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_basis" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_basis003.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_basis003.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_basis" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_basis004.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_basis" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_basis004.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
@@ -359,19 +363,19 @@ showDivs(0, 'tanh_basis');
 f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 \text{tanh}\left(x+1\right)}}  + {\color{yellow}{w_2 \text{tanh}\left(x+0.33\right)}}  + {\color{magenta}{w_3 \text{tanh}\left(x-0.33\right)}} + {\color{red}{w_4 \text{tanh}\left(x-1\right)}}
 \]</span></p>
 <script>
-showDivs(0, 'tanh_function');
+showDivs(0, 'hyperbolic_tangent_function');
 </script>
-<p><small></small> <input id="range-tanh_function" type="range" min="0" max="4" value="0" onchange="setDivs('tanh_function')" oninput="setDivs('tanh_function')"> <button onclick="plusDivs(-1, 'tanh_function')">❮</button> <button onclick="plusDivs(1, 'tanh_function')">❯</button></p>
-<div class="tanh_function" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_function000.svg" width="80%" style=" ">
+<p><small></small> <input id="range-hyperbolic_tangent_function" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_function')" oninput="setDivs('hyperbolic_tangent_function')"> <button onclick="plusDivs(-1, 'hyperbolic_tangent_function')">❮</button> <button onclick="plusDivs(1, 'hyperbolic_tangent_function')">❯</button></p>
+<div class="hyperbolic_tangent_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_function000.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_function" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_function001.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_function001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="tanh_function" style="text-align:center;">
-<object class="svgplot " data="../slides/diagrams/ml/tanh_function002.svg" width="80%" style=" ">
+<div class="hyperbolic_tangent_function" style="text-align:center;">
+<object class="svgplot " data="../slides/diagrams/ml/hyperbolic_tangent_function002.svg" width="80%" style=" ">
 </object>
 </div>
 </section>
@@ -464,15 +468,11 @@ showDivs(0, 'fourier_function');
 </div>
 </div>
 <aside class="notes">
-Olympic marathon pace times since 1892.
+Olympic marathon pace times since 1896.
 </aside>
 </section>
-<section id="exercise-0" class="slide level2">
-<h2>Exercise 0</h2>
-<p>Now we are going to redefine our polynomial basis. Have a careful look at the operations we perform on <code>x</code> to create <code>z</code>. We use <code>z</code> in the polynomial computation. What are we doing to the inputs? Why do you think we are changing <code>x</code> in this manner?</p>
-</section>
-<section id="exercise-2" class="slide level2">
-<h2>Exercise 2</h2>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise 3</h2>
 <p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
 <ol type="a">
 <li>polynomial basis</li>
@@ -551,11 +551,11 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 </section>
 <section id="differentiate" class="slide level2">
 <h2>Differentiate</h2>
-<p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
+<p>Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span> <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
 </section>
 <section id="matrix-notation" class="slide level2">
 <h2>Matrix Notation</h2>
-<p>Rewrite in matrix notation: <span class="math display">\[
+<p><span class="math display">\[
 \sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top = \boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i = \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></p>
 </section>
@@ -576,6 +576,11 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <li>E.g. Solve for <span class="math inline">\(\mathbf{ w}\)</span> <span class="math display">\[
 \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></li>
+</ul>
+<p><span class="math display">\[
+\mathbf{A}\mathbf{x} = \mathbf{b}.
+\]</span></p>
+<ul>
 <li>See <code>np.linalg.solve</code></li>
 <li>In practice use <span class="math inline">\(\mathbf{Q}\mathbf{R}\)</span> decomposition (see lab class notes).</li>
 </ul>
@@ -703,8 +708,8 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 \]</span></li>
 </ul>
 </section>
-<section id="exercise-0-1" class="slide level2">
-<h2>Exercise 0</h2>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise 1</h2>
 <p>For the following prediction functions state whether the model is linear in the inputs, the parameters or both.</p>
 <ol type="a">
 <li><p><span class="math inline">\(f(x) = w_1x_1 + w_2\)</span></p></li>
@@ -714,8 +719,8 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <li><p><span class="math inline">\(f(x) = \exp(-\mathbf{ w}^\top \mathbf{ x})\)</span></p></li>
 </ol>
 </section>
-<section id="exercise-3" class="slide level2">
-<h2>Exercise 3</h2>
+<section id="exercise-4" class="slide level2">
+<h2>Exercise 4</h2>
 <p>Choose one of the basis functions you have explored above. Compute the design matrix on the covariates (or input data), <code>x</code>. Use the design matrix and the response variable <code>y</code> to solve the following linear system for the model parameters <code>w</code>. <span class="math display">\[
 \boldsymbol{ \phi}^\top\boldsymbol{ \phi}\mathbf{ w}= \boldsymbol{ \phi}^\top \mathbf{ y}
 \]</span> Compute the corresponding error on the training data. How does it compare to the error you were able to achieve fitting the basis above? Plot the form of your prediction function from the least squares estimate alongside the form of you prediction function you fitted by hand.</p>
