@@ -8,12 +8,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import display, clear_output, HTML
 
-from numpy import dot, sqrt, sin, cos, tanh, arcsin, arccos, sinc, min, log, exp, eye, diag, zeros, ones, linspace, pi, var, asarray, hstack, sum, max, abs, ceil, arange, clip, frombuffer
-
+from numpy import sqrt, sin, cos, tanh, arcsin, arccos, sinc, log, exp
+from numpy import sum, max, min, abs, ceil, dot
+from numpy import eye, diag, zeros, ones, linspace
+from numpy import pi, var, asarray, hstack, arange, clip, frombuffer
 from numpy.random import randint, rand, seed, uniform, poisson, normal
 
 from numpy.linalg import qr, norm, det, inv
-
 from scipy.linalg import solve_triangular, cholesky
 
 
@@ -25,13 +26,17 @@ def filename_join(filename, directory=None):
         return os.path.join(directory, filename)
     return filename
 
-
-def write_anim(filename, directory=None, **kwargs):
+def write_animation(anim, filename, directory=None, **kwargs):
     "Write an animation to a file."
-    import matplotlib.animation as animation
     savename = filename_join(filename, directory)
-    animation.save(savename, **kwargs)
+    anim.save(savename, **kwargs)
 
+def write_animation_html(anim, filename, directory=None):
+    """Save an animation to file."""
+    savename = filename_join(filename, directory)
+    f = open(savename, 'w')
+    f.write(anim.to_jshtml())
+    f.close()
 
 def write_figure(filename, figure=None, directory=None, **kwargs):
     """Write figure in correct formating"""
@@ -775,6 +780,24 @@ def eq_cov(x, x_prime, variance=1., lengthscale=1.):
     diffx = x - x_prime
     return variance*exp(-0.5*dot(diffx, diffx)/lengthscale**2)
 
+def ou_cov(x, x_prime, variance=1., lengthscale=1.):
+    """Exponential covariance function."""
+    diffx = x - x_prime
+    return variance*exp(-sqrt(dot(diffx, diffx))/lengthscale)
+
+def matern32_cov(x, x_prime, variance=1., lengthscale=1.):
+    """Matern 3/2 covariance function."""
+    diffx = x - x_prime
+    r_norm = sqrt(dot(diffx, diffx))/lengthscale
+    sqrt3r_norm = r_norm*sqrt(3)
+    return variance*(1+sqrt3r_norm)*exp(-sqrt3r_norm)
+
+def matern52_cov(x, x_prime, variance=1., lengthscale=1.):
+    """Matern 5/2 covariance function."""
+    diffx = x - x_prime
+    r_norm = sqrt(dot(diffx, diffx))/lengthscale
+    sqrt5r_norm = r_norm*sqrt(5)
+    return variance*(1+sqrt5r_norm+sqrt5r_norm*sqrt5r_norm/3)*exp(-sqrt5r_norm)
 
 def mlp_cov(x, x_prime, variance=1., w=1., b=5., alpha=1.):
     """Covariance function for a MLP based neural network."""
@@ -897,6 +920,7 @@ def add_cov(x, x_prime, kerns, kern_args):
 def basis_cov(x, x_prime, basis):
     """Basis function covariance."""
     return (basis.Phi(x)*basis.Phi(x_prime)).sum()
+
 def contour_data(model, data, length_scales, log_SNRs):
     """
     Evaluate the GP objective function for a given data set for a range of
