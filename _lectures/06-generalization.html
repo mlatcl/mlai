@@ -8,11 +8,14 @@ author:
   institute: University of Cambridge
   twitter: lawrennd
   gscholar: r3SJcvoAAAAJ
-  orchid: 
+  orcid: 0000-0001-9258-1030
+edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/generalization.md
+time: "null"
 week: 6
 reveal: 06-generalization.slides.html
 ipynb: 06-generalization.ipynb
 youtube: "wy0J6cgqlf8"
+edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/generalization.md
 layout: lecture
 categories:
 - notes
@@ -29,12 +32,16 @@ categories:
 
 -->
 <h2 id="setup">Setup</h2>
-<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/mlai-notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
+<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>First we download some libraries and files to support the notebook.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/teaching_plots.py&#39;</span>,<span class="st">&#39;teaching_plots.py&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/gp_tutorial.py&#39;</span>,<span class="st">&#39;gp_tutorial.py&#39;</span>)</span></code></pre></div>
+<!--setupplotcode{import seaborn as sns
+sns.set_style('darkgrid')
+sns.set_context('paper')
+sns.set_palette('colorblind')}-->
 <h2 id="pods">pods</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_data-science/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>In Sheffield we created a suite of software tools for ‘Open Data Science’. Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
@@ -77,39 +84,40 @@ categories:
 <p>Figure: Alan Turing, in 1946 he was only 11 minutes slower than the winner of the 1948 games. Would he have won a hypothetical games held in 1946? Source: <a href="http://www.turing.org.uk/scrapbook/run.html" target="_blank" >Alan Turing Internet Scrapbook</a>.</p>
 </div>
 </div>
-<p>If we had to summarise the objectives of machine learning in one word, a very good candidate for that word would be <em>generalization</em>. What is generalization? From a human perspective it might be summarised as the ability to take lessons learned in one domain and apply them to another domain. If we accept the definition given in the first session for machine learning, <br /><span class="math display">$$
+<p>If we had to summarise the objectives of machine learning in one word, a very good candidate for that word would be <em>generalization</em>. What is generalization? From a human perspective it might be summarised as the ability to take lessons learned in one domain and apply them to another domain. If we accept the definition given in the first session for machine learning, <span class="math display">\[
 \text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}
-$$</span><br /> then we see that without a model we can’t generalise: we only have data. Data is fine for answering very specific questions, like “Who won the Olympic Marathon in 2012?”, because we have that answer stored, however, we are not given the answer to many other questions. For example, Alan Turing was a formidable marathon runner, in 1946 he ran a time 2 hours 46 minutes (just under four minutes per kilometer, faster than I and most of the other <a href="http://www.parkrun.org.uk/sheffieldhallam/">Endcliffe Park Run</a> runners can do 5 km). What is the probability he would have won an Olympics if one had been held in 1946?</p>
+\]</span> then we see that without a model we can’t generalise: we only have data. Data is fine for answering very specific questions, like “Who won the Olympic Marathon in 2012?”, because we have that answer stored, however, we are not given the answer to many other questions. For example, Alan Turing was a formidable marathon runner, in 1946 he ran a time 2 hours 46 minutes (just under four minutes per kilometer, faster than I and most of the other <a href="http://www.parkrun.org.uk/sheffieldhallam/">Endcliffe Park Run</a> runners can do 5 km). What is the probability he would have won an Olympics if one had been held in 1946?</p>
 <p>To answer this question we need to generalize, but before we formalize the concept of generalization let’s introduce some formal representation of what it means to generalize in machine learning.</p>
 <h2 id="expected-loss">Expected Loss</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/expected-loss.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/expected-loss.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>Our objective function so far has been the negative log likelihood, which we have minimized (via the sum of squares error) to obtain our model. However, there is an alternative perspective on an objective function, that of a <em>loss function</em>. A loss function is a cost function associated with the penalty you might need to pay for a particular incorrect decision. One approach to machine learning involves specifying a loss function and considering how much a particular model is likely to cost us across its lifetime. We can represent this with an expectation. If our loss function is given as <span class="math inline">$L(\dataScalar, \inputScalar, \mappingVector)$</span> for a particular model that predicts <span class="math inline">$\dataScalar$</span> given <span class="math inline">$\inputScalar$</span> and <span class="math inline">$\mappingVector$</span> then we are interested in minimizing the expected loss under the likely distribution of <span class="math inline">$\dataScalar$</span> and <span class="math inline">$\inputScalar$</span>. To understand this formally we define the <em>true</em> distribution of the data samples, <span class="math inline">$\dataScalar$</span>, <span class="math inline">$\inputScalar$</span>. This is a particularl distribution that we don’t have access to very often, and to represent that we define it with a variant of the letter ‘P’, <span class="math inline">$\mathbb{P}(\dataScalar, \inputScalar)$</span>. If we genuinely pay <span class="math inline">$L(\dataScalar, \inputScalar, \mappingVector)$</span> for every mistake we make, and the future test data is genuinely drawn from <span class="math inline">$\mathbb{P}(\dataScalar, \inputScalar)$</span> then we can define our expected loss, or risk, to be, <br /><span class="math display">$$
-R(\mappingVector) = \int L(\dataScalar, \inputScalar, \mappingVector) \mathbb{P}(\dataScalar, \inputScalar) \text{d}\dataScalar
-\text{d}\inputScalar.
-$$</span><br /> Of course, in practice, this value can’t be computed <em>but</em> it serves as a reminder of what it is we are aiming to minimize and under certain circumstances it can be approximated.</p>
+<p>Our objective function so far has been the negative log likelihood, which we have minimized (via the sum of squares error) to obtain our model. However, there is an alternative perspective on an objective function, that of a <em>loss function</em>. A loss function is a cost function associated with the penalty you might need to pay for a particular incorrect decision. One approach to machine learning involves specifying a loss function and considering how much a particular model is likely to cost us across its lifetime. We can represent this with an expectation. If our loss function is given as <span class="math inline">\(L(y, x, \mathbf{ w})\)</span> for a particular model that predicts <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathbf{ w}\)</span> then we are interested in minimizing the expected loss under the likely distribution of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. To understand this formally we define the <em>true</em> distribution of the data samples, <span class="math inline">\(y\)</span>, <span class="math inline">\(x\)</span>. This is a particularl distribution that we don’t have access to very often, and to represent that we define it with a variant of the letter ‘P’, <span class="math inline">\(\mathbb{P}(y, x)\)</span>. If we genuinely pay <span class="math inline">\(L(y, x, \mathbf{ w})\)</span> for every mistake we make, and the future test data is genuinely drawn from <span class="math inline">\(\mathbb{P}(y, x)\)</span> then we can define our expected loss, or risk, to be, <span class="math display">\[
+R(\mathbf{ w}) = \int L(y, x, \mathbf{ w}) \mathbb{P}(y, x) \text{d}y
+\text{d}x.
+\]</span> Of course, in practice, this value can’t be computed <em>but</em> it serves as a reminder of what it is we are aiming to minimize and under certain circumstances it can be approximated.</p>
 <h2 id="sample-based-approximations">Sample Based Approximations</h2>
 <p>A sample based approximation to an expectation involves replacing the true expectation with a sum over samples from the distribution.</p>
-<p><br /><span class="math display">$$
-\int \mappingFunction(z) p(z) \text{d}z\approx \frac{1}{s}\sum_{i=1}^s \mappingFunction(z_i).
-$$</span><br /> if <span class="math inline">{<em>z</em><sub><em>i</em></sub>}<sub><em>i</em> = 1</sub><sup><em>s</em></sup></span> are a set of <span class="math inline"><em>s</em></span> independent and identically distributed samples from the distribution <span class="math inline"><em>p</em>(<em>z</em>)</span>. This approximation becomes better for larger <span class="math inline"><em>s</em></span>, although the <em>rate of convergence</em> to the true integral will be very dependent on the distribution <span class="math inline"><em>p</em>(<em>z</em>)</span> <em>and</em> the function <span class="math inline">$\mappingFunction(z)$</span>.</p>
-<p>That said, this means we can approximate our true integral with the sum, <br /><span class="math display">$$
-R(\mappingVector) \approx \frac{1}{\numData}\sum_{i=1}^{\numData} L(\dataScalar_i, \inputScalar_i, \mappingVector).
-$$</span><br /></p>
-<p>if <span class="math inline">$\dataScalar_i$</span> and <span class="math inline">$\inputScalar_i$</span> are independent samples from the true distribution <span class="math inline">$\mathbb{P}(\dataScalar, \inputScalar)$</span>. Minimizing this sum directly is known as <em>empirical risk minimization</em>. The sum of squares error we have been using can be recovered for this case by considering a <em>squared loss</em>, <br /><span class="math display">$$
-L(\dataScalar, \inputScalar, \mappingVector) = (\dataScalar-\mappingVector^\top\boldsymbol{\phi}(\inputScalar))^2,
-$$</span><br /> which gives an empirical risk of the form <br /><span class="math display">$$
-R(\mappingVector) \approx \frac{1}{\numData} \sum_{i=1}^{\numData}
-(\dataScalar_i - \mappingVector^\top \boldsymbol{\phi}(\inputScalar_i))^2
-$$</span><br /> which up to the constant <span class="math inline">$\frac{1}{\numData}$</span> is identical to the objective function we have been using so far.</p>
+<p><span class="math display">\[
+\int f(z) p(z) \text{d}z\approx \frac{1}{s}\sum_{i=1}^s f(z_i).
+\]</span> if <span class="math inline">\(\{z_i\}_{i=1}^s\)</span> are a set of <span class="math inline">\(s\)</span> independent and identically distributed samples from the distribution <span class="math inline">\(p(z)\)</span>. This approximation becomes better for larger <span class="math inline">\(s\)</span>, although the <em>rate of convergence</em> to the true integral will be very dependent on the distribution <span class="math inline">\(p(z)\)</span> <em>and</em> the function <span class="math inline">\(f(z)\)</span>.</p>
+<p>That said, this means we can approximate our true integral with the sum, <span class="math display">\[
+R(\mathbf{ w}) \approx \frac{1}{n}\sum_{i=1}^{n} L(y_i, x_i, \mathbf{ w}).
+\]</span></p>
+<p>if <span class="math inline">\(y_i\)</span> and <span class="math inline">\(x_i\)</span> are independent samples from the true distribution <span class="math inline">\(\mathbb{P}(y, x)\)</span>. Minimizing this sum directly is known as <em>empirical risk minimization</em>. The sum of squares error we have been using can be recovered for this case by considering a <em>squared loss</em>, <span class="math display">\[
+L(y, x, \mathbf{ w}) = (y-\mathbf{ w}^\top\boldsymbol{\phi}(x))^2,
+\]</span> which gives an empirical risk of the form <span class="math display">\[
+R(\mathbf{ w}) \approx \frac{1}{n} \sum_{i=1}^{n}
+(y_i - \mathbf{ w}^\top \boldsymbol{\phi}(x_i))^2
+\]</span> which up to the constant <span class="math inline">\(\frac{1}{n}\)</span> is identical to the objective function we have been using so far.</p>
 <h2 id="estimating-risk-through-validation">Estimating Risk through Validation</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/empirical-risk-minimization.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/empirical-risk-minimization.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>Unfortuantely, minimising the empirial risk only guarantees something about our performance on the training data. If we don’t have enough data for the approximation to the risk to be valid, then we can end up performing significantly worse on test data. Fortunately, we can also estimate the risk for test data through estimating the risk for unseen data. The main trick here is to ‘hold out’ a portion of our data from training and use the models performance on that sub-set of the data as a proxy for the true risk. This data is known as ‘validation’ data. It contrasts with test data, because its values are known at the model design time. However, in contrast to test date we don’t use it to fit our model. This means that it doesn’t exhibit the same bias that the empirical risk does when estimating the true risk.</p>
 <h2 id="validation">Validation</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/validation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/validation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <p>In this lab we will explore techniques for model selection that make use of validation data. Data that isn’t seen by the model in the learning (or fitting) phase, but is used to <em>validate</em> our choice of model from amoungst the different designs we have selected.</p>
-<p>In machine learning, we are looking to minimise the value of our objective function <span class="math inline"><em>E</em></span> with respect to its parameters <span class="math inline">$\mappingVector$</span>. We do this by considering our training data. We minimize the value of the objective function as it’s observed at each training point. However we are really interested in how the model will perform on future data. For evaluating that we choose to <em>hold out</em> a portion of the data for evaluating the quality of the model.</p>
+<p>In machine learning, we are looking to minimise the value of our objective function <span class="math inline">\(E\)</span> with respect to its parameters <span class="math inline">\(\mathbf{ w}\)</span>. We do this by considering our training data. We minimize the value of the objective function as it’s observed at each training point. However we are really interested in how the model will perform on future data. For evaluating that we choose to <em>hold out</em> a portion of the data for evaluating the quality of the model.</p>
 <p>We will review the different methods of model selection on the Olympics marathon data. Firstly we import the Olympic marathon data.</p>
 <h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
+<p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
 <table>
 <tr>
 <td width="70%">
@@ -140,34 +148,34 @@ $$</span><br /> which up to the constant <span class="math inline">$\frac{1}{\nu
 <span id="cb9-6"><a href="#cb9-6"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width style=" ">
+<object class="svgplot " data="../slides/diagrams/datasets/olympic-marathon.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="olympic-marathon-caption" class="caption-frame">
-<p>Figure: Olympic marathon pace times since 1892.</p>
+<p>Figure: Olympic marathon pace times since 1896.</p>
 </div>
 </div>
 <p>Things to notice about the data include the outlier in 1904, in this year, the olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed.</p>
 <p>More recent years see more consistently quick marathons.</p>
 <h2 id="validation-on-the-olympic-marathon-data">Validation on the Olympic Marathon Data</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-validation-fit.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-validation-fit.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>The first thing we’ll do is fit a standard linear model to the data. We recall from previous lectures and lab classes that to do this we need to solve the system <br /><span class="math display">$$
-\basisMatrix^\top \basisMatrix \mappingVector = \basisMatrix^\top \dataVector
-$$</span><br /> for <span class="math inline">$\mappingVector$</span> and use the resulting vector to make predictions at the training points and test points, <br /><span class="math display">$$
-\mappingFunctionVector = \basisMatrix \mappingVector.
-$$</span><br /> The prediction function can be used to compute the objective function, <br /><span class="math display">$$
-E(\mappingVector) = \sum_{i}^{\numData} (\dataScalar_i - \mappingVector^\top\phi(\dataVector_i))^2
-$$</span><br /> by substituting in the prediction in vector form we have <br /><span class="math display">$$
-E(\mappingVector) =  (\dataVector - \mappingFunctionVector)^\top(\dataVector - \mappingFunctionVector)
-$$</span><br /></p>
+<p>The first thing we’ll do is fit a standard linear model to the data. We recall from previous lectures and lab classes that to do this we need to solve the system <span class="math display">\[
+\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
+\]</span> for <span class="math inline">\(\mathbf{ w}\)</span> and use the resulting vector to make predictions at the training points and test points, <span class="math display">\[
+\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
+\]</span> The prediction function can be used to compute the objective function, <span class="math display">\[
+E(\mathbf{ w}) = \sum_{i}^{n} (y_i - \mathbf{ w}^\top\phi(\mathbf{ y}_i))^2
+\]</span> by substituting in the prediction in vector form we have <span class="math display">\[
+E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
+\]</span></p>
 <h3 id="exercise-2">Exercise 2</h3>
 <p>In this question you will construct some flexible general code for fitting linear models.</p>
-<p>Create a python function that computes <span class="math inline">$\basisMatrix$</span> for the linear basis, <br /><span class="math display">$$\basisMatrix = \begin{bmatrix} \dataVector &amp; \mathbf{1}\end{bmatrix}$$</span><br /> Name your function <code>linear</code>. <code>Phi</code> should be in the form of a <em>design matrix</em> and <code>x</code> should be in the form of a <code>numpy</code> two dimensional array with <span class="math inline">$\numData$</span> rows and 1 column Calls to your function should be in the following form:</p>
+<p>Create a python function that computes <span class="math inline">\(\boldsymbol{ \Phi}\)</span> for the linear basis, <span class="math display">\[\boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{ y}&amp; \mathbf{1}\end{bmatrix}\]</span> Name your function <code>linear</code>. <code>Phi</code> should be in the form of a <em>design matrix</em> and <code>x</code> should be in the form of a <code>numpy</code> two dimensional array with <span class="math inline">\(n\)</span> rows and 1 column Calls to your function should be in the following form:</p>
 <p><code>Phi = linear(x)</code></p>
-<p>Create a python function that accepts, as arguments, a python function that defines a basis (like the one you’ve just created called <code>linear</code>) as well as a set of inputs and a vector of parameters. Your new python function should return a prediction. Name your function <code>prediction</code>. The return value <code>f</code> should be a two dimensional <code>numpy</code> array with <span class="math inline">$\numData$</span> rows and <span class="math inline">1</span> column, where <span class="math inline">$\numData$</span> is the number of data points. Calls to your function should be in the following form:</p>
+<p>Create a python function that accepts, as arguments, a python function that defines a basis (like the one you’ve just created called <code>linear</code>) as well as a set of inputs and a vector of parameters. Your new python function should return a prediction. Name your function <code>prediction</code>. The return value <code>f</code> should be a two dimensional <code>numpy</code> array with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(1\)</span> column, where <span class="math inline">\(n\)</span> is the number of data points. Calls to your function should be in the following form:</p>
 <p><code>f = prediction(w, x, linear)</code></p>
 <p>Create a python function that computes the sum of squares objective function (or error function). It should accept your input data (or covariates) and target data (or response variables) and your parameter vector <code>w</code> as arguments. It should also accept a python function that represents the basis. Calls to your function should be in the following form:</p>
 <p><code>e = objective(w, x, y, linear)</code></p>
@@ -177,9 +185,9 @@ $$</span><br /></p>
 <h2 id="polynomial-fit-training-error">Polynomial Fit: Training Error</h2>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>In this question we extend the code above to a non- linear basis (a quadratic function).</p>
-<p>Start by creating a python-function called <code>quadratic</code>. It should compute the quadratic basis. <br /><span class="math display">$$
-\basisMatrix = \begin{bmatrix} \mathbf{1} &amp; \dataVector &amp; \dataVector^2\end{bmatrix}
-$$</span><br /> It should be called in the following form:</p>
+<p>Start by creating a python-function called <code>quadratic</code>. It should compute the quadratic basis. <span class="math display">\[
+\boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ y}&amp; \mathbf{ y}^2\end{bmatrix}
+\]</span> It should be called in the following form:</p>
 <p><code>Phi = quadratic(x)</code></p>
 <p>Use this to compute the quadratic fit for the model, again plotting the result titled by the error.</p>
 <h2 id="polynomial-fits-to-olympics-data">Polynomial Fits to Olympics Data</h2>
@@ -250,28 +258,28 @@ $$</span><br /> It should be called in the following form:</p>
 <p>Which polynomial has the minimum training error? Which polynomial has the minimum validation error?</p>
 <h2 id="leave-one-out-validation">Leave One Out Validation</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-loo-validation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-loo-validation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>Hold out validation uses a portion of the data to hold out and a portion of the data to train on. There is always a compromise between how much data to hold out and how much data to train on. The more data you hold out, the better the estimate of your performance at ‘run-time’ (when the model is used to make predictions in real applications). However, by holding out more data, you leave less data to train on, so you have a better validation, but a poorer quality model fit than you could have had if you’d used all the data for training. Leave one out cross validation leaves as much data in the training phase as possible: you only take <em>one point</em> out for your validation set. However, if you do this for hold-out validation, then the quality of your validation error is very poor because you are testing the model quality on one point only. In <em>cross validation</em> the approach is to improve this estimate by doing more than one model fit. In <em>leave one out cross validation</em> you fit <span class="math inline">$\numData$</span> different models, where <span class="math inline">$\numData$</span> is the number of your data. For each model fit you take out one data point, and train the model on the remaining <span class="math inline"><em>n</em> − 1</span> data points. You validate the model on the data point you’ve held out, but you do this <span class="math inline">$\numData$</span> times, once for each different model. You then take the <em>average</em> of all the <span class="math inline">$\numData$</span> badly estimated hold out validation errors. The average of this estimate is a good estimate of performance of those models on the test data.</p>
+<p>Hold out validation uses a portion of the data to hold out and a portion of the data to train on. There is always a compromise between how much data to hold out and how much data to train on. The more data you hold out, the better the estimate of your performance at ‘run-time’ (when the model is used to make predictions in real applications). However, by holding out more data, you leave less data to train on, so you have a better validation, but a poorer quality model fit than you could have had if you’d used all the data for training. Leave one out cross validation leaves as much data in the training phase as possible: you only take <em>one point</em> out for your validation set. However, if you do this for hold-out validation, then the quality of your validation error is very poor because you are testing the model quality on one point only. In <em>cross validation</em> the approach is to improve this estimate by doing more than one model fit. In <em>leave one out cross validation</em> you fit <span class="math inline">\(n\)</span> different models, where <span class="math inline">\(n\)</span> is the number of your data. For each model fit you take out one data point, and train the model on the remaining <span class="math inline">\(n-1\)</span> data points. You validate the model on the data point you’ve held out, but you do this <span class="math inline">\(n\)</span> times, once for each different model. You then take the <em>average</em> of all the <span class="math inline">\(n\)</span> badly estimated hold out validation errors. The average of this estimate is a good estimate of performance of those models on the test data.</p>
 <h3 id="exercise-6">Exercise 6</h3>
 <p>Write code that computes the <em>leave one out</em> validation error for the olympic data and the polynomial basis. Use the functions you have created above: <code>objective</code>, <code>fit</code>, <code>polynomial</code>. Compute the <em>leave-one-out</em> cross validation error for basis functions containing a maximum degree from 0 to 17.</p>
-<h2 id="k-fold-cross-validation"><span class="math inline"><em>k</em></span>-fold Cross Validation</h2>
+<h2 id="k-fold-cross-validation"><span class="math inline">\(k\)</span>-fold Cross Validation</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-k-fold-validation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-k-fold-validation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>Leave one out cross validation produces a very good estimate of the performance at test time, and is particularly useful if you don’t have a lot of data. In these cases you need to make as much use of your data for model fitting as possible, and having a large hold out data set (to validate model performance) can have a significant effect on the size of the data set you have to fit your model, and correspondingly, the complexity of the model you can fit. However, leave one out cross validation involves fitting <span class="math inline">$\numData$</span> models, where <span class="math inline">$\numData$</span> is your number of training data. For the olympics example, this is only 27 model fits, but in practice many data sets consist thousands or millions of data points, and fitting many millions of models for estimating validation error isn’t really practical. One option is to return to <em>hold out</em> validation, but another approach is to perform <span class="math inline"><em>k</em></span>-fold cross validation. In <span class="math inline"><em>k</em></span>-fold cross validation you split your data into <span class="math inline"><em>k</em></span> parts. Then you use <span class="math inline"><em>k</em> − 1</span> of those parts for training, and hold out one part for validation. Just like we did for the hold out validation above. In <em>cross</em> validation, however, you repeat this process. You swap the part of the data you just used for validation back in to the training set and select another part for validation. You then fit the model to the new training data and validate on the portion of data you’ve just extracted. Each split of training/validation data is called a <em>fold</em> and since you do this process <span class="math inline"><em>k</em></span> times, the procedure is known as <span class="math inline"><em>k</em></span>-fold cross validation. The term <em>cross</em> refers to the fact that you cross over your validation portion back into the training data every time you perform a fold.</p>
+<p>Leave one out cross validation produces a very good estimate of the performance at test time, and is particularly useful if you don’t have a lot of data. In these cases you need to make as much use of your data for model fitting as possible, and having a large hold out data set (to validate model performance) can have a significant effect on the size of the data set you have to fit your model, and correspondingly, the complexity of the model you can fit. However, leave one out cross validation involves fitting <span class="math inline">\(n\)</span> models, where <span class="math inline">\(n\)</span> is your number of training data. For the olympics example, this is only 27 model fits, but in practice many data sets consist thousands or millions of data points, and fitting many millions of models for estimating validation error isn’t really practical. One option is to return to <em>hold out</em> validation, but another approach is to perform <span class="math inline">\(k\)</span>-fold cross validation. In <span class="math inline">\(k\)</span>-fold cross validation you split your data into <span class="math inline">\(k\)</span> parts. Then you use <span class="math inline">\(k-1\)</span> of those parts for training, and hold out one part for validation. Just like we did for the hold out validation above. In <em>cross</em> validation, however, you repeat this process. You swap the part of the data you just used for validation back in to the training set and select another part for validation. You then fit the model to the new training data and validate on the portion of data you’ve just extracted. Each split of training/validation data is called a <em>fold</em> and since you do this process <span class="math inline">\(k\)</span> times, the procedure is known as <span class="math inline">\(k\)</span>-fold cross validation. The term <em>cross</em> refers to the fact that you cross over your validation portion back into the training data every time you perform a fold.</p>
 <h3 id="exercise-7">Exercise 7</h3>
-<p>Perform <span class="math inline"><em>k</em></span>-fold cross validation on the olympic data with your polynomial basis. Use <span class="math inline"><em>k</em></span> set to 5 (e.g. five fold cross validation). Do the different forms of validation select different models? Does five fold cross validation always select the same model?</p>
+<p>Perform <span class="math inline">\(k\)</span>-fold cross validation on the olympic data with your polynomial basis. Use <span class="math inline">\(k\)</span> set to 5 (e.g. five fold cross validation). Do the different forms of validation select different models? Does five fold cross validation always select the same model?</p>
 <p><em>Note</em>: The data doesn’t divide into 5 equal size partitions for the five fold cross validation error. Don’t worry about this too much. Two of the partitions will have an extra data point. You might find <code>np.random.permutation?</code> useful.</p>
 <h2 id="bias-variance-decomposition">Bias Variance Decomposition</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bias-variance-dilemma.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bias-variance-dilemma.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
-<p>The bias-variance decomposition considers the expected test error for different variations of the <em>training data</em> sampled from, <span class="math inline">$\Pr(\dataVector, \dataScalar)$</span> <br /><span class="math display">$$
-\mathbb{E}\left[ \left(\dataScalar - \mappingFunction^*(\dataVector)\right)^2 \right].
-$$</span><br /> This can be decomposed into two parts, <br /><span class="math display">$$
-\mathbb{E}\left[ \left(\dataScalar - \mappingFunction(\dataVector)\right)^2 \right] = \text{bias}\left[\mappingFunction^*(\dataVector)\right]^2 + \text{variance}\left[\mappingFunction^*(\dataVector)\right] +\sigma^2,
-$$</span><br /> where the bias is given by <br /><span class="math display">$$
-  \text{bias}\left[\mappingFunction^*(\dataVector)\right] =
-\mathbb{E}\left[\mappingFunction^*(\dataVector)\right] * \mappingFunction(\dataVector)
-$$</span><br /> and it summarizes error that arises from the model’s inability to represent the underlying complexity of the data. For example, if we were to model the marathon pace of the winning runner from the Olympics by computing the average pace across time, then that model would exhibit <em>bias</em> error because the reality of Olympic marathon pace is it is changing (typically getting faster).</p>
-<p>The variance term is given by <br /><span class="math display">$$
-  \text{variance}\left[\mappingFunction^*(\dataVector)\right] = \mathbb{E}\left[\left(\mappingFunction^*(\dataVector) - \mathbb{E}\left[\mappingFunction^*(\dataVector)\right]\right)^2\right].
-  $$</span><br /> The variance term is often described as arising from a model that is too complex, but we have to be careful with this idea. Is the model really too complex relative to the real world that generates the data? The real world is a complex place, and it is rare that we are constructing mathematical models that are more complex than the world around us. Rather, the ‘too complex’ refers to ability to estimate the parameters of the model given the data we have. Slight variations in the training set cause changes in prediction.</p>
+<p>The bias-variance decomposition considers the expected test error for different variations of the <em>training data</em> sampled from, <span class="math inline">\(\Pr(\mathbf{ y}, y)\)</span> <span class="math display">\[
+\mathbb{E}\left[ \left(y- f^*(\mathbf{ y})\right)^2 \right].
+\]</span> This can be decomposed into two parts, <span class="math display">\[
+\mathbb{E}\left[ \left(y- f(\mathbf{ y})\right)^2 \right] = \text{bias}\left[f^*(\mathbf{ y})\right]^2 + \text{variance}\left[f^*(\mathbf{ y})\right] +\sigma^2,
+\]</span> where the bias is given by <span class="math display">\[
+  \text{bias}\left[f^*(\mathbf{ y})\right] =
+\mathbb{E}\left[f^*(\mathbf{ y})\right] * f(\mathbf{ y})
+\]</span> and it summarizes error that arises from the model’s inability to represent the underlying complexity of the data. For example, if we were to model the marathon pace of the winning runner from the Olympics by computing the average pace across time, then that model would exhibit <em>bias</em> error because the reality of Olympic marathon pace is it is changing (typically getting faster).</p>
+<p>The variance term is given by <span class="math display">\[
+  \text{variance}\left[f^*(\mathbf{ y})\right] = \mathbb{E}\left[\left(f^*(\mathbf{ y}) - \mathbb{E}\left[f^*(\mathbf{ y})\right]\right)^2\right].
+  \]</span> The variance term is often described as arising from a model that is too complex, but we have to be careful with this idea. Is the model really too complex relative to the real world that generates the data? The real world is a complex place, and it is rare that we are constructing mathematical models that are more complex than the world around us. Rather, the ‘too complex’ refers to ability to estimate the parameters of the model given the data we have. Slight variations in the training set cause changes in prediction.</p>
 <p>Models that exhibit high variance are sometimes said to ‘overfit’ the data whereas models that exhibit high bias are sometimes described as ‘underfitting’ the data.</p>
 <h2 id="bias-vs-variance-error-plots">Bias vs Variance Error Plots</h2>
 <p><span style="text-align:right"><span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bias-variance-plots.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bias-variance-plots.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span></span></p>
@@ -308,10 +316,11 @@ $$</span><br /> and it summarizes error that arises from the model’s inability
 <span id="cb16-19"><a href="#cb16-19"></a>    models <span class="op">=</span> (cl.fit(X, y) <span class="cf">for</span> cl <span class="kw">in</span> models)</span>
 <span id="cb16-20"><a href="#cb16-20"></a>    xlim, ylim <span class="op">=</span> decision_boundary_plot(models, X, y, </span>
 <span id="cb16-21"><a href="#cb16-21"></a>                           axs<span class="op">=</span>ax, </span>
-<span id="cb16-22"><a href="#cb16-22"></a>                           filename<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml/bias-variance</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>samp), </span>
-<span id="cb16-23"><a href="#cb16-23"></a>                           titles<span class="op">=</span>titles,</span>
-<span id="cb16-24"><a href="#cb16-24"></a>                          xlim<span class="op">=</span>xlim,</span>
-<span id="cb16-25"><a href="#cb16-25"></a>                          ylim<span class="op">=</span>ylim)</span></code></pre></div>
+<span id="cb16-22"><a href="#cb16-22"></a>                           filename<span class="op">=</span><span class="st">&#39;bias-variance</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>samp), </span>
+<span id="cb16-23"><a href="#cb16-23"></a>                           directory<span class="op">=</span><span class="st">&#39;../slides/diagrams/ml&#39;</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a>                           titles<span class="op">=</span>titles,</span>
+<span id="cb16-25"><a href="#cb16-25"></a>                          xlim<span class="op">=</span>xlim,</span>
+<span id="cb16-26"><a href="#cb16-26"></a>                          ylim<span class="op">=</span>ylim)</span></code></pre></div>
 <!---->
 <div class="figure">
 <div id="bias-variance-errors-figure" class="figure-frame">
@@ -344,7 +353,7 @@ $$</span><br /> and it summarizes error that arises from the model’s inability
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-Rogers:book11">
-<p>Rogers, Simon, and Mark Girolami. 2011. <em>A First Course in Machine Learning</em>. CRC Press.</p>
+<p>Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.</p>
 </div>
 </div>
 
