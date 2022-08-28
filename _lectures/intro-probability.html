@@ -3,8 +3,8 @@ title: "Probability and an Introduction to Jupyter, Python and Pandas"
 abstract: "<p>In this first session we will introduce <em>machine learning</em>, review <em>probability</em> and begin familiarization with the Jupyter notebook, python and pandas.</p>"
 edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/intro-probability.md
 week: 0
-reveal: 00-intro-probability.slides.html
-ipynb: 00-intro-probability.ipynb
+reveal: intro-probability.slides.html
+ipynb: intro-probability.ipynb
 youtube: "M67rG3cZoVg"
 edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/intro-probability.md
 layout: lecture
@@ -22,7 +22,7 @@ categories:
 <!--
 
 -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">--</span>upgrade git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>ods</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
 <h1 id="course-texts">Course Texts</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/welcome.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_mlai/includes/welcome.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -34,7 +34,7 @@ categories:
 <div class="figure">
 <div id="a-first-course-in-machine-learning-figure" class="figure-frame">
 <div class="centered centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//mlai/a-first-course-in-machine-learning.jpg" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//mlai/a-first-course-in-machine-learning.jpg" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="a-first-course-in-machine-learning-magnify" class="magnify" onclick="magnifyFigure(&#39;a-first-course-in-machine-learning&#39;)">
@@ -51,7 +51,7 @@ categories:
 <div class="figure">
 <div id="pattern-recognition-and-machine-learning-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//mlai/978-0-387-31073-2.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//mlai/978-0-387-31073-2.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="pattern-recognition-and-machine-learning-magnify" class="magnify" onclick="magnifyFigure(&#39;pattern-recognition-and-machine-learning&#39;)">
@@ -89,7 +89,7 @@ categories:
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    shuffle(words)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39; &#39;</span>.join(words))</span></code></pre></div>
 <p>Have a play with the code in the above box. Think about the following questions: what is the difference between <code>CTRL-enter</code> and <code>SHIFT-enter</code> in running the code? What does the command <code>shuffle</code> do? Can you find out by typing <code>shuffle?</code> in a code box? Once you’ve had a play with the code we can load in some data using the <code>pandas</code> library for data analysis.</p>
-<h3 id="exercise-1-1">Exercise 1</h3>
+<h3 id="exercise-2">Exercise 2</h3>
 <p>What is jupyter and why was it invented? Give some examples of functionality it gives over standard python. What is the jupyter project? Name two languages involved in the Jupyter project other than python.</p>
 <h1 id="what-is-machine-learning">What is Machine Learning?</h1>
 <div style="text-align:right">
@@ -99,21 +99,25 @@ categories:
 <p><span class="math display">\[\text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
 <p>where <em>data</em> is our observations. They can be actively or passively acquired (meta-data). The <em>model</em> contains our assumptions, based on previous experience. That experience can be other data, it can come from transfer learning, or it can merely be our beliefs about the regularities of the universe. In humans our models include our inductive biases. The <em>prediction</em> is an action to be taken or a categorization or a quality score. The reason that machine learning has become a mainstay of artificial intelligence is the importance of predictions in artificial intelligence. The data and the model are combined through computation.</p>
 <p>In practice we normally perform machine learning using two functions. To combine data with a model we typically make use of:</p>
-<p><strong>a prediction function</strong> a function which is used to make the predictions. It includes our beliefs about the regularities of the universe, our assumptions about how the world works, e.g. smoothness, spatial similarities, temporal similarities.</p>
-<p><strong>an objective function</strong> a function which defines the cost of misprediction. Typically it includes knowledge about the world’s generating processes (probabilistic objectives) or the costs we pay for mispredictions (empiricial risk minimization).</p>
-<p>The combination of data and model through the prediction function and the objective function leads to a <em>learning algorithm</em>. The class of prediction functions and objective functions we can make use of is restricted by the algorithms they lead to. If the prediction function or the objective function are too complex, then it can be difficult to find an appropriate learning algorithm. Much of the acdemic field of machine learning is the quest for new learning algorithms that allow us to bring different types of models and data together.</p>
+<p><strong>a prediction function</strong> a function which is used to make the predictions. It includes our beliefs about the regularities of the universe, our assumptions about how the world works, e.g., smoothness, spatial similarities, temporal similarities.</p>
+<p><strong>an objective function</strong> a function which defines the cost of misprediction. Typically, it includes knowledge about the world’s generating processes (probabilistic objectives) or the costs we pay for mispredictions (empirical risk minimization).</p>
+<p>The combination of data and model through the prediction function and the objective function leads to a <em>learning algorithm</em>. The class of prediction functions and objective functions we can make use of is restricted by the algorithms they lead to. If the prediction function or the objective function are too complex, then it can be difficult to find an appropriate learning algorithm. Much of the academic field of machine learning is the quest for new learning algorithms that allow us to bring different types of models and data together.</p>
 <p>A useful reference for state of the art in machine learning is the UK Royal Society Report, <a href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine Learning: Power and Promise of Computers that Learn by Example</a>.</p>
 <p>You can also check my post blog post on <a href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What is Machine Learning?</a>.</p>
 <h2 id="overdetermined-system">Overdetermined System</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-inaugural.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-inaugural.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-system.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-system.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The challenge with a linear model is that it has two unknowns, <span class="math inline">\(m\)</span>, and <span class="math inline">\(c\)</span>. Observing data allows us to write down a system of simultaneous linear equations. So, for example if we observe two data points, the first with the input value, <span class="math inline">\(x_1 = 1\)</span> and the output value, <span class="math inline">\(y_1 =3\)</span> and a second data point, <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span>, then we can write two simultaneous linear equations of the form.</p>
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> <span class="math display">\[3 = m + c\]</span> point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> <span class="math display">\[1 = 3m + c\]</span></p>
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> <span class="math display">\[
+3 = m + c
+\]</span> point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> <span class="math display">\[
+1 = 3m + c
+\]</span></p>
 <p>The solution to these two simultaneous equations can be represented graphically as</p>
 <div class="figure">
 <div id="over-determined-system-3-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.com/mlai/./slides/diagrams//ml/over_determined_system003.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/over_determined_system003.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="over-determined-system-3-magnify" class="magnify" onclick="magnifyFigure(&#39;over-determined-system-3&#39;)">
@@ -123,11 +127,13 @@ categories:
 <p>Figure: The solution of two linear equations represented as the fit of a straight line through two data</p>
 </div>
 </div>
-<p>The challenge comes when a third data point is observed and it doesn’t naturally fit on the straight line.</p>
-<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> <span class="math display">\[2.5 = 2m + c\]</span></p>
+<p>The challenge comes when a third data point is observed, and it doesn’t fit on the straight line.</p>
+<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> <span class="math display">\[
+2.5 = 2m + c
+\]</span></p>
 <div class="figure">
 <div id="over-determined-system-4-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.com/mlai/./slides/diagrams//ml/over_determined_system004.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/over_determined_system004.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="over-determined-system-4-magnify" class="magnify" onclick="magnifyFigure(&#39;over-determined-system-4&#39;)">
@@ -140,7 +146,7 @@ categories:
 <p>Now there are three candidate lines, each consistent with our data.</p>
 <div class="figure">
 <div id="over-determined-system-7-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.com/mlai/./slides/diagrams//ml/over_determined_system007.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/over_determined_system007.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="over-determined-system-7-magnify" class="magnify" onclick="magnifyFigure(&#39;over-determined-system-7&#39;)">
@@ -151,15 +157,19 @@ categories:
 </div>
 </div>
 <p>This is known as an <em>overdetermined</em> system because there are more data than we need to determine our parameters. The problem arises because the model is a simplification of the real world, and the data we observe is therefore inconsistent with our model.</p>
-<p>The solution was proposed by Pierre-Simon Laplace. His idea was to accept that the model was an incomplete representation of the real world, and the manner in which it was incomplete is <em>unknown</em>. His idea was that such unknowns could be dealt with through probability.</p>
-<h3 id="pierre-simon-laplace">Pierre-Simon Laplace</h3>
+<h2 id="pierre-simon-laplace">Pierre-Simon Laplace</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-laplace-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/overdetermined-laplace-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>The solution was proposed by Pierre-Simon Laplace. His idea was to accept that the model was an incomplete representation of the real world, and the way it was incomplete is <em>unknown</em>. His idea was that such unknowns could be dealt with through probability.</p>
+<h3 id="pierre-simon-laplace-1">Pierre-Simon Laplace</h3>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_physics/includes/laplace-portrait.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_physics/includes/laplace-portrait.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <div class="figure">
 <div id="pierre-simon-laplace-image-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//ml/Pierre-Simon_Laplace.png" width="30%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//ml/Pierre-Simon_Laplace.png" width="30%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="pierre-simon-laplace-image-magnify" class="magnify" onclick="magnifyFigure(&#39;pierre-simon-laplace-image&#39;)">
@@ -179,7 +189,7 @@ categories:
 <div class="figure">
 <div id="laplaces-determinism-english-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//physics/laplacesDeterminismEnglish.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//physics/laplacesDeterminismEnglish.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="laplaces-determinism-english-magnify" class="magnify" onclick="magnifyFigure(&#39;laplaces-determinism-english&#39;)">
@@ -203,7 +213,7 @@ categories:
 <div class="figure">
 <div id="probability-relative-in-part-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//physics/philosophicaless00lapliala.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//physics/philosophicaless00lapliala.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="probability-relative-in-part-magnify" class="magnify" onclick="magnifyFigure(&#39;probability-relative-in-part&#39;)">
@@ -215,23 +225,21 @@ categories:
 </div>
 <p>In other words, we can never make use of the idealistic deterministic Universe due to our ignorance about the world, Laplace’s suggestion, and focus in this essay is that we turn to probability to deal with this uncertainty. This is also our inspiration for using probability in machine learning. This is the true message of Laplace’s essay, not determinism, but the gremlin of uncertainty that emerges from our ignorance.</p>
 <p>The “forces by which nature is animated” is our <em>model</em>, the “situation of beings that compose it” is our <em>data</em> and the “intelligence sufficiently vast enough to submit these data to analysis” is our compute. The fly in the ointment is our <em>ignorance</em> about these aspects. And <em>probability</em> is the tool we use to incorporate this ignorance leading to uncertainty or <em>doubt</em> in our predictions.</p>
+<h2 id="latent-variables">Latent Variables</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/laplace-latent-variable-solution.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/laplace-latent-variable-solution.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Laplace’s concept was that the reason that the data doesn’t match up to the model is because of unconsidered factors, and that these might be well represented through probability densities. He tackles the challenge of the unknown factors by adding a variable, <span class="math inline">\(\epsilon\)</span>, that represents the unknown. In modern parlance we would call this a <em>latent</em> variable. But in the context Laplace uses it, the variable is so common that it has other names such as a “slack” variable or the <em>noise</em> in the system.</p>
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> <span class="math display">\[
-3 = m + c + \epsilon_1
-\]</span> point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> <span class="math display">\[
-1 = 3m + c + \epsilon_2
-\]</span> point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> <span class="math display">\[
-2.5 = 2m + c + \epsilon_3
-\]</span></p>
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> [ 3 = m + c + _1 ] point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> [ 1 = 3m + c + _2 ] point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> [ 2.5 = 2m + c + _3 ]</p>
 <p>Laplace’s trick has converted the <em>overdetermined</em> system into an <em>underdetermined</em> system. He has now added three variables, <span class="math inline">\(\{\epsilon_i\}_{i=1}^3\)</span>, which represent the unknown corruptions of the real world. Laplace’s idea is that we should represent that unknown corruption with a <em>probability distribution</em>.</p>
 <h2 id="a-probabilistic-process">A Probabilistic Process</h2>
-<p>However, it was left to an admirer of Gauss to develop a practical probability density for that purpose. It was Carl Friederich Gauss who suggested that the <em>Gaussian</em> density (which at the time was unnamed!) should be used to represent this error.</p>
+<p>However, it was left to an admirer of Laplace to develop a practical probability density for that purpose. It was Carl Friedrich Gauss who suggested that the <em>Gaussian</em> density (which at the time was unnamed!) should be used to represent this error.</p>
 <p>The result is a <em>noisy</em> function, a function which has a deterministic part, and a stochastic part. This type of function is sometimes known as a probabilistic or stochastic process, to distinguish it from a deterministic process.</p>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>As an example data set we will use Nigerian Millenium Development Goals Information System Health Facility <span class="citation" data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) and Columbia University, 2014)</span>. It can be found here <a href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014" class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
+<p>As an example data set we will use Nigerian Millennium Development Goals Information System Health Facility <span class="citation" data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) and Columbia University, 2014)</span>. It can be found here <a href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014" class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
 <p>Taking from the information on the site,</p>
 <blockquote>
 <p>The Nigeria MDG (Millennium Development Goals) Information System – NMIS health facility data is collected by the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia University. A rigorous, geo-referenced baseline facility inventory across Nigeria is created spanning from 2009 to 2011 with an additional survey effort to increase coverage in 2014, to build Nigeria’s first nation-wide inventory of health facility. The database includes 34,139 health facilities info in Nigeria.</p>
@@ -248,35 +256,34 @@ categories:
 <p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
 <p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on github: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
+<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
 <p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<p>Alternatively, you can access the data directly with the following commands.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
 <p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
-<p>In python and jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<p>In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
 <p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.com/mlai/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="nigerian-health-facilities-caption" class="caption-frame">
-<p>Figure: Location of the over thirty four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
+<p>Figure: Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
 </div>
 </div>
 <h1 id="probabilities">Probabilities</h1>
@@ -300,57 +307,57 @@ P(Y=y) \approx \frac{n_y}{N}.
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-explore.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-explore.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The NMIS facility data is stored in an object known as a ‘data frame.’ Data frames come from the statistical family of programming languages based on <code>S</code>, the most widely used of which is <a href="http://en.wikipedia.org/wiki/R_(programming_language)"><code>R</code></a>. The data frame gives us a convenient object for manipulating data. The describe method summarizes which columns there are in the data frame and gives us counts, means, standard deviations and percentiles for the values in those columns. To access a column directly we can write</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(data[&#39;num_nurses_fulltime&#39;])</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(data[&#39;num_nurses_fulltime&#39;])</span></span></code></pre></div>
 <p>This shows the number of doctors per facility, number of nurses and number of community health workers (CHEWS). We can plot the number of doctors against the number of nurses as follows.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this ensures the plot appears in the web browser</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># this imports the plotting library in python</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this ensures the plot appears in the web browser</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># this imports the plotting library in python</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>You may be curious what the arguments we give to <code>plt.plot</code> are for, now is the perfect time to look at the documentation</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.plot?</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot?</span></code></pre></div>
 <p>We immediately note that some facilities have a lot of nurses, which prevent’s us seeing the detail of the main number of facilities. First lets identify the facilities with the most nurses.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code></pre></div>
 <p>Here we are using the command <code>data['num_nurses_fulltime']&gt;100</code> to index the facilities in the pandas data frame which have over 100 nurses. To sort them in order we can also use the <code>sort</code> command. The result of this command on its own is a data <code>Series</code> of <code>True</code> and <code>False</code> values. However, when it is passed to the <code>data</code> data frame it returns a new data frame which contains only those values for which the data series is <code>True</code>. We can also sort the result. To sort the result by the values in the <code>num_nurses_fulltime</code> column in <em>descending</em> order we use the following command.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>].sort_values(by<span class="op">=</span><span class="st">&#39;num_nurses_fulltime&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>].sort_values(by<span class="op">=</span><span class="st">&#39;num_nurses_fulltime&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>We now see that the ‘University of Calabar Teaching Hospital’ is a large outlier with 513 nurses. We can try and determine how much of an outlier by histograming the data.</p>
 <h2 id="plotting-the-data">Plotting the Data</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span></code></pre></div>
 <p>We can’t see very much here. Two things are happening. There are so many facilities with zero or one nurse that we don’t see the histogram for hospitals with many nurses. We can try more bins and using a <em>log</em> scale on the <span class="math inline">\(y\)</span>-axis.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">100</span>) <span class="co"># histogram the data with 20 bins.</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">100</span>) <span class="co"># histogram the data with 20 bins.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
 <p>Let’s try and see how the number of nurses relates to the number of doctors.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>)) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ax.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic x scale</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic Y scale</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># give the plot some titles and labels</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Number of Nurses against Number of Doctors&#39;</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;number of nurses&#39;</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;number of doctors&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>)) </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic x scale</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic Y scale</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># give the plot some titles and labels</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Number of Nurses against Number of Doctors&#39;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;number of nurses&#39;</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;number of doctors&#39;</span>)</span></code></pre></div>
 <p>Note a few things. We are interacting with our data. In particular, we are replotting the data according to what we have learned so far. We are using the progamming language as a <em>scripting</em> language to give the computer one command or another, and then the next command we enter is dependent on the result of the previous. This is a very different paradigm to classical software engineering. In classical software engineering we normally write many lines of code (entire object classes or functions) before compiling the code and running it. Our approach is more similar to the approach we take whilst debugging. Historically, researchers interacted with data using a <em>console</em>. A command line window which allowed command entry. The notebook format we are using is slightly different. Each of the code entry boxes acts like a separate console window. We can move up and down the notebook and run each part in a different order. The <em>state</em> of the program is always as we left it after running the previous part.</p>
 <h2 id="probability-and-the-nmis-data">Probability and the NMIS Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-probability.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-probability.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Let’s use the sum rule to compute the estimate the probability that a facility has more than two nurses.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># number of positive outcomes (in sum True counts as 1, False counts as 0)</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count()</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greather than 2 is:&quot;</span>, prob_large)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># number of positive outcomes (in sum True counts as 1, False counts as 0)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greather than 2 is:&quot;</span>, prob_large)</span></code></pre></div>
 <h1 id="conditioning">Conditioning</h1>
 <p>When predicting whether a coin turns up head or tails, we might think that this event is <em>independent</em> of the year or time of day. If we include an observation such as time, then in a probability this is known as <em>condtioning</em>. We use this notation, <span class="math inline">\(P(Y=y|X=x)\)</span>, to condition the outcome on a second variable (in this case the number of doctors). Or, often, for a shorthand we use <span class="math inline">\(P(y|x)\)</span> to represent this distribution (the <span class="math inline">\(Y=\)</span> and <span class="math inline">\(X=\)</span> being implicit). If two variables are independent then we find that <span class="math display">\[
 P(y|x) = p(y).
 \]</span> However, we might believe that the number of nurses is dependent on the number of doctors. For this we can try estimating <span class="math inline">\(P(Y&gt;2 | X&gt;1)\)</span> and compare the result, for example to <span class="math inline">\(P(Y&gt;2|X\leq 1)\)</span> using our empirical estimate of the probability.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> ((data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>) <span class="op">&amp;</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>)).<span class="bu">sum</span>()</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>total_large_doctors <span class="op">=</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>).<span class="bu">sum</span>()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>prob_both_large <span class="op">=</span> large<span class="op">/</span>total_large_doctors</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greater than 2 given number of doctors is greater than 1 is:&quot;</span>, prob_both_large)</span></code></pre></div>
-<h3 id="exercise-2">Exercise 2</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> ((data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>) <span class="op">&amp;</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>total_large_doctors <span class="op">=</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>).<span class="bu">sum</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>prob_both_large <span class="op">=</span> large<span class="op">/</span>total_large_doctors</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greater than 2 given number of doctors is greater than 1 is:&quot;</span>, prob_both_large)</span></code></pre></div>
+<h3 id="exercise-3">Exercise 3</h3>
 <p>Write code that prints out the probability of nurses being greater than 2 for different numbers of doctors.</p>
 <p>Make sure the plot is included in <em>this</em> notebook file (the Jupyter magic command <code>%matplotlib inline</code> we ran above will do that for you, it only needs to be run once per file).</p>
 <table>
@@ -388,7 +395,7 @@ The different basic probability distributions.
 </div>
 <div class="figure">
 <div id="prob-diagram-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.com/mlai/./slides/diagrams//mlai/prob_diagram.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//mlai/prob_diagram.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="prob-diagram-magnify" class="magnify" onclick="magnifyFigure(&#39;prob-diagram&#39;)">
@@ -444,11 +451,11 @@ P\left(x,y\right)=P\left(y,x\right)
 P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right).
 \]</span> Sometimes I think of this as akin to the way in Python we can write ‘keyword arguments’ in functions. If we use keyword arguments, the ordering of arguments doesn’t matter.</p>
 <p>We’ve now introduced conditioning and independence to the notion of probability and computed some conditional probabilities on a practical example The scatter plot of deaths vs year that we created above can be seen as a <em>joint</em> probability distribution. We represent a joint probability using the notation <span class="math inline">\(P(Y=y, X=x)\)</span> or <span class="math inline">\(P(y, x)\)</span> for short. Computing a joint probability is equivalent to answering the simultaneous questions, what’s the probability that the number of nurses was over 2 and the number of doctors was 1? Or any other question that may occur to us. Again we can easily use pandas to ask such questions.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>num_doctors <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count() <span class="co"># this is total number of films</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of nurses being greater than 2 and number of doctors being&quot;</span>, num_doctors, <span class="st">&quot;is:&quot;</span>, prob_large)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>num_doctors <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count() <span class="co"># this is total number of films</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of nurses being greater than 2 and number of doctors being&quot;</span>, num_doctors, <span class="st">&quot;is:&quot;</span>, prob_large)</span></code></pre></div>
 <h2 id="the-product-rule">The Product Rule</h2>
 <p>This number is the joint probability, <span class="math inline">\(P(Y, X)\)</span> which is much <em>smaller</em> than the conditional probability. The number can never be bigger than the conditional probabililty because it is computed using the <em>product rule</em>. <span class="math display">\[
 p(Y=y, X=x) = p(Y=y|X=x)p(X=x)
@@ -457,22 +464,22 @@ p(Y=y, X=x) = p(Y=y|X=x)p(X=x)
 <p>In our shorter notation we can write the product rule as <span class="math display">\[
 p(y, x) = p(y|x)p(x)
 \]</span> We can see the relation working in practice for our data above by computing the different values for <span class="math inline">\(x=1\)</span>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>num_doctors<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>num_nurses<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>p_x <span class="op">=</span> <span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_nurses_fulltime.count())</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>p_y_given_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>p_y_and_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_nurses_fulltime.count())</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(x) is&quot;</span>, p_x)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y|x) is&quot;</span>, p_y_given_x)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y,x) is&quot;</span>, p_y_and_x)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>num_doctors<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>num_nurses<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>p_x <span class="op">=</span> <span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_doctors_fulltime.count())</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>p_y_given_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>p_y_and_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_nurses_fulltime.count())</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(x) is&quot;</span>, p_x)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y|x) is&quot;</span>, p_y_given_x)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y,x) is&quot;</span>, p_y_and_x)</span></code></pre></div>
 <h2 id="the-sum-rule">The Sum Rule</h2>
 <p>The other <em>fundamental rule</em> of probability is the <em>sum rule</em> this tells us how to get a <em>marginal</em> distribution from the joint distribution. Simply put it says that we need to sum across the value we’d like to remove. <span class="math display">\[
 P(Y=y) = \sum_{x} P(Y=y, X=x)
 \]</span> Or in our shortened notation <span class="math display">\[
 P(y) = \sum_{x} P(y, x)
 \]</span></p>
-<h3 id="exercise-3">Exercise 3</h3>
+<h3 id="exercise-4">Exercise 4</h3>
 <p>Write code that computes <span class="math inline">\(P(y)\)</span> by adding <span class="math inline">\(P(y, x)\)</span> for all values of <span class="math inline">\(x\)</span>.</p>
 <h2 id="bayes-rule">Bayes’ Rule</h2>
 <p>Bayes’ rule is a very simple rule, it’s hardly worth the name of a rule at all. It follows directly from the product rule of probability. Because <span class="math inline">\(P(y, x) = P(y|x)P(x)\)</span> and by symmetry <span class="math inline">\(P(y,x)=P(x,y)=P(x|y)P(y)\)</span> then by equating these two equations and dividing through by <span class="math inline">\(P(y)\)</span> we have <span class="math display">\[
@@ -492,8 +499,8 @@ P(x|y) =
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/probability-review.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/probability-review.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>What use is all this probability in data science? Let’s think about how we might use the probabilities to do some decision making. Let’s look at the information data.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div>
-<h3 id="exercise-1-2">Exercise 1</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div>
+<h3 id="exercise-5">Exercise 5</h3>
 <p>Now we see we have several additional features. Let’s assume we want to predict <code>maternal_health_delivery_services</code>. How would we go about doing it?</p>
 <p>Using what you’ve learnt about joint, conditional and marginal probabilities, as well as the sum and product rule, how would you formulate the question you want to answer in terms of probabilities? Should you be using a joint or a conditional distribution? If it’s conditional, what should the distribution be over, and what should it be conditioned on?</p>
 <div class="figure">
