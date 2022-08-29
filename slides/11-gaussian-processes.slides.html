@@ -158,6 +158,60 @@ p(\mathbf{ y}|\mathbf{X}, \mathbf{ w}) =
 \mathbf{ y}|\mathbf{X}\sim \mathcal{N}\left(\mathbf{m}(\mathbf{X}),\mathbf{K}(\mathbf{X})\right),
 \]</span></p>
 </section>
+<section id="sampling-a-function" class="slide level2">
+<h2>Sampling a Function</h2>
+<p><strong>Multi-variate Gaussians</strong></p>
+<ul>
+<li>We will consider a Gaussian with a particular structure of covariance matrix.</li>
+<li>Generate a single sample from this 25 dimensional Gaussian density, <span class="math display">\[
+\mathbf{ f}=\left[f_{1},f_{2}\dots f_{25}\right].
+\]</span></li>
+<li>We will plot these points against their index.</li>
+</ul>
+</section>
+<section id="gaussian-distribution-sample" class="slide level2">
+<h2>Gaussian Distribution Sample</h2>
+<script>
+showDivs(0, 'two_point_sample');
+</script>
+<p><small></small> <input id="range-two_point_sample" type="range" min="0" max="8" value="0" onchange="setDivs('two_point_sample')" oninput="setDivs('two_point_sample')"> <button onclick="plusDivs(-1, 'two_point_sample')">❮</button> <button onclick="plusDivs(1, 'two_point_sample')">❯</button></p>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample000.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample001.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample002.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample003.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample004.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample005.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample006.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample007.svg" width style=" ">
+</object>
+</div>
+<div class="two_point_sample" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/two_point_sample008.svg" width style=" ">
+</object>
+</div>
+</section>
 <section id="sampling-a-function-from-a-gaussian" class="slide level2">
 <h2>Sampling a Function from a Gaussian</h2>
 <script>
@@ -227,29 +281,28 @@ showDivs(9, 'two_point_sample2');
 </object>
 </div>
 </section>
-<section id="prediction-of-f_2-from-f_1-1" class="slide level2">
-<h2>Prediction of <span class="math inline">\(f_{2}\)</span> from <span class="math inline">\(f_{1}\)</span></h2>
-<p><small> * The single contour of the Gaussian density represents the <font color="cyan">joint distribution, <span class="math inline">\(p(f_1, f_2)\)</span></font></p>
-<div class="fragment">
-<ul>
-<li>We observe that <font color="magenta"><span class="math inline">\(f_1=?\)</span></font></li>
-</ul>
+<section id="uluru" class="slide level2">
+<h2>Uluru</h2>
+<div class="figure">
+<div id="uluru-as-probability-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/799px-Uluru_Panorama.jpg" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<div class="fragment">
-<ul>
-<li>Conditional density: <font color="cyan"><span class="math inline">\(p(f_2|f_1=?)\)</span></font> </small></li>
-</ul>
 </div>
+</div>
+<aside class="notes">
+Uluru, the sacred rock in Australia. If we think of it as a probability density, viewing it from this side gives us one <em>marginal</em> from the density. Figuratively speaking, slicing through the rock would give a conditional density.
+</aside>
 </section>
 <section id="prediction-with-correlated-gaussians" class="slide level2">
 <h2>Prediction with Correlated Gaussians</h2>
 <ul>
-<li><p>Prediction of <span class="math inline">\(f_2\)</span> from <span class="math inline">\(f_1\)</span> requires <em>conditional density</em>.</p></li>
-<li><p>Conditional density is <em>also</em> Gaussian. <span class="math display">\[
-p(f_2|f_1) = {\mathcal{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1,k_{2, 2} - \frac{k_{1,2}^2}{k_{1,1}}\right)}
+<li>Prediction of <span class="math inline">\(f_2\)</span> from <span class="math inline">\(f_1\)</span> requires <em>conditional density</em>.</li>
+<li>Conditional density is <em>also</em> Gaussian. <span class="math display">\[
+p(f_2|f_1) = \mathcal{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1, k_{2, 2} - \frac{k_{1,2}^2}{k_{1,1}}\right)
 \]</span> where covariance of joint density is given by <span class="math display">\[
-\mathbf{K}= \begin{bmatrix} k_{1, 1} &amp; k_{1, 2}\\ k_{2, 1} &amp; k_{2, 2}\end{bmatrix}
-\]</span></p></li>
+\mathbf{K}= \begin{bmatrix} k_{1, 1} &amp; k_{1, 2}\\ k_{2, 1} &amp; k_{2, 2}.\end{bmatrix}
+\]</span></li>
 </ul>
 </section>
 <section id="joint-density-of-f_1-and-f_8" class="slide level2">
@@ -583,6 +636,15 @@ E(\boldsymbol{\theta}) = \frac{1}{2} \log |\mathbf{K}|
 \begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\ \mathbf{K}_\ast^\top
 &amp; \mathbf{K}_{\ast,\ast}\end{bmatrix}
 \]</span></p>
+<div class="figure">
+<div id="block-predictive-covariance-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//gp/block-predictive-covariance.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Different blocks of the covariance function. The upper left block is the covariance of the training data with itself, <span class="math inline">\(\mathbf{K}\)</span>. The top right is the cross covariance between training data (rows) and prediction locations (columns). The lower left is the same matrix transposed. The bottom right is the covariance matrix of the test data with itself.
+</aside>
 </section>
 <section id="the-importance-of-the-covariance-function" class="slide level2">
 <h2>The Importance of the Covariance Function</h2>
@@ -718,6 +780,9 @@ showDivs(0, 'gp-optimise-determinant');
 </object>
 </div>
 </section>
+<section id="quadratic-data-fit" class="slide level2">
+<h2>Quadratic Data Fit</h2>
+</section>
 <section id="data-fit-colorcyanfracmathbf-ytopmathbfk-1mathbf-y2" class="slide level2">
 <h2>Data Fit: <span class="math inline">\(\color{cyan}{\frac{\mathbf{ y}^\top\mathbf{K}^{-1}\mathbf{ y}}{2}}\)</span></h2>
 <script>
@@ -748,9 +813,6 @@ The data fit term of the Gaussian process is a quadratic loss centered around ze
 </section>
 <section id="eboldsymbol-theta-coloryellowfrac12logdetmathbfkcolorcyanfracmathbf-ytopmathbfk-1mathbf-y2" class="slide level2">
 <h2><span class="math display">\[E(\boldsymbol{ \theta}) = \color{yellow}{\frac{1}{2}\log\det{\mathbf{K}}}+\color{cyan}{\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}}\]</span></h2>
-</section>
-<section id="quadratic-data-fit" class="slide level2">
-<h2>Quadratic Data Fit</h2>
 </section>
 <section id="data-fit-term" class="slide level2">
 <h2>Data Fit Term</h2>

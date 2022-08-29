@@ -938,7 +938,7 @@ The Carthaginian Empire at its peak.
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        movies[user] <span class="op">=</span> data[user][<span class="st">&#39;rating&#39;</span>]</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the csv on disk where it will be shared through dropbox.</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), index_label<span class="op">=</span><span class="st">&#39;index&#39;</span>)</span></code></pre></div>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), skiprows<span class="op">=</span><span class="dv">1</span>, index_label<span class="op">=</span><span class="st">&#39;ResponseID&#39;</span>)</span></code></pre></div>
 <p>Now we will convert our data structure into a form that is appropriate for processing. We will convert the <code>movies</code> object into a data base which contains the movie, the user and the score using the following command.</p>
 </section>
 <section id="processing-the-data" class="slide level2">
