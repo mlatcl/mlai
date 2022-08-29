@@ -129,18 +129,29 @@ sns.set_palette('colorblind')}-->
 <li>Showed examples in classification and mentioned possibilities for disease rate models.</li>
 <li>This week:
 <ul>
-<li>Gaussian Processes: non parametric Bayesian modelling }</li>
+<li>Gaussian Processes: non parametric Bayesian modelling</li>
 </ul></li>
 </ul>
 </section>
 <section id="generalized-linear-models" class="slide level2">
 <h2>Generalized Linear Models</h2>
-<p>Logistic regression is part of a wider class of models known as <em>generalized linear models</em>. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that <span class="math display">\[
+<ul>
+<li>Logistic regression is a <em>generalized linear model</em></li>
+<li>Prediction function that is linear in parameters <span class="math display">\[
 \log \frac{p(\mathbf{ x})}{1-p(\mathbf{ x})} = f(\mathbf{ x}; \mathbf{ w})
-\]</span> where <span class="math inline">\(f(\mathbf{ x}; \mathbf{ w})\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mathbf{ w}\)</span>, which is generally non-linear in the inputs. So far we have considered basis function models of the form <span class="math display">\[
+\]</span></li>
+<li>Where <span class="math inline">\(f(\cdot)\)</span> is linear in parameters.</li>
+</ul>
+</section>
+<section id="basis-functions" class="slide level2">
+<h2>Basis Functions</h2>
+<ul>
+<li><p>Linear models have the form <span class="math display">\[
 f(\mathbf{ x}) =
 \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
-\]</span></p>
+\]</span></p></li>
+<li><p>Gaussian processes are related to generalized linear models.</p></li>
+</ul>
 </section>
 <section id="gaussian-processes" class="slide level2">
 <h2>Gaussian Processes</h2>
@@ -347,7 +358,7 @@ showDivs(13, 'two_point_sample3');
 </div>
 <div class="fragment">
 <ul>
-<li>Conditional density: <font color="cyan"><span class="math inline">\(p(f_5|f_1=?)\)</span></font>.</li>
+<li>Conditional density: <font color="cyan"><span class="math inline">\(p(f_8|f_1=?)\)</span></font>.</li>
 </ul>
 </div>
 </section>
@@ -441,6 +452,9 @@ Samples directly from the covariance function implied by the basis function base
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="basis-covariance-function-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//kern/basis-covariance-function.svg" width="60%" style=" ">
@@ -451,7 +465,7 @@ Samples directly from the covariance function implied by the basis function base
 Covariance of the function implied by the basis set <span class="math inline">\(\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>.
 </aside>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathbf{ y}= \mathbf{ f}+ \boldsymbol{\epsilon}
@@ -463,7 +477,7 @@ Covariance of the function implied by the basis set <span class="math inline">\(
 \mathbf{ y}\sim \mathcal{N}\left(\mathbf{0},\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top +\sigma^2\mathbf{I}\right).
 \]</span></p>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="gp-sample-basis-functions-plus-noise-figure" class="figure-frame">
@@ -567,7 +581,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 \left\Vert\mathbf{ x}- \mathbf{ x}^\prime\right\Vert^2 = (\mathbf{ x}- \mathbf{ x}^\prime)^\top (\mathbf{ x}- \mathbf{ x}^\prime) 
 \]</span></p>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/gp_rejection_sample001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -576,7 +590,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 Here we’re showing 20 samples taken from the prior over functions defined by our covarariance
 </aside>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/gp_rejection_sample002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -585,7 +599,7 @@ Here we’re showing 20 samples taken from the prior over functions defined by o
 We can sample many such functions, in this slide there are now 1000 in total. This is a sample from our prior over functions.
 </aside>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/gp_rejection_sample003.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -594,7 +608,7 @@ We can sample many such functions, in this slide there are now 1000 in total. Th
 Now we observe data. Here there are three data points. Conceptually in Bayesian inference we discard all samples that are distant from the data.
 </aside>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/gp_rejection_sample004.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -603,7 +617,7 @@ Now we observe data. Here there are three data points. Conceptually in Bayesian 
 Throwing away such samples we are left with our posterior. This is the collection of samples from the prior that are consistent with the data.
 </aside>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlai/./slides/diagrams//gp/gp_rejection_sample005.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -681,13 +695,13 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 <h2>Learning Covariance Parameters</h2>
 <p>Can we determine covariance parameters from the data?</p>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \]</span></p>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -695,7 +709,7 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 \end{aligned}
 \]</span></p>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1108,7 +1122,7 @@ Gene expression levels over time for a gene from data provided by <span class="c
 <li>Want to detect if a gene is expressed or not, fit a GP to each gene <span class="citation" data-cites="Kalaitzis:simple11">Kalaitzis and Lawrence (2011)</span>.</li>
 </ul>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
@@ -1139,7 +1153,7 @@ The example is taken from the paper “A Simple Approach to Ranking Differential
 <a href="http://www.biomedcentral.com/1471-2105/12/180" class="uri">http://www.biomedcentral.com/1471-2105/12/180</a>
 </center>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 </section>
 <section id="tp53-gene-data-gp" class="slide level2">
@@ -1399,7 +1413,7 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 An additive covariance function formed by combining a linear and an exponentiated quadratic covariance functions.
 </aside>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">

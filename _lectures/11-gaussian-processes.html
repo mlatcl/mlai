@@ -65,15 +65,6 @@ sns.set_palette('colorblind')}-->
 <p>Once <code>mlai</code> is installed, it can be imported in the usual manner.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <h2 id="review">Review</h2>
-<ul>
-<li>Last week: Logistic Regression and Generalised Linear Models</li>
-<li>Introduced link functions and different transformations.</li>
-<li>Showed examples in classification and mentioned possibilities for disease rate models.</li>
-<li>This week:
-<ul>
-<li>Gaussian Processes: non parametric Bayesian modelling }</li>
-</ul></li>
-</ul>
 <p>Over the last two sessions we’ve begun considering classification models and logistic regresssion. In particular, for naive Bayes, we considered a set of assumptions that allowed us to build a joint model of our data set. In particular for naive Bayes we specified</p>
 <ol type="1">
 <li>Data conditional independence.</li>
@@ -84,7 +75,9 @@ sns.set_palette('colorblind')}-->
 <h2 id="generalized-linear-models">Generalized Linear Models</h2>
 <p>Logistic regression is part of a wider class of models known as <em>generalized linear models</em>. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that <span class="math display">\[
 \log \frac{p(\mathbf{ x})}{1-p(\mathbf{ x})} = f(\mathbf{ x}; \mathbf{ w})
-\]</span> where <span class="math inline">\(f(\mathbf{ x}; \mathbf{ w})\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mathbf{ w}\)</span>, which is generally non-linear in the inputs. So far we have considered basis function models of the form <span class="math display">\[
+\]</span> where <span class="math inline">\(f(\mathbf{ x}; \mathbf{ w})\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mathbf{ w}\)</span>, which is generally non-linear in the inputs.</p>
+<p>So far we have considered basis function models of the form</p>
+<p><span class="math display">\[
 f(\mathbf{ x}) =
 \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 \]</span> When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalized linear model approach.</p>
@@ -226,7 +219,7 @@ p(f_2|f_1) = \mathcal{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1, k_{2, 2} - \frac
 </div>
 <div class="incremental">
 <ul>
-<li><p>Conditional density: <font color="red"><span class="math inline">\(p(f_5|f_1=?)\)</span></font>.</p></li>
+<li><p>Conditional density: <font color="red"><span class="math inline">\(p(f_8|f_1=?)\)</span></font>.</p></li>
 <li><p>Prediction of <span class="math inline">\(\mathbf{ f}_*\)</span> from <span class="math inline">\(\mathbf{ f}\)</span> requires multivariate <em>conditional density</em>.</p></li>
 <li><p>Multivariate conditional density is <em>also</em> Gaussian. <large> <span class="math display">\[
 p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\mathbf{K}_{*,\mathbf{ f}}\mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{ f},\mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}\right)}
