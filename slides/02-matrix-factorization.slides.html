@@ -53,7 +53,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +66,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -107,7 +107,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Objective Functions: A Simple Example with Matrix Factorisation</h1>
+  <h1 class="title">Objective Functions: A Simple Example with Matrix
+Factorisation</h1>
 </section>
 
 <section class="slide level2">
@@ -125,7 +126,7 @@ sns.set_palette('colorblind')}-->
 <h2>Objective Function</h2>
 <ul>
 <li>Last week we motivated the importance of probability.</li>
-<li>This week we motivate the idea of the ‘objective function.’</li>
+<li>This week we motivate the idea of the ‘objective function’.</li>
 </ul>
 </section>
 <section id="introduction-to-classification" class="slide level2">
@@ -134,84 +135,138 @@ sns.set_palette('colorblind')}-->
 <section id="classification" class="slide level2">
 <h2>Classification</h2>
 <ul>
-<li><p><em>Wake word</em> classification (<a href="https://radio.unglobalpulse.net/uganda/">Global Pulse Project</a>).</p></li>
-<li><p>Breakthrough in 2012 with ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a></p></li>
-<li><p>We are given a data set containing ‘inputs,’ <span class="math inline">\(\mathbf{X}\)</span> and ‘targets,’ <span class="math inline">\(\mathbf{ y}\)</span>.</p></li>
-<li><p>Each data point consists of an input vector <span class="math inline">\(\mathbf{ x}_i\)</span> and a class label, <span class="math inline">\(y_i\)</span>.</p></li>
-<li><p>For binary classification assume <span class="math inline">\(y_i\)</span> should be either <span class="math inline">\(1\)</span> (yes) or <span class="math inline">\(-1\)</span> (no).</p></li>
+<li><p><em>Wake word</em> classification (<a
+href="https://radio.unglobalpulse.net/uganda/">Global Pulse
+Project</a>).</p></li>
+<li><p>Breakthrough in 2012 with ImageNet result of <a
+href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex
+Krizhevsky, Ilya Sutskever and Geoff Hinton</a></p></li>
+<li><p>We are given a data set containing ‘inputs’, <span
+class="math inline">\(\mathbf{X}\)</span> and ‘targets’, <span
+class="math inline">\(\mathbf{ y}\)</span>.</p></li>
+<li><p>Each data point consists of an input vector <span
+class="math inline">\(\mathbf{ x}_i\)</span> and a class label, <span
+class="math inline">\(y_i\)</span>.</p></li>
+<li><p>For binary classification assume <span
+class="math inline">\(y_i\)</span> should be either <span
+class="math inline">\(1\)</span> (yes) or <span
+class="math inline">\(-1\)</span> (no).</p></li>
 <li><p>Input vector can be thought of as features.</p></li>
 </ul>
 </section>
 <section id="discrete-probability" class="slide level2">
 <h2>Discrete Probability</h2>
 <ul>
-<li>Algorithms based on <em>prediction</em> function and <em>objective</em> function.</li>
-<li>For regression the <em>codomain</em> of the functions, <span class="math inline">\(f(\mathbf{X})\)</span> was the real numbers or sometimes real vectors.</li>
-<li>In classification we are given an input vector, <span class="math inline">\(\mathbf{ x}\)</span>, and an associated label, <span class="math inline">\(y\)</span> which either takes the value <span class="math inline">\(-1\)</span> or <span class="math inline">\(1\)</span>.</li>
+<li>Algorithms based on <em>prediction</em> function and
+<em>objective</em> function.</li>
+<li>For regression the <em>codomain</em> of the functions, <span
+class="math inline">\(f(\mathbf{X})\)</span> was the real numbers or
+sometimes real vectors.</li>
+<li>In classification we are given an input vector, <span
+class="math inline">\(\mathbf{ x}\)</span>, and an associated label,
+<span class="math inline">\(y\)</span> which either takes the value
+<span class="math inline">\(-1\)</span> or <span
+class="math inline">\(1\)</span>.</li>
 </ul>
 </section>
 <section id="classification-1" class="slide level2">
 <h2>Classification</h2>
 <ul>
-<li>Inputs, <span class="math inline">\(\mathbf{ x}\)</span>, mapped to a label, <span class="math inline">\(y\)</span>, through a function <span class="math inline">\(f(\cdot)\)</span> dependent on parameters, <span class="math inline">\(\mathbf{ w}\)</span>, <span class="math display">\[
+<li>Inputs, <span class="math inline">\(\mathbf{ x}\)</span>, mapped to
+a label, <span class="math inline">\(y\)</span>, through a function
+<span class="math inline">\(f(\cdot)\)</span> dependent on parameters,
+<span class="math inline">\(\mathbf{ w}\)</span>, <span
+class="math display">\[
 y= f(\mathbf{ x}; \mathbf{ w}).
 \]</span></li>
-<li><span class="math inline">\(f(\cdot)\)</span> is known as the <em>prediction function</em>.</li>
+<li><span class="math inline">\(f(\cdot)\)</span> is known as the
+<em>prediction function</em>.</li>
 </ul>
 </section>
 <section id="classification-examples" class="slide level2">
 <h2>Classification Examples</h2>
 <ul>
-<li>Classifiying hand written digits from binary images (automatic zip code reading)</li>
+<li>Classifiying hand written digits from binary images (automatic zip
+code reading)</li>
 <li>Detecting faces in images (e.g. digital cameras).</li>
 <li>Who a detected face belongs to (e.g. Facebook, DeepFace)</li>
 <li>Classifying type of cancer given gene expression data.</li>
-<li>Categorization of document types (different types of news article on the internet)</li>
+<li>Categorization of document types (different types of news article on
+the internet)</li>
 </ul>
 </section>
 <section id="hyperplane" class="slide level2">
 <h2>Hyperplane</h2>
 <ul>
-<li><p>predict the class label, <span class="math inline">\(y_i\)</span>, given the features associated with that data point, <span class="math inline">\(\mathbf{ x}_i\)</span>, using the <em>prediction function</em>:</p>
-<p><span class="math display">\[f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right)\]</span></p></li>
-<li><p>Decision boundary for the classification is given by a <em>hyperplane</em>.</p></li>
-<li><p>Vector <span class="math inline">\(\mathbf{ w}\)</span> is the [normal vector](http://en.wikipedia.org/wiki/Normal_(geometry) to the hyperplane.</p></li>
-<li><p>Hyperplane is described by the formula <span class="math inline">\(\mathbf{ w}^\top \mathbf{ x}= -b\)</span></p></li>
+<li><p>predict the class label, <span
+class="math inline">\(y_i\)</span>, given the features associated with
+that data point, <span class="math inline">\(\mathbf{ x}_i\)</span>,
+using the <em>prediction function</em>:</p>
+<p><span class="math display">\[f(x_i) = \text{sign}\left(\mathbf{
+w}^\top \mathbf{ x}_i + b\right)\]</span></p></li>
+<li><p>Decision boundary for the classification is given by a
+<em>hyperplane</em>.</p></li>
+<li><p>Vector <span class="math inline">\(\mathbf{ w}\)</span> is the
+[normal vector](http://en.wikipedia.org/wiki/Normal_(geometry) to the
+hyperplane.</p></li>
+<li><p>Hyperplane is described by the formula <span
+class="math inline">\(\mathbf{ w}^\top \mathbf{ x}= -b\)</span></p></li>
 </ul>
 </section>
 <section id="toy-data" class="slide level2">
 <h2>Toy Data</h2>
 <ul>
-<li>Need to draw a decision boundary that separates red crosses from green circles.</li>
+<li>Need to draw a decision boundary that separates red crosses from
+green circles.</li>
 </ul>
 </section>
-<section id="mathematical-drawing-of-decision-boundary" class="slide level2">
+<section id="mathematical-drawing-of-decision-boundary"
+class="slide level2">
 <h2>Mathematical Drawing of Decision Boundary</h2>
-<p><strong>Refresher</strong>: draw a hyper plane at decision boundary. - <em>Decision boundary</em>: plane where a point moves from being classified as -1 to +1. - We have</p>
-<p><span class="math display">\[\text{sign}(\mathbf{ x}^\top \mathbf{ w}) = \text{sign}(w_0 + w_1x_{i,1} + w_2 x_{i, 2})\]</span></p>
-<p><span class="math inline">\(x_{i, 1}\)</span> is first feature <span class="math inline">\(x_{i, 2}\)</span> is second feature assume <span class="math inline">\(x_{0,i}=1\)</span>.</p>
+<p><strong>Refresher</strong>: draw a hyper plane at decision boundary.
+- <em>Decision boundary</em>: plane where a point moves from being
+classified as -1 to +1. - We have</p>
+<p><span class="math display">\[\text{sign}(\mathbf{ x}^\top \mathbf{
+w}) = \text{sign}(w_0 + w_1x_{i,1} + w_2 x_{i, 2})\]</span></p>
+<p><span class="math inline">\(x_{i, 1}\)</span> is first feature <span
+class="math inline">\(x_{i, 2}\)</span> is second feature assume <span
+class="math inline">\(x_{0,i}=1\)</span>.</p>
 <ul>
 <li><p>Set <span class="math inline">\(w_0 = b\)</span> we have</p>
-<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2 x_{i, 2} + b\right)\]</span></p></li>
+<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2
+x_{i, 2} + b\right)\]</span></p></li>
 </ul>
 </section>
 <section id="equation-of-plane" class="slide level2">
 <h2>Equation of Plane</h2>
-<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2 x_{i, 2} + b\right)\]</span></p>
+<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2
+x_{i, 2} + b\right)\]</span></p>
 <ul>
 <li><p>Equation of plane is</p>
-<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0\]</span></p>
+<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} + b =
+0\]</span></p>
 <p>or</p>
-<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} = -b\]</span></p></li>
-<li><p>Next we will initialise the model and draw a decision boundary.</p></li>
+<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} =
+-b\]</span></p></li>
+<li><p>Next we will initialise the model and draw a decision
+boundary.</p></li>
 </ul>
 </section>
-<section id="perceptron-algorithm-initialisation-maths" class="slide level2">
+<section id="perceptron-algorithm-initialisation-maths"
+class="slide level2">
 <h2>Perceptron Algorithm: Initialisation Maths</h2>
 <ul>
-<li><p>For a randomly chosen data point, <span class="math inline">\(i\)</span>, set <span class="math display">\[\mathbf{ w}= y_i \mathbf{ x}_i\]</span></p></li>
-<li><p>If predicted label of the <span class="math inline">\(i\)</span>th point is <span class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i)\]</span></p></li>
-<li><p>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i\]</span></p></li>
+<li><p>For a randomly chosen data point, <span
+class="math inline">\(i\)</span>, set <span
+class="math display">\[\mathbf{ w}= y_i \mathbf{ x}_i\]</span></p></li>
+<li><p>If predicted label of the <span
+class="math inline">\(i\)</span>th point is <span
+class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{
+x}_i)\]</span></p></li>
+<li><p>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span
+class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span
+class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) =
+\text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i\]</span></p></li>
 </ul>
 </section>
 <section id="computing-decision-boundary" class="slide level2">
@@ -228,7 +283,10 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <script>
 showDivs(0, 'perceptron');
 </script>
-<p><small></small> <input id="range-perceptron" type="range" min="0" max="14" value="0" onchange="setDivs('perceptron')" oninput="setDivs('perceptron')"> <button onclick="plusDivs(-1, 'perceptron')">❮</button> <button onclick="plusDivs(1, 'perceptron')">❯</button></p>
+<p><small></small>
+<input id="range-perceptron" type="range" min="0" max="14" value="0" onchange="setDivs('perceptron')" oninput="setDivs('perceptron')">
+<button onclick="plusDivs(-1, 'perceptron')">❮</button>
+<button onclick="plusDivs(1, 'perceptron')">❯</button></p>
 <div class="perceptron" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/perceptron000.svg" width="60%" style=" ">
 </object>
@@ -294,20 +352,26 @@ showDivs(0, 'perceptron');
 <h2>Objective Functions and Regression</h2>
 <ul>
 <li><p>Classification: map feature to class label.</p></li>
-<li><p>Regression: map feature to real value our <em>prediction function</em> is</p>
+<li><p>Regression: map feature to real value our <em>prediction
+function</em> is</p>
 <p><span class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
 <li><p>Need an <em>algorithm</em> to fit it.</p></li>
 <li><p>Least squares: minimize an error.</p></li>
 </ul>
-<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i * f(x_i))^2\]</span></p>
+<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i *
+f(x_i))^2\]</span></p>
 </section>
 <section id="regression" class="slide level2">
 <h2>Regression</h2>
 <ul>
 <li>Create an artifical data set.</li>
 </ul>
-<p>We now need to decide on a <em>true</em> value for <span class="math inline">\(m\)</span> and a <em>true</em> value for <span class="math inline">\(c\)</span> to use for generating the data.</p>
-<p>We can use these values to create our artificial data. The formula <span class="math display">\[y_i = mx_i + c\]</span> is translated to code as follows:</p>
+<p>We now need to decide on a <em>true</em> value for <span
+class="math inline">\(m\)</span> and a <em>true</em> value for <span
+class="math inline">\(c\)</span> to use for generating the data.</p>
+<p>We can use these values to create our artificial data. The formula
+<span class="math display">\[y_i = mx_i + c\]</span> is translated to
+code as follows:</p>
 </section>
 <section id="plot-of-data" class="slide level2">
 <h2>Plot of Data</h2>
@@ -321,7 +385,8 @@ showDivs(0, 'perceptron');
 <aside class="notes">
 A simple linear regression.
 </aside>
-<p>These points lie exactly on a straight line, that’s not very realistic, let’s corrupt them with a bit of Gaussian ‘noise.’</p>
+<p>These points lie exactly on a straight line, that’s not very
+realistic, let’s corrupt them with a bit of Gaussian ‘noise’.</p>
 </section>
 <section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
@@ -338,9 +403,13 @@ A simple linear regression with noise.
 <section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
 <ul>
-<li><p>Visualise the error function surface, create vectors of values.</p></li>
-<li><p>create a grid of values to evaluate the error function in 2D.</p></li>
-<li><p>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</p></li>
+<li><p>Visualise the error function surface, create vectors of
+values.</p></li>
+<li><p>create a grid of values to evaluate the error function in
+2D.</p></li>
+<li><p>compute the error function at each combination of <span
+class="math inline">\(c\)</span> and <span
+class="math inline">\(m\)</span>.</p></li>
 </ul>
 </section>
 <section id="contour-plot-of-error" class="slide level2">
@@ -355,7 +424,8 @@ A simple linear regression with noise.
 </div>
 </div>
 <aside class="notes">
-Contours of the objective function for linear regression by minimizing least squares.
+Contours of the objective function for linear regression by minimizing
+least squares.
 </aside>
 </section>
 <section id="steepest-descent" class="slide level2">
@@ -363,21 +433,27 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>Minimize the sum of squares error function.</li>
 <li>One way of doing that is gradient descent.</li>
-<li>Initialize with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span></li>
-<li>update that guess by subtracting a portion of the gradient from the guess.</li>
-<li>Like walking down a hill in the steepest direction of the hill to get to the bottom.</li>
+<li>Initialize with a guess for <span class="math inline">\(m\)</span>
+and <span class="math inline">\(c\)</span></li>
+<li>update that guess by subtracting a portion of the gradient from the
+guess.</li>
+<li>Like walking down a hill in the steepest direction of the hill to
+get to the bottom.</li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
-<li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
+<li>We start with a guess for <span class="math inline">\(m\)</span> and
+<span class="math inline">\(c\)</span>.</li>
 </ul>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
-<li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>, <span class="math display">\[
+<li><p>Now we need to compute the gradient of the error function,
+firstly with respect to <span class="math inline">\(c\)</span>, <span
+class="math display">\[
   \frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)
   \]</span></p></li>
 <li><p>This is computed in python as follows</p></li>
@@ -385,24 +461,46 @@ Contours of the objective function for linear regression by minimizing least squ
 </section>
 <section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
-<p>To see how the gradient was derived, first note that the <span class="math inline">\(c\)</span> appears in every term in the sum. So we are just differentiating <span class="math inline">\((y_i - mx_i - c)^2\)</span> for each term in the sum. The gradient of this term with respect to <span class="math inline">\(c\)</span> is simply the gradient of the outer quadratic, multiplied by the gradient with respect to <span class="math inline">\(c\)</span> of the part inside the quadratic. The gradient of a quadratic is two times the argument of the quadratic, and the gradient of the inside linear term is just minus one. This is true for all terms in the sum, so we are left with the sum in the gradient.</p>
+<p>To see how the gradient was derived, first note that the <span
+class="math inline">\(c\)</span> appears in every term in the sum. So we
+are just differentiating <span class="math inline">\((y_i - mx_i -
+c)^2\)</span> for each term in the sum. The gradient of this term with
+respect to <span class="math inline">\(c\)</span> is simply the gradient
+of the outer quadratic, multiplied by the gradient with respect to <span
+class="math inline">\(c\)</span> of the part inside the quadratic. The
+gradient of a quadratic is two times the argument of the quadratic, and
+the gradient of the inside linear term is just minus one. This is true
+for all terms in the sum, so we are left with the sum in the
+gradient.</p>
 </section>
 <section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
-<p>The gradient with respect tom <span class="math inline">\(m\)</span> is similar, but now the gradient of the quadratic’s argument is <span class="math inline">\(-x_i\)</span> so the gradient with respect to <span class="math inline">\(m\)</span> is</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
+<p>The gradient with respect tom <span class="math inline">\(m\)</span>
+is similar, but now the gradient of the quadratic’s argument is <span
+class="math inline">\(-x_i\)</span> so the gradient with respect to
+<span class="math inline">\(m\)</span> is</p>
+<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} =
+-2\sum_{i=1}^nx_i(y_i - mx_i -
 c)\]</span></p>
 <p>which can be implemented in python (numpy) as</p>
 </section>
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>Now we have gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>Can update our inital guesses for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> using the gradient.</li>
-<li>We don’t want to just subtract the gradient from <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>,</li>
-<li>We need to take a <em>small</em> step in the gradient direction.</li>
+<li>Now we have gradients with respect to <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>.</li>
+<li>Can update our inital guesses for <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> using the gradient.</li>
+<li>We don’t want to just subtract the gradient from <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>,</li>
+<li>We need to take a <em>small</em> step in the gradient
+direction.</li>
 <li>Otherwise we might overshoot the minimum.</li>
-<li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
+<li>We want to follow the gradient to get to the minimum, the gradient
+changes all the time.</li>
 </ul>
 </section>
 <section id="move-in-direction-of-gradient" class="slide level2">
@@ -414,19 +512,29 @@ c)\]</span></p>
 </div>
 </div>
 <aside class="notes">
-Single update descending the contours of the error surface for regression.
+Single update descending the contours of the error surface for
+regression.
 </aside>
 </section>
 <section id="update-equations-1" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li><p>The step size has already been introduced, it’s again known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
-c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}c}
+<li><p>The step size has already been introduced, it’s again known as
+the learning rate and is denoted by <span
+class="math inline">\(\eta\)</span>. <span class="math display">\[
+c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}c}
 \]</span></p></li>
-<li><p>gives us an update for our estimate of <span class="math inline">\(c\)</span> (which in the code we’ve been calling <code>c_star</code> to represent a common way of writing a parameter estimate, <span class="math inline">\(c^*\)</span>) and <span class="math display">\[
-m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
+<li><p>gives us an update for our estimate of <span
+class="math inline">\(c\)</span> (which in the code we’ve been calling
+<code>c_star</code> to represent a common way of writing a parameter
+estimate, <span class="math inline">\(c^*\)</span>) and <span
+class="math display">\[
+m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}m}
 \]</span></p></li>
-<li><p>Giving us an update for <span class="math inline">\(m\)</span>.</p></li>
+<li><p>Giving us an update for <span
+class="math inline">\(m\)</span>.</p></li>
 </ul>
 </section>
 <section id="update-code" class="slide level2">
@@ -447,7 +555,10 @@ m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
 <script>
 showDivs(1, 'regression_contour_fit');
 </script>
-<p><small></small> <input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')"> <button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
+<p><small></small>
+<input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')">
+<button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button>
+<button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/regression_contour_fit000.svg" width="60%" style=" ">
 </object>
@@ -568,55 +679,81 @@ showDivs(1, 'regression_contour_fit');
 <section id="stochastic-gradient-descent" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>If <span class="math inline">\(n\)</span> is small, gradient descent is fine.</li>
-<li>But sometimes (e.g. on the internet <span class="math inline">\(n\)</span> could be a billion.</li>
+<li>If <span class="math inline">\(n\)</span> is small, gradient descent
+is fine.</li>
+<li>But sometimes (e.g. on the internet <span
+class="math inline">\(n\)</span> could be a billion.</li>
 <li>Stochastic gradient descent is more similar to perceptron.</li>
-<li>Look at gradient of one data point at a time rather than summing across <em>all</em> data points)</li>
+<li>Look at gradient of one data point at a time rather than summing
+across <em>all</em> data points)</li>
 <li>This gives a stochastic estimate of gradient.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-1" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li><p>The real gradient with respect to <span class="math inline">\(m\)</span> is given by</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i -
+<li><p>The real gradient with respect to <span
+class="math inline">\(m\)</span> is given by</p>
+<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} =
+-2\sum_{i=1}^nx_i(y_i -
 mx_i - c)\]</span></p>
-<p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form</p>
+<p>but it has <span class="math inline">\(n\)</span> terms in the sum.
+Substituting in the gradient we can see that the full update is of the
+form</p>
 <p><span class="math display">\[m_\text{new} \leftarrow
-m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]\]</span></p>
-<p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
-c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
-m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3 \leftarrow m_2 + 2\eta
-\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
+m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) +
+(x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n -
+m_\text{old}x_n - c_\text{old})\right]\]</span></p>
+<p>This could be split up into lots of individual updates <span
+class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1
+- m_\text{old}x_1 -
+c_\text{old})\right]\]</span> <span class="math display">\[m_2
+\leftarrow m_1 + 2\eta\left[x_2 (y_2 -
+m_\text{old}x_2 - c_\text{old})\right]\]</span> <span
+class="math display">\[m_3 \leftarrow m_2 + 2\eta
+\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow
+m_{n-1} + 2\eta\left[x_n (y_n -
 m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
 </ul>
 <p>which would lead to the same final update.</p>
 </section>
 <section id="updating-c-and-m" class="slide level2">
-<h2>Updating <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span></h2>
+<h2>Updating <span class="math inline">\(c\)</span> and <span
+class="math inline">\(m\)</span></h2>
 <ul>
-<li>In the sum we don’t <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
+<li>In the sum we don’t <span class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> we use for computing the gradient term
+at each update.</li>
 <li>In stochastic gradient descent we <em>do</em> change them.</li>
 <li>This means it’s not quite the same as steepest desceint.</li>
-<li>But we can present each data point in a random order, like we did for the perceptron.</li>
-<li>This makes the algorithm suitable for large scale web use (recently this domain is know as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
+<li>But we can present each data point in a random order, like we did
+for the perceptron.</li>
+<li>This makes the algorithm suitable for large scale web use (recently
+this domain is know as ‘Big Data’) and algorithms like this are widely
+used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-2" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>Or more accurate, since the data is normally presented in a random order we just can write <span class="math display">\[
-m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]
+<li>Or more accurate, since the data is normally presented in a random
+order we just can write <span class="math display">\[
+m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i -
+c_\text{old})\right]
 \]</span></li>
 </ul>
 </section>
 <section id="sgd-for-linear-regression" class="slide level2">
 <h2>SGD for Linear Regression</h2>
-<p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
+<p>Putting it all together in an algorithm, we can do stochastic
+gradient descent for our regression data.</p>
 <script>
 showDivs(0, 'regression_sgd_contour_fit');
 </script>
-<p><small></small> <input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" onchange="setDivs('regression_sgd_contour_fit')" oninput="setDivs('regression_sgd_contour_fit')"> <button onclick="plusDivs(-1, 'regression_sgd_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_sgd_contour_fit')">❯</button></p>
+<p><small></small>
+<input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" onchange="setDivs('regression_sgd_contour_fit')" oninput="setDivs('regression_sgd_contour_fit')">
+<button onclick="plusDivs(-1, 'regression_sgd_contour_fit')">❮</button>
+<button onclick="plusDivs(1, 'regression_sgd_contour_fit')">❯</button></p>
 <div class="regression_sgd_contour_fit" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/regression_sgd_contour_fit000.svg" width="60%" style=" ">
 </object>
@@ -854,19 +991,26 @@ showDivs(0, 'regression_sgd_contour_fit');
 </object>
 </div>
 </section>
-<section id="reflection-on-linear-regression-and-supervised-learning" class="slide level2">
+<section id="reflection-on-linear-regression-and-supervised-learning"
+class="slide level2">
 <h2>Reflection on Linear Regression and Supervised Learning</h2>
 <p>Think about:</p>
 <ol type="1">
-<li><p>What effect does the learning rate have in the optimization? What’s the effect of making it too small, what’s the effect of making it too big? Do you get the same result for both stochastic and steepest gradient descent?</p></li>
-<li><p>The stochastic gradient descent doesn’t help very much for such a small data set. It’s real advantage comes when there are many, you’ll see this in the lab.</p></li>
+<li><p>What effect does the learning rate have in the optimization?
+What’s the effect of making it too small, what’s the effect of making it
+too big? Do you get the same result for both stochastic and steepest
+gradient descent?</p></li>
+<li><p>The stochastic gradient descent doesn’t help very much for such a
+small data set. It’s real advantage comes when there are many, you’ll
+see this in the lab.</p></li>
 </ol>
 </section>
 <section id="lab-class" class="slide level2">
 <h2>Lab Class</h2>
 <ul>
 <li>You will take the ideas you have learnt.</li>
-<li>You will apply them in the domain of <em>matrix factorisation</em>.</li>
+<li>You will apply them in the domain of <em>matrix
+factorisation</em>.</li>
 <li>Matrix factorization presents a different error function.</li>
 </ul>
 <p>for loss functions.</p>
@@ -874,7 +1018,8 @@ showDivs(0, 'regression_sgd_contour_fit');
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Section 1.1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Section 1.1.3 of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
 <!-- SECTION Movie Body Count Example -->
 </section>
@@ -895,7 +1040,8 @@ showDivs(0, 'regression_sgd_contour_fit');
 The Carthaginian Empire at its peak.
 </aside>
 </section>
-<section id="inner-products-for-representing-similarity" class="slide level2">
+<section id="inner-products-for-representing-similarity"
+class="slide level2">
 <h2>Inner Products for Representing Similarity</h2>
 </section>
 <section id="the-library-on-an-infinite-plane" class="slide level2">
@@ -909,7 +1055,8 @@ The Carthaginian Empire at its peak.
 </section>
 <section id="obtaining-the-data" class="slide level2">
 <h2>Obtaining the Data</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>user_data <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>movies.index, columns<span class="op">=</span>[<span class="st">&#39;title&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;rating&#39;</span>, <span class="st">&#39;prediction&#39;</span>])</span>
@@ -925,7 +1072,8 @@ The Carthaginian Empire at its peak.
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                  function<span class="op">=</span>function)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>accumulator.write_comment(<span class="st">&#39;Rate Movie Here (score 1-5)&#39;</span>, row<span class="op">=</span><span class="dv">1</span>, column<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>accumulator.share(share_type<span class="op">=</span><span class="st">&#39;writer&#39;</span>, send_notifications<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -938,15 +1086,22 @@ The Carthaginian Empire at its peak.
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        movies[user] <span class="op">=</span> data[user][<span class="st">&#39;rating&#39;</span>]</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the csv on disk where it will be shared through dropbox.</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), index_label<span class="op">=</span><span class="st">&#39;index&#39;</span>)</span></code></pre></div>
-<p>Now we will convert our data structure into a form that is appropriate for processing. We will convert the <code>movies</code> object into a data base which contains the movie, the user and the score using the following command.</p>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), skiprows<span class="op">=</span><span class="dv">1</span>, index_label<span class="op">=</span><span class="st">&#39;ResponseID&#39;</span>)</span></code></pre></div>
+<p>Now we will convert our data structure into a form that is
+appropriate for processing. We will convert the <code>movies</code>
+object into a data base which contains the movie, the user and the score
+using the following command.</p>
 </section>
 <section id="processing-the-data" class="slide level2">
 <h2>Processing the Data</h2>
-<p>We will now prepare the data set for processing. To do this we are going to conver the data into a new format using the <code>melt</code> command.</p>
+<p>We will now prepare the data set for processing. To do this we are
+going to conver the data into a new format using the <code>melt</code>
+command.</p>
 </section>
-<section id="what-is-a-pivot-table-what-does-the-pandas-command" class="slide level2">
-<h2>What is a pivot table? What does the <code>pandas</code> command</h2>
+<section id="what-is-a-pivot-table-what-does-the-pandas-command"
+class="slide level2">
+<h2>What is a pivot table? What does the <code>pandas</code>
+command</h2>
 <p><code>pd.melt</code> do?</p>
 </section>
 <section id="measuring-similarity" class="slide level2">
@@ -960,72 +1115,173 @@ The Carthaginian Empire at its peak.
 </section>
 <section id="objective-function-1" class="slide level2">
 <h2>Objective Function</h2>
-<p>The error function (or objective function, or cost function) we will choose is known as ‘sum of squares,’ we will aim to minimize the sum of squared squared error between the inner product of <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_i\)</span> and the observed score for the user/item pairing, given by <span class="math inline">\(y_{i, j}\)</span>.</p>
-<p>The total objective function can be written as <span class="math display">\[
-E(\mathbf{U}, \mathbf{V}) = \sum_{i,j} s_{i,j} (y_{i,j} - \mathbf{u}_i^\top \mathbf{v}_j)^2
-\]</span> where <span class="math inline">\(s_{i,j}\)</span> is an <em>indicator</em> variable that is 1 if user <span class="math inline">\(i\)</span> has rated item <span class="math inline">\(j\)</span> and is zero otherwise. Here <span class="math inline">\(\mathbf{U}\)</span> is the matrix made up of all the vectors <span class="math inline">\(\mathbf{u}\)</span>, <span class="math display">\[
-\mathbf{U} = \begin{bmatrix} \mathbf{u}_1 \dots \mathbf{u}_n\end{bmatrix}^\top
-\]</span> where we note that <span class="math inline">\(i\)</span>th <em>row</em> of <span class="math inline">\(\mathbf{U}\)</span> contains the vector associated with the <span class="math inline">\(i\)</span>th user and <span class="math inline">\(n\)</span> is the total number of users. This form of matrix is known as a <em>design matrix</em>. Similarly, we define the matrix <span class="math display">\[
-\mathbf{V} = \begin{bmatrix} \mathbf{v}_1 \dots \mathbf{v}_m\end{bmatrix}^\top
-\]</span> where again the <span class="math inline">\(j\)</span>th row of <span class="math inline">\(\mathbf{V}\)</span> contains the vector associated with the <span class="math inline">\(j\)</span>th item and <span class="math inline">\(m\)</span> is the total number of items in the data set.</p>
+<p>The error function (or objective function, or cost function) we will
+choose is known as ‘sum of squares’, we will aim to minimize the sum of
+squared squared error between the inner product of <span
+class="math inline">\(\mathbf{u}_i\)</span> and <span
+class="math inline">\(\mathbf{v}_i\)</span> and the observed score for
+the user/item pairing, given by <span class="math inline">\(y_{i,
+j}\)</span>.</p>
+<p>The total objective function can be written as <span
+class="math display">\[
+E(\mathbf{U}, \mathbf{V}) = \sum_{i,j} s_{i,j} (y_{i,j} -
+\mathbf{u}_i^\top \mathbf{v}_j)^2
+\]</span> where <span class="math inline">\(s_{i,j}\)</span> is an
+<em>indicator</em> variable that is 1 if user <span
+class="math inline">\(i\)</span> has rated item <span
+class="math inline">\(j\)</span> and is zero otherwise. Here <span
+class="math inline">\(\mathbf{U}\)</span> is the matrix made up of all
+the vectors <span class="math inline">\(\mathbf{u}\)</span>, <span
+class="math display">\[
+\mathbf{U} = \begin{bmatrix} \mathbf{u}_1 \dots
+\mathbf{u}_n\end{bmatrix}^\top
+\]</span> where we note that <span class="math inline">\(i\)</span>th
+<em>row</em> of <span class="math inline">\(\mathbf{U}\)</span> contains
+the vector associated with the <span class="math inline">\(i\)</span>th
+user and <span class="math inline">\(n\)</span> is the total number of
+users. This form of matrix is known as a <em>design matrix</em>.
+Similarly, we define the matrix <span class="math display">\[
+\mathbf{V} = \begin{bmatrix} \mathbf{v}_1 \dots
+\mathbf{v}_m\end{bmatrix}^\top
+\]</span> where again the <span class="math inline">\(j\)</span>th row
+of <span class="math inline">\(\mathbf{V}\)</span> contains the vector
+associated with the <span class="math inline">\(j\)</span>th item and
+<span class="math inline">\(m\)</span> is the total number of items in
+the data set.</p>
 </section>
 <section id="objective-optimization" class="slide level2">
 <h2>Objective Optimization</h2>
-<p>The idea is to mimimize this objective. A standard, simple, technique for minimizing an objective is <em>gradient descent</em> or <em>steepest descent</em>. In gradient descent we simply choose to update each parameter in the model by subtracting a multiple of the objective function’s gradient with respect to the parameters. So for a parameter <span class="math inline">\(u_{i,j}\)</span> from the matrix <span class="math inline">\(\mathbf{U}\)</span> we would have an update as follows: <span class="math display">\[ 
+<p>The idea is to mimimize this objective. A standard, simple, technique
+for minimizing an objective is <em>gradient descent</em> or <em>steepest
+descent</em>. In gradient descent we simply choose to update each
+parameter in the model by subtracting a multiple of the objective
+function’s gradient with respect to the parameters. So for a parameter
+<span class="math inline">\(u_{i,j}\)</span> from the matrix <span
+class="math inline">\(\mathbf{U}\)</span> we would have an update as
+follows: <span class="math display">\[
 u_{k,\ell} \leftarrow u_{k,\ell} - \eta \frac{\text{d}
-E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} 
-\]</span> where <span class="math inline">\(\eta\)</span> (which is pronounced <em>eta</em> in English) is a Greek letter representing the <em>learning rate</em>.</p>
-<p>We can compute the gradient of the objective function with respect to <span class="math inline">\(u_{k,\ell}\)</span> as <span class="math display">\[
+E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
+\]</span> where <span class="math inline">\(\eta\)</span> (which is
+pronounced <em>eta</em> in English) is a Greek letter representing the
+<em>learning rate</em>.</p>
+<p>We can compute the gradient of the objective function with respect to
+<span class="math inline">\(u_{k,\ell}\)</span> as <span
+class="math display">\[
 \frac{\text{d}E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} = -2
 \sum_j s_{k,j}v_{j,\ell}(y_{k, j} - \mathbf{u}_k^\top\mathbf{v}_{j}).
-\]</span> Similarly each parameter <span class="math inline">\(v_{i,j}\)</span> needs to be updated according to its gradient.</p>
+\]</span> Similarly each parameter <span
+class="math inline">\(v_{i,j}\)</span> needs to be updated according to
+its gradient.</p>
 </section>
 <section id="steepest-descent-algorithm" class="slide level2">
 <h2>Steepest Descent Algorithm</h2>
-<p>In the steepest descent algorithm we aim to minimize the objective function by subtacting the gradient of the objective function from the parameters.</p>
+<p>In the steepest descent algorithm we aim to minimize the objective
+function by subtacting the gradient of the objective function from the
+parameters.</p>
 </section>
 <section id="initialisation" class="slide level2">
 <h2>Initialisation</h2>
-<p>To start with though, we need initial values for the matrix <span class="math inline">\(\mathbf{U}\)</span> and the matrix <span class="math inline">\(\mathbf{V}\)</span>. Let’s create them as <code>pandas</code> data frames and initialise them randomly with small values.</p>
-<p>We also will subtract the mean from the rating before we try and predict them predictions. Have a think about why this might be a good idea (<em>Hint</em>: what will the gradients be if we don’t subtract the mean?).</p>
-<p>Now that we have the initial values set, we can start the optimization. First we define a function for the gradient of the objective and the objective function itself.</p>
-<p>Now we can write our simple optimisation route. This allows us to observe the objective function as the optimization proceeds.</p>
+<p>To start with though, we need initial values for the matrix <span
+class="math inline">\(\mathbf{U}\)</span> and the matrix <span
+class="math inline">\(\mathbf{V}\)</span>. Let’s create them as
+<code>pandas</code> data frames and initialise them randomly with small
+values.</p>
+<p>We also will subtract the mean from the rating before we try and
+predict them predictions. Have a think about why this might be a good
+idea (<em>Hint</em>: what will the gradients be if we don’t subtract the
+mean?).</p>
+<p>Now that we have the initial values set, we can start the
+optimization. First we define a function for the gradient of the
+objective and the objective function itself.</p>
+<p>Now we can write our simple optimisation route. This allows us to
+observe the objective function as the optimization proceeds.</p>
 </section>
-<section id="stochastic-gradient-descent-or-robbins-monroe-algorithm" class="slide level2">
+<section id="stochastic-gradient-descent-or-robbins-monroe-algorithm"
+class="slide level2">
 <h2>Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
-<p>Stochastic gradient descent <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves updating separating each gradient update according to each separate observation, rather than summing over them all. It is an approximate optimization method, but it has proven convergence under certain conditions and can be much faster in practice. It is used widely by internet companies for doing machine learning in practice. For example, Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
+<p>Stochastic gradient descent <span class="citation"
+data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves
+updating separating each gradient update according to each separate
+observation, rather than summing over them all. It is an approximate
+optimization method, but it has proven convergence under certain
+conditions and can be much faster in practice. It is used widely by
+internet companies for doing machine learning in practice. For example,
+Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
 </section>
 <section id="making-predictions" class="slide level2">
 <h2>Making Predictions</h2>
-<p>Predictions can be made from the model of the appropriate rating for a given user, <span class="math inline">\(i\)</span>, for a given film, <span class="math inline">\(j\)</span>, by simply taking the inner product between their vectors <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_j\)</span>.</p>
+<p>Predictions can be made from the model of the appropriate rating for
+a given user, <span class="math inline">\(i\)</span>, for a given film,
+<span class="math inline">\(j\)</span>, by simply taking the inner
+product between their vectors <span
+class="math inline">\(\mathbf{u}_i\)</span> and <span
+class="math inline">\(\mathbf{v}_j\)</span>.</p>
 </section>
-<section id="is-our-map-enough-are-our-data-enough" class="slide level2">
+<section id="is-our-map-enough-are-our-data-enough"
+class="slide level2">
 <h2>Is Our Map Enough? Are Our Data Enough?</h2>
-<p>Is two dimensions really enough to capture the complexity of humans and their artforms? Perhaps we need even more dimensions to capture that complexity. Extending our books analogy further, consider how we should place books that have a historical timeframe as well as some geographical location. Do we really want books from the 2nd World War to sit alongside books from the Roman Empire? Books on the American invasion of Sicily in 1943 are perhaps less related to books about Carthage than those that study the Jewish Revolt from 66-70 (in the Roman Province of Judaea). So books that relate to subjects which are closer in time should be stored together. However, a student of rebellion against empire may also be interested in the relationship between the Jewish Revolt of 66-70 and the Indian Rebellion of 1857, nearly 1800 years later. Whilst the technologies are different, the psychology of the people is shared: a rebellious nation angainst their imperial masters, triggered by misrule with a religious and cultural background. To capture such complexities we would need further dimensions in our latent representation. But are further dimensions justified by the amount of data we have? Can we really understand the facets of a film that only has at most three or four ratings?</p>
+<p>Is two dimensions really enough to capture the complexity of humans
+and their artforms? Perhaps we need even more dimensions to capture that
+complexity. Extending our books analogy further, consider how we should
+place books that have a historical timeframe as well as some
+geographical location. Do we really want books from the 2nd World War to
+sit alongside books from the Roman Empire? Books on the American
+invasion of Sicily in 1943 are perhaps less related to books about
+Carthage than those that study the Jewish Revolt from 66-70 (in the
+Roman Province of Judaea). So books that relate to subjects which are
+closer in time should be stored together. However, a student of
+rebellion against empire may also be interested in the relationship
+between the Jewish Revolt of 66-70 and the Indian Rebellion of 1857,
+nearly 1800 years later. Whilst the technologies are different, the
+psychology of the people is shared: a rebellious nation angainst their
+imperial masters, triggered by misrule with a religious and cultural
+background. To capture such complexities we would need further
+dimensions in our latent representation. But are further dimensions
+justified by the amount of data we have? Can we really understand the
+facets of a film that only has at most three or four ratings?</p>
 </section>
 <section id="going-further" class="slide level2">
 <h2>Going Further</h2>
-<p>If you want to take this model further then you’ll need more data. One possible source of data is the <a href="http://grouplens.org/datasets/movielens/"><code>movielens</code> data set</a>. They have data sets containing up to ten million movie ratings. The few ratings we were able to collect in the class are not enough to capture the rich structure underlying these films. Imagine if we assume that the ratings are uniformly distributed between 1 and 5. If you know something about information theory then you could use that to work out the maximum number of <em>bits</em> of information we could gain per rating.</p>
-<p>Now we’ll download the movielens 100k data and see if we can extract information about these movies.</p>
+<p>If you want to take this model further then you’ll need more data.
+One possible source of data is the <a
+href="http://grouplens.org/datasets/movielens/"><code>movielens</code>
+data set</a>. They have data sets containing up to ten million movie
+ratings. The few ratings we were able to collect in the class are not
+enough to capture the rich structure underlying these films. Imagine if
+we assume that the ratings are uniformly distributed between 1 and 5. If
+you know something about information theory then you could use that to
+work out the maximum number of <em>bits</em> of information we could
+gain per rating.</p>
+<p>Now we’ll download the movielens 100k data and see if we can extract
+information about these movies.</p>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Robbins:stoch51" class="csl-entry" role="doc-biblioentry">
-Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals of Mathematical Statistics 22, 400–407.
+Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals
+of Mathematical Statistics 22, 400–407.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 </section>
@@ -1040,8 +1296,39 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

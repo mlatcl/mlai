@@ -59,16 +59,21 @@ sns.set_palette('colorblind')}-->
 <section id="overdetermined-system" class="slide level2">
 <h2>Overdetermined System</h2>
 <ul>
-<li>With two unknowns and two observations: <span class="math display">\[
+<li>With two unknowns and two observations: <span
+class="math display">\[
 \begin{aligned}
 y_1 = &amp; mx_1 + c\\
 y_2 = &amp; mx_2 + c
 \end{aligned}
 \]</span></li>
-<li>Additional observation leads to <em>overdetermined</em> system. <span class="math display">\[
+<li>Additional observation leads to <em>overdetermined</em> system.
+<span class="math display">\[
 y_3 =  mx_3 + c
 \]</span></li>
-<li>This problem is solved through a noise model <span class="math inline">\(\epsilon\sim \mathcal{N}\left(0,\sigma^2\right)\)</span> <span class="math display">\[
+<li>This problem is solved through a noise model <span
+class="math inline">\(\epsilon\sim
+\mathcal{N}\left(0,\sigma^2\right)\)</span> <span
+class="math display">\[
 \begin{aligned}
 y_1 = mx_1 + c + \epsilon_1\\
         y_2 = mx_2 + c + \epsilon_2\\
@@ -116,10 +121,13 @@ y_1 = mx_1 + c + \epsilon_1\\
 <section id="underdetermined-system-1" class="slide level2">
 <h2>Underdetermined System</h2>
 <ul>
-<li>What about two unknowns and <em>one</em> observation? <span class="math display">\[y_1 =  mx_1 + c\]</span></li>
+<li>What about two unknowns and <em>one</em> observation? <span
+class="math display">\[y_1 =  mx_1 + c\]</span></li>
 </ul>
 <div class="fragment">
-<p>Can compute <span class="math inline">\(m\)</span> given <span class="math inline">\(c\)</span>. <span class="math display">\[m = \frac{y_1 - c}{x}\]</span></p>
+<p>Can compute <span class="math inline">\(m\)</span> given <span
+class="math inline">\(c\)</span>. <span class="math display">\[m =
+\frac{y_1 - c}{x}\]</span></p>
 </div>
 </section>
 <section id="underdetermined-system-2" class="slide level2">
@@ -127,7 +135,10 @@ y_1 = mx_1 + c + \epsilon_1\\
 <script>
 showDivs(0, 'under_determined_system');
 </script>
-<p><small></small> <input id="range-under_determined_system" type="range" min="0" max="9" value="0" onchange="setDivs('under_determined_system')" oninput="setDivs('under_determined_system')"> <button onclick="plusDivs(-1, 'under_determined_system')">❮</button> <button onclick="plusDivs(1, 'under_determined_system')">❯</button></p>
+<p><small></small>
+<input id="range-under_determined_system" type="range" min="0" max="9" value="0" onchange="setDivs('under_determined_system')" oninput="setDivs('under_determined_system')">
+<button onclick="plusDivs(-1, 'under_determined_system')">❮</button>
+<button onclick="plusDivs(1, 'under_determined_system')">❯</button></p>
 <div class="under_determined_system" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/under_determined_system000.svg" width="40%" style=" ">
 </object>
@@ -169,17 +180,20 @@ showDivs(0, 'under_determined_system');
 </object>
 </div>
 </section>
-<section id="the-bayesian-controversy-philosophical-underpinnings" class="slide level2">
+<section id="the-bayesian-controversy-philosophical-underpinnings"
+class="slide level2">
 <h2>The Bayesian Controversy: Philosophical Underpinnings</h2>
 <p>A segment from the lecture in 2012 on philsophical underpinnings.</p>
 <div class="figure">
-<div id="philosophical-underpinnings-uncertainty-figure" class="figure-frame">
+<div id="philosophical-underpinnings-uncertainty-figure"
+class="figure-frame">
 <iframe width="600" height="450" src="https://www.youtube.com/embed/AvlnFnvFw_0?start=1215" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
 </div>
 </div>
 <aside class="notes">
-The philosophical underpinnings of uncertainty, as discussed in 2012 MLAI lecture.
+The philosophical underpinnings of uncertainty, as discussed in 2012
+MLAI lecture.
 </aside>
 </section>
 <section id="noise-models" class="slide level2">
@@ -188,38 +202,50 @@ The philosophical underpinnings of uncertainty, as discussed in 2012 MLAI lectur
 <li>We aren’t modeling entire system.</li>
 <li>Noise model gives mismatch between model and data.</li>
 <li>Gaussian model justified by appeal to central limit theorem.</li>
-<li>Other models also possible (Student-<span class="math inline">\(t\)</span> for heavy tails).</li>
-<li>Maximum likelihood with Gaussian noise leads to <em>least squares</em>.</li>
+<li>Other models also possible (Student-<span
+class="math inline">\(t\)</span> for heavy tails).</li>
+<li>Maximum likelihood with Gaussian noise leads to <em>least
+squares</em>.</li>
 </ul>
 </section>
 <section id="different-types-of-uncertainty" class="slide level2">
 <h2>Different Types of Uncertainty</h2>
 <ul>
-<li>The first type of uncertainty we are assuming is <em>aleatoric</em> uncertainty.</li>
-<li>The second type of uncertainty we are assuming is <em>epistemic</em> uncertainty.</li>
+<li>The first type of uncertainty we are assuming is <em>aleatoric</em>
+uncertainty.</li>
+<li>The second type of uncertainty we are assuming is <em>epistemic</em>
+uncertainty.</li>
 </ul>
 </section>
 <section id="aleatoric-uncertainty" class="slide level2">
 <h2>Aleatoric Uncertainty</h2>
 <ul>
-<li>This is uncertainty we couldn’t know even if we wanted to. e.g. the result of a football match before it’s played.</li>
+<li>This is uncertainty we couldn’t know even if we wanted to. e.g. the
+result of a football match before it’s played.</li>
 <li>Where a sheet of paper might land on the floor.</li>
 </ul>
 </section>
 <section id="epistemic-uncertainty" class="slide level2">
 <h2>Epistemic Uncertainty</h2>
 <ul>
-<li>This is uncertainty we could in principal know the answer too. We just haven’t observed enough yet, e.g. the result of a football match <em>after</em> it’s played.</li>
+<li>This is uncertainty we could in principal know the answer too. We
+just haven’t observed enough yet, e.g. the result of a football match
+<em>after</em> it’s played.</li>
 <li>What colour socks your lecturer is wearing.</li>
 </ul>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>Section 1.2.3 (pg 21–24) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Sections 3.1-3.4 (pg 95-117) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 1.2.3 (pg 21–24) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Section 1.2.6 (start from just past eq 1.64 pg 30-32) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 1.2.3 (pg 21–24) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Sections 3.1-3.4 (pg 95-117) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 1.2.3 (pg 21–24) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 1.2.6 (start from just past eq 1.64 pg 30-32) of <span
+class="citation" data-cites="Bishop:book06">Bishop
+(2006)</span></p></li>
 </ul>
 </section>
 <section id="sum-of-squares-and-probability" class="slide level2">
@@ -227,36 +253,58 @@ The philosophical underpinnings of uncertainty, as discussed in 2012 MLAI lectur
 <div class="figure">
 <div id="gauss-theoria-ls-figure" class="figure-frame">
 <div class="centered" style="">
-<a href="https://play.google.com/books/reader?id=ORUOAAAAQAAJ&amp;pg=PA213"><img data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/ORUOAAAAQAAJ-PA213.png" /></a>
+<a
+href="https://play.google.com/books/reader?id=ORUOAAAAQAAJ&amp;pg=PA213"><img
+data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/ORUOAAAAQAAJ-PA213.png" /></a>
 </div>
 </div>
 </div>
 <aside class="notes">
-Gauss’s book <em>Theoria Motus Corprum Coelestium</em> <span class="citation" data-cites="Gauss:theoria09">(Gauss, 1809)</span> motivates the use of least squares through a probabilistic forumation.
+Gauss’s book <em>Theoria Motus Corprum Coelestium</em> <span
+class="citation" data-cites="Gauss:theoria09">(Gauss, 1809)</span>
+motivates the use of least squares through a probabilistic forumation.
 </aside>
 <blockquote>
-<p>… It is clear, that for the product <span class="math inline">\(\Omega = h^\mu \pi^{-\frac{1}{2}\mu} e^{-hh(vv + v^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \dots)}\)</span> to be maximised the sum <span class="math inline">\(vv + v ^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \text{etc}.\)</span> ought to be minimized. <em>Therefore, the most probable values of the unknown quantities <span class="math inline">\(p , q, r , s \text{etc}.\)</span>, should be that in which the sum of the squares of the differences between the functions <span class="math inline">\(V, V^\prime, V^{\prime\prime} \text{etc}\)</span>, and the observed values is minimized</em>, for all observations of the same degree of precision is presumed.</p>
+<p>… It is clear, that for the product <span
+class="math inline">\(\Omega = h^\mu \pi^{-\frac{1}{2}\mu} e^{-hh(vv +
+v^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \dots)}\)</span>
+to be maximised the sum <span class="math inline">\(vv + v ^\prime
+v^\prime + v^{\prime\prime} v^{\prime\prime} + \text{etc}.\)</span>
+ought to be minimized. <em>Therefore, the most probable values of the
+unknown quantities <span class="math inline">\(p , q, r , s
+\text{etc}.\)</span>, should be that in which the sum of the squares of
+the differences between the functions <span class="math inline">\(V,
+V^\prime, V^{\prime\prime} \text{etc}\)</span>, and the observed values
+is minimized</em>, for all observations of the same degree of precision
+is presumed.</p>
 </blockquote>
 </section>
 <section id="prior-distribution" class="slide level2">
 <h2>Prior Distribution</h2>
 <ul>
 <li><p>Bayesian inference requires a prior on the parameters.</p></li>
-<li><p>The prior represents your belief <em>before</em> you see the data of the likely value of the parameters.</p></li>
-<li><p>For linear regression, consider a Gaussian prior on the intercept:</p>
-<p><span class="math display">\[c \sim \mathcal{N}\left(0,\alpha_1\right)\]</span></p></li>
+<li><p>The prior represents your belief <em>before</em> you see the data
+of the likely value of the parameters.</p></li>
+<li><p>For linear regression, consider a Gaussian prior on the
+intercept:</p>
+<p><span class="math display">\[c \sim
+\mathcal{N}\left(0,\alpha_1\right)\]</span></p></li>
 </ul>
 </section>
 <section id="posterior-distribution" class="slide level2">
 <h2>Posterior Distribution</h2>
 <ul>
-<li><p>Posterior distribution is found by combining the prior with the likelihood.</p></li>
-<li><p>Posterior distribution is your belief <em>after</em> you see the data of the likely value of the parameters.</p></li>
-<li><p>The posterior is found through <strong>Bayes’ Rule</strong> <span class="math display">\[
+<li><p>Posterior distribution is found by combining the prior with the
+likelihood.</p></li>
+<li><p>Posterior distribution is your belief <em>after</em> you see the
+data of the likely value of the parameters.</p></li>
+<li><p>The posterior is found through <strong>Bayes’ Rule</strong> <span
+class="math display">\[
 p(c|y) = \frac{p(y|c)p(c)}{p(y)}
 \]</span></p>
 <p><span class="math display">\[
-\text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}.
+\text{posterior} = \frac{\text{likelihood}\times
+\text{prior}}{\text{marginal likelihood}}.
 \]</span></p></li>
 </ul>
 </section>
@@ -265,7 +313,10 @@ p(c|y) = \frac{p(y|c)p(c)}{p(y)}
 <script>
 showDivs(1, 'dem_gaussian');
 </script>
-<p><small></small> <input id="range-dem_gaussian" type="range" min="1" max="3" value="1" onchange="setDivs('dem_gaussian')" oninput="setDivs('dem_gaussian')"> <button onclick="plusDivs(-1, 'dem_gaussian')">❮</button> <button onclick="plusDivs(1, 'dem_gaussian')">❯</button></p>
+<p><small></small>
+<input id="range-dem_gaussian" type="range" min="1" max="3" value="1" onchange="setDivs('dem_gaussian')" oninput="setDivs('dem_gaussian')">
+<button onclick="plusDivs(-1, 'dem_gaussian')">❮</button>
+<button onclick="plusDivs(1, 'dem_gaussian')">❯</button></p>
 <div class="dem_gaussian" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/dem_gaussian001.svg" width="70%" style=" ">
 </object>
@@ -279,73 +330,118 @@ showDivs(1, 'dem_gaussian');
 </object>
 </div>
 </section>
-<section id="stages-to-derivation-of-the-posterior" class="slide level2">
+<section id="stages-to-derivation-of-the-posterior"
+class="slide level2">
 <h2>Stages to Derivation of the Posterior</h2>
 <ul>
 <li>Multiply likelihood by prior
 <ul>
-<li>they are “exponentiated quadratics,” the answer is always also an exponentiated quadratic because <span class="math inline">\(\exp(a^2)\exp(b^2) = \exp(a^2 + b^2)\)</span>.</li>
+<li>they are “exponentiated quadratics”, the answer is always also an
+exponentiated quadratic because <span
+class="math inline">\(\exp(a^2)\exp(b^2) = \exp(a^2 +
+b^2)\)</span>.</li>
 </ul></li>
-<li>Complete the square to get the resulting density in the form of a Gaussian.</li>
-<li>Recognise the mean and (co)variance of the Gaussian. This is the estimate of the posterior.</li>
+<li>Complete the square to get the resulting density in the form of a
+Gaussian.</li>
+<li>Recognise the mean and (co)variance of the Gaussian. This is the
+estimate of the posterior.</li>
 </ul>
 </section>
 <section id="main-trick" class="slide level2">
 <h2>Main Trick</h2>
-<p><span class="math display">\[p(c) = \frac{1}{\sqrt{2\pi\alpha_1}} \exp\left(-\frac{1}{2\alpha_1}c^2\right)\]</span> <span class="math display">\[p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2) = \frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i - c)^2\right)\]</span></p>
+<p><span class="math display">\[p(c) = \frac{1}{\sqrt{2\pi\alpha_1}}
+\exp\left(-\frac{1}{2\alpha_1}c^2\right)\]</span> <span
+class="math display">\[p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2) =
+\frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}}
+\exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i -
+c)^2\right)\]</span></p>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{p(\mathbf{ y}|\mathbf{ x}, m, \sigma^2)}\]</span></p>
-<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =  \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{\int p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c) \text{d} c}\]</span></p>
+<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m,
+\sigma^2) = \frac{p(\mathbf{ y}|\mathbf{ x}, c, m,
+\sigma^2)p(c)}{p(\mathbf{ y}|\mathbf{ x}, m, \sigma^2)}\]</span></p>
+<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m,
+\sigma^2) =  \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{\int
+p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c) \text{d} c}\]</span></p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)\]</span></p>
+<p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m,
+\sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, c, m,
+\sigma^2)p(c)\]</span></p>
 <p><span class="math display">\[\begin{aligned}
-    \log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c - mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
-     = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
+    \log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2)
+=&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c -
+mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
+     = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2
+-\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
     &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
   \end{aligned}\]</span></p>
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<p>complete the square of the quadratic form to obtain <span class="math display">\[\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
+<p>complete the square of the quadratic form to obtain <span
+class="math display">\[\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2)
+= -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},\]</span> where <span
+class="math inline">\(\tau^2 = \left(n\sigma^{-2}
++\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu
+= \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
 </section>
 <section id="main-trick-1" class="slide level2">
 <h2>Main Trick</h2>
 <p><span class="math display">\[
-p(c) = \frac{1}{\sqrt{2\pi\alpha_1}} \exp\left(-\frac{1}{2\alpha_1}c^2\right)
+p(c) = \frac{1}{\sqrt{2\pi\alpha_1}}
+\exp\left(-\frac{1}{2\alpha_1}c^2\right)
 \]</span> <span class="math display">\[
-p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2) = \frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i - c)^2\right)
+p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2) =
+\frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}}
+\exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i - c)^2\right)
 \]</span> <span class="math display">\[
-p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{p(\mathbf{ y}|\mathbf{ x}, m, \sigma^2)}
+p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = \frac{p(\mathbf{
+y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{p(\mathbf{ y}|\mathbf{ x}, m,
+\sigma^2)}
 \]</span> <span class="math display">\[
-p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =  \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{\int p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c) \text{d} c}
+p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =  \frac{p(\mathbf{
+y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{\int p(\mathbf{ y}|\mathbf{ x}, c,
+m, \sigma^2)p(c) \text{d} c}
 \]</span> <span class="math display">\[
-p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)
+p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{
+y}|\mathbf{ x}, c, m, \sigma^2)p(c)
 \]</span> <span class="math display">\[
 \begin{aligned}
-\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c - mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
-     = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
-     &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2}, 
+\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2)
+=&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c -
+mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
+     = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2
+-\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
+     &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
 \end{aligned}
-\]</span> complete the square of the quadratic form to obtain <span class="math display">\[
-\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},
-\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
+\]</span> complete the square of the quadratic form to obtain <span
+class="math display">\[
+\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c
+- \mu)^2 +\text{const},
+\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2}
++\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu
+= \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
 </section>
 <section id="the-joint-density" class="slide level2">
 <h2>The Joint Density</h2>
 <ul>
-<li>Really want to know the <em>joint</em> posterior density over the parameters <span class="math inline">\(c\)</span> <em>and</em> <span class="math inline">\(m\)</span>.</li>
-<li>Could now integrate out over <span class="math inline">\(m\)</span>, but it’s easier to consider the multivariate case.</li>
+<li>Really want to know the <em>joint</em> posterior density over the
+parameters <span class="math inline">\(c\)</span> <em>and</em> <span
+class="math inline">\(m\)</span>.</li>
+<li>Could now integrate out over <span class="math inline">\(m\)</span>,
+but it’s easier to consider the multivariate case.</li>
 </ul>
 </section>
 <section id="two-dimensional-gaussian" class="slide level2">
 <h2>Two Dimensional Gaussian</h2>
 <ul>
-<li>Consider height, <span class="math inline">\(h/m\)</span> and weight, <span class="math inline">\(w/kg\)</span>.</li>
-<li>Could sample height from a distribution: <span class="math display">\[
+<li>Consider height, <span class="math inline">\(h/m\)</span> and
+weight, <span class="math inline">\(w/kg\)</span>.</li>
+<li>Could sample height from a distribution: <span
+class="math display">\[
 p(h) \sim \mathcal{N}\left(1.7,0.0225\right).
 \]</span></li>
 <li>And similarly weight: <span class="math display">\[
@@ -379,7 +475,10 @@ p(w, h) = p(w)p(h).
 <script>
 showDivs(0, 'independent_height_weight');
 </script>
-<p><small></small> <input id="range-independent_height_weight" type="range" min="0" max="7" value="0" onchange="setDivs('independent_height_weight')" oninput="setDivs('independent_height_weight')"> <button onclick="plusDivs(-1, 'independent_height_weight')">❮</button> <button onclick="plusDivs(1, 'independent_height_weight')">❯</button></p>
+<p><small></small>
+<input id="range-independent_height_weight" type="range" min="0" max="7" value="0" onchange="setDivs('independent_height_weight')" oninput="setDivs('independent_height_weight')">
+<button onclick="plusDivs(-1, 'independent_height_weight')">❮</button>
+<button onclick="plusDivs(1, 'independent_height_weight')">❯</button></p>
 <div class="independent_height_weight" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/independent_height_weight000.svg" width="70%" style=" ">
 </object>
@@ -416,8 +515,10 @@ showDivs(0, 'independent_height_weight');
 <section id="body-mass-index" class="slide level2">
 <h2>Body Mass Index</h2>
 <ul>
-<li>In reality they are dependent (body mass index) <span class="math inline">\(= \frac{w}{h^2}\)</span>.</li>
-<li>To deal with this dependence we introduce <em>correlated</em> multivariate Gaussians.</li>
+<li>In reality they are dependent (body mass index) <span
+class="math inline">\(= \frac{w}{h^2}\)</span>.</li>
+<li>To deal with this dependence we introduce <em>correlated</em>
+multivariate Gaussians.</li>
 </ul>
 </section>
 <section id="sampling-two-dimensional-variables-1" class="slide level2">
@@ -425,7 +526,10 @@ showDivs(0, 'independent_height_weight');
 <script>
 showDivs(0, 'correlated_height_weight');
 </script>
-<p><small></small> <input id="range-correlated_height_weight" type="range" min="0" max="7" value="0" onchange="setDivs('correlated_height_weight')" oninput="setDivs('correlated_height_weight')"> <button onclick="plusDivs(-1, 'correlated_height_weight')">❮</button> <button onclick="plusDivs(1, 'correlated_height_weight')">❯</button></p>
+<p><small></small>
+<input id="range-correlated_height_weight" type="range" min="0" max="7" value="0" onchange="setDivs('correlated_height_weight')" oninput="setDivs('correlated_height_weight')">
+<button onclick="plusDivs(-1, 'correlated_height_weight')">❮</button>
+<button onclick="plusDivs(1, 'correlated_height_weight')">❯</button></p>
 <div class="correlated_height_weight" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/correlated_height_weight000.svg" width="70%" style=" ">
 </object>
@@ -468,95 +572,140 @@ p(w, h) = p(w)p(h)
 <section id="independent-gaussians-1" class="slide level2">
 <h2>Independent Gaussians</h2>
 <p><span class="math display">\[
-p(w, h) = \frac{1}{\sqrt{2\pi \sigma_1^2}\sqrt{2\pi\sigma_2^2}} \exp\left(-\frac{1}{2}\left(\frac{(w-\mu_1)^2}{\sigma_1^2} + \frac{(h-\mu_2)^2}{\sigma_2^2}\right)\right)
+p(w, h) = \frac{1}{\sqrt{2\pi \sigma_1^2}\sqrt{2\pi\sigma_2^2}}
+\exp\left(-\frac{1}{2}\left(\frac{(w-\mu_1)^2}{\sigma_1^2} +
+\frac{(h-\mu_2)^2}{\sigma_2^2}\right)\right)
 \]</span></p>
 </section>
 <section id="independent-gaussians-2" class="slide level2">
 <h2>Independent Gaussians</h2>
 <p><small> <span class="math display">\[
-p(w, h) = \frac{1}{\sqrt{2\pi\sigma_1^22\pi\sigma_2^2}} \exp\left(-\frac{1}{2}\left(\begin{bmatrix}w \\ h\end{bmatrix} - \begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}\right)^\top\begin{bmatrix}\sigma_1^2&amp; 0\\0&amp;\sigma_2^2\end{bmatrix}^{-1}\left(\begin{bmatrix}w \\ h\end{bmatrix} - \begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}\right)\right)
+p(w, h) = \frac{1}{\sqrt{2\pi\sigma_1^22\pi\sigma_2^2}}
+\exp\left(-\frac{1}{2}\left(\begin{bmatrix}w \\ h\end{bmatrix} -
+\begin{bmatrix}\mu_1 \\
+\mu_2\end{bmatrix}\right)^\top\begin{bmatrix}\sigma_1^2&amp;
+0\\0&amp;\sigma_2^2\end{bmatrix}^{-1}\left(\begin{bmatrix}w \\
+h\end{bmatrix} - \begin{bmatrix}\mu_1 \\
+\mu_2\end{bmatrix}\right)\right)
 \]</span> </small></p>
 </section>
 <section id="independent-gaussians-3" class="slide level2">
 <h2>Independent Gaussians</h2>
 <p><span class="math display">\[
-p(\mathbf{ y}) = \frac{1}{\det{2\pi \mathbf{D}}^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{ \mu})^\top\mathbf{D}^{-1}(\mathbf{ y}- \boldsymbol{ \mu})\right)
+p(\mathbf{ y}) = \frac{1}{\det{2\pi \mathbf{D}}^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{
+\mu})^\top\mathbf{D}^{-1}(\mathbf{ y}- \boldsymbol{ \mu})\right)
 \]</span></p>
 </section>
 <section id="correlated-gaussian" class="slide level2">
 <h2>Correlated Gaussian</h2>
-<p>Form correlated from original by rotating the data space using matrix <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Form correlated from original by rotating the data space using matrix
+<span class="math inline">\(\mathbf{R}\)</span>.</p>
 <p><span class="math display">\[
-p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{ \mu})^\top\mathbf{D}^{-1}(\mathbf{ y}- \boldsymbol{ \mu})\right)
+p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{
+\mu})^\top\mathbf{D}^{-1}(\mathbf{ y}- \boldsymbol{ \mu})\right)
 \]</span></p>
 </section>
 <section id="correlated-gaussian-1" class="slide level2">
 <h2>Correlated Gaussian</h2>
-<p>Form correlated from original by rotating the data space using matrix <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Form correlated from original by rotating the data space using matrix
+<span class="math inline">\(\mathbf{R}\)</span>.</p>
 <p><span class="math display">\[
-p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(\mathbf{R}^\top\mathbf{ y}- \mathbf{R}^\top\boldsymbol{ \mu})^\top\mathbf{D}^{-1}(\mathbf{R}^\top\mathbf{ y}- \mathbf{R}^\top\boldsymbol{ \mu})\right)
+p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}(\mathbf{R}^\top\mathbf{ y}-
+\mathbf{R}^\top\boldsymbol{
+\mu})^\top\mathbf{D}^{-1}(\mathbf{R}^\top\mathbf{ y}-
+\mathbf{R}^\top\boldsymbol{ \mu})\right)
 \]</span></p>
 </section>
 <section id="correlated-gaussian-2" class="slide level2">
 <h2>Correlated Gaussian</h2>
-<p>Form correlated from original by rotating the data space using matrix <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Form correlated from original by rotating the data space using matrix
+<span class="math inline">\(\mathbf{R}\)</span>.</p>
 <p><span class="math display">\[
-p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{ \mu})^\top\mathbf{R}\mathbf{D}^{-1}\mathbf{R}^\top(\mathbf{ y}- \boldsymbol{ \mu})\right)
+p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{D}}^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{
+\mu})^\top\mathbf{R}\mathbf{D}^{-1}\mathbf{R}^\top(\mathbf{ y}-
+\boldsymbol{ \mu})\right)
 \]</span> this gives a covariance matrix: <span class="math display">\[
 \mathbf{C}^{-1} = \mathbf{R}\mathbf{D}^{-1} \mathbf{R}^\top
 \]</span></p>
 </section>
 <section id="correlated-gaussian-3" class="slide level2">
 <h2>Correlated Gaussian</h2>
-<p>Form correlated from original by rotating the data space using matrix <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Form correlated from original by rotating the data space using matrix
+<span class="math inline">\(\mathbf{R}\)</span>.</p>
 <p><span class="math display">\[
-p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{C}}^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{ \mu})^\top\mathbf{C}^{-1} (\mathbf{ y}- \boldsymbol{ \mu})\right)
+p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{C}}^{\frac{1}{2}}}
+\exp\left(-\frac{1}{2}(\mathbf{ y}- \boldsymbol{
+\mu})^\top\mathbf{C}^{-1} (\mathbf{ y}- \boldsymbol{ \mu})\right)
 \]</span> this gives a covariance matrix: <span class="math display">\[
 \mathbf{C}= \mathbf{R}\mathbf{D} \mathbf{R}^\top
 \]</span></p>
 </section>
 <section id="the-prior-density" class="slide level2">
 <h2>The Prior Density</h2>
-<p>Let’s assume that the prior density is given by a zero mean Gaussian, which is independent across each of the parameters, <span class="math display">\[
+<p>Let’s assume that the prior density is given by a zero mean Gaussian,
+which is independent across each of the parameters, <span
+class="math display">\[
 \mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
-\]</span> In other words, we are assuming, for the prior, that each element of the parameters vector, <span class="math inline">\(w_i\)</span>, was drawn from a Gaussian density as follows <span class="math display">\[
+\]</span> In other words, we are assuming, for the prior, that each
+element of the parameters vector, <span
+class="math inline">\(w_i\)</span>, was drawn from a Gaussian density as
+follows <span class="math display">\[
 w_i \sim \mathcal{N}\left(0,\alpha\right)
-\]</span> Let’s start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, <span class="math inline">\(\alpha\)</span>.</p>
+\]</span> Let’s start by assigning the parameter of the prior
+distribution, which is the variance of the prior distribution, <span
+class="math inline">\(\alpha\)</span>.</p>
 </section>
 <section id="further-reading-1" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>Multivariate Gaussians: Section 2.3 up to top of pg 85 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Section 3.3 up to 159 (pg 152–159) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Multivariate Gaussians: Section 2.3 up to top of pg 85 of <span
+class="citation" data-cites="Bishop:book06">Bishop
+(2006)</span></p></li>
+<li><p>Section 3.3 up to 159 (pg 152–159) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 </section>
 <section id="revisit-olympics-data" class="slide level2">
 <h2>Revisit Olympics Data</h2>
 <ul>
 <li><p>Use Bayesian approach on olympics data with polynomials.</p></li>
-<li><p>Choose a prior <span class="math inline">\(\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)\)</span> with <span class="math inline">\(\alpha = 1\)</span>.</p></li>
-<li><p>Choose noise variance <span class="math inline">\(\sigma^2 = 0.01\)</span></p></li>
+<li><p>Choose a prior <span class="math inline">\(\mathbf{ w}\sim
+\mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)\)</span> with <span
+class="math inline">\(\alpha = 1\)</span>.</p></li>
+<li><p>Choose noise variance <span class="math inline">\(\sigma^2 =
+0.01\)</span></p></li>
 </ul>
 </section>
 <section id="sampling-the-prior" class="slide level2">
 <h2>Sampling the Prior</h2>
 <ul>
-<li>Always useful to perform a ‘sanity check’ and sample from the prior before observing the data.</li>
-<li>Since <span class="math inline">\(\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> just need to sample <span class="math display">\[
+<li>Always useful to perform a ‘sanity check’ and sample from the prior
+before observing the data.</li>
+<li>Since <span class="math inline">\(\mathbf{ y}= \boldsymbol{
+\Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> just need to sample
+<span class="math display">\[
 \mathbf{ w}\sim \mathcal{N}\left(0,\alpha\mathbf{I}\right)
 \]</span> <span class="math display">\[
 \boldsymbol{ \epsilon}\sim \mathcal{N}\left(\mathbf{0},\sigma^2\right)
-\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
+\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span
+class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
 </ul>
 </section>
 <section id="computing-the-posterior" class="slide level2">
 <h2>Computing the Posterior</h2>
 <p><span class="math display">\[
-p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
+p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) =
+\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
 \]</span> with <span class="math display">\[
-\mathbf{C}_w= \left(\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right)^{-1}
+\mathbf{C}_w= \left(\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{
+\Phi}+ \alpha^{-1}\mathbf{I}\right)^{-1}
 \]</span> and <span class="math display">\[
-\boldsymbol{ \mu}_w= \mathbf{C}_w\sigma^{-2}\boldsymbol{ \Phi}^\top \mathbf{ y}
+\boldsymbol{ \mu}_w= \mathbf{C}_w\sigma^{-2}\boldsymbol{ \Phi}^\top
+\mathbf{ y}
 \]</span></p>
 </section>
 <section id="olympic-marathon-data" class="slide level2">
@@ -568,14 +717,16 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathcal{N}\left(\mathbf{ w
 <li>Gold medal times for Olympic Marathon since 1896.</li>
 <li>Marathons before 1924 didn’t have a standardized distance.</li>
 <li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
+<li>In 1904 Marathon was badly organized leading to very slow
+times.</li>
 </ul>
 </td>
 <td width="30%">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ"
+class="uri">http://bit.ly/16kMKHQ</a></small>
 </td>
 </tr>
 </table>
@@ -592,12 +743,16 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathcal{N}\left(\mathbf{ w
 Olympic marathon pace times since 1896.
 </aside>
 </section>
-<section id="olympic-data-with-bayesian-polynomials" class="slide level2">
+<section id="olympic-data-with-bayesian-polynomials"
+class="slide level2">
 <h2>Olympic Data with Bayesian Polynomials</h2>
 <script>
 showDivs(1, 'olympic_BLM_polynomial_number');
 </script>
-<p><small></small> <input id="range-olympic_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_BLM_polynomial_number')" oninput="setDivs('olympic_BLM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_BLM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_BLM_polynomial_number')">❯</button></p>
+<p><small></small>
+<input id="range-olympic_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_BLM_polynomial_number')" oninput="setDivs('olympic_BLM_polynomial_number')">
+<button onclick="plusDivs(-1, 'olympic_BLM_polynomial_number')">❮</button>
+<button onclick="plusDivs(1, 'olympic_BLM_polynomial_number')">❯</button></p>
 <div class="olympic_BLM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_BLM_polynomial_number001.svg" width="80%" style=" ">
 </object>
@@ -708,108 +863,137 @@ showDivs(1, 'olympic_BLM_polynomial_number');
 <script>
 showDivs(1, 'olympic_val_BLM_polynomial_number');
 </script>
-<p><small></small> <input id="range-olympic_val_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_val_BLM_polynomial_number')" oninput="setDivs('olympic_val_BLM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_val_BLM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_val_BLM_polynomial_number')">❯</button></p>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<p><small></small>
+<input id="range-olympic_val_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_val_BLM_polynomial_number')" oninput="setDivs('olympic_val_BLM_polynomial_number')">
+<button onclick="plusDivs(-1, 'olympic_val_BLM_polynomial_number')">❮</button>
+<button onclick="plusDivs(1, 'olympic_val_BLM_polynomial_number')">❯</button></p>
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number011.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number012.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number013.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number014.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number015.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number016.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number017.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number018.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number019.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number020.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number021.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number022.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number023.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number024.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number025.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_val_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_BLM_polynomial_number026.svg" width="80%" style=" ">
 </object>
 </div>
@@ -819,108 +1003,137 @@ showDivs(1, 'olympic_val_BLM_polynomial_number');
 <script>
 showDivs(1, 'olympic_5cv05_BLM_polynomial_number');
 </script>
-<p><small></small> <input id="range-olympic_5cv05_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_5cv05_BLM_polynomial_number')" oninput="setDivs('olympic_5cv05_BLM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_5cv05_BLM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv05_BLM_polynomial_number')">❯</button></p>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<p><small></small>
+<input id="range-olympic_5cv05_BLM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_5cv05_BLM_polynomial_number')" oninput="setDivs('olympic_5cv05_BLM_polynomial_number')">
+<button onclick="plusDivs(-1, 'olympic_5cv05_BLM_polynomial_number')">❮</button>
+<button onclick="plusDivs(1, 'olympic_5cv05_BLM_polynomial_number')">❯</button></p>
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number011.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number012.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number013.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number014.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number015.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number016.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number017.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number018.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number019.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number020.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number021.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number022.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number023.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number024.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number025.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_5cv05_BLM_polynomial_number" style="text-align:center;">
+<div class="olympic_5cv05_BLM_polynomial_number"
+style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number026.svg" width="80%" style=" ">
 </object>
 </div>
@@ -928,96 +1141,156 @@ showDivs(1, 'olympic_5cv05_BLM_polynomial_number');
 <section id="model-fit" class="slide level2">
 <h2>Model Fit</h2>
 <ul>
-<li>Marginal likelihood doesn’t always increase as model order increases.</li>
-<li>Bayesian model always has 2 parameters, regardless of how many basis functions (and here we didn’t even fit them).</li>
-<li>Maximum likelihood model over fits through increasing number of parameters.</li>
+<li>Marginal likelihood doesn’t always increase as model order
+increases.</li>
+<li>Bayesian model always has 2 parameters, regardless of how many basis
+functions (and here we didn’t even fit them).</li>
+<li>Maximum likelihood model over fits through increasing number of
+parameters.</li>
 <li>Revisit maximum likelihood solution with validation set.</li>
 </ul>
 </section>
 <section id="regularized-mean" class="slide level2">
 <h2>Regularized Mean</h2>
 <ul>
-<li>Validation fit here based on mean solution for <span class="math inline">\(\mathbf{ w}\)</span> only.</li>
+<li>Validation fit here based on mean solution for <span
+class="math inline">\(\mathbf{ w}\)</span> only.</li>
 <li>For Bayesian solution <span class="math display">\[
-\boldsymbol{ \mu}_w = \left[\sigma^{-2}\boldsymbol{ \Phi}^\top\boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right]^{-1} \sigma^{-2} \boldsymbol{ \Phi}^\top \mathbf{ y}
+\boldsymbol{ \mu}_w = \left[\sigma^{-2}\boldsymbol{
+\Phi}^\top\boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right]^{-1}
+\sigma^{-2} \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span> instead of <span class="math display">\[
-\mathbf{ w}^* = \left[\boldsymbol{ \Phi}^\top\boldsymbol{ \Phi}\right]^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
+\mathbf{ w}^* = \left[\boldsymbol{ \Phi}^\top\boldsymbol{
+\Phi}\right]^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></li>
-<li>Two are equivalent when <span class="math inline">\(\alpha \rightarrow \infty\)</span>.</li>
-<li>Equivalent to a prior for <span class="math inline">\(\mathbf{ w}\)</span> with infinite variance.</li>
-<li>In other cases <span class="math inline">\(\alpha \mathbf{I}\)</span> <em>regularizes</em> the system (keeps parameters smaller).</li>
+<li>Two are equivalent when <span class="math inline">\(\alpha
+\rightarrow \infty\)</span>.</li>
+<li>Equivalent to a prior for <span class="math inline">\(\mathbf{
+w}\)</span> with infinite variance.</li>
+<li>In other cases <span class="math inline">\(\alpha
+\mathbf{I}\)</span> <em>regularizes</em> the system (keeps parameters
+smaller).</li>
 </ul>
 </section>
 <section id="sampling-from-the-posterior" class="slide level2">
 <h2>Sampling from the Posterior</h2>
 <ul>
-<li>Now check samples by extracting <span class="math inline">\(\mathbf{ w}\)</span> from the <em>posterior</em>.</li>
-<li>Now for <span class="math inline">\(\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> need <span class="math display">\[
+<li>Now check samples by extracting <span class="math inline">\(\mathbf{
+w}\)</span> from the <em>posterior</em>.</li>
+<li>Now for <span class="math inline">\(\mathbf{ y}= \boldsymbol{
+\Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> need <span
+class="math display">\[
 \mathbf{ w}\sim \mathcal{N}\left(\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
-\]</span> with <span class="math inline">\(\mathbf{C}_w = \left[\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right]^{-1}\)</span> and <span class="math inline">\(\boldsymbol{ \mu}_w =\mathbf{C}_w \sigma^{-2} \boldsymbol{ \Phi}^\top \mathbf{ y}\)</span> <span class="math display">\[
-\boldsymbol{ \epsilon}\sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
-\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
+\]</span> with <span class="math inline">\(\mathbf{C}_w =
+\left[\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+
+\alpha^{-1}\mathbf{I}\right]^{-1}\)</span> and <span
+class="math inline">\(\boldsymbol{ \mu}_w =\mathbf{C}_w \sigma^{-2}
+\boldsymbol{ \Phi}^\top \mathbf{ y}\)</span> <span
+class="math display">\[
+\boldsymbol{ \epsilon}\sim
+\mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
+\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span
+class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
 </ul>
 </section>
 <section id="marginal-likelihood" class="slide level2">
 <h2>Marginal Likelihood</h2>
 <ul>
-<li><p>The marginal likelihood can also be computed, it has the form: <span class="math display">\[
-p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
-\]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.</p></li>
-<li><p>So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
+<li><p>The marginal likelihood can also be computed, it has the form:
+<span class="math display">\[
+p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) =
+\frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}}
+\exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{
+y}\right)
+\]</span> where <span class="math inline">\(\mathbf{K}= \alpha
+\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2
+\mathbf{I}\)</span>.</p></li>
+<li><p>So it is a zero mean <span
+class="math inline">\(n\)</span>-dimensional Gaussian with covariance
+matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
 </ul>
 </section>
 <section id="computing-the-expected-output" class="slide level2">
 <h2>Computing the Expected Output</h2>
 <ul>
-<li>Given the posterior for the parameters, how can we compute the expected output at a given location?</li>
-<li>Output of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
+<li>Given the posterior for the parameters, how can we compute the
+expected output at a given location?</li>
+<li>Output of model at location <span class="math inline">\(\mathbf{
+x}_i\)</span> is given by <span class="math display">\[
 f(\mathbf{ x}_i; \mathbf{ w}) = \boldsymbol{ \phi}_i^\top \mathbf{ w}
 \]</span></li>
-<li>We want the expected output under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
-<li>Mean of mapping function will be given by <span class="math display">\[
-\begin{aligned} \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} &amp;= \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} \\  &amp; = \boldsymbol{ \phi}_i^\top \boldsymbol{ \mu}_w \end{aligned}
+<li>We want the expected output under the posterior density, <span
+class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2,
+\alpha)\)</span>.</li>
+<li>Mean of mapping function will be given by <span
+class="math display">\[
+\begin{aligned} \left\langle f(\mathbf{ x}_i; \mathbf{
+w})\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2,
+\alpha)} &amp;= \boldsymbol{ \phi}_i^\top \left\langle\mathbf{
+w}\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2,
+\alpha)} \\  &amp; = \boldsymbol{ \phi}_i^\top \boldsymbol{ \mu}_w
+\end{aligned}
 \]</span></li>
 </ul>
 </section>
 <section id="variance-of-expected-output" class="slide level2">
 <h2>Variance of Expected Output</h2>
 <ul>
-<li>Variance of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
-\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;= \left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle - \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;= \boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{ w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{ \phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
+<li>Variance of model at location <span class="math inline">\(\mathbf{
+x}_i\)</span> is given by <span class="math display">\[
+\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;=
+\left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle -
+\left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;=
+\boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{
+w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top
+\left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{
+w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{
+\phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
 \end{aligned}
-\]</span> where all these expectations are taken under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
+\]</span> where all these expectations are taken under the posterior
+density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y},
+\mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
 </ul>
 </section>
 <section id="further-reading-2" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>Section 3.7–3.8 (pg 122–133) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 3.4 (pg 161–165) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 3.7–3.8 (pg 122–133) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 3.4 (pg 161–165) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Gauss:theoria09" class="csl-entry" role="doc-biblioentry">
-Gauss, C.F., 1809. Theoria motus corporum coelestium in sectionibus conicis solem ambientium. F. Perthes und I. H. Besser, Hamburg.
+Gauss, C.F., 1809. Theoria motus corporum coelestium in sectionibus
+conicis solem ambientium. F. Perthes und I. H. Besser, Hamburg.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 </section>
@@ -1032,8 +1305,39 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

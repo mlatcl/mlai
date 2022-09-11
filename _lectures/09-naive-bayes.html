@@ -1,6 +1,10 @@
 ---
 title: "Probabilistic Classification: Naive Bayes"
-abstract: "In the last lecture we looked at unsupervised learning. We introduced latent variables, dimensionality reduction and clustering. In this lecture we’re going to look at clustering, specifically the probabilistic approach to clustering. We’ll focus on a simple but often effective algorithm known as <em>naive Bayes</em>."
+abstract: "In the last lecture we looked at unsupervised learning. We
+introduced latent variables, dimensionality reduction and clustering. In
+this lecture we’re going to look at clustering, specifically the
+probabilistic approach to clustering. We’ll focus on a simple but often
+effective algorithm known as <em>naive Bayes</em>."
 edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/naive-bayes.md
 week: 9
 reveal: 09-naive-bayes.slides.html
@@ -24,7 +28,9 @@ categories:
 -->
 <h2 id="setup">Setup</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <!--setupplotcode{import seaborn as sns
 sns.set_style('darkgrid')
@@ -32,92 +38,218 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h2 id="notutils">notutils</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>This small package is a helper package for various notebook utilities used</p>
+<p>This small package is a helper package for various notebook utilities
+used</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/notutils" class="uri">https://github.com/lawrennd/notutils</a></p>
-<p>Once <code>notutils</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/notutils"
+class="uri">https://github.com/lawrennd/notutils</a></p>
+<p>Once <code>notutils</code> is installed, it can be imported in the
+usual manner.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
 <h2 id="pods">pods</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
-<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
+<p>In Sheffield we created a suite of software tools for ‘Open Data
+Science’. Open data science is an approach to sharing code, models and
+data that should make it easier for companies, health professionals and
+scientists to gain access to data science techniques.</p>
+<p>You can also check this blog post on <a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
-<p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/ods"
+class="uri">https://github.com/lawrennd/ods</a></p>
+<p>Once <code>pods</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="mlai">mlai</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The <code>mlai</code> software is a suite of helper functions for teaching and demonstrating machine learning algorithms. It was first used in the Machine Learning and Adaptive Intelligence course in Sheffield in 2013.</p>
+<p>The <code>mlai</code> software is a suite of helper functions for
+teaching and demonstrating machine learning algorithms. It was first
+used in the Machine Learning and Adaptive Intelligence course in
+Sheffield in 2013.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/mlai" class="uri">https://github.com/lawrennd/mlai</a></p>
-<p>Once <code>mlai</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<h2 id="introduction-to-classification">Introduction to Classification</h2>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/mlai"
+class="uri">https://github.com/lawrennd/mlai</a></p>
+<p>Once <code>mlai</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<h2 id="introduction-to-classification">Introduction to
+Classification</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Classification is perhaps the technique most closely assocated with machine learning. In the speech based agents, on-device classifiers are used to determine when the wake word is used. A wake word is a word that wakes up the device. For the Amazon Echo it is “Alexa,” for Siri it is “Hey Siri.” Once the wake word detected with a classifier, the speech can be uploaded to the cloud for full processing, the speech recognition stages.</p>
-<p>This isn’t just useful for intelligent agents, the UN global pulse project on public discussion on radio also uses <a href="https://radio.unglobalpulse.net/uganda/">wake word detection for recording radio conversations</a>.</p>
-<p>A major breakthrough in image classification came in 2012 with the ImageNet result of <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex Krizhevsky, Ilya Sutskever and Geoff Hinton</a> from the University of Toronto. ImageNet is a large data base of 14 million images with many thousands of classes. The data is used in a community-wide challenge for object categorization. Krizhevsky et al used convolutional neural networks to outperform all previous approaches on the challenge. They formed a company which was purchased shortly after by Google. This challenge, known as object categorisation, was a major obstacle for practical computer vision systems. Modern object categorization systems are close to human performance.</p>
-<p>Machine learning problems normally involve a prediction function and an objective function. Regression is the case where the prediction function iss over the real numbers, so the codomain of the functions, <span class="math inline">\(f(\mathbf{X})\)</span> was the real numbers or sometimes real vectors. The classification problem consists of predicting whether or not a particular example is a member of a particular class. So we may want to know if a particular image represents a digit 6 or if a particular user will click on a given advert. These are classification problems, and they require us to map to <em>yes</em> or <em>no</em> answers. That makes them naturally discrete mappings.</p>
-<p>In classification we are given an input vector, <span class="math inline">\(\mathbf{ x}\)</span>, and an associated label, <span class="math inline">\(y\)</span> which either takes the value <span class="math inline">\(-1\)</span> to represent <em>no</em> or <span class="math inline">\(1\)</span> to represent <em>yes</em>.</p>
-<p>In supervised learning the inputs, <span class="math inline">\(\mathbf{ x}\)</span>, are mapped to a label, <span class="math inline">\(y\)</span>, through a function <span class="math inline">\(f(\cdot)\)</span> that is dependent on a set of parameters, <span class="math inline">\(\mathbf{ w}\)</span>, <span class="math display">\[
+<p>Classification is perhaps the technique most closely assocated with
+machine learning. In the speech based agents, on-device classifiers are
+used to determine when the wake word is used. A wake word is a word that
+wakes up the device. For the Amazon Echo it is “Alexa”, for Siri it is
+“Hey Siri”. Once the wake word detected with a classifier, the speech
+can be uploaded to the cloud for full processing, the speech recognition
+stages.</p>
+<p>This isn’t just useful for intelligent agents, the UN global pulse
+project on public discussion on radio also uses <a
+href="https://radio.unglobalpulse.net/uganda/">wake word detection for
+recording radio conversations</a>.</p>
+<p>A major breakthrough in image classification came in 2012 with the
+ImageNet result of <a
+href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-">Alex
+Krizhevsky, Ilya Sutskever and Geoff Hinton</a> from the University of
+Toronto. ImageNet is a large data base of 14 million images with many
+thousands of classes. The data is used in a community-wide challenge for
+object categorization. Krizhevsky et al used convolutional neural
+networks to outperform all previous approaches on the challenge. They
+formed a company which was purchased shortly after by Google. This
+challenge, known as object categorisation, was a major obstacle for
+practical computer vision systems. Modern object categorization systems
+are close to human performance.</p>
+<p>Machine learning problems normally involve a prediction function and
+an objective function. Regression is the case where the prediction
+function iss over the real numbers, so the codomain of the functions,
+<span class="math inline">\(f(\mathbf{X})\)</span> was the real numbers
+or sometimes real vectors. The classification problem consists of
+predicting whether or not a particular example is a member of a
+particular class. So we may want to know if a particular image
+represents a digit 6 or if a particular user will click on a given
+advert. These are classification problems, and they require us to map to
+<em>yes</em> or <em>no</em> answers. That makes them naturally discrete
+mappings.</p>
+<p>In classification we are given an input vector, <span
+class="math inline">\(\mathbf{ x}\)</span>, and an associated label,
+<span class="math inline">\(y\)</span> which either takes the value
+<span class="math inline">\(-1\)</span> to represent <em>no</em> or
+<span class="math inline">\(1\)</span> to represent <em>yes</em>.</p>
+<p>In supervised learning the inputs, <span
+class="math inline">\(\mathbf{ x}\)</span>, are mapped to a label, <span
+class="math inline">\(y\)</span>, through a function <span
+class="math inline">\(f(\cdot)\)</span> that is dependent on a set of
+parameters, <span class="math inline">\(\mathbf{ w}\)</span>, <span
+class="math display">\[
 y= f(\mathbf{ x}; \mathbf{ w}).
-\]</span> The function <span class="math inline">\(f(\cdot)\)</span> is known as the <em>prediction function</em>. The key challenges are (1) choosing which features, <span class="math inline">\(\mathbf{ x}\)</span>, are relevant in the prediction, (2) defining the appropriate <em>class of function</em>, <span class="math inline">\(f(\cdot)\)</span>, to use and (3) selecting the right parameters, <span class="math inline">\(\mathbf{ w}\)</span>.</p>
+\]</span> The function <span class="math inline">\(f(\cdot)\)</span> is
+known as the <em>prediction function</em>. The key challenges are (1)
+choosing which features, <span class="math inline">\(\mathbf{
+x}\)</span>, are relevant in the prediction, (2) defining the
+appropriate <em>class of function</em>, <span
+class="math inline">\(f(\cdot)\)</span>, to use and (3) selecting the
+right parameters, <span class="math inline">\(\mathbf{ w}\)</span>.</p>
 <h2 id="classification-examples">Classification Examples</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-examples.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-examples.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-examples.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/classification-examples.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <ul>
-<li>Classifiying hand written digits from binary images (automatic zip code reading)</li>
+<li>Classifiying hand written digits from binary images (automatic zip
+code reading)</li>
 <li>Detecting faces in images (e.g. digital cameras).</li>
 <li>Who a detected face belongs to (e.g. Facebook, DeepFace)</li>
 <li>Classifying type of cancer given gene expression data.</li>
-<li>Categorization of document types (different types of news article on the internet)</li>
+<li>Categorization of document types (different types of news article on
+the internet)</li>
 </ul>
 <h2 id="bernoulli-distribution">Bernoulli Distribution</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-distribution.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-distribution.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-distribution.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-distribution.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Our focus has been on models where the objective function is inspired by a probabilistic analysis of the problem. In particular we’ve argued that we answer questions about the data set by placing probability distributions over the various quantities of interest. For the case of binary classification this will normally involve introducing probability distributions for discrete variables. Such probability distributions, are in some senses easier than those for continuous variables, in particular we can represent a probability distribution over <span class="math inline">\(y\)</span>, where <span class="math inline">\(y\)</span> is binary, with one value. If we specify the probability that <span class="math inline">\(y=1\)</span> with a number that is between 0 and 1, i.e. let’s say that <span class="math inline">\(P(y=1) = \pi\)</span> (here we don’t mean <span class="math inline">\(\pi\)</span> the number, we are setting <span class="math inline">\(\pi\)</span> to be a variable) then we can specify the probability distribution through a table.</p>
+<p>Our focus has been on models where the objective function is inspired
+by a probabilistic analysis of the problem. In particular we’ve argued
+that we answer questions about the data set by placing probability
+distributions over the various quantities of interest. For the case of
+binary classification this will normally involve introducing probability
+distributions for discrete variables. Such probability distributions,
+are in some senses easier than those for continuous variables, in
+particular we can represent a probability distribution over <span
+class="math inline">\(y\)</span>, where <span
+class="math inline">\(y\)</span> is binary, with one value. If we
+specify the probability that <span class="math inline">\(y=1\)</span>
+with a number that is between 0 and 1, i.e. let’s say that <span
+class="math inline">\(P(y=1) = \pi\)</span> (here we don’t mean <span
+class="math inline">\(\pi\)</span> the number, we are setting <span
+class="math inline">\(\pi\)</span> to be a variable) then we can specify
+the probability distribution through a table.</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">\(y\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(y\)</span></th>
 <th style="text-align: center;">0</th>
 <th style="text-align: center;">1</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(P(y)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\((1-\pi)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\pi\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(P(y)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\((1-\pi)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\pi\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Mathematically we can use a trick to implement this same table. We can use the value <span class="math inline">\(y\)</span> as a mathematical switch and write that <span class="math display">\[
+<p>Mathematically we can use a trick to implement this same table. We
+can use the value <span class="math inline">\(y\)</span> as a
+mathematical switch and write that <span class="math display">\[
   P(y) = \pi^y(1-\pi)^{(1-y)}
-  \]</span> where our probability distribution is now written as a function of <span class="math inline">\(y\)</span>. This probability distribution is known as the <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a>. The Bernoulli distribution is a clever trick for mathematically switching between two probabilities if we were to write it as code it would be better described as</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bernoulli(y_i, pi):</span>
+  \]</span> where our probability distribution is now written as a
+function of <span class="math inline">\(y\)</span>. This probability
+distribution is known as the <a
+href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli
+distribution</a>. The Bernoulli distribution is a clever trick for
+mathematically switching between two probabilities if we were to write
+it as code it would be better described as</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bernoulli(y_i, pi):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> y_i <span class="op">==</span> <span class="dv">1</span>:</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pi</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>pi</span></code></pre></div>
-<p>If we insert <span class="math inline">\(y=1\)</span> then the function is equal to <span class="math inline">\(\pi\)</span>, and if we insert <span class="math inline">\(y=0\)</span> then the function is equal to <span class="math inline">\(1-\pi\)</span>. So the function recreates the table for the distribution given above.</p>
-<p>The probability distribution is named for <a href="http://en.wikipedia.org/wiki/Jacob_Bernoulli">Jacob Bernoulli</a>, the swiss mathematician. In his book Ars Conjectandi he considered the distribution and the result of a number of ‘trials’ under the Bernoulli distribution to form the <em>binomial</em> distribution. Below is the page where he considers Pascal’s triangle in forming combinations of the Bernoulli distribution to realise the binomial distribution for the outcome of positive trials.</p>
+<p>If we insert <span class="math inline">\(y=1\)</span> then the
+function is equal to <span class="math inline">\(\pi\)</span>, and if we
+insert <span class="math inline">\(y=0\)</span> then the function is
+equal to <span class="math inline">\(1-\pi\)</span>. So the function
+recreates the table for the distribution given above.</p>
+<p>The probability distribution is named for <a
+href="http://en.wikipedia.org/wiki/Jacob_Bernoulli">Jacob Bernoulli</a>,
+the swiss mathematician. In his book Ars Conjectandi he considered the
+distribution and the result of a number of ‘trials’ under the Bernoulli
+distribution to form the <em>binomial</em> distribution. Below is the
+page where he considers Pascal’s triangle in forming combinations of the
+Bernoulli distribution to realise the binomial distribution for the
+outcome of positive trials.</p>
 <iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=CF4UAAAAQAAJ&amp;pg=PA87&amp;output=embed" width="700" height="500">
 </iframe>
 <div class="figure">
@@ -125,45 +257,97 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/bernoulli-urn.svg" width="40%" style=" ">
 </object>
 </div>
-<div id="bernoulli-urn-magnify" class="magnify" onclick="magnifyFigure(&#39;bernoulli-urn&#39;)">
+<div id="bernoulli-urn-magnify" class="magnify"
+onclick="magnifyFigure(&#39;bernoulli-urn&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="bernoulli-urn-caption" class="caption-frame">
-<p>Figure: Jacob Bernoulli described the Bernoulli distribution through an urn in which there are black and red balls.</p>
+<p>Figure: Jacob Bernoulli described the Bernoulli distribution through
+an urn in which there are black and red balls.</p>
 </div>
 </div>
-<p>Thomas Bayes also described the Bernoulli distribution, only he didn’t refer to Jacob Bernoulli’s work, so he didn’t call it by that name. He described the distribution in terms of a table (think of a <em>billiard table</em>) and two balls. Bayes suggests that each ball can be rolled across the table such that it comes to rest at a position that is <em>uniformly distributed</em> between the sides of the table.</p>
-<p>Let’s assume that the first ball is rolled, and that it comes to reset at a position that is <span class="math inline">\(\pi\)</span> times the width of the table from the left hand side.</p>
-<p>Now, we roll the second ball. We are interested if the second ball ends up on the left side (+ve result) or the right side (-ve result) of the first ball. We use the Bernoulli distribution to determine this.</p>
-<p>For this reason in Bayes’s distribution there is considered to be <em>aleatoric</em> uncertainty about the distribution parameter.</p>
+<p>Thomas Bayes also described the Bernoulli distribution, only he
+didn’t refer to Jacob Bernoulli’s work, so he didn’t call it by that
+name. He described the distribution in terms of a table (think of a
+<em>billiard table</em>) and two balls. Bayes suggests that each ball
+can be rolled across the table such that it comes to rest at a position
+that is <em>uniformly distributed</em> between the sides of the
+table.</p>
+<p>Let’s assume that the first ball is rolled, and that it comes to
+reset at a position that is <span class="math inline">\(\pi\)</span>
+times the width of the table from the left hand side.</p>
+<p>Now, we roll the second ball. We are interested if the second ball
+ends up on the left side (+ve result) or the right side (-ve result) of
+the first ball. We use the Bernoulli distribution to determine this.</p>
+<p>For this reason in Bayes’s distribution there is considered to be
+<em>aleatoric</em> uncertainty about the distribution parameter.</p>
 <div class="figure">
 <div id="bayes-billiard-9-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/bayes-billiard009.svg" width="40%" style=" ">
 </object>
 </div>
-<div id="bayes-billiard-9-magnify" class="magnify" onclick="magnifyFigure(&#39;bayes-billiard-9&#39;)">
+<div id="bayes-billiard-9-magnify" class="magnify"
+onclick="magnifyFigure(&#39;bayes-billiard-9&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="bayes-billiard-9-caption" class="caption-frame">
-<p>Figure: Thomas Bayes described the Bernoulli distribution independently of Jacob Bernoulli. He used the analogy of a billiard table. Any ball on the table is given a uniformly random position between the left and right side of the table. The first ball (in the figure) gives the parameter of the Bernoulli distribution. The second ball (in the figure) gives the outcome as either left or right (relative to the first ball). This is the origin of the term Bayesian because the parameter of the distribution is drawn from a probsbility.</p>
+<p>Figure: Thomas Bayes described the Bernoulli distribution
+independently of Jacob Bernoulli. He used the analogy of a billiard
+table. Any ball on the table is given a uniformly random position
+between the left and right side of the table. The first ball (in the
+figure) gives the parameter of the Bernoulli distribution. The second
+ball (in the figure) gives the outcome as either left or right (relative
+to the first ball). This is the origin of the term Bayesian because the
+parameter of the distribution is drawn from a probsbility.</p>
 </div>
 </div>
-<h2 id="maximum-likelihood-in-the-bernoulli">Maximum Likelihood in the Bernoulli</h2>
+<h2 id="maximum-likelihood-in-the-bernoulli">Maximum Likelihood in the
+Bernoulli</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-maximum-likelihood.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-maximum-likelihood.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-maximum-likelihood.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/bernoulli-maximum-likelihood.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Maximum likelihood in the Bernoulli distribution is straightforward. Let’s assume we have data, <span class="math inline">\(\mathbf{ y}\)</span> which consists of a vector of binary values of length <span class="math inline">\(n\)</span>. If we assume each value was sampled independently from the Bernoulli distribution, conditioned on the parameter <span class="math inline">\(\pi\)</span> then our joint probability density has the form <span class="math display">\[
+<p>Maximum likelihood in the Bernoulli distribution is straightforward.
+Let’s assume we have data, <span class="math inline">\(\mathbf{
+y}\)</span> which consists of a vector of binary values of length <span
+class="math inline">\(n\)</span>. If we assume each value was sampled
+independently from the Bernoulli distribution, conditioned on the
+parameter <span class="math inline">\(\pi\)</span> then our joint
+probability density has the form <span class="math display">\[
 p(\mathbf{ y}|\pi) = \prod_{i=1}^{n} \pi^{y_i} (1-\pi)^{1-y_i}.
-\]</span> As normal in maximum likelihood we consider the negative log likelihood as our objective, <span class="math display">\[\begin{align*}
-  E(\pi)&amp; = -\log p(\mathbf{ y}|\pi)\\ 
-                     &amp; = -\sum_{i=1}^{n} y_i \log \pi - \sum_{i=1}^{n} (1-y_i) \log(1-\pi),
+\]</span> As normal in maximum likelihood we consider the negative log
+likelihood as our objective, <span class="math display">\[\begin{align*}
+  E(\pi)&amp; = -\log p(\mathbf{ y}|\pi)\\
+                     &amp; = -\sum_{i=1}^{n} y_i \log \pi -
+\sum_{i=1}^{n} (1-y_i) \log(1-\pi),
   \end{align*}\]</span></p>
-<p>and we can derive the gradient with respect to the parameter <span class="math inline">\(\pi\)</span>. <span class="math display">\[\frac{\text{d}E(\pi)}{\text{d}\pi} = -\frac{\sum_{i=1}^{n} y_i}{\pi}  + \frac{\sum_{i=1}^{n} (1-y_i)}{1-\pi},\]</span></p>
-<p>and as normal we look for a stationary point for the log likelihood by setting this derivative to zero, <span class="math display">\[0 = -\frac{\sum_{i=1}^{n} y_i}{\pi}  + \frac{\sum_{i=1}^{n} (1-y_i)}{1-\pi},\]</span> rearranging we form <span class="math display">\[(1-\pi)\sum_{i=1}^{n} y_i =   \pi\sum_{i=1}^{n} (1-y_i),\]</span> which implies <span class="math display">\[\sum_{i=1}^{n} y_i =   \pi\left(\sum_{i=1}^{n} (1-y_i) + \sum_{i=1}^{n} y_i\right),\]</span></p>
-<p>and now we recognise that <span class="math inline">\(\sum_{i=1}^{n} (1-y_i) + \sum_{i=1}^{n} y_i = n\)</span> so we have <span class="math display">\[\pi = \frac{\sum_{i=1}^{n} y_i}{n}\]</span></p>
-<p>so in other words we estimate the probability associated with the Bernoulli by setting it to the number of observed positives, divided by the total length of <span class="math inline">\(y\)</span>. This makes intiutive sense. If I asked you to estimate the probability of a coin being heads, and you tossed the coin 100 times, and recovered 47 heads, then the estimate of the probability of heads should be <span class="math inline">\(\frac{47}{100}\)</span>.</p>
+<p>and we can derive the gradient with respect to the parameter <span
+class="math inline">\(\pi\)</span>. <span
+class="math display">\[\frac{\text{d}E(\pi)}{\text{d}\pi} =
+-\frac{\sum_{i=1}^{n} y_i}{\pi}  + \frac{\sum_{i=1}^{n}
+(1-y_i)}{1-\pi},\]</span></p>
+<p>and as normal we look for a stationary point for the log likelihood
+by setting this derivative to zero, <span class="math display">\[0 =
+-\frac{\sum_{i=1}^{n} y_i}{\pi}  + \frac{\sum_{i=1}^{n}
+(1-y_i)}{1-\pi},\]</span> rearranging we form <span
+class="math display">\[(1-\pi)\sum_{i=1}^{n} y_i =   \pi\sum_{i=1}^{n}
+(1-y_i),\]</span> which implies <span
+class="math display">\[\sum_{i=1}^{n} y_i =   \pi\left(\sum_{i=1}^{n}
+(1-y_i) + \sum_{i=1}^{n} y_i\right),\]</span></p>
+<p>and now we recognise that <span class="math inline">\(\sum_{i=1}^{n}
+(1-y_i) + \sum_{i=1}^{n} y_i = n\)</span> so we have <span
+class="math display">\[\pi = \frac{\sum_{i=1}^{n} y_i}{n}\]</span></p>
+<p>so in other words we estimate the probability associated with the
+Bernoulli by setting it to the number of observed positives, divided by
+the total length of <span class="math inline">\(y\)</span>. This makes
+intiutive sense. If I asked you to estimate the probability of a coin
+being heads, and you tossed the coin 100 times, and recovered 47 heads,
+then the estimate of the probability of heads should be <span
+class="math inline">\(\frac{47}{100}\)</span>.</p>
 <h3 id="exercise-1">Exercise 1</h3>
-<p>Show that the maximum likelihood solution we have found is a <em>minimum</em> for our objective.</p>
+<p>Show that the maximum likelihood solution we have found is a
+<em>minimum</em> for our objective.</p>
 <p><span class="math display">\[
 \text{posterior} =
 \frac{\text{likelihood}\times\text{prior}}{\text{marginal likelihood}}
@@ -177,104 +361,285 @@ p(\mathbf{ y}|\pi) = \prod_{i=1}^{n} \pi^{y_i} (1-\pi)^{1-y_i}.
 </ol>
 <h2 id="naive-bayes-classifiers">Naive Bayes Classifiers</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p><em>Note</em>: Everything we do below is possible using standard packages like <code>scikit-learn</code>, our purpose in this session is to help you understand how those engines are constructed. In practice for an application you should use a library like <code>scikit-learn</code>.</p>
-<p>In probabilistic machine learning we place probability distributions (or densities) over all the variables of interest, our first classification algorithm will do just that. We will consider how to form a classification by making assumptions about the <em>joint</em> density of our observations. We need to make assumptions to reduce the number of parameters we need to optimise.</p>
-<p>In the ideal world, given label data <span class="math inline">\(\mathbf{ y}\)</span> and the inputs <span class="math inline">\(\mathbf{X}\)</span> we should be able to specify the joint density of all potential values of <span class="math inline">\(\mathbf{ y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span>, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X})\)</span>. If <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{ y}\)</span> are our training data, and we can somehow extend our density to incorporate future test data (by augmenting <span class="math inline">\(\mathbf{ y}\)</span> with a new observation <span class="math inline">\(y^*\)</span> and <span class="math inline">\(\mathbf{X}\)</span> with the corresponding inputs, <span class="math inline">\(\mathbf{ x}^*\)</span>), then we can answer any given question about a future test point <span class="math inline">\(y^*\)</span> given its covariates <span class="math inline">\(\mathbf{ x}^*\)</span> by conditioning on the training variables to recover, <span class="math display">\[
+<p><em>Note</em>: Everything we do below is possible using standard
+packages like <code>scikit-learn</code>, our purpose in this session is
+to help you understand how those engines are constructed. In practice
+for an application you should use a library like
+<code>scikit-learn</code>.</p>
+<p>In probabilistic machine learning we place probability distributions
+(or densities) over all the variables of interest, our first
+classification algorithm will do just that. We will consider how to form
+a classification by making assumptions about the <em>joint</em> density
+of our observations. We need to make assumptions to reduce the number of
+parameters we need to optimise.</p>
+<p>In the ideal world, given label data <span
+class="math inline">\(\mathbf{ y}\)</span> and the inputs <span
+class="math inline">\(\mathbf{X}\)</span> we should be able to specify
+the joint density of all potential values of <span
+class="math inline">\(\mathbf{ y}\)</span> and <span
+class="math inline">\(\mathbf{X}\)</span>, <span
+class="math inline">\(p(\mathbf{ y}, \mathbf{X})\)</span>. If <span
+class="math inline">\(\mathbf{X}\)</span> and <span
+class="math inline">\(\mathbf{ y}\)</span> are our training data, and we
+can somehow extend our density to incorporate future test data (by
+augmenting <span class="math inline">\(\mathbf{ y}\)</span> with a new
+observation <span class="math inline">\(y^*\)</span> and <span
+class="math inline">\(\mathbf{X}\)</span> with the corresponding inputs,
+<span class="math inline">\(\mathbf{ x}^*\)</span>), then we can answer
+any given question about a future test point <span
+class="math inline">\(y^*\)</span> given its covariates <span
+class="math inline">\(\mathbf{ x}^*\)</span> by conditioning on the
+training variables to recover, <span class="math display">\[
 p(y^*|\mathbf{X}, \mathbf{ y}, \mathbf{ x}^*),
 \]</span></p>
-<p>We can compute this distribution using the product and sum rules. However, to specify this density we must give the probability associated with all possible combinations of <span class="math inline">\(\mathbf{ y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span>. There are <span class="math inline">\(2^{n}\)</span> possible combinations for the vector <span class="math inline">\(\mathbf{ y}\)</span> and the probability for each of these combinations must be jointly specified along with the joint density of the matrix <span class="math inline">\(\mathbf{X}\)</span>, as well as being able to <em>extend</em> the density for any chosen test location <span class="math inline">\(\mathbf{ x}^*\)</span>.</p>
-<p>In naive Bayes we make certain simplifying assumptions that allow us to perform all of the above in practice.</p>
-<h2 id="data-conditional-independence">Data Conditional Independence</h2>
-<p>If we are given model parameters <span class="math inline">\(\boldsymbol{ \theta}\)</span> we assume that conditioned on all these parameters that all data points in the model are independent. In other words we have, <span class="math display">\[
-  p(y^*, \mathbf{ x}^*, \mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}) = p(y^*, \mathbf{ x}^*|\boldsymbol{ \theta})\prod_{i=1}^{n} p(y_i, \mathbf{ x}_i | \boldsymbol{ \theta}).
-  \]</span> This is a conditional independence assumption because we are not assuming our data are purely independent. If we were to assume that, then there would be nothing to learn about our test data given our training data. We are assuming that they are independent <em>given</em> our parameters, <span class="math inline">\(\boldsymbol{ \theta}\)</span>. We made similar assumptions for regression, where our parameter set included <span class="math inline">\(\mathbf{ w}\)</span> and <span class="math inline">\(\sigma^2\)</span>. Given those parameters we assumed that the density over <span class="math inline">\(\mathbf{ y}, y^*\)</span> was <em>independent</em>. Here we are going a little further with that assumption because we are assuming the <em>joint</em> density of <span class="math inline">\(\mathbf{ y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span> is independent across the data given the parameters.</p>
-<p>Computing posterior distribution in this case becomes easier, this is known as the ‘Bayes classifier.’</p>
-<h2 id="feature-conditional-independence">Feature Conditional Independence</h2>
+<p>We can compute this distribution using the product and sum rules.
+However, to specify this density we must give the probability associated
+with all possible combinations of <span class="math inline">\(\mathbf{
+y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span>. There
+are <span class="math inline">\(2^{n}\)</span> possible combinations for
+the vector <span class="math inline">\(\mathbf{ y}\)</span> and the
+probability for each of these combinations must be jointly specified
+along with the joint density of the matrix <span
+class="math inline">\(\mathbf{X}\)</span>, as well as being able to
+<em>extend</em> the density for any chosen test location <span
+class="math inline">\(\mathbf{ x}^*\)</span>.</p>
+<p>In naive Bayes we make certain simplifying assumptions that allow us
+to perform all of the above in practice.</p>
+<h2 id="data-conditional-independence">Data Conditional
+Independence</h2>
+<p>If we are given model parameters <span
+class="math inline">\(\boldsymbol{ \theta}\)</span> we assume that
+conditioned on all these parameters that all data points in the model
+are independent. In other words we have, <span class="math display">\[
+  p(y^*, \mathbf{ x}^*, \mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}) =
+p(y^*, \mathbf{ x}^*|\boldsymbol{ \theta})\prod_{i=1}^{n} p(y_i,
+\mathbf{ x}_i | \boldsymbol{ \theta}).
+  \]</span> This is a conditional independence assumption because we are
+not assuming our data are purely independent. If we were to assume that,
+then there would be nothing to learn about our test data given our
+training data. We are assuming that they are independent <em>given</em>
+our parameters, <span class="math inline">\(\boldsymbol{
+\theta}\)</span>. We made similar assumptions for regression, where our
+parameter set included <span class="math inline">\(\mathbf{ w}\)</span>
+and <span class="math inline">\(\sigma^2\)</span>. Given those
+parameters we assumed that the density over <span
+class="math inline">\(\mathbf{ y}, y^*\)</span> was
+<em>independent</em>. Here we are going a little further with that
+assumption because we are assuming the <em>joint</em> density of <span
+class="math inline">\(\mathbf{ y}\)</span> and <span
+class="math inline">\(\mathbf{X}\)</span> is independent across the data
+given the parameters.</p>
+<p>Computing posterior distribution in this case becomes easier, this is
+known as the ‘Bayes classifier’.</p>
+<h2 id="feature-conditional-independence">Feature Conditional
+Independence</h2>
 <p><span class="math display">\[
-p(\mathbf{ x}_i | y_i, \boldsymbol{ \theta}) = \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})
-\]</span> where <span class="math inline">\(p\)</span> is the dimensionality of our inputs.</p>
-<p>The assumption that is particular to naive Bayes is to now consider that the <em>features</em> are also conditionally independent, but not only given the parameters. We assume that the features are independent given the parameters <em>and</em> the label. So for each data point we have <span class="math display">\[p(\mathbf{ x}_i | y_i, \boldsymbol{ \theta}) = \prod_{j=1}^{p} p(x_{i,j}|y_i,\boldsymbol{ \theta})\]</span> where <span class="math inline">\(p\)</span> is the dimensionality of our inputs.</p>
-<h2 id="marginal-density-for-y_i">Marginal Density for <span class="math inline">\(y_i\)</span></h2>
+p(\mathbf{ x}_i | y_i, \boldsymbol{ \theta}) = \prod_{j=1}^{p}
+p(x_{i,j}|y_i, \boldsymbol{ \theta})
+\]</span> where <span class="math inline">\(p\)</span> is the
+dimensionality of our inputs.</p>
+<p>The assumption that is particular to naive Bayes is to now consider
+that the <em>features</em> are also conditionally independent, but not
+only given the parameters. We assume that the features are independent
+given the parameters <em>and</em> the label. So for each data point we
+have <span class="math display">\[p(\mathbf{ x}_i | y_i, \boldsymbol{
+\theta}) = \prod_{j=1}^{p} p(x_{i,j}|y_i,\boldsymbol{ \theta})\]</span>
+where <span class="math inline">\(p\)</span> is the dimensionality of
+our inputs.</p>
+<h2 id="marginal-density-for-y_i">Marginal Density for <span
+class="math inline">\(y_i\)</span></h2>
 <p><span class="math display">\[
-p(x_{i,j},y_i| \boldsymbol{ \theta}) = p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i).
+p(x_{i,j},y_i| \boldsymbol{ \theta}) = p(x_{i,j}|y_i, \boldsymbol{
+\theta})p(y_i).
 \]</span></p>
-<p>We now have nearly all of the components we need to specify the full joint density. However, the feature conditional independence doesn’t yet give us the joint density over <span class="math inline">\(p(y_i, \mathbf{ x}_i)\)</span> which is required to subsitute in to our data conditional independence to give us the full density. To recover the joint density given the conditional distribution of each feature, <span class="math inline">\(p(x_{i,j}|y_i, \boldsymbol{ \theta})\)</span>, we need to make use of the product rule and combine it with a marginal density for <span class="math inline">\(y_i\)</span>,</p>
-<p><span class="math display">\[p(x_{i,j},y_i| \boldsymbol{ \theta}) = p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i).\]</span> Because <span class="math inline">\(y_i\)</span> is binary the <em>Bernoulli</em> density makes a suitable choice for our prior over <span class="math inline">\(y_i\)</span>, <span class="math display">\[p(y_i|\pi) = \pi^{y_i} (1-\pi)^{1-y_i}\]</span> where <span class="math inline">\(\pi\)</span> now has the interpretation as being the <em>prior</em> probability that the classification should be positive.</p>
-<h2 id="joint-density-for-naive-bayes">Joint Density for Naive Bayes</h2>
-<p>This allows us to write down the full joint density of the training data, <span class="math display">\[
-  p(\mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}, \pi) = \prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)
+<p>We now have nearly all of the components we need to specify the full
+joint density. However, the feature conditional independence doesn’t yet
+give us the joint density over <span class="math inline">\(p(y_i,
+\mathbf{ x}_i)\)</span> which is required to subsitute in to our data
+conditional independence to give us the full density. To recover the
+joint density given the conditional distribution of each feature, <span
+class="math inline">\(p(x_{i,j}|y_i, \boldsymbol{ \theta})\)</span>, we
+need to make use of the product rule and combine it with a marginal
+density for <span class="math inline">\(y_i\)</span>,</p>
+<p><span class="math display">\[p(x_{i,j},y_i| \boldsymbol{ \theta}) =
+p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i).\]</span> Because <span
+class="math inline">\(y_i\)</span> is binary the <em>Bernoulli</em>
+density makes a suitable choice for our prior over <span
+class="math inline">\(y_i\)</span>, <span
+class="math display">\[p(y_i|\pi) = \pi^{y_i} (1-\pi)^{1-y_i}\]</span>
+where <span class="math inline">\(\pi\)</span> now has the
+interpretation as being the <em>prior</em> probability that the
+classification should be positive.</p>
+<h2 id="joint-density-for-naive-bayes">Joint Density for Naive
+Bayes</h2>
+<p>This allows us to write down the full joint density of the training
+data, <span class="math display">\[
+  p(\mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}, \pi) = \prod_{i=1}^{n}
+\prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)
   \]</span></p>
-<p>which can now be fit by maximum likelihood. As normal we form our objective as the negative log likelihood,</p>
+<p>which can now be fit by maximum likelihood. As normal we form our
+objective as the negative log likelihood,</p>
 <p><span class="math display">\[\begin{align*}
-E(\boldsymbol{ \theta}, \pi)&amp; =  -\log p(\mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}, \pi) \\ &amp;= -\sum_{i=1}^{n} \sum_{j=1}^{p} \log p(x_{i, j}|y_i, \boldsymbol{ \theta}) -  \sum_{i=1}^{n} \log p(y_i|\pi),
-\end{align*}\]</span> which we note <em>decomposes</em> into two objective functions, one which is dependent on <span class="math inline">\(\pi\)</span> alone and one which is dependent on <span class="math inline">\(\boldsymbol{ \theta}\)</span> alone so we have, <span class="math display">\[
+E(\boldsymbol{ \theta}, \pi)&amp; =  -\log p(\mathbf{ y},
+\mathbf{X}|\boldsymbol{ \theta}, \pi) \\ &amp;= -\sum_{i=1}^{n}
+\sum_{j=1}^{p} \log p(x_{i, j}|y_i, \boldsymbol{ \theta})
+-  \sum_{i=1}^{n} \log p(y_i|\pi),
+\end{align*}\]</span> which we note <em>decomposes</em> into two
+objective functions, one which is dependent on <span
+class="math inline">\(\pi\)</span> alone and one which is dependent on
+<span class="math inline">\(\boldsymbol{ \theta}\)</span> alone so we
+have, <span class="math display">\[
 E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
-\]</span> Since the two objective functions are separately dependent on the parameters <span class="math inline">\(\pi\)</span> and <span class="math inline">\(\boldsymbol{ \theta}\)</span> we can minimize them independently. Firstly, minimizing the Bernoulli likelihood over the labels we have, <span class="math display">\[
-E(\pi) = -\sum_{i=1}^{n}\log p(y_i|\pi) = -\sum_{i=1}^{n} y_i \log \pi - \sum_{i=1}^{n} (1-y_i) \log (1-\pi)
-\]</span> which we already minimized above recovering <span class="math display">\[
+\]</span> Since the two objective functions are separately dependent on
+the parameters <span class="math inline">\(\pi\)</span> and <span
+class="math inline">\(\boldsymbol{ \theta}\)</span> we can minimize them
+independently. Firstly, minimizing the Bernoulli likelihood over the
+labels we have, <span class="math display">\[
+E(\pi) = -\sum_{i=1}^{n}\log p(y_i|\pi) = -\sum_{i=1}^{n} y_i \log \pi -
+\sum_{i=1}^{n} (1-y_i) \log (1-\pi)
+\]</span> which we already minimized above recovering <span
+class="math display">\[
 \pi = \frac{\sum_{i=1}^{n} y_i}{n}.
 \]</span></p>
-<p>We now need to minimize the objective associated with the conditional distributions for the features, <span class="math display">\[
-E(\boldsymbol{ \theta}) = -\sum_{i=1}^{n} \sum_{j=1}^{p} \log p(x_{i, j} |y_i, \boldsymbol{ \theta}),
-\]</span> which necessarily implies making some assumptions about the form of the conditional distributions. The right assumption will depend on the nature of our input data. For example, if we have an input which is real valued, we could use a Gaussian density and we could allow the mean and variance of the Gaussian to be different according to whether the class was positive or negative and according to which feature we were measuring. That would give us the form, <span class="math display">\[
-p(x_{i, j} | y_i,\boldsymbol{ \theta}) = \frac{1}{\sqrt{2\pi \sigma_{y_i,j}^2}} \exp \left(-\frac{(x_{i,j} - \mu_{y_i, j})^2}{\sigma_{y_i,j}^2}\right),
-\]</span> where <span class="math inline">\(\sigma_{1, j}^2\)</span> is the variance of the density for the <span class="math inline">\(j\)</span>th output and the class <span class="math inline">\(y_i=1\)</span> and <span class="math inline">\(\sigma_{0, j}^2\)</span> is the variance if the class is 0. The means can vary similarly. Our parameters, <span class="math inline">\(\boldsymbol{ \theta}\)</span> would consist of all the means and all the variances for the different dimensions.</p>
-<p>As normal we form our objective as the negative log likelihood, <span class="math display">\[
-E(\boldsymbol{ \theta}, \pi) = -\log p(\mathbf{ y}, \mathbf{X}|\boldsymbol{ \theta}, \pi) = -\sum_{i=1}^{n} \sum_{j=1}^{p} \log p(x_{i, j}|y_i, \boldsymbol{ \theta}) - \sum_{i=1}^{n} \log p(y_i|\pi),
-\]</span> which we note <em>decomposes</em> into two objective functions, one which is dependent on <span class="math inline">\(\pi\)</span> alone and one which is dependent on <span class="math inline">\(\boldsymbol{ \theta}\)</span> alone so we have, <span class="math display">\[
+<p>We now need to minimize the objective associated with the conditional
+distributions for the features, <span class="math display">\[
+E(\boldsymbol{ \theta}) = -\sum_{i=1}^{n} \sum_{j=1}^{p} \log p(x_{i, j}
+|y_i, \boldsymbol{ \theta}),
+\]</span> which necessarily implies making some assumptions about the
+form of the conditional distributions. The right assumption will depend
+on the nature of our input data. For example, if we have an input which
+is real valued, we could use a Gaussian density and we could allow the
+mean and variance of the Gaussian to be different according to whether
+the class was positive or negative and according to which feature we
+were measuring. That would give us the form, <span
+class="math display">\[
+p(x_{i, j} | y_i,\boldsymbol{ \theta}) = \frac{1}{\sqrt{2\pi
+\sigma_{y_i,j}^2}} \exp \left(-\frac{(x_{i,j} - \mu_{y_i,
+j})^2}{\sigma_{y_i,j}^2}\right),
+\]</span> where <span class="math inline">\(\sigma_{1, j}^2\)</span> is
+the variance of the density for the <span
+class="math inline">\(j\)</span>th output and the class <span
+class="math inline">\(y_i=1\)</span> and <span
+class="math inline">\(\sigma_{0, j}^2\)</span> is the variance if the
+class is 0. The means can vary similarly. Our parameters, <span
+class="math inline">\(\boldsymbol{ \theta}\)</span> would consist of all
+the means and all the variances for the different dimensions.</p>
+<p>As normal we form our objective as the negative log likelihood, <span
+class="math display">\[
+E(\boldsymbol{ \theta}, \pi) = -\log p(\mathbf{ y},
+\mathbf{X}|\boldsymbol{ \theta}, \pi) = -\sum_{i=1}^{n} \sum_{j=1}^{p}
+\log p(x_{i, j}|y_i, \boldsymbol{ \theta}) - \sum_{i=1}^{n} \log
+p(y_i|\pi),
+\]</span> which we note <em>decomposes</em> into two objective
+functions, one which is dependent on <span
+class="math inline">\(\pi\)</span> alone and one which is dependent on
+<span class="math inline">\(\boldsymbol{ \theta}\)</span> alone so we
+have, <span class="math display">\[
 E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 \]</span></p>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>As an example data set we will use Nigerian Millennium Development Goals Information System Health Facility <span class="citation" data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) and Columbia University, 2014)</span>. It can be found here <a href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014" class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
+<p>As an example data set we will use Nigerian Millennium Development
+Goals Information System Health Facility <span class="citation"
+data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant
+to the President on the Millennium Development Goals (OSSAP-MDGs) and
+Columbia University, 2014)</span>. It can be found here <a
+href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014"
+class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
 <p>Taking from the information on the site,</p>
 <blockquote>
-<p>The Nigeria MDG (Millennium Development Goals) Information System – NMIS health facility data is collected by the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia University. A rigorous, geo-referenced baseline facility inventory across Nigeria is created spanning from 2009 to 2011 with an additional survey effort to increase coverage in 2014, to build Nigeria’s first nation-wide inventory of health facility. The database includes 34,139 health facilities info in Nigeria.</p>
-<p>The goal of this database is to make the data collected available to planners, government officials, and the public, to be used to make strategic decisions for planning relevant interventions.</p>
-<p>For data inquiry, please contact Ms. Funlola Osinupebi, Performance Monitoring &amp; Communications, Advisory Power Team, Office of the Vice President at funlola.osinupebi@aptovp.org</p>
-<p>To learn more, please visit <a href="http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/" class="uri">http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/</a></p>
-<p>Suggested citation: Nigeria NMIS facility database (2014), the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
+<p>The Nigeria MDG (Millennium Development Goals) Information System –
+NMIS health facility data is collected by the Office of the Senior
+Special Assistant to the President on the Millennium Development Goals
+(OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia
+University. A rigorous, geo-referenced baseline facility inventory
+across Nigeria is created spanning from 2009 to 2011 with an additional
+survey effort to increase coverage in 2014, to build Nigeria’s first
+nation-wide inventory of health facility. The database includes 34,139
+health facilities info in Nigeria.</p>
+<p>The goal of this database is to make the data collected available to
+planners, government officials, and the public, to be used to make
+strategic decisions for planning relevant interventions.</p>
+<p>For data inquiry, please contact Ms. Funlola Osinupebi, Performance
+Monitoring &amp; Communications, Advisory Power Team, Office of the Vice
+President at funlola.osinupebi@aptovp.org</p>
+<p>To learn more, please visit <a
+href="http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/"
+class="uri">http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/</a></p>
+<p>Suggested citation: Nigeria NMIS facility database (2014), the Office
+of the Senior Special Assistant to the President on the Millennium
+Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
 </blockquote>
-<p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<p>For ease of use we’ve packaged this data set in the <code>pods</code>
+library</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<p>Alternatively, you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<p>Alternatively, you can access the data directly with the following
+commands.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
-<p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
-<p>In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
-<p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<p>Once it is loaded in the data can be summarized using the
+<code>describe</code> method in pandas.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<p>In python and the Jupyter notebook it is possible to see a list of
+all possible functions and attributes by typing the name of the object
+followed by <code>.&lt;Tab&gt;</code> for example in the above case if
+we type <code>data.&lt;Tab&gt;</code> it show the columns available
+(these are attributes in pandas dataframes) such as
+<code>num_nurses_fulltime</code>, and also functions, such as
+<code>.describe()</code>.</p>
+<p>For functions we can also see the documentation about the function by
+following the name with a question mark. This will open a box with
+documentation at the bottom which can be closed with the x button.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
+<div id="nigerian-health-facilities-magnify" class="magnify"
+onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="nigerian-health-facilities-caption" class="caption-frame">
-<p>Figure: Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
+<p>Figure: Location of the over thirty-four thousand health facilities
+registered in the NMIS data across Nigeria. Each facility plotted
+according to its latitude and longitude.</p>
 </div>
 </div>
-<h2 id="nigeria-nmis-data-classification">Nigeria NMIS Data Classification</h2>
+<h2 id="nigeria-nmis-data-classification">Nigeria NMIS Data
+Classification</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data-classification.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data-classification.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data-classification.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data-classification.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Our aim will be to predict whether a center has maternal health delivery services given the attributes in the data. We will predict of the number of nurses, the number of doctors, location etc.</p>
-<p>Now we will convert this data into a form which we can use as inputs <code>X</code>, and labels <code>y</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<p>Our aim will be to predict whether a center has maternal health
+delivery services given the attributes in the data. We will predict of
+the number of nurses, the number of doctors, location etc.</p>
+<p>Now we will convert this data into a form which we can use as inputs
+<code>X</code>, and labels <code>y</code>.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[<span class="op">~</span>pd.isnull(data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>])]</span>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[<span class="op">~</span>pd.isnull(data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>])]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.dropna() <span class="co"># Remove entries with missing values</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;emergency_transport&#39;</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_chews_fulltime&#39;</span>, </span>
@@ -306,14 +671,22 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
-<p>This has given us a new data frame <code>X</code> which contains the different facility types in different columns.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
+<p>This has given us a new data frame <code>X</code> which contains the
+different facility types in different columns.</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
 <h2 id="naive-bayes-nmis">Naive Bayes NMIS</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/nigeria-nmis-data-naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>We can now specify the naive Bayes model. For the genres we want to model the data as Bernoulli distributed, and for the year and body count we want to model the data as Gaussian distributed. We set up two data frames to contain the parameters for the rows and the columns below.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assume data is binary or real.</span></span>
+<p>We can now specify the naive Bayes model. For the genres we want to
+model the data as Bernoulli distributed, and for the year and body count
+we want to model the data as Gaussian distributed. We set up two data
+frames to contain the parameters for the rows and the columns below.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assume data is binary or real.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this list encodes whether it is binary or real (1 for binary, 0 for real)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>binary_columns <span class="op">=</span> [<span class="st">&#39;emergency_transport&#39;</span>,</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;phcn_electricity&#39;</span>,</span>
@@ -330,8 +703,10 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;longitude&#39;</span>]</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>Bernoulli <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.zeros((<span class="dv">2</span>,<span class="bu">len</span>(binary_columns))), columns<span class="op">=</span>binary_columns, index<span class="op">=</span>[<span class="st">&#39;theta_0&#39;</span>, <span class="st">&#39;theta_1&#39;</span>])</span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>Gaussian <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.zeros((<span class="dv">4</span>,<span class="bu">len</span>(real_columns))), columns<span class="op">=</span>real_columns, index<span class="op">=</span>[<span class="st">&#39;mu_0&#39;</span>, <span class="st">&#39;sigma2_0&#39;</span>, <span class="st">&#39;mu_1&#39;</span>, <span class="st">&#39;sigma2_1&#39;</span>])</span></code></pre></div>
-<p>Now we have the data in a form ready for analysis, let’s construct our data matrix.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="dv">20000</span></span>
+<p>Now we have the data in a form ready for analysis, let’s construct
+our data matrix.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="dv">20000</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
@@ -339,8 +714,14 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
-<p>And we can now train the model. For each feature we can make the fit independently. The fit is given by either counting the number of positives (for binary data) which gives us the maximum likelihood solution for the Bernoulli. Or by computing the empirical mean and variance of the data for the Gaussian, which also gives us the maximum likelihood solution.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> X_train:</span>
+<p>And we can now train the model. For each feature we can make the fit
+independently. The fit is given by either counting the number of
+positives (for binary data) which gives us the maximum likelihood
+solution for the Bernoulli. Or by computing the empirical mean and
+variance of the data for the Gaussian, which also gives us the maximum
+likelihood solution.</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> X_train:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> column <span class="kw">in</span> Gaussian:</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        Gaussian[column][<span class="st">&#39;mu_0&#39;</span>] <span class="op">=</span> X_train[column][<span class="op">~</span>y_train].mean()</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        Gaussian[column][<span class="st">&#39;mu_1&#39;</span>] <span class="op">=</span> X_train[column][y_train].mean()</span>
@@ -349,61 +730,191 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> column <span class="kw">in</span> Bernoulli:</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        Bernoulli[column][<span class="st">&#39;theta_0&#39;</span>] <span class="op">=</span> X_train[column][<span class="op">~</span>y_train].<span class="bu">sum</span>()<span class="op">/</span>(<span class="op">~</span>y_train).<span class="bu">sum</span>()</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        Bernoulli[column][<span class="st">&#39;theta_1&#39;</span>] <span class="op">=</span> X_train[column][y_train].<span class="bu">sum</span>()<span class="op">/</span>(y_train).<span class="bu">sum</span>()</span></code></pre></div>
-<p>We can examine the nature of the distributions we’ve fitted to the model by looking at the entries in these data frames.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Bernoulli</span></code></pre></div>
-<p>The distributions show the parameters of the <em>independent</em> class conditional probabilities for no maternity services. It is a Bernoulli distribution with the parameter, <span class="math inline">\(\pi\)</span>, given by (<code>theta_0</code>) for the facilities without maternity services and <code>theta_1</code> for the facilities with maternity services. The parameters whow that, facilities with maternity services also are more likely to have other services such as grid electricity, emergency transport, immunization programs etc.</p>
-<p>The naive Bayes assumption says that the joint probability for these services is given by the product of each of these Bernoulli distributions.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Gaussian</span></code></pre></div>
-<p>We have modelled the numbers in our table with a Gaussian density. Since several of these numbers are counts, a more appropriate distribution might be the Poisson distribution. But here we can see that the average number of nurses, healthworkers and doctors is <em>higher</em> in the facilities with maternal services (<code>mu_1</code>) than those without maternal services (<code>mu_0</code>). There is also a small difference between the mean latitude and longitudes. However, the <em>standard deviation</em> which would be given by the square root of the variance parameters (<code>sigma_0</code> and <code>sigma_1</code>) is large, implying that a difference in latitude and longitude may be due to sampling error. To be sure more analysis would be required.</p>
-<p>The final model parameter is the prior probability of the positive class, <span class="math inline">\(\pi\)</span>, which is computed by maximum likelihood.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>prior <span class="op">=</span> <span class="bu">float</span>(y_train.<span class="bu">sum</span>())<span class="op">/</span><span class="bu">len</span>(y_train)</span></code></pre></div>
-<p>The prior probability tells us that slightly more facilities have maternity services than those that don’t.</p>
+<p>We can examine the nature of the distributions we’ve fitted to the
+model by looking at the entries in these data frames.</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Bernoulli</span></code></pre></div>
+<p>The distributions show the parameters of the <em>independent</em>
+class conditional probabilities for no maternity services. It is a
+Bernoulli distribution with the parameter, <span
+class="math inline">\(\pi\)</span>, given by (<code>theta_0</code>) for
+the facilities without maternity services and <code>theta_1</code> for
+the facilities with maternity services. The parameters whow that,
+facilities with maternity services also are more likely to have other
+services such as grid electricity, emergency transport, immunization
+programs etc.</p>
+<p>The naive Bayes assumption says that the joint probability for these
+services is given by the product of each of these Bernoulli
+distributions.</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Gaussian</span></code></pre></div>
+<p>We have modelled the numbers in our table with a Gaussian density.
+Since several of these numbers are counts, a more appropriate
+distribution might be the Poisson distribution. But here we can see that
+the average number of nurses, healthworkers and doctors is
+<em>higher</em> in the facilities with maternal services
+(<code>mu_1</code>) than those without maternal services
+(<code>mu_0</code>). There is also a small difference between the mean
+latitude and longitudes. However, the <em>standard deviation</em> which
+would be given by the square root of the variance parameters
+(<code>sigma_0</code> and <code>sigma_1</code>) is large, implying that
+a difference in latitude and longitude may be due to sampling error. To
+be sure more analysis would be required.</p>
+<p>The final model parameter is the prior probability of the positive
+class, <span class="math inline">\(\pi\)</span>, which is computed by
+maximum likelihood.</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>prior <span class="op">=</span> <span class="bu">float</span>(y_train.<span class="bu">sum</span>())<span class="op">/</span><span class="bu">len</span>(y_train)</span></code></pre></div>
+<p>The prior probability tells us that slightly more facilities have
+maternity services than those that don’t.</p>
 <h2 id="making-predictions">Making Predictions</h2>
-<p>Naive Bayes has given us the class conditional densities: <span class="math inline">\(p(\mathbf{ x}_i | y_i, \boldsymbol{ \theta})\)</span>. To make predictions with these densities we need to form the distribution given by <span class="math display">\[
+<p>Naive Bayes has given us the class conditional densities: <span
+class="math inline">\(p(\mathbf{ x}_i | y_i, \boldsymbol{
+\theta})\)</span>. To make predictions with these densities we need to
+form the distribution given by <span class="math display">\[
 P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta})
-\]</span> This can be computed by using the product rule. We know that <span class="math display">\[
-P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta})p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta}) = p(y*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})
+\]</span> This can be computed by using the product rule. We know that
+<span class="math display">\[
+P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{
+\theta})p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta}) =
+p(y*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})
 \]</span> implying that <span class="math display">\[
-P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{p(y*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})}{p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta})}
-\]</span> and we’ve already defined <span class="math inline">\(p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})\)</span> using our conditional independence assumptions above <span class="math display">\[
-p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta}) = \prod_{j=1}^{p} p(x^*_{j}|y^*, \boldsymbol{ \theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)
+P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta}) =
+\frac{p(y*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{
+\theta})}{p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{
+\theta})}
+\]</span> and we’ve already defined <span class="math inline">\(p(y^*,
+\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})\)</span>
+using our conditional independence assumptions above <span
+class="math display">\[
+p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta}) =
+\prod_{j=1}^{p} p(x^*_{j}|y^*, \boldsymbol{
+\theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i,
+\boldsymbol{ \theta})p(y_i|\pi)
 \]</span> The other required density is <span class="math display">\[
 p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta})
-\]</span> which can be found from <span class="math display">\[p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})\]</span> using the <em>sum rule</em> of probability, <span class="math display">\[
-p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta}) = \sum_{y^*=0}^1 p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta}).
-\]</span> Because of our independence assumptions that is simply equal to <span class="math display">\[
-p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta}) = \sum_{y^*=0}^1 \prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi).
-\]</span> Substituting both forms in to recover our distribution over the test label conditioned on the training data we have, <span class="math display">\[
-P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{\prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)}{\sum_{y^*=0}^1 \prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)}
-\]</span> and we notice that all the terms associated with the training data actually cancel, the test prediction is <em>conditionally independent</em> of the training data <em>given</em> the parameters. This is a result of our conditional independence assumptions over the data points. <span class="math display">\[
-p(y^*| \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{\prod_{j=1}^{p} p(x^*_{j}|y^*_i,
-\boldsymbol{ \theta})p(y^*|\pi)}{\sum_{y^*=0}^1 \prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)}
-\]</span> This formula is also fairly straightforward to implement. First we implement the log probabilities for the Gaussian density.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_gaussian(x, mu, sigma2):</span>
+\]</span> which can be found from <span class="math display">\[p(y^*,
+\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta})\]</span>
+using the <em>sum rule</em> of probability, <span
+class="math display">\[
+p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|\boldsymbol{ \theta}) =
+\sum_{y^*=0}^1 p(y^*, \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*|
+\boldsymbol{ \theta}).
+\]</span> Because of our independence assumptions that is simply equal
+to <span class="math display">\[
+p(\mathbf{ y}, \mathbf{X}, \mathbf{ x}^*| \boldsymbol{ \theta}) =
+\sum_{y^*=0}^1 \prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{
+\theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i,
+\boldsymbol{ \theta})p(y_i|\pi).
+\]</span> Substituting both forms in to recover our distribution over
+the test label conditioned on the training data we have, <span
+class="math display">\[
+P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta}) =
+\frac{\prod_{j=1}^{p} p(x^*_{j}|y^*_i, \boldsymbol{
+\theta})p(y^*|\pi)\prod_{i=1}^{n} \prod_{j=1}^{p} p(x_{i,j}|y_i,
+\boldsymbol{ \theta})p(y_i|\pi)}{\sum_{y^*=0}^1 \prod_{j=1}^{p}
+p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)\prod_{i=1}^{n}
+\prod_{j=1}^{p} p(x_{i,j}|y_i, \boldsymbol{ \theta})p(y_i|\pi)}
+\]</span> and we notice that all the terms associated with the training
+data actually cancel, the test prediction is <em>conditionally
+independent</em> of the training data <em>given</em> the parameters.
+This is a result of our conditional independence assumptions over the
+data points. <span class="math display">\[
+p(y^*| \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{\prod_{j=1}^{p}
+p(x^*_{j}|y^*_i,
+\boldsymbol{ \theta})p(y^*|\pi)}{\sum_{y^*=0}^1 \prod_{j=1}^{p}
+p(x^*_{j}|y^*_i, \boldsymbol{ \theta})p(y^*|\pi)}
+\]</span> This formula is also fairly straightforward to implement.
+First we implement the log probabilities for the Gaussian density.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_gaussian(x, mu, sigma2):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span> np.log(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>sigma2)<span class="op">-</span>((x<span class="op">-</span>mu)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>sigma2)</span></code></pre></div>
-<p>Now for any test point we compute the joint distribution of the Gaussian features by <em>summing</em> their log probabilities. Working in log space can be a considerable advantage over computing the probabilities directly: as the number of features we include goes up, because all the probabilities are less than 1, the joint probability will become smaller and smaller, and may be difficult to represent accurately (or even underflow). Working in log space can ameliorate this problem. We can also compute the log probability for the Bernoulli distribution.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_bernoulli(x, theta):</span>
+<p>Now for any test point we compute the joint distribution of the
+Gaussian features by <em>summing</em> their log probabilities. Working
+in log space can be a considerable advantage over computing the
+probabilities directly: as the number of features we include goes up,
+because all the probabilities are less than 1, the joint probability
+will become smaller and smaller, and may be difficult to represent
+accurately (or even underflow). Working in log space can ameliorate this
+problem. We can also compute the log probability for the Bernoulli
+distribution.</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_bernoulli(x, theta):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">*</span>np.log(theta) <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>x)<span class="op">*</span>np.log(<span class="dv">1</span><span class="op">-</span>theta)</span></code></pre></div>
 <h2 id="laplace-smoothing">Laplace Smoothing</h2>
-<p>Before we proceed, let’s just pause and think for a moment what will happen if <code>theta</code> here is either zero or one. This will result in <span class="math inline">\(\log 0 = -\infty\)</span> and cause numerical problems. This definitely can happen in practice. If some of the features are rare or very common across the data set then the maximum likelihood solution could find values of zero or one respectively. Such values are problematic because they cause posterior probabilities of class membership of either one or zero. In practice we deal with this using <em>Laplace smoothing</em> (which actually has an interpretation as a Bayesian fit of the Bernoulli distribution. Laplace used an example of the sun rising each day, and a wish to predict the sun rise the following day to describe his idea of smoothing, which can be found at the bottom of following page from Laplace’s ‘Essai Philosophique …’</p>
+<p>Before we proceed, let’s just pause and think for a moment what will
+happen if <code>theta</code> here is either zero or one. This will
+result in <span class="math inline">\(\log 0 = -\infty\)</span> and
+cause numerical problems. This definitely can happen in practice. If
+some of the features are rare or very common across the data set then
+the maximum likelihood solution could find values of zero or one
+respectively. Such values are problematic because they cause posterior
+probabilities of class membership of either one or zero. In practice we
+deal with this using <em>Laplace smoothing</em> (which actually has an
+interpretation as a Bayesian fit of the Bernoulli distribution. Laplace
+used an example of the sun rising each day, and a wish to predict the
+sun rise the following day to describe his idea of smoothing, which can
+be found at the bottom of following page from Laplace’s ‘Essai
+Philosophique …’</p>
 <iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=1YQPAAAAQAAJ&amp;pg=PA16&amp;output=embed" width="700" height="500">
 </iframe>
-<p>Laplace suggests that when computing the probability of an event where a success or failure is rare (he uses an example of the sun rising across the last 5,000 years or 1,826,213 days) that even though only successes have been observed (in the sun rising case) that the odds for tomorrow shouldn’t be given as <span class="math display">\[
+<p>Laplace suggests that when computing the probability of an event
+where a success or failure is rare (he uses an example of the sun rising
+across the last 5,000 years or 1,826,213 days) that even though only
+successes have been observed (in the sun rising case) that the odds for
+tomorrow shouldn’t be given as <span class="math display">\[
 \frac{1,826,213}{1,826,213} = 1
-\]</span> but rather by adding one to the numerator and two to the denominator, <span class="math display">\[
+\]</span> but rather by adding one to the numerator and two to the
+denominator, <span class="math display">\[
 \frac{1,826,213 + 1}{1,826,213 + 2} = 0.99999945.
-\]</span> This technique is sometimes called a ‘pseudocount technique’ because it has an intepretation of assuming some observations before you start, it’s as if instead of observing <span class="math inline">\(\sum_{i}y_i\)</span> successes you have an additional success, <span class="math inline">\(\sum_{i}y_i + 1\)</span> and instead of having observed <span class="math inline">\(n\)</span> events you’ve observed <span class="math inline">\(n+ 2\)</span>. So we can think of Laplace’s idea saying (before we start) that we have ‘two observations worth of belief, that the odds are 50/50,’ because before we start (i.e. when <span class="math inline">\(n=0\)</span>) our estimate is 0.5, yet because the effective <span class="math inline">\(n\)</span> is only 2, this estimate is quickly overwhelmed by data. Laplace used ideas like this a lot, and it is known as his ‘principle of insufficient reason.’ His idea was that in the absence of knowledge (i.e. before we start) we should assume that all possible outcomes are equally likely. This idea has a modern counterpart, known as the <a href="http://en.wikipedia.org/wiki/Principle_of_maximum_entropy">principle of maximum entropy</a>. A lot of the theory of this approach was developed by <a href="http://en.wikipedia.org/wiki/Edwin_Thompson_Jaynes">Ed Jaynes</a>, who according to his erstwhile collaborator and friend, John Skilling, learnt French as an undergraduate by reading the works of Laplace. Although John also related that Jaynes’s spoken French was not up to the standard of his scientific French. For me Ed Jaynes’s work very much carries on the tradition of Laplace into the modern era, in particular his focus on Bayesian approaches. I’m very proud to have met those that knew and worked with him. It turns out that Laplace’s idea also has a Bayesian interpretation (as Laplace understood), it comes from assuming a particular prior density for the parameter <span class="math inline">\(\pi\)</span>, but we won’t explore that interpretation for the moment, and merely choose to estimate the probability as, <span class="math display">\[
+\]</span> This technique is sometimes called a ‘pseudocount technique’
+because it has an intepretation of assuming some observations before you
+start, it’s as if instead of observing <span
+class="math inline">\(\sum_{i}y_i\)</span> successes you have an
+additional success, <span class="math inline">\(\sum_{i}y_i + 1\)</span>
+and instead of having observed <span class="math inline">\(n\)</span>
+events you’ve observed <span class="math inline">\(n+ 2\)</span>. So we
+can think of Laplace’s idea saying (before we start) that we have ‘two
+observations worth of belief, that the odds are 50/50’, because before
+we start (i.e. when <span class="math inline">\(n=0\)</span>) our
+estimate is 0.5, yet because the effective <span
+class="math inline">\(n\)</span> is only 2, this estimate is quickly
+overwhelmed by data. Laplace used ideas like this a lot, and it is known
+as his ‘principle of insufficient reason’. His idea was that in the
+absence of knowledge (i.e. before we start) we should assume that all
+possible outcomes are equally likely. This idea has a modern
+counterpart, known as the <a
+href="http://en.wikipedia.org/wiki/Principle_of_maximum_entropy">principle
+of maximum entropy</a>. A lot of the theory of this approach was
+developed by <a
+href="http://en.wikipedia.org/wiki/Edwin_Thompson_Jaynes">Ed Jaynes</a>,
+who according to his erstwhile collaborator and friend, John Skilling,
+learnt French as an undergraduate by reading the works of Laplace.
+Although John also related that Jaynes’s spoken French was not up to the
+standard of his scientific French. For me Ed Jaynes’s work very much
+carries on the tradition of Laplace into the modern era, in particular
+his focus on Bayesian approaches. I’m very proud to have met those that
+knew and worked with him. It turns out that Laplace’s idea also has a
+Bayesian interpretation (as Laplace understood), it comes from assuming
+a particular prior density for the parameter <span
+class="math inline">\(\pi\)</span>, but we won’t explore that
+interpretation for the moment, and merely choose to estimate the
+probability as, <span class="math display">\[
 \pi = \frac{\sum_{i=1}^{n} y_i + 1}{n+ 2}
-\]</span> to prevent problems with certainty causing numerical issues and misclassifications. Let’s refit the Bernoulli features now.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the Bernoulli with Laplace smoothing.</span></span>
+\]</span> to prevent problems with certainty causing numerical issues
+and misclassifications. Let’s refit the Bernoulli features now.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the Bernoulli with Laplace smoothing.</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> X_train:</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> column <span class="kw">in</span> Bernoulli:</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        Bernoulli[column][<span class="st">&#39;theta_0&#39;</span>] <span class="op">=</span> (X_train[column][<span class="op">~</span>y_train].<span class="bu">sum</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span>((<span class="op">~</span>y_train).<span class="bu">sum</span>() <span class="op">+</span> <span class="dv">2</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        Bernoulli[column][<span class="st">&#39;theta_1&#39;</span>] <span class="op">=</span> (X_train[column][y_train].<span class="bu">sum</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span>((y_train).<span class="bu">sum</span>() <span class="op">+</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>That places us in a position to write the prediction function.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X_test, Gaussian, Bernoulli, prior):</span>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X_test, Gaussian, Bernoulli, prior):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    log_positive <span class="op">=</span> pd.Series(data <span class="op">=</span> np.zeros(X_test.shape[<span class="dv">0</span>]), index<span class="op">=</span>X_test.index)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    log_negative <span class="op">=</span> pd.Series(data <span class="op">=</span> np.zeros(X_test.shape[<span class="dv">0</span>]), index<span class="op">=</span>X_test.index)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> column <span class="kw">in</span> X_test.columns:</span>
@@ -420,14 +931,31 @@ p(y^*| \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{\prod_{j=1}^{p} p(x^*_{j}|y^
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                                                               <span class="op">+</span> np.exp(log_negative.values[i] <span class="op">+</span> np.log(<span class="dv">1</span><span class="op">-</span>prior)))</span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v</span>
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#return np.exp(log_positive + np.log(prior))/(np.exp(log_positive + np.log(prior)) + np.exp(log_negative + np.log(1-prior)))</span></span></code></pre></div>
-<p>Now we are in a position to make the predictions for the test data.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p_y <span class="op">=</span> predict(X_test, Gaussian, Bernoulli, prior)</span></code></pre></div>
-<p>We can test the quality of the predictions in the following way. Firstly, we can threshold our probabilities at 0.5, allocating points with greater than 50% probability of membership of the positive class to the positive class. We can then compare to the true values, and see how many of these values we got correct. This is our total number correct.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> y_test.eq(p_y<span class="op">&gt;</span><span class="fl">0.5</span>)</span>
+<p>Now we are in a position to make the predictions for the test
+data.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p_y <span class="op">=</span> predict(X_test, Gaussian, Bernoulli, prior)</span></code></pre></div>
+<p>We can test the quality of the predictions in the following way.
+Firstly, we can threshold our probabilities at 0.5, allocating points
+with greater than 50% probability of membership of the positive class to
+the positive class. We can then compare to the true values, and see how
+many of these values we got correct. This is our total number
+correct.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> y_test.eq(p_y<span class="op">&gt;</span><span class="fl">0.5</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>total_correct <span class="op">=</span> <span class="bu">sum</span>(correct)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total correct&quot;</span>, total_correct, <span class="st">&quot; out of &quot;</span>, <span class="bu">len</span>(y_test), <span class="st">&quot;which is&quot;</span>, <span class="bu">float</span>(total_correct)<span class="op">/</span><span class="bu">len</span>(y_test), <span class="st">&quot;%&quot;</span>)</span></code></pre></div>
-<p>We can also now plot the <a href="http://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a>. A confusion matrix tells us where we are making mistakes. Along the diagonal it stores the <em>true positives</em>, the points that were positive class that we classified correctly, and the <em>true negatives</em>, the points that were negative class and that we classified correctly. The off diagonal terms contain the false positives and the false negatives. Along the rows of the matrix we place the actual class, and along the columns we place our predicted class.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>confusion_matrix <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.zeros((<span class="dv">2</span>,<span class="dv">2</span>)), </span>
+<p>We can also now plot the <a
+href="http://en.wikipedia.org/wiki/Confusion_matrix">confusion
+matrix</a>. A confusion matrix tells us where we are making mistakes.
+Along the diagonal it stores the <em>true positives</em>, the points
+that were positive class that we classified correctly, and the <em>true
+negatives</em>, the points that were negative class and that we
+classified correctly. The off diagonal terms contain the false positives
+and the false negatives. Along the rows of the matrix we place the
+actual class, and along the columns we place our predicted class.</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>confusion_matrix <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.zeros((<span class="dv">2</span>,<span class="dv">2</span>)), </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                columns<span class="op">=</span>[<span class="st">&#39;predicted no maternity&#39;</span>, <span class="st">&#39;predicted maternity&#39;</span>],</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                                index <span class="op">=</span>[<span class="st">&#39;actual no maternity&#39;</span>,<span class="st">&#39;actual maternity&#39;</span>])</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>confusion_matrix[<span class="st">&#39;predicted maternity&#39;</span>][<span class="st">&#39;actual maternity&#39;</span>] <span class="op">=</span> (y_test <span class="op">&amp;</span> (p_y<span class="op">&gt;</span><span class="fl">0.5</span>)).<span class="bu">sum</span>()</span>
@@ -436,54 +964,117 @@ p(y^*| \mathbf{ x}^*, \boldsymbol{ \theta}) = \frac{\prod_{j=1}^{p} p(x^*_{j}|y^
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>confusion_matrix[<span class="st">&#39;predicted no maternity&#39;</span>][<span class="st">&#39;actual no maternity&#39;</span>] <span class="op">=</span> (<span class="op">~</span>y_test <span class="op">&amp;</span> <span class="op">~</span>(p_y<span class="op">&gt;</span><span class="fl">0.5</span>)).<span class="bu">sum</span>()</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>confusion_matrix</span></code></pre></div>
 <h3 id="exercise-2">Exercise 2</h3>
-<p>How can you improve your classification, are all the features equally valid? Are some features more helpful than others? What happens if you remove features that appear to be less helpful. How might you select such features?</p>
+<p>How can you improve your classification, are all the features equally
+valid? Are some features more helpful than others? What happens if you
+remove features that appear to be less helpful. How might you select
+such features?</p>
 <h3 id="exercise-3">Exercise 3</h3>
-<p>We have decided to classify positive if probability of maternity is greater than 0.5. This has led us to accidentally classify some facilities as havien’t facilities for maternity when in fact they don’t. Imagine you wish to ensure that a facility handles maternity. With your test set how low do you have to set the threshold to avoid all the false negatives (i.e. facilities where you predicted there was no maternity, but in actuality there were?</p>
+<p>We have decided to classify positive if probability of maternity is
+greater than 0.5. This has led us to accidentally classify some
+facilities as havien’t facilities for maternity when in fact they don’t.
+Imagine you wish to ensure that a facility handles maternity. With your
+test set how low do you have to set the threshold to avoid all the false
+negatives (i.e. facilities where you predicted there was no maternity,
+but in actuality there were?</p>
 <h2 id="making-predictions-1">Making Predictions</h2>
-<p>Naive Bayes has given us the class conditional densities: <span class="math inline">\(p(\mathbf{ x}_i | y_i, \boldsymbol{ \theta})\)</span>. To make predictions with these densities we need to form the distribution given by <span class="math display">\[
+<p>Naive Bayes has given us the class conditional densities: <span
+class="math inline">\(p(\mathbf{ x}_i | y_i, \boldsymbol{
+\theta})\)</span>. To make predictions with these densities we need to
+form the distribution given by <span class="math display">\[
 P(y^*| \mathbf{ y}, \mathbf{X}, \mathbf{ x}^*, \boldsymbol{ \theta})
 \]</span></p>
 <h3 id="exercise-4">Exercise 4</h3>
-<p>Write down the negative log likelihood of the Gaussian density over a vector of variables <span class="math inline">\(\mathbf{ x}\)</span>. Assume independence between each variable. Minimize this objective to obtain the maximum likelihood solution of the form. <span class="math display">\[
+<p>Write down the negative log likelihood of the Gaussian density over a
+vector of variables <span class="math inline">\(\mathbf{ x}\)</span>.
+Assume independence between each variable. Minimize this objective to
+obtain the maximum likelihood solution of the form. <span
+class="math display">\[
 \mu = \frac{\sum_{i=1}^{n} x_i}{n}
 \]</span> <span class="math display">\[
 \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \mu)^2}{n}
 \]</span></p>
-<p>If the input data was <em>binary</em> then we could also make use of the Bernoulli distribution for the features. For that case we would have the form, <span class="math display">\[
-p(x_{i, j} | y_i,\boldsymbol{ \theta}) = \theta_{y_i, j}^{x_{i, j}}(1-\theta_{y_i, j})^{(1-x_{i,j})},
-\]</span> where <span class="math inline">\(\theta_{1, j}\)</span> is the probability that the <span class="math inline">\(j\)</span>th feature is on if <span class="math inline">\(y_i\)</span> is 1.</p>
-<p>In either case, maximum likelihood fitting would proceed in the same way. The objective has the form, <span class="math display">\[
-E(\boldsymbol{ \theta}) = -\sum_{j=1}^{p} \sum_{i=1}^{n} \log p(x_{i,j} |y_i, \boldsymbol{ \theta}),
-\]</span> and if, as above, the parameters of the distributions are specific to each feature vector (we had means and variances for each continuous feature, and a probability for each binary feature) then we can use the fact that these parameters separate into disjoint subsets across the features to write, <span class="math display">\[
+<p>If the input data was <em>binary</em> then we could also make use of
+the Bernoulli distribution for the features. For that case we would have
+the form, <span class="math display">\[
+p(x_{i, j} | y_i,\boldsymbol{ \theta}) = \theta_{y_i, j}^{x_{i,
+j}}(1-\theta_{y_i, j})^{(1-x_{i,j})},
+\]</span> where <span class="math inline">\(\theta_{1, j}\)</span> is
+the probability that the <span class="math inline">\(j\)</span>th
+feature is on if <span class="math inline">\(y_i\)</span> is 1.</p>
+<p>In either case, maximum likelihood fitting would proceed in the same
+way. The objective has the form, <span class="math display">\[
+E(\boldsymbol{ \theta}) = -\sum_{j=1}^{p} \sum_{i=1}^{n} \log p(x_{i,j}
+|y_i, \boldsymbol{ \theta}),
+\]</span> and if, as above, the parameters of the distributions are
+specific to each feature vector (we had means and variances for each
+continuous feature, and a probability for each binary feature) then we
+can use the fact that these parameters separate into disjoint subsets
+across the features to write, <span class="math display">\[
 \begin{align*}
 E(\boldsymbol{ \theta}) &amp;= -\sum_{j=1}^{p} \sum_{i=1}^{n} \log
 p(x_{i,j} |y_i, \boldsymbol{ \theta}_j)\\
 &amp; \sum_{j=1}^{p}
 E(\boldsymbol{ \theta}_j),
 \end{align*}
-\]</span> which means we can minimize our objective on each feature independently.</p>
-<p>These characteristics mean that naive Bayes scales very well with big data. To fit the model we consider each feature in turn, we select the positive class and fit parameters for that class, then we select each negative class and fit features for that class. We have code below.</p>
+\]</span> which means we can minimize our objective on each feature
+independently.</p>
+<p>These characteristics mean that naive Bayes scales very well with big
+data. To fit the model we consider each feature in turn, we select the
+positive class and fit parameters for that class, then we select each
+negative class and fit features for that class. We have code below.</p>
 <h2 id="naive-bayes-summary">Naive Bayes Summary</h2>
-<p>Naive Bayes is making very simple assumptions about the data, in particular it is modeling the full <em>joint</em> probability of the data set, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X}| \boldsymbol{ \theta}, \pi)\)</span> by very strong assumptions about factorizations that are unlikely to be true in practice. The data conditional independence assumption is common, and relies on a rich parameter vector to absorb all the information in the training data. The additional assumption of naive Bayes is that features are conditional independent given the class label <span class="math inline">\(y_i\)</span> (and the parameter vector, <span class="math inline">\(\boldsymbol{ \theta}\)</span>. This is quite a strong assumption. However, it causes the objective function to decompose into parts which can be independently fitted to the different feature vectors, meaning it is very easy to fit the model to large data. It is also clear how we should handle <em>streaming</em> data and <em>missing</em> data. This means that the model can be run ‘live,’ adapting parameters and information as it arrives. Indeed, the model is even capable of dealing with new <em>features</em> that might arrive at run time. Such is the strength of the modeling the joint probability density. However, the factorization assumption that allows us to do this efficiently is very strong and may lead to poor decision boundaries in practice.</p>
+<p>Naive Bayes is making very simple assumptions about the data, in
+particular it is modeling the full <em>joint</em> probability of the
+data set, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X}|
+\boldsymbol{ \theta}, \pi)\)</span> by very strong assumptions about
+factorizations that are unlikely to be true in practice. The data
+conditional independence assumption is common, and relies on a rich
+parameter vector to absorb all the information in the training data. The
+additional assumption of naive Bayes is that features are conditional
+independent given the class label <span
+class="math inline">\(y_i\)</span> (and the parameter vector, <span
+class="math inline">\(\boldsymbol{ \theta}\)</span>. This is quite a
+strong assumption. However, it causes the objective function to
+decompose into parts which can be independently fitted to the different
+feature vectors, meaning it is very easy to fit the model to large data.
+It is also clear how we should handle <em>streaming</em> data and
+<em>missing</em> data. This means that the model can be run ‘live’,
+adapting parameters and information as it arrives. Indeed, the model is
+even capable of dealing with new <em>features</em> that might arrive at
+run time. Such is the strength of the modeling the joint probability
+density. However, the factorization assumption that allows us to do this
+efficiently is very strong and may lead to poor decision boundaries in
+practice.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
-<li>Chapter 5 up to pg 179 (Section 5.1, and 5.2 up to 5.2.2) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Chapter 5 up to pg 179 (Section 5.1, and 5.2 up to 5.2.2) of <span
+class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span></li>
 </ul>
 <h2 id="thanks">Thanks!</h2>
-<p>For more information on these subjects and more you might want to check the following resources.</p>
+<p>For more information on these subjects and more you might want to
+check the following resources.</p>
 <ul>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+<li>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 <div id="ref-Nigeria-nmis14" class="csl-entry" role="doc-biblioentry">
-The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014. Nigeria <span>NMIS</span> facility database.
+The Office of the Senior Special Assistant to the President on the
+Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014.
+Nigeria <span>NMIS</span> facility database.
 </div>
 </div>
 

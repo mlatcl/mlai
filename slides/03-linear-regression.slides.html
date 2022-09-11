@@ -59,18 +59,24 @@ sns.set_palette('colorblind')}-->
 <section id="review" class="slide level2">
 <h2>Review</h2>
 <ul>
-<li>Last time: Looked at objective functions for movie recommendation.</li>
-<li>Minimized sum of squares objective by steepest descent and stochastic gradients.</li>
+<li>Last time: Looked at objective functions for movie
+recommendation.</li>
+<li>Minimized sum of squares objective by steepest descent and
+stochastic gradients.</li>
 <li>This time: explore least squares for regression.</li>
 </ul>
 </section>
 <section id="regression-examples" class="slide level2">
 <h2>Regression Examples</h2>
 <ul>
-<li>Predict a real value, <span class="math inline">\(y_i\)</span> given some inputs <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
-<li>Predict quality of meat given spectral measurements (Tecator data).</li>
-<li>Radiocarbon dating, the C14 calibration curve: predict age given quantity of C14 isotope.</li>
-<li>Predict quality of different Go or Backgammon moves given expert rated training data.</li>
+<li>Predict a real value, <span class="math inline">\(y_i\)</span> given
+some inputs <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
+<li>Predict quality of meat given spectral measurements (Tecator
+data).</li>
+<li>Radiocarbon dating, the C14 calibration curve: predict age given
+quantity of C14 isotope.</li>
+<li>Predict quality of different Go or Backgammon moves given expert
+rated training data.</li>
 </ul>
 </section>
 <section id="olympic-100m-data" class="slide level2">
@@ -80,7 +86,9 @@ sns.set_palette('colorblind')}-->
 <td width="50%">
 <ul>
 <li>Gold medal times for Olympic 100 m runners since 1896.</li>
-<li>One of a number of Olypmic data sets collected by <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span>.
+<li>One of a number of Olypmic data sets collected by <span
+class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span>.
 </td>
 <td width="50%">
 <div class="figure">
@@ -91,7 +99,9 @@ sns.set_palette('colorblind')}-->
 </div>
 </div>
 <aside class="notes">
-Start of the 2012 London 100m race. <em>Image from Wikimedia Commons</em> <a href="http://bit.ly/191adDC" class="uri">http://bit.ly/191adDC</a>
+Start of the 2012 London 100m race. <em>Image from Wikimedia
+Commons</em> <a href="http://bit.ly/191adDC"
+class="uri">http://bit.ly/191adDC</a>
 </aside>
 </td>
 </tr>
@@ -119,14 +129,16 @@ Olympic 100m wining times since 1896.
 <li>Gold medal times for Olympic Marathon since 1896.</li>
 <li>Marathons before 1924 didn’t have a standardized distance.</li>
 <li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
+<li>In 1904 Marathon was badly organized leading to very slow
+times.</li>
 </ul>
 </td>
 <td width="30%">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ"
+class="uri">http://bit.ly/16kMKHQ</a></small>
 </td>
 </tr>
 </table>
@@ -150,36 +162,48 @@ Olympic marathon pace times since 1896.
 <section id="what-is-machine-learning-1" class="slide level2">
 <h2>What is Machine Learning?</h2>
 <div class="fragment">
-<p><span class="math display">\[ \text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
+<p><span class="math display">\[ \text{data} + \text{model}
+\stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>data</strong> : observations, could be actively or passively acquired (meta-data).</li>
+<li><strong>data</strong> : observations, could be actively or passively
+acquired (meta-data).</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>model</strong> : assumptions, based on previous experience (other data! transfer learning etc), or beliefs about the regularities of the universe. Inductive bias.</li>
+<li><strong>model</strong> : assumptions, based on previous experience
+(other data! transfer learning etc), or beliefs about the regularities
+of the universe. Inductive bias.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>prediction</strong> : an action to be taken or a categorization or a quality score.</li>
+<li><strong>prediction</strong> : an action to be taken or a
+categorization or a quality score.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>Royal Society Report: <a href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine Learning: Power and Promise of Computers that Learn by Example</a></li>
+<li>Royal Society Report: <a
+href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine
+Learning: Power and Promise of Computers that Learn by Example</a></li>
 </ul>
 </div>
 </section>
 <section id="what-is-machine-learning-2" class="slide level2">
 <h2>What is Machine Learning?</h2>
-<p><span class="math display">\[\text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
+<p><span class="math display">\[\text{data} + \text{model}
+\stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
 <ul>
 <li class="fragment">To combine data with a model need:</li>
-<li class="fragment"><strong>a prediction function</strong> <span class="math inline">\(f(\cdot)\)</span> includes our beliefs about the regularities of the universe</li>
-<li class="fragment"><strong>an objective function</strong> <span class="math inline">\(E(\cdot)\)</span> defines the cost of misprediction.</li>
+<li class="fragment"><strong>a prediction function</strong> <span
+class="math inline">\(f(\cdot)\)</span> includes our beliefs about the
+regularities of the universe</li>
+<li class="fragment"><strong>an objective function</strong> <span
+class="math inline">\(E(\cdot)\)</span> defines the cost of
+misprediction.</li>
 </ul>
 <!-- SECTION Sum of Squares Error -->
 </section>
@@ -191,9 +215,12 @@ Olympic marathon pace times since 1896.
 <p><span class="math display">\[y_i = m x_i + c\]</span></p>
 <ul>
 <li><p><span class="math inline">\(y_i\)</span> : winning pace.</p></li>
-<li><p><span class="math inline">\(x_i\)</span> : year of Olympics.</p></li>
-<li><p><span class="math inline">\(m\)</span> : rate of improvement over time.</p></li>
-<li><p><span class="math inline">\(c\)</span> : winning time at year 0.</p></li>
+<li><p><span class="math inline">\(x_i\)</span> : year of
+Olympics.</p></li>
+<li><p><span class="math inline">\(m\)</span> : rate of improvement over
+time.</p></li>
+<li><p><span class="math inline">\(c\)</span> : winning time at year
+0.</p></li>
 </ul>
 </section>
 <section id="overdetermined-system" class="slide level2">
@@ -204,7 +231,10 @@ Olympic marathon pace times since 1896.
 <script>
 showDivs(1, 'over_determined_system');
 </script>
-<p><small></small> <input id="range-over_determined_system" type="range" min="1" max="8" value="1" onchange="setDivs('over_determined_system')" oninput="setDivs('over_determined_system')"> <button onclick="plusDivs(-1, 'over_determined_system')">❮</button> <button onclick="plusDivs(1, 'over_determined_system')">❯</button></p>
+<p><small></small>
+<input id="range-over_determined_system" type="range" min="1" max="8" value="1" onchange="setDivs('over_determined_system')" oninput="setDivs('over_determined_system')">
+<button onclick="plusDivs(-1, 'over_determined_system')">❮</button>
+<button onclick="plusDivs(1, 'over_determined_system')">❯</button></p>
 <div class="over_determined_system" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/over_determined_system001.svg" width="40%" style=" ">
 </object>
@@ -237,17 +267,20 @@ showDivs(1, 'over_determined_system');
 <section id="y-mx-c" class="slide level2">
 <h2><span class="math inline">\(y= mx+ c\)</span></h2>
 <div class="fragment">
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> <span class="math display">\[
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span
+class="math inline">\(y=3\)</span> <span class="math display">\[
 3 = m + c
 \]</span></p>
 </div>
 <div class="fragment">
-<p>point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> <span class="math display">\[
+<p>point 2: <span class="math inline">\(x= 3\)</span>, <span
+class="math inline">\(y=1\)</span> <span class="math display">\[
 1 = 3m + c
 \]</span></p>
 </div>
 <div class="fragment">
-<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> <span class="math display">\[
+<p>point 3: <span class="math inline">\(x= 2\)</span>, <span
+class="math inline">\(y=2.5\)</span> <span class="math display">\[
 2.5 = 2m + c
 \]</span></p>
 </div>
@@ -271,7 +304,9 @@ Pierre-Simon Laplace 1749-1827.
 <section id="section-2" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
-<a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2"><img data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA2.png" /></a>
+<a
+href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2"><img
+data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA2.png" /></a>
 </div>
 </section>
 <section id="section-3" class="slide level2">
@@ -310,7 +345,9 @@ Laplace’s determinsim in English translation.
 <section id="section-5" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
-<a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA4"><img data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA4.png" /></a>
+<a
+href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA4"><img
+data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA4.png" /></a>
 </div>
 </section>
 <section id="section-6" class="slide level2">
@@ -323,13 +360,15 @@ Laplace’s determinsim in English translation.
 </div>
 </div>
 <aside class="notes">
-To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to uncertainty which should be dealt with through probability.
+To Laplace, determinism is a strawman. Ignorance of mechanism and data
+leads to uncertainty which should be dealt with through probability.
 </aside>
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <div class="figure">
-<div id="probability-relative-in-part-cropped-figure" class="figure-frame">
+<div id="probability-relative-in-part-cropped-figure"
+class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//physics/philosophicaless00lapliala_18_cropped.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
@@ -350,24 +389,29 @@ To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to 
 <section id="y-mx-c-epsilon" class="slide level2">
 <h2><span class="math inline">\(y= mx+ c + \epsilon\)</span></h2>
 <div class="fragment">
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> [ 3 = m + c + _1 ]</p>
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span
+class="math inline">\(y=3\)</span> [ 3 = m + c + _1 ]</p>
 </div>
 <div class="fragment">
-<p>point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> [ 1 = 3m + c + _2 ]</p>
+<p>point 2: <span class="math inline">\(x= 3\)</span>, <span
+class="math inline">\(y=1\)</span> [ 1 = 3m + c + _2 ]</p>
 </div>
 <div class="fragment">
-<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> [ 2.5 = 2m + c + _3 ]</p>
+<p>point 3: <span class="math inline">\(x= 2\)</span>, <span
+class="math inline">\(y=2.5\)</span> [ 2.5 = 2m + c + _3 ]</p>
 </div>
 </section>
 <section id="a-probabilistic-process" class="slide level2">
 <h2>A Probabilistic Process</h2>
 <div class="fragment">
-<p>Set the mean of Gaussian to be a function. <span class="math display">\[
-p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).
+<p>Set the mean of Gaussian to be a function. <span
+class="math display">\[
+p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp
+\left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).
 \]</span></p>
 </div>
 <div class="fragment">
-<p>This gives us a ‘noisy function.’</p>
+<p>This gives us a ‘noisy function’.</p>
 </div>
 <div class="fragment">
 <p>This is known as a stochastic process.</p>
@@ -380,7 +424,10 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f
 </ul>
 <div class="fragment">
 <p><span class="math display">\[\begin{align}
-  p(y| \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y- \mu)^2}{2\sigma^2}\right)\\&amp; \buildrel\triangle\over = \mathcal{N}\left(y|\mu,\sigma^2\right)
+  p(y| \mu, \sigma^2) &amp; =
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y-
+\mu)^2}{2\sigma^2}\right)\\&amp; \buildrel\triangle\over =
+\mathcal{N}\left(y|\mu,\sigma^2\right)
   \end{align}\]</span></p>
 </div>
 </section>
@@ -393,17 +440,22 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f
 </div>
 </div>
 <aside class="notes">
-The Gaussian PDF with <span class="math inline">\({\mu}=1.7\)</span> and variance <span class="math inline">\({\sigma}^2=0.0225\)</span>. Mean shown as cyan line. It could represent the heights of a population of students.
+The Gaussian PDF with <span class="math inline">\({\mu}=1.7\)</span> and
+variance <span class="math inline">\({\sigma}^2=0.0225\)</span>. Mean
+shown as cyan line. It could represent the heights of a population of
+students.
 </aside>
 </section>
 <section id="gaussian-density-1" class="slide level2">
 <h2>Gaussian Density</h2>
 <p><large><span class="math display">\[
-\mathcal{N}\left(y|\mu,\sigma^2\right) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(y-\mu)^2}{2\sigma^2}\right)
+\mathcal{N}\left(y|\mu,\sigma^2\right) = \frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(y-\mu)^2}{2\sigma^2}\right)
 \]</span></large></p>
 <div class="fragment">
 <center>
-<span class="math inline">\(\sigma^2\)</span> is the variance of the density and <span class="math inline">\(\mu\)</span> is the mean.
+<span class="math inline">\(\sigma^2\)</span> is the variance of the
+density and <span class="math inline">\(\mu\)</span> is the mean.
 </center>
 </div>
 </section>
@@ -416,18 +468,23 @@ The Gaussian PDF with <span class="math inline">\({\mu}=1.7\)</span> and varianc
 <div style="text-align:left">
 Sum of Gaussian variables is also Gaussian.
 </div>
-<p><span class="math display">\[y_i \sim \mathcal{N}\left(\mu_i,\sigma_i^2\right)\]</span></p>
+<p><span class="math display">\[y_i \sim
+\mathcal{N}\left(\mu_i,\sigma_i^2\right)\]</span></p>
 </div>
 <div class="fragment">
 <div style="text-align:left">
 And the sum is distributed as
 </div>
 <p><span class="math display">\[
-\sum_{i=1}^{n} y_i \sim \mathcal{N}\left(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2\right)
+\sum_{i=1}^{n} y_i \sim
+\mathcal{N}\left(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2\right)
 \]</span></p>
 </div>
 <div class="fragment">
-<p><small>(<em>Aside</em>: As sum increases, sum of non-Gaussian, finite variance variables is also Gaussian because of <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">central limit theorem</a>.)</small></p>
+<p><small>(<em>Aside</em>: As sum increases, sum of non-Gaussian, finite
+variance variables is also Gaussian because of <a
+href="https://en.wikipedia.org/wiki/Central_limit_theorem">central limit
+theorem</a>.)</small></p>
 </div>
 </section>
 <section id="scaling-a-gaussian" class="slide level2">
@@ -438,13 +495,15 @@ Scaling a Gaussian leads to a Gaussian.
 </div>
 </div>
 <div class="fragment">
-<p><span class="math display">\[y\sim \mathcal{N}\left(\mu,\sigma^2\right)\]</span></p>
+<p><span class="math display">\[y\sim
+\mathcal{N}\left(\mu,\sigma^2\right)\]</span></p>
 </div>
 <div class="fragment">
 <div style="text-align:left">
 And the scaled variable is distributed as
 </div>
-<p><span class="math display">\[wy\sim \mathcal{N}\left(w\mu,w^2 \sigma^2\right).\]</span></p>
+<p><span class="math display">\[wy\sim \mathcal{N}\left(w\mu,w^2
+\sigma^2\right).\]</span></p>
 </div>
 </section>
 <section id="laplaces-idea" class="slide level2">
@@ -454,10 +513,11 @@ And the scaled variable is distributed as
 <h2>A Probabilistic Process</h2>
 <p>Set the mean of Gaussian to be a function.</p>
 <div class="fragment">
-<p><span class="math display">\[p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).\]</span></p>
+<p><span
+class="math display">\[p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).\]</span></p>
 </div>
 <div class="fragment">
-<p>This gives us a ‘noisy function.’</p>
+<p>This gives us a ‘noisy function’.</p>
 </div>
 <div class="fragment">
 <p>This is known as a stochastic process.</p>
@@ -465,24 +525,34 @@ And the scaled variable is distributed as
 </section>
 <section id="height-as-a-function-of-weight" class="slide level2">
 <h2>Height as a Function of Weight</h2>
-<p>In the standard Gaussian, parameterized by mean and variance, make the mean a linear function of an <em>input</em>.</p>
+<p>In the standard Gaussian, parameterized by mean and variance, make
+the mean a linear function of an <em>input</em>.</p>
 <p>This leads to a regression model. <span class="math display">\[
 \begin{align*}
   y_i=&amp;f\left(x_i\right)+\epsilon_i,\\
          \epsilon_i \sim &amp; \mathcal{N}\left(0,\sigma^2\right).
   \end{align*}
 \]</span></p>
-<p>Assume <span class="math inline">\(y_i\)</span> is height and <span class="math inline">\(x_i\)</span> is weight.</p>
+<p>Assume <span class="math inline">\(y_i\)</span> is height and <span
+class="math inline">\(x_i\)</span> is weight.</p>
 </section>
 <section id="data-point-likelihood" class="slide level2">
 <h2>Data Point Likelihood</h2>
 <p>Likelihood of an individual data point <span class="math display">\[
-p\left(y_i|x_i,m,c\right)=\frac{1}{\sqrt{2\pi \sigma^2}}\exp\left(-\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}\right).
-\]</span> Parameters are gradient, <span class="math inline">\(m\)</span>, offset, <span class="math inline">\(c\)</span> of the function and noise variance <span class="math inline">\(\sigma^2\)</span>.</p>
+p\left(y_i|x_i,m,c\right)=\frac{1}{\sqrt{2\pi
+\sigma^2}}\exp\left(-\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}\right).
+\]</span> Parameters are gradient, <span
+class="math inline">\(m\)</span>, offset, <span
+class="math inline">\(c\)</span> of the function and noise variance
+<span class="math inline">\(\sigma^2\)</span>.</p>
 </section>
 <section id="data-set-likelihood" class="slide level2">
 <h2>Data Set Likelihood</h2>
-<p>If the noise, <span class="math inline">\(\epsilon_i\)</span> is sampled independently for each data point. Each data point is independent (given <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>). For <em>independent</em> variables: <span class="math display">\[
+<p>If the noise, <span class="math inline">\(\epsilon_i\)</span> is
+sampled independently for each data point. Each data point is
+independent (given <span class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>). For <em>independent</em> variables:
+<span class="math display">\[
 p(\mathbf{ y}) = \prod_{i=1}^np(y_i)
 \]</span> <span class="math display">\[
 p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^np(y_i|x_i, m, c)
@@ -491,51 +561,74 @@ p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^np(y_i|x_i, m, c)
 <section id="for-gaussian" class="slide level2">
 <h2>For Gaussian</h2>
 <p>i.i.d. assumption <span class="math display">\[
-p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left(-\frac{\left(y_i- mx_i-c\right)^{2}}{2\sigma^2}\right).
+p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi
+\sigma^2}}\exp \left(-\frac{\left(y_i-
+mx_i-c\right)^{2}}{2\sigma^2}\right).
 \]</span> <span class="math display">\[
-p(\mathbf{ y}|\mathbf{ x}, m, c) = \frac{1}{\left(2\pi \sigma^2\right)^{\frac{n}{2}}}\exp\left(-\frac{\sum_{i=1}^n\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}\right).
+p(\mathbf{ y}|\mathbf{ x}, m, c) = \frac{1}{\left(2\pi
+\sigma^2\right)^{\frac{n}{2}}}\exp\left(-\frac{\sum_{i=1}^n\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}\right).
 \]</span></p>
 </section>
 <section id="log-likelihood-function" class="slide level2">
 <h2>Log Likelihood Function</h2>
 <ul>
 <li>Normally work with the log likelihood: <span class="math display">\[
-L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
+L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2
+-\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
 \]</span></li>
 </ul>
 </section>
 <section id="consistency-of-maximum-likelihood" class="slide level2">
 <h2>Consistency of Maximum Likelihood</h2>
 <ul>
-<li>If data was really generated according to probability we specified.</li>
-<li>Correct parameters will be recovered in limit as <span class="math inline">\(n\rightarrow \infty\)</span>.</li>
-<li>This can be proven through sample based approximations (law of large numbers) of “KL divergences.”</li>
-<li>Mainstay of classical statistics <span class="citation" data-cites="Wasserman:all03">(Wasserman, 2003)</span>.</li>
+<li>If data was really generated according to probability we
+specified.</li>
+<li>Correct parameters will be recovered in limit as <span
+class="math inline">\(n\rightarrow \infty\)</span>.</li>
+<li>This can be proven through sample based approximations (law of large
+numbers) of “KL divergences”.</li>
+<li>Mainstay of classical statistics <span class="citation"
+data-cites="Wasserman:all03">(Wasserman, 2003)</span>.</li>
 </ul>
 </section>
-<section id="probabilistic-interpretation-of-the-error-function" class="slide level2">
+<section id="probabilistic-interpretation-of-the-error-function"
+class="slide level2">
 <h2>Probabilistic Interpretation of the Error Function</h2>
 <ul>
-<li>Probabilistic Interpretation for Error Function is Negative Log Likelihood.</li>
-<li><em>Minimizing</em> error function is equivalent to <em>maximizing</em> log likelihood.</li>
-<li>Maximizing <em>log likelihood</em> is equivalent to maximizing the <em>likelihood</em> because <span class="math inline">\(\log\)</span> is monotonic.</li>
-<li>Probabilistic interpretation: Minimizing error function is equivalent to maximum likelihood with respect to parameters.</li>
+<li>Probabilistic Interpretation for Error Function is Negative Log
+Likelihood.</li>
+<li><em>Minimizing</em> error function is equivalent to
+<em>maximizing</em> log likelihood.</li>
+<li>Maximizing <em>log likelihood</em> is equivalent to maximizing the
+<em>likelihood</em> because <span class="math inline">\(\log\)</span> is
+monotonic.</li>
+<li>Probabilistic interpretation: Minimizing error function is
+equivalent to maximum likelihood with respect to parameters.</li>
 </ul>
 </section>
 <section id="error-function" class="slide level2">
 <h2>Error Function</h2>
 <ul>
-<li>Negative log likelihood is the error function leading to an error function <span class="math display">\[E(m,c,\sigma^{2})=\frac{n}{2}\log \sigma^2+\frac{1}{2\sigma^2}\sum _{i=1}^{n}\left(y_i-mx_i-c\right)^{2}.\]</span></li>
-<li>Learning proceeds by minimizing this error function for the data set provided.</li>
+<li>Negative log likelihood is the error function leading to an error
+function <span class="math display">\[E(m,c,\sigma^{2})=\frac{n}{2}\log
+\sigma^2+\frac{1}{2\sigma^2}\sum
+_{i=1}^{n}\left(y_i-mx_i-c\right)^{2}.\]</span></li>
+<li>Learning proceeds by minimizing this error function for the data set
+provided.</li>
 </ul>
 <!-- SECTION Sum of Squares Error -->
 </section>
 <section id="sum-of-squares-error-1" class="slide level2">
 <h2>Sum of Squares Error</h2>
 <ul>
-<li>Ignoring terms which don’t depend on <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives <span class="math display">\[E(m, c) \propto \sum_{i=1}^n(y_i - f(x_i))^2\]</span> where <span class="math inline">\(f(x_i) = mx_i + c\)</span>.</li>
+<li>Ignoring terms which don’t depend on <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> gives <span class="math display">\[E(m,
+c) \propto \sum_{i=1}^n(y_i - f(x_i))^2\]</span> where <span
+class="math inline">\(f(x_i) = mx_i + c\)</span>.</li>
 <li>This is known as the <em>sum of squares</em> error function.</li>
-<li>Commonly used and is closely associated with the Gaussian likelihood.</li>
+<li>Commonly used and is closely associated with the Gaussian
+likelihood.</li>
 </ul>
 </section>
 <section id="reminder" class="slide level2">
@@ -543,10 +636,13 @@ L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n
 <ul>
 <li>Two functions involved:
 <ul>
-<li><em>Prediction function</em>: <span class="math inline">\(f(x_i)\)</span></li>
-<li>Error, or <em>Objective function</em>: <span class="math inline">\(E(m, c)\)</span></li>
+<li><em>Prediction function</em>: <span
+class="math inline">\(f(x_i)\)</span></li>
+<li>Error, or <em>Objective function</em>: <span
+class="math inline">\(E(m, c)\)</span></li>
 </ul></li>
-<li>Error function depends on parameters through prediction function.</li>
+<li>Error function depends on parameters through prediction
+function.</li>
 </ul>
 </section>
 <section id="mathematical-interpretation" class="slide level2">
@@ -555,7 +651,8 @@ L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n
 <li>What is the mathematical interpretation?</li>
 <li>There is a cost function.
 <ul>
-<li>It expresses mismatch between your prediction and reality. <span class="math display">\[
+<li>It expresses mismatch between your prediction and reality. <span
+class="math display">\[
 E(m, c)=\sum_{i=1}^n\left(y_i - mx_i-c\right)^2
 \]</span></li>
 <li>This is known as the sum of squares error.</li>
@@ -568,7 +665,8 @@ E(m, c)=\sum_{i=1}^n\left(y_i - mx_i-c\right)^2
 <section id="running-example-olympic-marathons" class="slide level2">
 <h2>Running Example: Olympic Marathons</h2>
 </section>
-<section id="maximum-likelihood-iterative-solution" class="slide level2">
+<section id="maximum-likelihood-iterative-solution"
+class="slide level2">
 <h2>Maximum Likelihood: Iterative Solution</h2>
 <p><span class="math display">\[
 E(m, c) =  \sum_{i=1}^n(y_i-mx_i-c)^2
@@ -582,13 +680,20 @@ E(m, c) =  \sum_{i=1}^n(y_i-mx_i-c)^2
 <ul>
 <li>Learning is minimization of the cost function.</li>
 <li>At the minima the gradient is zero.</li>
-<li>Coordinate ascent, find gradient in each coordinate and set to zero. <span class="math display">\[\frac{\text{d}E(c)}{\text{d}c} = -2\sum_{i=1}^n\left(y_i- m x_i - c \right)\]</span> <span class="math display">\[0 = -2\sum_{i=1}^n\left(y_i- mx_i - c \right)\]</span></li>
+<li>Coordinate ascent, find gradient in each coordinate and set to zero.
+<span class="math display">\[\frac{\text{d}E(c)}{\text{d}c} =
+-2\sum_{i=1}^n\left(y_i- m x_i - c \right)\]</span> <span
+class="math display">\[0 = -2\sum_{i=1}^n\left(y_i- mx_i - c
+\right)\]</span></li>
 </ul>
 </section>
 <section id="learning-is-optimization-1" class="slide level2">
 <h2>Learning is Optimization</h2>
 <ul>
-<li>Fixed point equations <span class="math display">\[0 = -2\sum_{i=1}^ny_i +2\sum_{i=1}^nm x_i +2n c\]</span> <span class="math display">\[c = \frac{\sum_{i=1}^n\left(y_i - mx_i\right)}{n}\]</span></li>
+<li>Fixed point equations <span class="math display">\[0 =
+-2\sum_{i=1}^ny_i +2\sum_{i=1}^nm x_i +2n c\]</span> <span
+class="math display">\[c = \frac{\sum_{i=1}^n\left(y_i -
+mx_i\right)}{n}\]</span></li>
 </ul>
 </section>
 <section id="learning-is-optimization-2" class="slide level2">
@@ -596,15 +701,23 @@ E(m, c) =  \sum_{i=1}^n(y_i-mx_i-c)^2
 <ul>
 <li>Learning is minimization of the cost function.</li>
 <li>At the minima the gradient is zero.</li>
-<li>Coordinate ascent, find gradient in each coordinate and set to zero. <span class="math display">\[\frac{\text{d}E(m)}{\text{d}m} = -2\sum_{i=1}^nx_i\left(y_i- m x_i - c \right)\]</span> <span class="math display">\[0 = -2\sum_{i=1}^nx_i \left(y_i-m x_i - c \right)\]</span></li>
+<li>Coordinate ascent, find gradient in each coordinate and set to zero.
+<span class="math display">\[\frac{\text{d}E(m)}{\text{d}m} =
+-2\sum_{i=1}^nx_i\left(y_i- m x_i - c \right)\]</span> <span
+class="math display">\[0 = -2\sum_{i=1}^nx_i \left(y_i-m x_i - c
+\right)\]</span></li>
 </ul>
 </section>
 <section id="learning-is-optimization-3" class="slide level2">
 <h2>Learning is Optimization</h2>
 <ul>
-<li>Fixed point equations <span class="math display">\[0 = -2\sum_{i=1}^nx_iy_i+2\sum_{i=1}^nm x_i^2+2\sum_{i=1}^ncx_i\]</span> <span class="math display">\[m  =    \frac{\sum_{i=1}^n\left(y_i -c\right)x_i}{\sum_{i=1}^nx_i^2}\]</span></li>
+<li>Fixed point equations <span class="math display">\[0 =
+-2\sum_{i=1}^nx_iy_i+2\sum_{i=1}^nm x_i^2+2\sum_{i=1}^ncx_i\]</span>
+<span class="math display">\[m  =    \frac{\sum_{i=1}^n\left(y_i
+-c\right)x_i}{\sum_{i=1}^nx_i^2}\]</span></li>
 </ul>
-<p><span class="math display">\[m^* = \frac{\sum_{i=1}^n(y_i - c)x_i}{\sum_{i=1}^nx_i^2}\]</span></p>
+<p><span class="math display">\[m^* = \frac{\sum_{i=1}^n(y_i -
+c)x_i}{\sum_{i=1}^nx_i^2}\]</span></p>
 </section>
 <section id="fixed-point-updates" class="slide level2">
 <h2>Fixed Point Updates</h2>
@@ -627,7 +740,8 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 <ul>
 <li>Other optimization methods:
 <ul>
-<li>Second order methods, conjugate gradient, quasi-Newton and Newton.</li>
+<li>Second order methods, conjugate gradient, quasi-Newton and
+Newton.</li>
 </ul></li>
 <li>Effective heuristics such as momentum.</li>
 <li>Local vs global solutions.</li>
@@ -639,35 +753,49 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 <li>Multivariate functions involve more than one input.</li>
 <li>Height might be a function of weight and gender.</li>
 <li>There could be other contributory factors.</li>
-<li>Place these factors in a feature vector <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
-<li>Linear function is now defined as <span class="math display">\[f(\mathbf{ x}_i) = \sum_{j=1}^p w_j x_{i, j} + c\]</span></li>
+<li>Place these factors in a feature vector <span
+class="math inline">\(\mathbf{ x}_i\)</span>.</li>
+<li>Linear function is now defined as <span
+class="math display">\[f(\mathbf{ x}_i) = \sum_{j=1}^p w_j x_{i, j} +
+c\]</span></li>
 </ul>
 </section>
 <section id="vector-notation" class="slide level2">
 <h2>Vector Notation</h2>
 <ul>
-<li>Write in vector notation, <span class="math display">\[f(\mathbf{ x}_i) = \mathbf{ w}^\top \mathbf{ x}_i + c\]</span></li>
-<li>Can absorb <span class="math inline">\(c\)</span> into <span class="math inline">\(\mathbf{ w}\)</span> by assuming extra input <span class="math inline">\(x_0\)</span> which is always 1. <span class="math display">\[f(\mathbf{ x}_i) = \mathbf{ w}^\top \mathbf{ x}_i\]</span></li>
+<li>Write in vector notation, <span class="math display">\[f(\mathbf{
+x}_i) = \mathbf{ w}^\top \mathbf{ x}_i + c\]</span></li>
+<li>Can absorb <span class="math inline">\(c\)</span> into <span
+class="math inline">\(\mathbf{ w}\)</span> by assuming extra input <span
+class="math inline">\(x_0\)</span> which is always 1. <span
+class="math display">\[f(\mathbf{ x}_i) = \mathbf{ w}^\top \mathbf{
+x}_i\]</span></li>
 </ul>
 </section>
 <section id="objective-functions-and-regression" class="slide level2">
 <h2>Objective Functions and Regression</h2>
 <ul>
 <li><p>Classification: map feature to class label.</p></li>
-<li><p>Regression: map feature to real value our <em>prediction function</em> is</p>
+<li><p>Regression: map feature to real value our <em>prediction
+function</em> is</p>
 <p><span class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
 <li><p>Need an <em>algorithm</em> to fit it.</p></li>
 <li><p>Least squares: minimize an error.</p></li>
 </ul>
-<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i * f(x_i))^2\]</span></p>
+<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i *
+f(x_i))^2\]</span></p>
 </section>
 <section id="regression" class="slide level2">
 <h2>Regression</h2>
 <ul>
 <li>Create an artifical data set.</li>
 </ul>
-<p>We now need to decide on a <em>true</em> value for <span class="math inline">\(m\)</span> and a <em>true</em> value for <span class="math inline">\(c\)</span> to use for generating the data.</p>
-<p>We can use these values to create our artificial data. The formula <span class="math display">\[y_i = mx_i + c\]</span> is translated to code as follows:</p>
+<p>We now need to decide on a <em>true</em> value for <span
+class="math inline">\(m\)</span> and a <em>true</em> value for <span
+class="math inline">\(c\)</span> to use for generating the data.</p>
+<p>We can use these values to create our artificial data. The formula
+<span class="math display">\[y_i = mx_i + c\]</span> is translated to
+code as follows:</p>
 </section>
 <section id="plot-of-data" class="slide level2">
 <h2>Plot of Data</h2>
@@ -681,7 +809,8 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 <aside class="notes">
 A simple linear regression.
 </aside>
-<p>These points lie exactly on a straight line, that’s not very realistic, let’s corrupt them with a bit of Gaussian ‘noise.’</p>
+<p>These points lie exactly on a straight line, that’s not very
+realistic, let’s corrupt them with a bit of Gaussian ‘noise’.</p>
 </section>
 <section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
@@ -698,9 +827,13 @@ A simple linear regression with noise.
 <section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
 <ul>
-<li><p>Visualise the error function surface, create vectors of values.</p></li>
-<li><p>create a grid of values to evaluate the error function in 2D.</p></li>
-<li><p>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</p></li>
+<li><p>Visualise the error function surface, create vectors of
+values.</p></li>
+<li><p>create a grid of values to evaluate the error function in
+2D.</p></li>
+<li><p>compute the error function at each combination of <span
+class="math inline">\(c\)</span> and <span
+class="math inline">\(m\)</span>.</p></li>
 </ul>
 </section>
 <section id="contour-plot-of-error" class="slide level2">
@@ -715,7 +848,8 @@ A simple linear regression with noise.
 </div>
 </div>
 <aside class="notes">
-Contours of the objective function for linear regression by minimizing least squares.
+Contours of the objective function for linear regression by minimizing
+least squares.
 </aside>
 </section>
 <section id="steepest-descent" class="slide level2">
@@ -723,21 +857,27 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>Minimize the sum of squares error function.</li>
 <li>One way of doing that is gradient descent.</li>
-<li>Initialize with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span></li>
-<li>update that guess by subtracting a portion of the gradient from the guess.</li>
-<li>Like walking down a hill in the steepest direction of the hill to get to the bottom.</li>
+<li>Initialize with a guess for <span class="math inline">\(m\)</span>
+and <span class="math inline">\(c\)</span></li>
+<li>update that guess by subtracting a portion of the gradient from the
+guess.</li>
+<li>Like walking down a hill in the steepest direction of the hill to
+get to the bottom.</li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
-<li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
+<li>We start with a guess for <span class="math inline">\(m\)</span> and
+<span class="math inline">\(c\)</span>.</li>
 </ul>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
-<li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>, <span class="math display">\[
+<li><p>Now we need to compute the gradient of the error function,
+firstly with respect to <span class="math inline">\(c\)</span>, <span
+class="math display">\[
   \frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)
   \]</span></p></li>
 <li><p>This is computed in python as follows</p></li>
@@ -745,24 +885,46 @@ Contours of the objective function for linear regression by minimizing least squ
 </section>
 <section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
-<p>To see how the gradient was derived, first note that the <span class="math inline">\(c\)</span> appears in every term in the sum. So we are just differentiating <span class="math inline">\((y_i - mx_i - c)^2\)</span> for each term in the sum. The gradient of this term with respect to <span class="math inline">\(c\)</span> is simply the gradient of the outer quadratic, multiplied by the gradient with respect to <span class="math inline">\(c\)</span> of the part inside the quadratic. The gradient of a quadratic is two times the argument of the quadratic, and the gradient of the inside linear term is just minus one. This is true for all terms in the sum, so we are left with the sum in the gradient.</p>
+<p>To see how the gradient was derived, first note that the <span
+class="math inline">\(c\)</span> appears in every term in the sum. So we
+are just differentiating <span class="math inline">\((y_i - mx_i -
+c)^2\)</span> for each term in the sum. The gradient of this term with
+respect to <span class="math inline">\(c\)</span> is simply the gradient
+of the outer quadratic, multiplied by the gradient with respect to <span
+class="math inline">\(c\)</span> of the part inside the quadratic. The
+gradient of a quadratic is two times the argument of the quadratic, and
+the gradient of the inside linear term is just minus one. This is true
+for all terms in the sum, so we are left with the sum in the
+gradient.</p>
 </section>
 <section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
-<p>The gradient with respect tom <span class="math inline">\(m\)</span> is similar, but now the gradient of the quadratic’s argument is <span class="math inline">\(-x_i\)</span> so the gradient with respect to <span class="math inline">\(m\)</span> is</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
+<p>The gradient with respect tom <span class="math inline">\(m\)</span>
+is similar, but now the gradient of the quadratic’s argument is <span
+class="math inline">\(-x_i\)</span> so the gradient with respect to
+<span class="math inline">\(m\)</span> is</p>
+<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} =
+-2\sum_{i=1}^nx_i(y_i - mx_i -
 c)\]</span></p>
 <p>which can be implemented in python (numpy) as</p>
 </section>
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>Now we have gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>Can update our inital guesses for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> using the gradient.</li>
-<li>We don’t want to just subtract the gradient from <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>,</li>
-<li>We need to take a <em>small</em> step in the gradient direction.</li>
+<li>Now we have gradients with respect to <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>.</li>
+<li>Can update our inital guesses for <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> using the gradient.</li>
+<li>We don’t want to just subtract the gradient from <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>,</li>
+<li>We need to take a <em>small</em> step in the gradient
+direction.</li>
 <li>Otherwise we might overshoot the minimum.</li>
-<li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
+<li>We want to follow the gradient to get to the minimum, the gradient
+changes all the time.</li>
 </ul>
 </section>
 <section id="move-in-direction-of-gradient" class="slide level2">
@@ -774,19 +936,29 @@ c)\]</span></p>
 </div>
 </div>
 <aside class="notes">
-Single update descending the contours of the error surface for regression.
+Single update descending the contours of the error surface for
+regression.
 </aside>
 </section>
 <section id="update-equations-1" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li><p>The step size has already been introduced, it’s again known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
-c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}c}
+<li><p>The step size has already been introduced, it’s again known as
+the learning rate and is denoted by <span
+class="math inline">\(\eta\)</span>. <span class="math display">\[
+c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}c}
 \]</span></p></li>
-<li><p>gives us an update for our estimate of <span class="math inline">\(c\)</span> (which in the code we’ve been calling <code>c_star</code> to represent a common way of writing a parameter estimate, <span class="math inline">\(c^*\)</span>) and <span class="math display">\[
-m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
+<li><p>gives us an update for our estimate of <span
+class="math inline">\(c\)</span> (which in the code we’ve been calling
+<code>c_star</code> to represent a common way of writing a parameter
+estimate, <span class="math inline">\(c^*\)</span>) and <span
+class="math display">\[
+m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}m}
 \]</span></p></li>
-<li><p>Giving us an update for <span class="math inline">\(m\)</span>.</p></li>
+<li><p>Giving us an update for <span
+class="math inline">\(m\)</span>.</p></li>
 </ul>
 </section>
 <section id="update-code" class="slide level2">
@@ -807,7 +979,10 @@ m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
 <script>
 showDivs(1, 'regression_contour_fit');
 </script>
-<p><small></small> <input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')"> <button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
+<p><small></small>
+<input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" onchange="setDivs('regression_contour_fit')" oninput="setDivs('regression_contour_fit')">
+<button onclick="plusDivs(-1, 'regression_contour_fit')">❮</button>
+<button onclick="plusDivs(1, 'regression_contour_fit')">❯</button></p>
 <div class="regression_contour_fit" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/regression_contour_fit000.svg" width="60%" style=" ">
 </object>
@@ -928,55 +1103,81 @@ showDivs(1, 'regression_contour_fit');
 <section id="stochastic-gradient-descent" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>If <span class="math inline">\(n\)</span> is small, gradient descent is fine.</li>
-<li>But sometimes (e.g. on the internet <span class="math inline">\(n\)</span> could be a billion.</li>
+<li>If <span class="math inline">\(n\)</span> is small, gradient descent
+is fine.</li>
+<li>But sometimes (e.g. on the internet <span
+class="math inline">\(n\)</span> could be a billion.</li>
 <li>Stochastic gradient descent is more similar to perceptron.</li>
-<li>Look at gradient of one data point at a time rather than summing across <em>all</em> data points)</li>
+<li>Look at gradient of one data point at a time rather than summing
+across <em>all</em> data points)</li>
 <li>This gives a stochastic estimate of gradient.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-1" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li><p>The real gradient with respect to <span class="math inline">\(m\)</span> is given by</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i -
+<li><p>The real gradient with respect to <span
+class="math inline">\(m\)</span> is given by</p>
+<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} =
+-2\sum_{i=1}^nx_i(y_i -
 mx_i - c)\]</span></p>
-<p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form</p>
+<p>but it has <span class="math inline">\(n\)</span> terms in the sum.
+Substituting in the gradient we can see that the full update is of the
+form</p>
 <p><span class="math display">\[m_\text{new} \leftarrow
-m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]\]</span></p>
-<p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
-c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
-m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3 \leftarrow m_2 + 2\eta
-\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
+m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) +
+(x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n -
+m_\text{old}x_n - c_\text{old})\right]\]</span></p>
+<p>This could be split up into lots of individual updates <span
+class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1
+- m_\text{old}x_1 -
+c_\text{old})\right]\]</span> <span class="math display">\[m_2
+\leftarrow m_1 + 2\eta\left[x_2 (y_2 -
+m_\text{old}x_2 - c_\text{old})\right]\]</span> <span
+class="math display">\[m_3 \leftarrow m_2 + 2\eta
+\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow
+m_{n-1} + 2\eta\left[x_n (y_n -
 m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
 </ul>
 <p>which would lead to the same final update.</p>
 </section>
 <section id="updating-c-and-m" class="slide level2">
-<h2>Updating <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span></h2>
+<h2>Updating <span class="math inline">\(c\)</span> and <span
+class="math inline">\(m\)</span></h2>
 <ul>
-<li>In the sum we don’t <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
+<li>In the sum we don’t <span class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> we use for computing the gradient term
+at each update.</li>
 <li>In stochastic gradient descent we <em>do</em> change them.</li>
 <li>This means it’s not quite the same as steepest desceint.</li>
-<li>But we can present each data point in a random order, like we did for the perceptron.</li>
-<li>This makes the algorithm suitable for large scale web use (recently this domain is know as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
+<li>But we can present each data point in a random order, like we did
+for the perceptron.</li>
+<li>This makes the algorithm suitable for large scale web use (recently
+this domain is know as ‘Big Data’) and algorithms like this are widely
+used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-2" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>Or more accurate, since the data is normally presented in a random order we just can write <span class="math display">\[
-m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]
+<li>Or more accurate, since the data is normally presented in a random
+order we just can write <span class="math display">\[
+m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i -
+c_\text{old})\right]
 \]</span></li>
 </ul>
 </section>
 <section id="sgd-for-linear-regression" class="slide level2">
 <h2>SGD for Linear Regression</h2>
-<p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
+<p>Putting it all together in an algorithm, we can do stochastic
+gradient descent for our regression data.</p>
 <script>
 showDivs(0, 'regression_sgd_contour_fit');
 </script>
-<p><small></small> <input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" onchange="setDivs('regression_sgd_contour_fit')" oninput="setDivs('regression_sgd_contour_fit')"> <button onclick="plusDivs(-1, 'regression_sgd_contour_fit')">❮</button> <button onclick="plusDivs(1, 'regression_sgd_contour_fit')">❯</button></p>
+<p><small></small>
+<input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" onchange="setDivs('regression_sgd_contour_fit')" oninput="setDivs('regression_sgd_contour_fit')">
+<button onclick="plusDivs(-1, 'regression_sgd_contour_fit')">❮</button>
+<button onclick="plusDivs(1, 'regression_sgd_contour_fit')">❯</button></p>
 <div class="regression_sgd_contour_fit" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/regression_sgd_contour_fit000.svg" width="60%" style=" ">
 </object>
@@ -1214,41 +1415,58 @@ showDivs(0, 'regression_sgd_contour_fit');
 </object>
 </div>
 </section>
-<section id="reflection-on-linear-regression-and-supervised-learning" class="slide level2">
+<section id="reflection-on-linear-regression-and-supervised-learning"
+class="slide level2">
 <h2>Reflection on Linear Regression and Supervised Learning</h2>
 <p>Think about:</p>
 <ol type="1">
-<li><p>What effect does the learning rate have in the optimization? What’s the effect of making it too small, what’s the effect of making it too big? Do you get the same result for both stochastic and steepest gradient descent?</p></li>
-<li><p>The stochastic gradient descent doesn’t help very much for such a small data set. It’s real advantage comes when there are many, you’ll see this in the lab.</p></li>
+<li><p>What effect does the learning rate have in the optimization?
+What’s the effect of making it too small, what’s the effect of making it
+too big? Do you get the same result for both stochastic and steepest
+gradient descent?</p></li>
+<li><p>The stochastic gradient descent doesn’t help very much for such a
+small data set. It’s real advantage comes when there are many, you’ll
+see this in the lab.</p></li>
 </ol>
 </section>
-<section id="log-likelihood-for-multivariate-regression" class="slide level2">
+<section id="log-likelihood-for-multivariate-regression"
+class="slide level2">
 <h2>Log Likelihood for Multivariate Regression</h2>
 <p>The likelihood of a single data point is</p>
 <div class="fragment">
-<p><span class="math display">\[p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}\right).\]</span></p>
+<p><span
+class="math display">\[p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{
+w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}\right).\]</span></p>
 </div>
 <div class="fragment">
 <p>Leading to a log likelihood for the data set of</p>
 </div>
 <div class="fragment">
-<p><span class="math display">\[L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\]</span></p>
+<p><span class="math display">\[L(\mathbf{ w},\sigma^2)=
+-\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi
+-\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{
+x}_i\right)^{2}}{2\sigma^2}.\]</span></p>
 </div>
 </section>
 <section id="error-function-1" class="slide level2">
 <h2>Error Function</h2>
-<p>And a corresponding error function of <span class="math display">\[E(\mathbf{ w},\sigma^2)=\frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\]</span></p>
+<p>And a corresponding error function of <span
+class="math display">\[E(\mathbf{ w},\sigma^2)=\frac{n}{2}\log\sigma^2 +
+\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{
+x}_i\right)^{2}}{2\sigma^2}.\]</span></p>
 </section>
 <section id="quadratic-loss" class="slide level2">
 <h2>Quadratic Loss</h2>
 <p><span class="math display">\[
-E(\mathbf{ w}) = \sum_{i=1}^n\left(y_i - f(\mathbf{ x}_i, \mathbf{ w})\right)^2
+E(\mathbf{ w}) = \sum_{i=1}^n\left(y_i - f(\mathbf{ x}_i, \mathbf{
+w})\right)^2
 \]</span></p>
 </section>
 <section id="linear-model" class="slide level2">
 <h2>Linear Model</h2>
 <p><span class="math display">\[
-E(\mathbf{ w}) = \sum_{i=1}^n\left(y_i - \mathbf{ w}^\top \mathbf{ x}_i\right)^2
+E(\mathbf{ w}) = \sum_{i=1}^n\left(y_i - \mathbf{ w}^\top \mathbf{
+x}_i\right)^2
 \]</span></p>
 </section>
 <section id="bracket-expansion" class="slide level2">
@@ -1258,14 +1476,17 @@ E(\mathbf{ w}) = \sum_{i=1}^n\left(y_i - \mathbf{ w}^\top \mathbf{ x}_i\right)^2
   E(\mathbf{ w},\sigma^2)  = &amp;
 \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum
 _{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum
-_{i=1}^{n}y_i\mathbf{ w}^{\top}\mathbf{ x}_i\\&amp;+\frac{1}{2\sigma^2}\sum
+_{i=1}^{n}y_i\mathbf{ w}^{\top}\mathbf{
+x}_i\\&amp;+\frac{1}{2\sigma^2}\sum
 _{i=1}^{n}\mathbf{ w}^{\top}\mathbf{ x}_i\mathbf{ x}_i^{\top}\mathbf{ w}
 +\text{const}.\\
     = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum
 _{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}
-\mathbf{ w}^\top\sum_{i=1}^{n}\mathbf{ x}_iy_i\\&amp;+\frac{1}{2\sigma^2}
+\mathbf{ w}^\top\sum_{i=1}^{n}\mathbf{
+x}_iy_i\\&amp;+\frac{1}{2\sigma^2}
 \mathbf{ w}^{\top}\left[\sum
-_{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^{\top}\right]\mathbf{ w}+\text{const}.
+_{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^{\top}\right]\mathbf{
+w}+\text{const}.
 \end{align*}
 \]</span></p>
 <!-- SECTION Design Matrix -->
@@ -1274,9 +1495,9 @@ _{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^{\top}\right]\mathbf{ w}+\text{const}.
 <h2>Design Matrix</h2>
 <p><span class="math display">\[
 \mathbf{X}
-= \begin{bmatrix} 
-\mathbf{ x}_1^\top \\\ 
-\mathbf{ x}_2^\top \\\ 
+= \begin{bmatrix}
+\mathbf{ x}_1^\top \\\
+\mathbf{ x}_2^\top \\\
 \vdots \\\
 \mathbf{ x}_n^\top
 \end{bmatrix} = \begin{bmatrix}
@@ -1288,7 +1509,8 @@ _{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^{\top}\right]\mathbf{ w}+\text{const}.
 \end{bmatrix}
 \]</span></p>
 </section>
-<section id="writing-the-objective-with-linear-algebra" class="slide level2">
+<section id="writing-the-objective-with-linear-algebra"
+class="slide level2">
 <h2>Writing the Objective with Linear Algebra</h2>
 <p><span class="math display">\[
 E(\mathbf{ w}) = \sum_{i=1}^n(y_i - f(\mathbf{ x}_i; \mathbf{ w}))^2,
@@ -1304,7 +1526,8 @@ f(\mathbf{ x}_i; \mathbf{ w}) = \mathbf{ x}_i^\top \mathbf{ w}.
 \vdots \\ f_n\end{bmatrix}.
 \]</span></p>
 <p><span class="math display">\[
-E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
+E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{
+f})
 \]</span></p>
 </section>
 <section id="section-8" class="slide level2">
@@ -1313,7 +1536,8 @@ E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 \mathbf{ f}= \mathbf{X}\mathbf{ w}.
 \]</span></p>
 <p><span class="math display">\[
-E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
+E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{
+f})
 \]</span></p>
 <!-- SECTION Objective Optimization -->
 </section>
@@ -1324,17 +1548,30 @@ E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 <h2>Multivariate Derivatives</h2>
 <ul>
 <li>We will need some multivariate calculus.</li>
-<li>For now some simple multivariate differentiation: <span class="math display">\[\frac{\text{d}{\mathbf{a}^{\top}}{\mathbf{ w}}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></li>
+<li>For now some simple multivariate differentiation: <span
+class="math display">\[\frac{\text{d}{\mathbf{a}^{\top}}{\mathbf{
+w}}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span
+class="math display">\[\frac{\mathbf{ w}^{\top}\mathbf{A}\mathbf{
+w}}{\text{d}\mathbf{
+w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if
+<span class="math inline">\(\mathbf{A}\)</span> is symmetric
+(<em>i.e.</em> <span
+class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span
+class="math display">\[\frac{\text{d}\mathbf{
+w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{
+w}.\]</span></li>
 </ul>
 </section>
 <section id="differentiate-the-objective" class="slide level2">
 <h2>Differentiate the Objective</h2>
 <div style="text-align:left">
-Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain
+Differentiating with respect to the vector <span
+class="math inline">\(\mathbf{ w}\)</span> we obtain
 </div>
 <p><span class="math display">\[
 \frac{\partial L\left(\mathbf{ w},\sigma^2 \right)}{\partial
-\mathbf{ w}}=\frac{1}{\sigma^2} \sum _{i=1}^{n}\mathbf{ x}_i y_i-\frac{1}{\sigma^2}
+\mathbf{ w}}=\frac{1}{\sigma^2} \sum _{i=1}^{n}\mathbf{ x}_i
+y_i-\frac{1}{\sigma^2}
 \left[\sum _{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^{\top}\right]\mathbf{ w}
 \]</span> Leading to <span class="math display">\[
 \mathbf{ w}^{*}=\left[\sum
@@ -1345,7 +1582,8 @@ _{i=1}^{n}\mathbf{ x}_iy_i,
 <section id="differentiate-the-objective-1" class="slide level2">
 <h2>Differentiate the Objective</h2>
 <p>Rewrite in matrix notation: <span class="math display">\[
-\sum_{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^\top = \mathbf{X}^\top \mathbf{X}
+\sum_{i=1}^{n}\mathbf{ x}_i\mathbf{ x}_i^\top = \mathbf{X}^\top
+\mathbf{X}
 \]</span> <span class="math display">\[
 \sum_{i=1}^{n}\mathbf{ x}_iy_i = \mathbf{X}^\top \mathbf{ y}
 \]</span></p>
@@ -1357,20 +1595,30 @@ _{i=1}^{n}\mathbf{ x}_iy_i,
 <section id="update-equations-2" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li><p>Solve the matrix equation for <span class="math inline">\(\mathbf{ w}\)</span>. <span class="math display">\[\mathbf{X}^\top \mathbf{X}\mathbf{ w}=  \mathbf{X}^\top \mathbf{ y}\]</span></p></li>
-<li><p>The equation for <span class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be found <span class="math display">\[\left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\mathbf{ x}_i\right)^{2}}{n}.\]</span></p></li>
+<li><p>Solve the matrix equation for <span
+class="math inline">\(\mathbf{ w}\)</span>. <span
+class="math display">\[\mathbf{X}^\top \mathbf{X}\mathbf{
+w}=  \mathbf{X}^\top \mathbf{ y}\]</span></p></li>
+<li><p>The equation for <span
+class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be
+found <span
+class="math display">\[\left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{
+w}^{*}\right.^{\top}\mathbf{ x}_i\right)^{2}}{n}.\]</span></p></li>
 </ul>
 </section>
 <section id="movie-body-count-data" class="slide level2">
 <h2>Movie Body Count Data</h2>
 <ul>
-<li>Data containing movie information (year, length, rating, genre, IMDB Rating).</li>
+<li>Data containing movie information (year, length, rating, genre, IMDB
+Rating).</li>
 </ul>
 </section>
-<section id="multivariate-regression-on-movie-body-count-data" class="slide level2">
+<section id="multivariate-regression-on-movie-body-count-data"
+class="slide level2">
 <h2>Multivariate Regression on Movie Body Count Data</h2>
 <ul>
-<li>Regress from features <code>Year</code>, <code>Body_Count</code>, <code>Length_Minutes</code> to IMDB_Rating.</li>
+<li>Regress from features <code>Year</code>, <code>Body_Count</code>,
+<code>Length_Minutes</code> to IMDB_Rating.</li>
 </ul>
 </section>
 <section id="residuals" class="slide level2">
@@ -1382,7 +1630,8 @@ _{i=1}^{n}\mathbf{ x}_iy_i,
 </div>
 </div>
 <aside class="notes">
-Residual values for the ratings from the prediction of the movie rating given the data from the film.
+Residual values for the ratings from the prediction of the movie rating
+given the data from the film.
 </aside>
 </section>
 <section id="solution-with-qr-decomposition" class="slide level2">
@@ -1390,7 +1639,8 @@ Residual values for the ratings from the prediction of the movie rating given th
 <p><span class="math display">\[
 \mathbf{X}^\top \mathbf{X}\boldsymbol{\beta} =
 \mathbf{X}^\top \mathbf{ y}
-\]</span> substitute <span class="math inline">\(\mathbf{X}= \mathbf{Q}{\mathbf{R}\)</span> <span class="math display">\[
+\]</span> substitute <span class="math inline">\(\mathbf{X}=
+\mathbf{Q}{\mathbf{R}\)</span> <span class="math display">\[
 (\mathbf{Q}\mathbf{R})^\top
 (\mathbf{Q}\mathbf{R})\boldsymbol{\beta} = (\mathbf{Q}\mathbf{R})^\top
 \mathbf{ y}
@@ -1402,7 +1652,8 @@ Residual values for the ratings from the prediction of the movie rating given th
 <section id="section-9" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
-\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top \mathbf{Q}^\top
+\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top
+\mathbf{Q}^\top
 \mathbf{ y}
 \]</span> <span class="math display">\[
 \mathbf{R} \boldsymbol{\beta} = \mathbf{Q}^\top \mathbf{ y}
@@ -1412,36 +1663,52 @@ Residual values for the ratings from the prediction of the movie rating given th
 <h2></h2>
 <ul>
 <li>More nummerically stable.</li>
-<li>Avoids the intermediate computation of <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span>.</li>
+<li>Avoids the intermediate computation of <span
+class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span>.</li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p>
-<p><a href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What is Machine Learning?</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p>
+<p><a
+href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What
+is Machine Learning?</a></p></li>
 </ul>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>For fitting linear models: Section 1.1-1.2 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 1.2.5 up to equation 1.65 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Section 1.3 for Matrix &amp; Vector Review of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>For fitting linear models: Section 1.1-1.2 of <span
+class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span></p></li>
+<li><p>Section 1.2.5 up to equation 1.65 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 1.3 for Matrix &amp; Vector Review of <span
+class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 <div id="ref-Wasserman:all03" class="csl-entry" role="doc-biblioentry">
 Wasserman, L.A., 2003. All of statistics. springer, New York.
@@ -1459,8 +1726,39 @@ Wasserman, L.A., 2003. All of statistics. springer, New York.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

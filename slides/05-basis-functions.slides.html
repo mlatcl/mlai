@@ -59,9 +59,16 @@ sns.set_palette('colorblind')}-->
 <section id="nonlinear-regression" class="slide level2">
 <h2>Nonlinear Regression</h2>
 <ul>
-<li>Problem with Linear Regression—<span class="math inline">\(\mathbf{ x}\)</span> may not be linearly related to <span class="math inline">\(\mathbf{ y}\)</span>.</li>
-<li>Potential solution: create a feature space: define <span class="math inline">\(\phi(\mathbf{ x})\)</span> where <span class="math inline">\(\phi(\cdot)\)</span> is a nonlinear function of <span class="math inline">\(\mathbf{ x}\)</span>.</li>
-<li>Model for target is a linear combination of these nonlinear functions <span class="math display">\[f(\mathbf{ x}) = \sum_{j=1}^mw_j \phi_j(\mathbf{ x})\]</span></li>
+<li>Problem with Linear Regression—<span class="math inline">\(\mathbf{
+x}\)</span> may not be linearly related to <span
+class="math inline">\(\mathbf{ y}\)</span>.</li>
+<li>Potential solution: create a feature space: define <span
+class="math inline">\(\phi(\mathbf{ x})\)</span> where <span
+class="math inline">\(\phi(\cdot)\)</span> is a nonlinear function of
+<span class="math inline">\(\mathbf{ x}\)</span>.</li>
+<li>Model for target is a linear combination of these nonlinear
+functions <span class="math display">\[f(\mathbf{ x}) = \sum_{j=1}^mw_j
+\phi_j(\mathbf{ x})\]</span></li>
 </ul>
 </section>
 <section id="non-linear-in-the-inputs" class="slide level2">
@@ -80,7 +87,8 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
 <section id="quadratic-basis" class="slide level2">
 <h2>Quadratic Basis</h2>
 <ul>
-<li>Basis functions can be global. E.g. quadratic basis: <span class="math display">\[
+<li>Basis functions can be global. E.g. quadratic basis: <span
+class="math display">\[
 \boldsymbol{ \phi}= [1, x, x^2]
 \]</span></li>
 </ul>
@@ -98,7 +106,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
 <section id="matrix-valued-function" class="slide level2">
 <h2>Matrix Valued Function</h2>
 <p><span class="math display">\[
-\boldsymbol{ \Phi}(\mathbf{ x}) = 
+\boldsymbol{ \Phi}(\mathbf{ x}) =
 \begin{bmatrix} 1 &amp; x_1 &amp;
 x_1^2 \\
 1 &amp; x_2 &amp; x_2^2\\
@@ -107,15 +115,20 @@ x_1^2 \\
 \end{bmatrix}
 \]</span></p>
 </section>
-<section id="functions-derived-from-quadratic-basis" class="slide level2">
+<section id="functions-derived-from-quadratic-basis"
+class="slide level2">
 <h2>Functions Derived from Quadratic Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}}
+f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} +
+{\color{yellow}{w_2 x^2}}
 \]</span></p>
 <script>
 showDivs(0, 'quadratic_basis');
 </script>
-<p><small></small> <input id="range-quadratic_basis" type="range" min="0" max="2" value="0" onchange="setDivs('quadratic_basis')" oninput="setDivs('quadratic_basis')"> <button onclick="plusDivs(-1, 'quadratic_basis')">❮</button> <button onclick="plusDivs(1, 'quadratic_basis')">❯</button></p>
+<p><small></small>
+<input id="range-quadratic_basis" type="range" min="0" max="2" value="0" onchange="setDivs('quadratic_basis')" oninput="setDivs('quadratic_basis')">
+<button onclick="plusDivs(-1, 'quadratic_basis')">❮</button>
+<button onclick="plusDivs(1, 'quadratic_basis')">❯</button></p>
 <div class="quadratic_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/quadratic_basis000.svg" width="80%" style=" ">
 </object>
@@ -132,12 +145,16 @@ showDivs(0, 'quadratic_basis');
 <section id="quadratic-functions" class="slide level2">
 <h2>Quadratic Functions</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}}
+f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 x}} +
+{\color{yellow}{w_2 x^2}}
 \]</span></p>
 <script>
 showDivs(0, 'quadratic_function');
 </script>
-<p><small></small> <input id="range-quadratic_function" type="range" min="0" max="2" value="0" onchange="setDivs('quadratic_function')" oninput="setDivs('quadratic_function')"> <button onclick="plusDivs(-1, 'quadratic_function')">❮</button> <button onclick="plusDivs(1, 'quadratic_function')">❯</button></p>
+<p><small></small>
+<input id="range-quadratic_function" type="range" min="0" max="2" value="0" onchange="setDivs('quadratic_function')" oninput="setDivs('quadratic_function')">
+<button onclick="plusDivs(-1, 'quadratic_function')">❮</button>
+<button onclick="plusDivs(1, 'quadratic_function')">❯</button></p>
 <div class="quadratic_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/quadratic_function000.svg" width="80%" style=" ">
 </object>
@@ -165,7 +182,10 @@ showDivs(0, 'quadratic_function');
 <script>
 showDivs(0, 'polynomial_basis');
 </script>
-<p><small></small> <input id="range-polynomial_basis" type="range" min="0" max="4" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')"> <button onclick="plusDivs(-1, 'polynomial_basis')">❮</button> <button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
+<p><small></small>
+<input id="range-polynomial_basis" type="range" min="0" max="4" value="0" onchange="setDivs('polynomial_basis')" oninput="setDivs('polynomial_basis')">
+<button onclick="plusDivs(-1, 'polynomial_basis')">❮</button>
+<button onclick="plusDivs(1, 'polynomial_basis')">❯</button></p>
 <div class="polynomial_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/polynomial_basis000.svg" width="80%" style=" ">
 </object>
@@ -187,15 +207,21 @@ showDivs(0, 'polynomial_basis');
 </object>
 </div>
 </section>
-<section id="functions-derived-from-polynomial-basis" class="slide level2">
+<section id="functions-derived-from-polynomial-basis"
+class="slide level2">
 <h2>Functions Derived from Polynomial Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} + {\color{yellow}{w_2 x^2}} + {\color{magenta}{w_3 x^3}} + {\color{red}{w_4 x^4}}
+f(x) = {\color{cyan}{w_0}} + {\color{green}{w_1 x}} +
+{\color{yellow}{w_2 x^2}} + {\color{magenta}{w_3 x^3}} +
+{\color{red}{w_4 x^4}}
 \]</span></p>
 <script>
 showDivs(0, 'polynomial_function');
 </script>
-<p><small></small> <input id="range-polynomial_function" type="range" min="0" max="3" value="0" onchange="setDivs('polynomial_function')" oninput="setDivs('polynomial_function')"> <button onclick="plusDivs(-1, 'polynomial_function')">❮</button> <button onclick="plusDivs(1, 'polynomial_function')">❯</button></p>
+<p><small></small>
+<input id="range-polynomial_function" type="range" min="0" max="3" value="0" onchange="setDivs('polynomial_function')" oninput="setDivs('polynomial_function')">
+<button onclick="plusDivs(-1, 'polynomial_function')">❮</button>
+<button onclick="plusDivs(1, 'polynomial_function')">❯</button></p>
 <div class="polynomial_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/polynomial_function000.svg" width="80%" style=" ">
 </object>
@@ -215,14 +241,18 @@ showDivs(0, 'polynomial_function');
 <section id="radial-basis-functions" class="slide level2">
 <h2>Radial Basis Functions</h2>
 <ul>
-<li>Basis functions can be local e.g. radial (or Gaussian) basis <span class="math display">\[
+<li>Basis functions can be local e.g. radial (or Gaussian) basis <span
+class="math display">\[
 \phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
 \]</span></li>
 </ul>
 <script>
 showDivs(0, 'radial_basis');
 </script>
-<p><small></small> <input id="range-radial_basis" type="range" min="0" max="2" value="0" onchange="setDivs('radial_basis')" oninput="setDivs('radial_basis')"> <button onclick="plusDivs(-1, 'radial_basis')">❮</button> <button onclick="plusDivs(1, 'radial_basis')">❯</button></p>
+<p><small></small>
+<input id="range-radial_basis" type="range" min="0" max="2" value="0" onchange="setDivs('radial_basis')" oninput="setDivs('radial_basis')">
+<button onclick="plusDivs(-1, 'radial_basis')">❮</button>
+<button onclick="plusDivs(1, 'radial_basis')">❯</button></p>
 <div class="radial_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/radial_basis000.svg" width="80%" style=" ">
 </object>
@@ -239,12 +269,16 @@ showDivs(0, 'radial_basis');
 <section id="functions-derived-from-radial-basis" class="slide level2">
 <h2>Functions Derived from Radial Basis</h2>
 <p><span class="math display">\[
-f(x) = \color{cyan}{w_1 e^{-2(x+1)^2}}  + \color{green}{w_2e^{-2x^2}} + \color{yellow}{w_3 e^{-2(x-1)^2}}
+f(x) = \color{cyan}{w_1 e^{-2(x+1)^2}}  + \color{green}{w_2e^{-2x^2}} +
+\color{yellow}{w_3 e^{-2(x-1)^2}}
 \]</span></p>
 <script>
 showDivs(0, 'radial_function');
 </script>
-<p><small></small> <input id="range-radial_function" type="range" min="0" max="2" value="0" onchange="setDivs('radial_function')" oninput="setDivs('radial_function')"> <button onclick="plusDivs(-1, 'radial_function')">❮</button> <button onclick="plusDivs(1, 'radial_function')">❯</button></p>
+<p><small></small>
+<input id="range-radial_function" type="range" min="0" max="2" value="0" onchange="setDivs('radial_function')" oninput="setDivs('radial_function')">
+<button onclick="plusDivs(-1, 'radial_function')">❮</button>
+<button onclick="plusDivs(1, 'radial_function')">❯</button></p>
 <div class="radial_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/radial_function000.svg" width="80%" style=" ">
 </object>
@@ -269,7 +303,10 @@ showDivs(0, 'radial_function');
 <script>
 showDivs(0, 'relu_basis');
 </script>
-<p><small></small> <input id="range-relu_basis" type="range" min="0" max="4" value="0" onchange="setDivs('relu_basis')" oninput="setDivs('relu_basis')"> <button onclick="plusDivs(-1, 'relu_basis')">❮</button> <button onclick="plusDivs(1, 'relu_basis')">❯</button></p>
+<p><small></small>
+<input id="range-relu_basis" type="range" min="0" max="4" value="0" onchange="setDivs('relu_basis')" oninput="setDivs('relu_basis')">
+<button onclick="plusDivs(-1, 'relu_basis')">❮</button>
+<button onclick="plusDivs(1, 'relu_basis')">❯</button></p>
 <div class="relu_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/relu_basis000.svg" width="80%" style=" ">
 </object>
@@ -294,12 +331,17 @@ showDivs(0, 'relu_basis');
 <section id="functions-derived-from-relu-basis" class="slide level2">
 <h2>Functions Derived from Relu Basis</h2>
 <p><span class="math display">\[
-f(x) = \color{cyan}{w_0}   + \color{green}{w_1 xH(x+1.0) } + \color{yellow}{w_2 xH(x+0.33) } + \color{magenta}{w_3 xH(x-0.33)} +  \color{red}{w_4 xH(x-1.0)}
+f(x) = \color{cyan}{w_0}   + \color{green}{w_1 xH(x+1.0) } +
+\color{yellow}{w_2 xH(x+0.33) } + \color{magenta}{w_3 xH(x-0.33)}
++  \color{red}{w_4 xH(x-1.0)}
 \]</span></p>
 <script>
 showDivs(0, 'relu_function');
 </script>
-<p><small></small> <input id="range-relu_function" type="range" min="0" max="4" value="0" onchange="setDivs('relu_function')" oninput="setDivs('relu_function')"> <button onclick="plusDivs(-1, 'relu_function')">❮</button> <button onclick="plusDivs(1, 'relu_function')">❯</button></p>
+<p><small></small>
+<input id="range-relu_function" type="range" min="0" max="4" value="0" onchange="setDivs('relu_function')" oninput="setDivs('relu_function')">
+<button onclick="plusDivs(-1, 'relu_function')">❮</button>
+<button onclick="plusDivs(1, 'relu_function')">❯</button></p>
 <div class="relu_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/relu_function000.svg" width="80%" style=" ">
 </object>
@@ -324,7 +366,10 @@ showDivs(0, 'relu_function');
 <script>
 showDivs(0, 'hyperbolic_tangent_basis');
 </script>
-<p><small></small> <input id="range-hyperbolic_tangent_basis" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_basis')" oninput="setDivs('hyperbolic_tangent_basis')"> <button onclick="plusDivs(-1, 'hyperbolic_tangent_basis')">❮</button> <button onclick="plusDivs(1, 'hyperbolic_tangent_basis')">❯</button></p>
+<p><small></small>
+<input id="range-hyperbolic_tangent_basis" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_basis')" oninput="setDivs('hyperbolic_tangent_basis')">
+<button onclick="plusDivs(-1, 'hyperbolic_tangent_basis')">❮</button>
+<button onclick="plusDivs(1, 'hyperbolic_tangent_basis')">❯</button></p>
 <div class="hyperbolic_tangent_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/hyperbolic_tangent_basis000.svg" width="80%" style=" ">
 </object>
@@ -349,12 +394,19 @@ showDivs(0, 'hyperbolic_tangent_basis');
 <section id="functions-derived-from-tanh-basis" class="slide level2">
 <h2>Functions Derived from Tanh Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1 \text{tanh}\left(x+1\right)}}  + {\color{yellow}{w_2 \text{tanh}\left(x+0.33\right)}}  + {\color{magenta}{w_3 \text{tanh}\left(x-0.33\right)}} + {\color{red}{w_4 \text{tanh}\left(x-1\right)}}
+f(x) = {\color{cyan}{w_0}}   + {\color{green}{w_1
+\text{tanh}\left(x+1\right)}}  + {\color{yellow}{w_2
+\text{tanh}\left(x+0.33\right)}}  + {\color{magenta}{w_3
+\text{tanh}\left(x-0.33\right)}} + {\color{red}{w_4
+\text{tanh}\left(x-1\right)}}
 \]</span></p>
 <script>
 showDivs(0, 'hyperbolic_tangent_function');
 </script>
-<p><small></small> <input id="range-hyperbolic_tangent_function" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_function')" oninput="setDivs('hyperbolic_tangent_function')"> <button onclick="plusDivs(-1, 'hyperbolic_tangent_function')">❮</button> <button onclick="plusDivs(1, 'hyperbolic_tangent_function')">❯</button></p>
+<p><small></small>
+<input id="range-hyperbolic_tangent_function" type="range" min="0" max="4" value="0" onchange="setDivs('hyperbolic_tangent_function')" oninput="setDivs('hyperbolic_tangent_function')">
+<button onclick="plusDivs(-1, 'hyperbolic_tangent_function')">❮</button>
+<button onclick="plusDivs(1, 'hyperbolic_tangent_function')">❯</button></p>
 <div class="hyperbolic_tangent_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/hyperbolic_tangent_function000.svg" width="80%" style=" ">
 </object>
@@ -379,7 +431,10 @@ f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
 <script>
 showDivs(0, 'fourier_basis');
 </script>
-<p><small></small> <input id="range-fourier_basis" type="range" min="0" max="4" value="0" onchange="setDivs('fourier_basis')" oninput="setDivs('fourier_basis')"> <button onclick="plusDivs(-1, 'fourier_basis')">❮</button> <button onclick="plusDivs(1, 'fourier_basis')">❯</button></p>
+<p><small></small>
+<input id="range-fourier_basis" type="range" min="0" max="4" value="0" onchange="setDivs('fourier_basis')" oninput="setDivs('fourier_basis')">
+<button onclick="plusDivs(-1, 'fourier_basis')">❮</button>
+<button onclick="plusDivs(1, 'fourier_basis')">❯</button></p>
 <div class="fourier_basis" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/fourier_basis000.svg" width="80%" style=" ">
 </object>
@@ -404,12 +459,17 @@ showDivs(0, 'fourier_basis');
 <section id="functions-derived-from-fourier-basis" class="slide level2">
 <h2>Functions Derived from Fourier Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{cyan}{w_0}}  + {\color{green}{w_1 \sin(x)}} + {\color{yellow}{w_2 \cos(x)}} + {\color{magenta}{w_3 \sin(2x)}} + {\color{red}{w_4 \cos(2x)}}
+f(x) = {\color{cyan}{w_0}}  + {\color{green}{w_1 \sin(x)}} +
+{\color{yellow}{w_2 \cos(x)}} + {\color{magenta}{w_3 \sin(2x)}} +
+{\color{red}{w_4 \cos(2x)}}
 \]</span></p>
 <script>
 showDivs(0, 'fourier_function');
 </script>
-<p><small></small> <input id="range-fourier_function" type="range" min="0" max="4" value="0" onchange="setDivs('fourier_function')" oninput="setDivs('fourier_function')"> <button onclick="plusDivs(-1, 'fourier_function')">❮</button> <button onclick="plusDivs(1, 'fourier_function')">❯</button></p>
+<p><small></small>
+<input id="range-fourier_function" type="range" min="0" max="4" value="0" onchange="setDivs('fourier_function')" oninput="setDivs('fourier_function')">
+<button onclick="plusDivs(-1, 'fourier_function')">❮</button>
+<button onclick="plusDivs(1, 'fourier_function')">❯</button></p>
 <div class="fourier_function" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/fourier_function000.svg" width="80%" style=" ">
 </object>
@@ -425,7 +485,10 @@ showDivs(0, 'fourier_function');
 </section>
 <section id="fitting-to-data" class="slide level2">
 <h2>Fitting to Data</h2>
-<p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
+<p>Now we are going to consider how these basis functions can be
+adjusted to fit to a particular data set. We will return to the olympic
+marathon data from last time. First we will scale the output of the data
+to be zero mean and variance 1.</p>
 </section>
 <section id="olympic-marathon-data" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -436,14 +499,16 @@ showDivs(0, 'fourier_function');
 <li>Gold medal times for Olympic Marathon since 1896.</li>
 <li>Marathons before 1924 didn’t have a standardized distance.</li>
 <li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
+<li>In 1904 Marathon was badly organized leading to very slow
+times.</li>
 </ul>
 </td>
 <td width="30%">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ"
+class="uri">http://bit.ly/16kMKHQ</a></small>
 </td>
 </tr>
 </table>
@@ -463,7 +528,8 @@ Olympic marathon pace times since 1896.
 <section id="basis-function-models" class="slide level2">
 <h2>Basis Function Models</h2>
 <ul>
-<li>The <em>prediction function</em> is now defined as <span class="math display">\[
+<li>The <em>prediction function</em> is now defined as <span
+class="math display">\[
 f(\mathbf{ x}_i) = \sum_{j=1}^mw_j \phi_{i, j}
 \]</span></li>
 </ul>
@@ -476,27 +542,37 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}_i
 \]</span></li>
 </ul>
 </section>
-<section id="log-likelihood-for-basis-function-model" class="slide level2">
+<section id="log-likelihood-for-basis-function-model"
+class="slide level2">
 <h2>Log Likelihood for Basis Function Model</h2>
 <ul>
-<li>The likelihood of a single data point is <span class="math display">\[
-p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}\right).
+<li>The likelihood of a single data point is <span
+class="math display">\[
+p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{
+w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}\right).
 \]</span></li>
 </ul>
 </section>
-<section id="log-likelihood-for-basis-function-model-1" class="slide level2">
+<section id="log-likelihood-for-basis-function-model-1"
+class="slide level2">
 <h2>Log Likelihood for Basis Function Model</h2>
 <ul>
-<li>Leading to a log likelihood for the data set of <span class="math display">\[
-L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+<li>Leading to a log likelihood for the data set of <span
+class="math display">\[
+L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi
+-\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\right)^{2}}{2\sigma^2}.
 \]</span></li>
 </ul>
 </section>
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>And a corresponding <em>objective function</em> of the form <span class="math display">\[
-E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+<li>And a corresponding <em>objective function</em> of the form <span
+class="math display">\[
+E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 +
+\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\right)^{2}}{2\sigma^2}.
 \]</span></li>
 </ul>
 </section>
@@ -504,19 +580,30 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <h2>Expand the Brackets</h2>
 <p><span class="math display">\[
 \begin{align}
-  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\\ &amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
+  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 +
+\frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{
+w}^{\top}\boldsymbol{ \phi}_i\\
+&amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
 \end{align}
 \]</span></p>
 </section>
 <section id="expand-the-brackets-1" class="slide level2">
 <h2>Expand the Brackets</h2>
-<p><span class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{ w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp; +\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}+\text{const}.\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) =
+&amp; \frac{n}{2}\log \sigma^2 +
+\frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{
+w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp;
++\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{
+w}+\text{const}.\end{align}\]</span></p>
 </section>
 <section id="design-matrices" class="slide level2">
 <h2>Design Matrices</h2>
 <ul>
 <li>Design matrix notation <span class="math display">\[
-\boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ x}&amp; \mathbf{ x}^2\end{bmatrix}
+\boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ x}&amp;
+\mathbf{ x}^2\end{bmatrix}
 \]</span> so that <span class="math display">\[
 \boldsymbol{ \Phi}\in \Re^{n\times p}.
 \]</span></li>
@@ -525,35 +612,64 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <section id="multivariate-derivatives-reminder" class="slide level2">
 <h2>Multivariate Derivatives Reminder</h2>
 <ul>
-<li>We will need some multivariate calculus. <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></li>
+<li>We will need some multivariate calculus. <span
+class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{
+w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span
+class="math display">\[\frac{\text{d}\mathbf{
+w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{
+w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if
+<span class="math inline">\(\mathbf{A}\)</span> is symmetric
+(<em>i.e.</em> <span
+class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span
+class="math display">\[\frac{\text{d}\mathbf{
+w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{
+w}.\]</span></li>
 </ul>
 </section>
 <section id="differentiate" class="slide level2">
 <h2>Differentiate</h2>
-<p>Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span> <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
+<p>Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span>
+<span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2
+\right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2}
+\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2}
+\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{
+\phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span
+class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{
+\phi}_iy_i,\]</span></p>
 </section>
 <section id="matrix-notation" class="slide level2">
 <h2>Matrix Notation</h2>
 <p><span class="math display">\[
-\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top = \boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i = \boldsymbol{ \Phi}^\top \mathbf{ y}
+\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top =
+\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span
+class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i =
+\boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></p>
 </section>
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>Update for <span class="math inline">\(\mathbf{ w}^{*}\)</span> <span class="math display">\[
-\mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
+<li>Update for <span class="math inline">\(\mathbf{ w}^{*}\)</span>
+<span class="math display">\[
+\mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{
+\Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></li>
-<li>The equation for <span class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be found <span class="math display">\[
-\left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
+<li>The equation for <span
+class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be
+found <span class="math display">\[
+\left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{
+w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
 \]</span></li>
 </ul>
 </section>
 <section id="avoid-direct-inverse" class="slide level2">
 <h2>Avoid Direct Inverse</h2>
 <ul>
-<li>E.g. Solve for <span class="math inline">\(\mathbf{ w}\)</span> <span class="math display">\[
-\left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
+<li>E.g. Solve for <span class="math inline">\(\mathbf{ w}\)</span>
+<span class="math display">\[
+\left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}=
+\boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></li>
 </ul>
 <p><span class="math display">\[
@@ -561,7 +677,9 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 \]</span></p>
 <ul>
 <li>See <code>np.linalg.solve</code></li>
-<li>In practice use <span class="math inline">\(\mathbf{Q}\mathbf{R}\)</span> decomposition (see lab class notes).</li>
+<li>In practice use <span
+class="math inline">\(\mathbf{Q}\mathbf{R}\)</span> decomposition (see
+lab class notes).</li>
 </ul>
 </section>
 <section id="solution-with-qr-decomposition" class="slide level2">
@@ -569,7 +687,8 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <p><span class="math display">\[
 \designMatrix^\top \designMatrix \boldsymbol{\beta} =
 \designMatrix^\top \mathbf{ y}
-\]</span> substitute <span class="math inline">\(\designMatrix = \mathbf{Q}{\mathbf{R}\)</span> <span class="math display">\[
+\]</span> substitute <span class="math inline">\(\designMatrix =
+\mathbf{Q}{\mathbf{R}\)</span> <span class="math display">\[
 (\mathbf{Q}\mathbf{R})^\top
 (\mathbf{Q}\mathbf{R})\boldsymbol{\beta} = (\mathbf{Q}\mathbf{R})^\top
 \mathbf{ y}
@@ -581,7 +700,8 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <section id="section" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
-\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top \mathbf{Q}^\top
+\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top
+\mathbf{Q}^\top
 \mathbf{ y}
 \]</span> <span class="math display">\[
 \mathbf{R} \boldsymbol{\beta} = \mathbf{Q}^\top \mathbf{ y}
@@ -591,7 +711,8 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <h2></h2>
 <ul>
 <li>More nummerically stable.</li>
-<li>Avoids the intermediate computation of <span class="math inline">\(\designMatrix^\top\designMatrix\)</span>.</li>
+<li>Avoids the intermediate computation of <span
+class="math inline">\(\designMatrix^\top\designMatrix\)</span>.</li>
 </ul>
 </section>
 <section id="polynomial-fits-to-olympic-data" class="slide level2">
@@ -599,7 +720,10 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <script>
 showDivs(1, 'olympic_LM_polynomial_number');
 </script>
-<p><small></small> <input id="range-olympic_LM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_LM_polynomial_number')" oninput="setDivs('olympic_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_LM_polynomial_number')">❯</button></p>
+<p><small></small>
+<input id="range-olympic_LM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_LM_polynomial_number')" oninput="setDivs('olympic_LM_polynomial_number')">
+<button onclick="plusDivs(-1, 'olympic_LM_polynomial_number')">❮</button>
+<button onclick="plusDivs(1, 'olympic_LM_polynomial_number')">❯</button></p>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
@@ -705,19 +829,24 @@ showDivs(1, 'olympic_LM_polynomial_number');
 </object>
 </div>
 </section>
-<section id="non-linear-but-linear-in-the-parameters" class="slide level2">
+<section id="non-linear-but-linear-in-the-parameters"
+class="slide level2">
 <h2>Non-linear but Linear in the Parameters</h2>
 <ul>
-<li>Model is non-linear, but linear in parameters <span class="math display">\[
+<li>Model is non-linear, but linear in parameters <span
+class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
 \]</span></li>
-<li><span class="math inline">\(\mathbf{ x}\)</span> is inside the non-linearity, but <span class="math inline">\(\mathbf{ w}\)</span> is outside. <span class="math display">\[
+<li><span class="math inline">\(\mathbf{ x}\)</span> is inside the
+non-linearity, but <span class="math inline">\(\mathbf{ w}\)</span> is
+outside. <span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 \boldsymbol{\theta}),
 \]</span></li>
 </ul>
 </section>
-<section id="lecture-on-basis-functions-from-gprs-uganda" class="slide level2">
+<section id="lecture-on-basis-functions-from-gprs-uganda"
+class="slide level2">
 <h2>Lecture on Basis Functions from GPRS Uganda</h2>
 <div class="figure">
 <div id="basis-functions-gprs-uganda-figure" class="figure-frame">
@@ -729,36 +858,48 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 Lecture on Basis functions from GPRS in Uganda in 2013.
 </aside>
 </section>
-<section id="use-of-qr-decomposition-for-numerical-stability" class="slide level2">
+<section id="use-of-qr-decomposition-for-numerical-stability"
+class="slide level2">
 <h2>Use of QR Decomposition for Numerical Stability</h2>
 <p><em>TODO</em> example with polynomials.</p>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>Section 1.4 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Chapter 1, pg 1-6 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 1.4 of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Chapter 1, pg 1-6 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 </section>
@@ -773,8 +914,39 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
