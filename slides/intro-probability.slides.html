@@ -42,7 +42,8 @@
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Probability and an Introduction to Jupyter, Python and Pandas</h1>
+  <h1 class="title">Probability and an Introduction to Jupyter, Python
+and Pandas</h1>
 </section>
 
 <section class="slide level2">
@@ -59,33 +60,41 @@
 <section id="a-first-course-in-machine-learning" class="slide level2">
 <h2>A First Course in Machine Learning</h2>
 <div class="figure">
-<div id="a-first-course-in-machine-learning-figure" class="figure-frame">
+<div id="a-first-course-in-machine-learning-figure"
+class="figure-frame">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//mlai/a-first-course-in-machine-learning.jpg" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
 <aside class="notes">
-The main course text is “A First Course in Machine Learning” by <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span>.
+The main course text is “A First Course in Machine Learning” by <span
+class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span>.
 </aside>
 <div style="text-align:right">
-<span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span>
+<span class="citation" data-cites="Rogers:book11">Rogers and Girolami
+(2011)</span>
 </div>
 </section>
 <section id="additional-course-text" class="slide level2">
 <h2>Additional Course Text</h2>
 </section>
-<section id="pattern-recognition-and-machine-learning" class="slide level2">
+<section id="pattern-recognition-and-machine-learning"
+class="slide level2">
 <h2>Pattern Recognition and Machine Learning</h2>
 <div class="figure">
-<div id="pattern-recognition-and-machine-learning-figure" class="figure-frame">
+<div id="pattern-recognition-and-machine-learning-figure"
+class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//mlai/978-0-387-31073-2.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
 <aside class="notes">
-For additional reading we will regularly refer to “Pattern Recognition and Machine Learning” by <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span>
+For additional reading we will regularly refer to “Pattern Recognition
+and Machine Learning” by <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span>
 </aside>
 <div style="text-align:right">
 <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span>
@@ -113,36 +122,48 @@ sns.set_palette('colorblind')}-->
 <section id="what-is-machine-learning-1" class="slide level2">
 <h2>What is Machine Learning?</h2>
 <div class="fragment">
-<p><span class="math display">\[ \text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
+<p><span class="math display">\[ \text{data} + \text{model}
+\stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>data</strong> : observations, could be actively or passively acquired (meta-data).</li>
+<li><strong>data</strong> : observations, could be actively or passively
+acquired (meta-data).</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>model</strong> : assumptions, based on previous experience (other data! transfer learning etc), or beliefs about the regularities of the universe. Inductive bias.</li>
+<li><strong>model</strong> : assumptions, based on previous experience
+(other data! transfer learning etc), or beliefs about the regularities
+of the universe. Inductive bias.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><strong>prediction</strong> : an action to be taken or a categorization or a quality score.</li>
+<li><strong>prediction</strong> : an action to be taken or a
+categorization or a quality score.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>Royal Society Report: <a href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine Learning: Power and Promise of Computers that Learn by Example</a></li>
+<li>Royal Society Report: <a
+href="https://royalsociety.org/~/media/policy/projects/machine-learning/publications/machine-learning-report.pdf">Machine
+Learning: Power and Promise of Computers that Learn by Example</a></li>
 </ul>
 </div>
 </section>
 <section id="what-is-machine-learning-2" class="slide level2">
 <h2>What is Machine Learning?</h2>
-<p><span class="math display">\[\text{data} + \text{model} \stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
+<p><span class="math display">\[\text{data} + \text{model}
+\stackrel{\text{compute}}{\rightarrow} \text{prediction}\]</span></p>
 <ul>
 <li class="fragment">To combine data with a model need:</li>
-<li class="fragment"><strong>a prediction function</strong> <span class="math inline">\(f(\cdot)\)</span> includes our beliefs about the regularities of the universe</li>
-<li class="fragment"><strong>an objective function</strong> <span class="math inline">\(E(\cdot)\)</span> defines the cost of misprediction.</li>
+<li class="fragment"><strong>a prediction function</strong> <span
+class="math inline">\(f(\cdot)\)</span> includes our beliefs about the
+regularities of the universe</li>
+<li class="fragment"><strong>an objective function</strong> <span
+class="math inline">\(E(\cdot)\)</span> defines the cost of
+misprediction.</li>
 </ul>
 </section>
 <section id="overdetermined-system" class="slide level2">
@@ -153,7 +174,10 @@ sns.set_palette('colorblind')}-->
 <script>
 showDivs(1, 'over_determined_system');
 </script>
-<p><small></small> <input id="range-over_determined_system" type="range" min="1" max="8" value="1" onchange="setDivs('over_determined_system')" oninput="setDivs('over_determined_system')"> <button onclick="plusDivs(-1, 'over_determined_system')">❮</button> <button onclick="plusDivs(1, 'over_determined_system')">❯</button></p>
+<p><small></small>
+<input id="range-over_determined_system" type="range" min="1" max="8" value="1" onchange="setDivs('over_determined_system')" oninput="setDivs('over_determined_system')">
+<button onclick="plusDivs(-1, 'over_determined_system')">❮</button>
+<button onclick="plusDivs(1, 'over_determined_system')">❯</button></p>
 <div class="over_determined_system" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/over_determined_system001.svg" width="40%" style=" ">
 </object>
@@ -186,17 +210,20 @@ showDivs(1, 'over_determined_system');
 <section id="y-mx-c" class="slide level2">
 <h2><span class="math inline">\(y= mx+ c\)</span></h2>
 <div class="fragment">
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> <span class="math display">\[
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span
+class="math inline">\(y=3\)</span> <span class="math display">\[
 3 = m + c
 \]</span></p>
 </div>
 <div class="fragment">
-<p>point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> <span class="math display">\[
+<p>point 2: <span class="math inline">\(x= 3\)</span>, <span
+class="math inline">\(y=1\)</span> <span class="math display">\[
 1 = 3m + c
 \]</span></p>
 </div>
 <div class="fragment">
-<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> <span class="math display">\[
+<p>point 3: <span class="math inline">\(x= 2\)</span>, <span
+class="math inline">\(y=2.5\)</span> <span class="math display">\[
 2.5 = 2m + c
 \]</span></p>
 </div>
@@ -220,7 +247,9 @@ Pierre-Simon Laplace 1749-1827.
 <section id="section-2" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
-<a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2"><img data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA2.png" /></a>
+<a
+href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2"><img
+data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA2.png" /></a>
 </div>
 </section>
 <section id="section-3" class="slide level2">
@@ -259,7 +288,9 @@ Laplace’s determinsim in English translation.
 <section id="section-5" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
-<a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA4"><img data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA4.png" /></a>
+<a
+href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA4"><img
+data-src="https://mlatcl.github.io/mlai/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA4.png" /></a>
 </div>
 </section>
 <section id="section-6" class="slide level2">
@@ -272,13 +303,15 @@ Laplace’s determinsim in English translation.
 </div>
 </div>
 <aside class="notes">
-To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to uncertainty which should be dealt with through probability.
+To Laplace, determinism is a strawman. Ignorance of mechanism and data
+leads to uncertainty which should be dealt with through probability.
 </aside>
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <div class="figure">
-<div id="probability-relative-in-part-cropped-figure" class="figure-frame">
+<div id="probability-relative-in-part-cropped-figure"
+class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//physics/philosophicaless00lapliala_18_cropped.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
@@ -299,24 +332,29 @@ To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to 
 <section id="y-mx-c-epsilon" class="slide level2">
 <h2><span class="math inline">\(y= mx+ c + \epsilon\)</span></h2>
 <div class="fragment">
-<p>point 1: <span class="math inline">\(x= 1\)</span>, <span class="math inline">\(y=3\)</span> [ 3 = m + c + _1 ]</p>
+<p>point 1: <span class="math inline">\(x= 1\)</span>, <span
+class="math inline">\(y=3\)</span> [ 3 = m + c + _1 ]</p>
 </div>
 <div class="fragment">
-<p>point 2: <span class="math inline">\(x= 3\)</span>, <span class="math inline">\(y=1\)</span> [ 1 = 3m + c + _2 ]</p>
+<p>point 2: <span class="math inline">\(x= 3\)</span>, <span
+class="math inline">\(y=1\)</span> [ 1 = 3m + c + _2 ]</p>
 </div>
 <div class="fragment">
-<p>point 3: <span class="math inline">\(x= 2\)</span>, <span class="math inline">\(y=2.5\)</span> [ 2.5 = 2m + c + _3 ]</p>
+<p>point 3: <span class="math inline">\(x= 2\)</span>, <span
+class="math inline">\(y=2.5\)</span> [ 2.5 = 2m + c + _3 ]</p>
 </div>
 </section>
 <section id="a-probabilistic-process" class="slide level2">
 <h2>A Probabilistic Process</h2>
 <div class="fragment">
-<p>Set the mean of Gaussian to be a function. <span class="math display">\[
-p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).
+<p>Set the mean of Gaussian to be a function. <span
+class="math display">\[
+p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp
+\left(-\frac{\left(y_i-f\left(x_i\right)\right)^{2}}{2\sigma^2}\right).
 \]</span></p>
 </div>
 <div class="fragment">
-<p>This gives us a ‘noisy function.’</p>
+<p>This gives us a ‘noisy function’.</p>
 </div>
 <div class="fragment">
 <p>This is known as a stochastic process.</p>
@@ -336,7 +374,9 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f
 </div>
 </div>
 <aside class="notes">
-Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.
+Location of the over thirty-four thousand health facilities registered
+in the NMIS data across Nigeria. Each facility plotted according to its
+latitude and longitude.
 </aside>
 <!-- SECTION Probabilities -->
 </section>
@@ -356,8 +396,13 @@ Location of the over thirty-four thousand health facilities registered in the NM
 <section id="probability-review" class="slide level2">
 <h2>Probability Review</h2>
 <ul>
-<li>We are interested in trials which result in two random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, each of which has an ‘outcome’ denoted by <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>.</li>
-<li>We summarise the notation and terminology for these distributions in the following table.</li>
+<li>We are interested in trials which result in two random variables,
+<span class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span>, each of which has an ‘outcome’ denoted
+by <span class="math inline">\(x\)</span> or <span
+class="math inline">\(y\)</span>.</li>
+<li>We summarise the notation and terminology for these distributions in
+the following table.</li>
 </ul>
 </section>
 <section id="section-8" class="slide level2">
@@ -392,7 +437,8 @@ Location of the over thirty-four thousand health facilities registered in the NM
 The different basic probability distributions.
 </center>
 </section>
-<section id="a-pictorial-definition-of-probability" class="slide level2">
+<section id="a-pictorial-definition-of-probability"
+class="slide level2">
 <h2>A Pictorial Definition of Probability</h2>
 <div class="figure">
 <div id="prob-diagram-figure" class="figure-frame">
@@ -401,13 +447,16 @@ The different basic probability distributions.
 </div>
 </div>
 <aside class="notes">
-Diagram representing the different probabilities, joint, marginal and conditional. This diagram was inspired by lectures given by Christopher Bishop.
+Diagram representing the different probabilities, joint, marginal and
+conditional. This diagram was inspired by lectures given by Christopher
+Bishop.
 </aside>
 <div style="text-align:right">
 Inspired by lectures from Christopher Bishop
 </div>
 </section>
-<section id="definition-of-probability-distributions" class="slide level2">
+<section id="definition-of-probability-distributions"
+class="slide level2">
 <h2>Definition of probability distributions</h2>
 <table>
 <colgroup>
@@ -425,17 +474,20 @@ Inspired by lectures from Christopher Bishop
 <tbody>
 <tr class="odd">
 <td>Joint Probability</td>
-<td><span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=3,Y=4}}{N}\)</span></td>
+<td><span
+class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=3,Y=4}}{N}\)</span></td>
 <td><span class="math inline">\(P\left(X=3,Y=4\right)\)</span></td>
 </tr>
 <tr class="even">
 <td>Marginal Probability</td>
-<td><span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=5}}{N}\)</span></td>
+<td><span
+class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=5}}{N}\)</span></td>
 <td><span class="math inline">\(P\left(X=5\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td>Conditional Probability</td>
-<td><span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=3,Y=4}}{n_{Y=4}}\)</span></td>
+<td><span
+class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=3,Y=4}}{n_{Y=4}}\)</span></td>
 <td><span class="math inline">\(P\left(X=3\vert Y=4\right)\)</span></td>
 </tr>
 </tbody>
@@ -444,27 +496,43 @@ Inspired by lectures from Christopher Bishop
 <section id="notational-details" class="slide level2">
 <h2>Notational Details</h2>
 <ul>
-<li><p>Typically we should write out <span class="math inline">\(P\left(X=x,Y=y\right)\)</span>.</p></li>
-<li><p>In practice, we often use <span class="math inline">\(P\left(x,y\right)\)</span>.</p></li>
-<li><p>This looks very much like we might write a multivariate function, <em>e.g.</em> <span class="math inline">\(f\left(x,y\right)=\frac{x}{y}\)</span>.</p>
+<li><p>Typically we should write out <span
+class="math inline">\(P\left(X=x,Y=y\right)\)</span>.</p></li>
+<li><p>In practice, we often use <span
+class="math inline">\(P\left(x,y\right)\)</span>.</p></li>
+<li><p>This looks very much like we might write a multivariate function,
+<em>e.g.</em> <span
+class="math inline">\(f\left(x,y\right)=\frac{x}{y}\)</span>.</p>
 <ul>
-<li>For a multivariate function though, <span class="math inline">\(f\left(x,y\right)\neq f\left(y,x\right)\)</span>.</li>
-<li>However <span class="math inline">\(P\left(x,y\right)=P\left(y,x\right)\)</span> because <span class="math inline">\(P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)\)</span>.</li>
+<li>For a multivariate function though, <span
+class="math inline">\(f\left(x,y\right)\neq
+f\left(y,x\right)\)</span>.</li>
+<li>However <span
+class="math inline">\(P\left(x,y\right)=P\left(y,x\right)\)</span>
+because <span
+class="math inline">\(P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)\)</span>.</li>
 </ul></li>
-<li><p>We now quickly review the ‘rules of probability.’</p></li>
+<li><p>We now quickly review the ‘rules of probability’.</p></li>
 </ul>
 </section>
 <section id="normalization" class="slide level2">
 <h2>Normalization</h2>
-<p><em>All</em> distributions are normalized. This is clear from the fact that <span class="math inline">\(\sum_{x}n_{x}=N\)</span>, which gives <span class="math display">\[\sum_{x}P\left(x\right)={\lim_{N\rightarrow\infty}}\frac{\sum_{x}n_{x}}{N}={\lim_{N\rightarrow\infty}}\frac{N}{N}=1.\]</span> A similar result can be derived for the marginal and conditional distributions.</p>
+<p><em>All</em> distributions are normalized. This is clear from the
+fact that <span class="math inline">\(\sum_{x}n_{x}=N\)</span>, which
+gives <span
+class="math display">\[\sum_{x}P\left(x\right)={\lim_{N\rightarrow\infty}}\frac{\sum_{x}n_{x}}{N}={\lim_{N\rightarrow\infty}}\frac{N}{N}=1.\]</span>
+A similar result can be derived for the marginal and conditional
+distributions.</p>
 </section>
 <section id="the-product-rule" class="slide level2">
 <h2>The Product Rule</h2>
 <ul>
-<li><span class="math inline">\(P\left(x|y\right)\)</span> is <span class="math display">\[
+<li><span class="math inline">\(P\left(x|y\right)\)</span> is <span
+class="math display">\[
 {\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{n_{y}}.
 \]</span></li>
-<li><span class="math inline">\(P\left(x,y\right)\)</span> is <span class="math display">\[
+<li><span class="math inline">\(P\left(x,y\right)\)</span> is <span
+class="math display">\[
 {\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{N}={\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{n_{y}}\frac{n_{y}}{N}
 \]</span> or in other words <span class="math display">\[
 P\left(x,y\right)=P\left(x|y\right)P\left(y\right).
@@ -475,9 +543,15 @@ P\left(x,y\right)=P\left(x|y\right)P\left(y\right).
 <h2>The Sum Rule</h2>
 <p>Ignoring the limit in our definitions:</p>
 <ul>
-<li><p>The marginal probability <span class="math inline">\(P\left(y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}\)</span> .</p></li>
-<li><p>The joint distribution <span class="math inline">\(P\left(x,y\right)\)</span> is <span class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{N}\)</span>.</p></li>
-<li><p><span class="math inline">\(n_{y}=\sum_{x}n_{x,y}\)</span> so <span class="math display">\[
+<li><p>The marginal probability <span
+class="math inline">\(P\left(y\right)\)</span> is <span
+class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}\)</span>
+.</p></li>
+<li><p>The joint distribution <span
+class="math inline">\(P\left(x,y\right)\)</span> is <span
+class="math inline">\({\lim_{N\rightarrow\infty}}\frac{n_{x,y}}{N}\)</span>.</p></li>
+<li><p><span class="math inline">\(n_{y}=\sum_{x}n_{x,y}\)</span> so
+<span class="math display">\[
 {\lim_{N\rightarrow\infty}}\frac{n_{y}}{N}={\lim_{N\rightarrow\infty}}\sum_{x}\frac{n_{x,y}}{N},
 \]</span> in other words <span class="math display">\[
 P\left(y\right)=\sum_{x}P\left(x,y\right).
@@ -488,7 +562,8 @@ P\left(y\right)=\sum_{x}P\left(x,y\right).
 <h2>Bayes’ Rule</h2>
 <ul>
 <li>From the product rule, <span class="math display">\[
-P\left(y,x\right)=P\left(x,y\right)=P\left(x|y\right)P\left(y\right),\]</span> so <span class="math display">\[
+P\left(y,x\right)=P\left(x,y\right)=P\left(x|y\right)P\left(y\right),\]</span>
+so <span class="math display">\[
 P\left(y|x\right)P\left(x\right)=P\left(x|y\right)P\left(y\right)
 \]</span> which leads to Bayes’ rule, <span class="math display">\[
 P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
@@ -498,7 +573,10 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <section id="bayes-theorem-example" class="slide level2">
 <h2>Bayes’ Theorem Example</h2>
 <ul>
-<li>There are two barrels in front of you. Barrel One contains 20 apples and 4 oranges. Barrel Two other contains 4 apples and 8 oranges. You choose a barrel randomly and select a fruit. It is an apple. What is the probability that the barrel was Barrel One?</li>
+<li>There are two barrels in front of you. Barrel One contains 20 apples
+and 4 oranges. Barrel Two other contains 4 apples and 8 oranges. You
+choose a barrel randomly and select a fruit. It is an apple. What is the
+probability that the barrel was Barrel One?</li>
 </ul>
 </section>
 <section id="bayes-rule-example-answer-i" class="slide level2">
@@ -515,12 +593,17 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <section id="bayes-rule-example-answer-ii" class="slide level2">
 <h2>Bayes’ Rule Example: Answer II</h2>
 <ul>
-<li>We use the sum rule to compute: <span class="math display">\[\begin{aligned}
-  P(\text{F}=\text{A}) = &amp; P(\text{F}=\text{A}|\text{B}=1)P(\text{B}=1) \\&amp; + P(\text{F}=\text{A}|\text{B}=2)P(\text{B}=2) \\
+<li>We use the sum rule to compute: <span
+class="math display">\[\begin{aligned}
+  P(\text{F}=\text{A}) = &amp;
+P(\text{F}=\text{A}|\text{B}=1)P(\text{B}=1) \\&amp; +
+P(\text{F}=\text{A}|\text{B}=2)P(\text{B}=2) \\
         = &amp; 20/24\times 0.5 + 4/12 \times 0.5 = 7/12
- \end{aligned}\]</span></li>
-<li>And Bayes’ rule tells us that: <span class="math display">\[\begin{aligned}
-  P(\text{B}=1|\text{F}=\text{A}) = &amp; \frac{P(\text{F} = \text{A}|\text{B}=1)P(\text{B}=1)}{P(\text{F}=\text{A})}\\ 
+\end{aligned}\]</span></li>
+<li>And Bayes’ rule tells us that: <span
+class="math display">\[\begin{aligned}
+  P(\text{B}=1|\text{F}=\text{A}) = &amp; \frac{P(\text{F} =
+\text{A}|\text{B}=1)P(\text{B}=1)}{P(\text{F}=\text{A})}\\
        = &amp; \frac{20/24 \times 0.5}{7/12} = 5/7
 \end{aligned}\]</span></li>
 </ul>
@@ -528,13 +611,15 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Probability distributions: page 12–17 (Section 1.2) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></li>
+<li>Probability distributions: page 12–17 (Section 1.2) of <span
+class="citation" data-cites="Bishop:book06">Bishop (2006)</span></li>
 </ul>
 </section>
 <section id="exercises" class="slide level2 scrollable">
 <h2 class="scrollable">Exercises</h2>
 <ul>
-<li>Exercise 1.3 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></li>
+<li>Exercise 1.3 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></li>
 </ul>
 </section>
 <section id="computing-expectations-example" class="slide level2">
@@ -565,8 +650,10 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <ul>
 <li>What is the mean of the distribution?</li>
 <li>What is the standard deviation of the distribution?</li>
-<li>Are the mean and standard deviation representative of the distribution form?</li>
-<li>What is the expected value of <span class="math inline">\(-\log P(y)\)</span>?</li>
+<li>Are the mean and standard deviation representative of the
+distribution form?</li>
+<li>What is the expected value of <span class="math inline">\(-\log
+P(y)\)</span>?</li>
 </ul>
 </section>
 <section id="expectations-example-answer" class="slide level2">
@@ -609,10 +696,14 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 </tbody>
 </table>
 <ul>
-<li>Mean: <span class="math inline">\(1\times 0.3 + 2\times 0.2 + 3 \times 0.1 + 4 \times 0.4 = 2.6\)</span></li>
-<li>Second moment: <span class="math inline">\(1 \times 0.3 + 4 \times 0.2 + 9 \times 0.1 + 16 \times 0.4 = 8.4\)</span></li>
-<li>Variance: <span class="math inline">\(8.4 - 2.6\times 2.6 = 1.64\)</span></li>
-<li>Standard deviation: <span class="math inline">\(\sqrt{1.64} = 1.2806\)</span></li>
+<li>Mean: <span class="math inline">\(1\times 0.3 + 2\times 0.2 + 3
+\times 0.1 + 4 \times 0.4 = 2.6\)</span></li>
+<li>Second moment: <span class="math inline">\(1 \times 0.3 + 4 \times
+0.2 + 9 \times 0.1 + 16 \times 0.4 = 8.4\)</span></li>
+<li>Variance: <span class="math inline">\(8.4 - 2.6\times 2.6 =
+1.64\)</span></li>
+<li>Standard deviation: <span class="math inline">\(\sqrt{1.64} =
+1.2806\)</span></li>
 </ul>
 </section>
 <section id="expectations-example-answer-ii" class="slide level2">
@@ -655,13 +746,16 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 </tbody>
 </table>
 <ul>
-<li>Expectation <span class="math inline">\(-\log(P(y))\)</span>: <span class="math inline">\(0.3\times 1.204 + 0.2\times 1.609 + 0.1\times 2.302 +0.4\times 0.916 = 1.280\)</span></li>
+<li>Expectation <span class="math inline">\(-\log(P(y))\)</span>: <span
+class="math inline">\(0.3\times 1.204 + 0.2\times 1.609 + 0.1\times
+2.302 +0.4\times 0.916 = 1.280\)</span></li>
 </ul>
 </section>
 <section id="sample-based-approximation-example" class="slide level2">
 <h2>Sample Based Approximation Example</h2>
 <ul>
-<li><p>You are given the following values samples of heights of students,</p>
+<li><p>You are given the following values samples of heights of
+students,</p>
 <table>
 <thead>
 <tr class="header">
@@ -688,10 +782,12 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 </table></li>
 <li><p>What is the sample mean?</p></li>
 <li><p>What is the sample variance?</p></li>
-<li><p>Can you compute sample approximation expected value of <span class="math inline">\(-\log P(y)\)</span>?</p></li>
+<li><p>Can you compute sample approximation expected value of <span
+class="math inline">\(-\log P(y)\)</span>?</p></li>
 </ul>
 </section>
-<section id="sample-based-approximation-example-answer" class="slide level2">
+<section id="sample-based-approximation-example-answer"
+class="slide level2">
 <h2>Sample Based Approximation Example: Answer</h2>
 <ul>
 <li>We can compute:</li>
@@ -730,17 +826,21 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 </tbody>
 </table>
 <ul>
-<li>Mean: <span class="math inline">\(\frac{1.76 + 1.73 + 1.79 + 1.81 + 1.85 + 1.80}{6} = 1.79\)</span></li>
-<li>Second moment: $  = 3.2055$</li>
-<li>Variance: <span class="math inline">\(3.2055 - 1.79\times1.79 = 1.43\times 10^{-3}\)</span></li>
+<li>Mean: <span class="math inline">\(\frac{1.76 + 1.73 + 1.79 + 1.81 +
+1.85 + 1.80}{6} = 1.79\)</span></li>
+<li>Second moment: $ = 3.2055$</li>
+<li>Variance: <span class="math inline">\(3.2055 - 1.79\times1.79 =
+1.43\times 10^{-3}\)</span></li>
 <li>Standard deviation: <span class="math inline">\(0.0379\)</span></li>
-<li>No, you can’t compute it. You don’t have access to <span class="math inline">\(P(y)\)</span> directly.</li>
+<li>No, you can’t compute it. You don’t have access to <span
+class="math inline">\(P(y)\)</span> directly.</li>
 </ul>
 </section>
 <section id="sample-based-approximation-example-1" class="slide level2">
 <h2>Sample Based Approximation Example</h2>
 <ul>
-<li><p>You are given the following values samples of heights of students,</p>
+<li><p>You are given the following values samples of heights of
+students,</p>
 <table>
 <thead>
 <tr class="header">
@@ -765,7 +865,9 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 </tr>
 </tbody>
 </table></li>
-<li><p>Actually these “data” were sampled from a Gaussian with mean 1.7 and standard deviation 0.15. Are your estimates close to the real values? If not why not?</p></li>
+<li><p>Actually these “data” were sampled from a Gaussian with mean 1.7
+and standard deviation 0.15. Are your estimates close to the real
+values? If not why not?</p></li>
 </ul>
 </section>
 <section id="section-9" class="slide level2">
@@ -785,49 +887,75 @@ MLAI Lecture 2 from 2012.
 <ul>
 <li><p>See probability review at end of slides for reminders.</p></li>
 <li><p>For other material in Bishop read:</p></li>
-<li><p>If you are unfamiliar with probabilities you should complete the following exercises:</p></li>
+<li><p>If you are unfamiliar with probabilities you should complete the
+following exercises:</p></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p>
-<p><a href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What is Machine Learning?</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p>
+<p><a
+href="http://inverseprobability.com/2017/07/17/what-is-machine-learning">What
+is Machine Learning?</a></p></li>
 </ul>
 </section>
 <section id="further-reading-1" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li><p>Section 2.2 (pg 41–53) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 2.4 (pg 55–58) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 2.5.1 (pg 58–60) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Section 2.5.3 (pg 61–62) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Probability densities: Section 1.2.1 (Pages 17–19) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Expectations and Covariances: Section 1.2.2 (Pages 19–20) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>The Gaussian density: Section 1.2.4 (Pages 24–28) (don’t worry about material on bias) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>For material on information theory and KL divergence try Section 1.6 &amp; 1.6.1 (pg 48 onwards) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 2.2 (pg 41–53) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 2.4 (pg 55–58) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 2.5.1 (pg 58–60) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 2.5.3 (pg 61–62) of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Probability densities: Section 1.2.1 (Pages 17–19) of <span
+class="citation" data-cites="Bishop:book06">Bishop
+(2006)</span></p></li>
+<li><p>Expectations and Covariances: Section 1.2.2 (Pages 19–20) of
+<span class="citation" data-cites="Bishop:book06">Bishop
+(2006)</span></p></li>
+<li><p>The Gaussian density: Section 1.2.4 (Pages 24–28) (don’t worry
+about material on bias) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>For material on information theory and KL divergence try Section
+1.6 &amp; 1.6.1 (pg 48 onwards) of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 </section>
 <section id="exercises-1" class="slide level2 scrollable">
 <h2 class="scrollable">Exercises</h2>
 <ul>
-<li><p>Exercise 1.7 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Exercise 1.8 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Exercise 1.9 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Exercise 1.7 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Exercise 1.8 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Exercise 1.9 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 </section>
@@ -842,8 +970,39 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
