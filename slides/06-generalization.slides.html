@@ -60,10 +60,8 @@ sns.set_palette('colorblind')}-->
 <h2>Review</h2>
 <ul>
 <li>Last time: introduced basis functions.</li>
-<li>Showed how to maximize the likelihood of a non-linear model that’s
-linear in parameters.</li>
-<li>Explored the different characteristics of different basis function
-models</li>
+<li>Showed how to maximize the likelihood of a non-linear model that’s linear in parameters.</li>
+<li>Explored the different characteristics of different basis function models</li>
 </ul>
 </section>
 <section id="alan-turing" class="slide level2">
@@ -87,11 +85,7 @@ models</li>
 </div>
 </div>
 <aside class="notes">
-Alan Turing, in 1946 he was only 11 minutes slower than the winner of
-the 1948 games. Would he have won a hypothetical games held in 1946?
-Source:
-<a href="http://www.turing.org.uk/scrapbook/run.html" target="_blank">Alan
-Turing Internet Scrapbook</a>.
+Alan Turing, in 1946 he was only 11 minutes slower than the winner of the 1948 games. Would he have won a hypothetical games held in 1946? Source: <a href="http://www.turing.org.uk/scrapbook/run.html" target="_blank">Alan Turing Internet Scrapbook</a>.
 </aside>
 </section>
 <section id="probability-winning-olympics" class="slide level2">
@@ -102,8 +96,7 @@ Turing Internet Scrapbook</a>.
 <ul>
 <li>That’s a pace of 3.95 min/km.</li>
 </ul></li>
-<li>What is the probability he would have won an Olympics if one had
-been held in 1946?</li>
+<li>What is the probability he would have won an Olympics if one had been held in 1946?</li>
 </ul>
 </section>
 <section id="expected-loss" class="slide level2">
@@ -116,26 +109,21 @@ R(\mathbf{ w}) = \int L(y, x, \mathbf{ w}) \mathbb{P}(y, x) \text{d}y
 <section id="sample-based-approximations" class="slide level2">
 <h2>Sample-Based Approximations</h2>
 <ul>
-<li><p>Sample based approximation: replace true expectation with sum
-over samples. <span class="math display">\[
+<li><p>Sample based approximation: replace true expectation with sum over samples. <span class="math display">\[
 \int f(z) p(z) \text{d}z\approx \frac{1}{s}\sum_{i=1}^s f(z_i).
 \]</span></p></li>
-<li><p>Allows us to approximate true integral with a sum <span
-class="math display">\[
-R(\mathbf{ w}) \approx \frac{1}{n}\sum_{i=1}^{n} L(y_i, x_i, \mathbf{
-w}).
+<li><p>Allows us to approximate true integral with a sum <span class="math display">\[
+R(\mathbf{ w}) \approx \frac{1}{n}\sum_{i=1}^{n} L(y_i, x_i, \mathbf{ w}).
 \]</span></p></li>
 </ul>
 </section>
 <section id="empirical-risk-minimization" class="slide level2">
 <h2>Empirical Risk Minimization</h2>
 <ul>
-<li>If the loss is the <em>squared loss</em> <span
-class="math display">\[
+<li>If the loss is the <em>squared loss</em> <span class="math display">\[
 L(y, x, \mathbf{ w}) = (y-\mathbf{ w}^\top\boldsymbol{\phi}(x))^2,
 \]</span></li>
-<li>This recovers the <em>empirical risk</em> <span
-class="math display">\[
+<li>This recovers the <em>empirical risk</em> <span class="math display">\[
 R(\mathbf{ w}) \approx \frac{1}{n} \sum_{i=1}^{n}
 (y_i - \mathbf{ w}^\top \boldsymbol{\phi}(x_i))^2
 \]</span></li>
@@ -156,16 +144,14 @@ R(\mathbf{ w}) \approx \frac{1}{n} \sum_{i=1}^{n}
 <li>Gold medal times for Olympic Marathon since 1896.</li>
 <li>Marathons before 1924 didn’t have a standardized distance.</li>
 <li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow
-times.</li>
+<li>In 1904 Marathon was badly organized leading to very slow times.</li>
 </ul>
 </td>
 <td width="30%">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ"
-class="uri">http://bit.ly/16kMKHQ</a></small>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
 </td>
 </tr>
 </table>
@@ -182,24 +168,19 @@ class="uri">http://bit.ly/16kMKHQ</a></small>
 Olympic marathon pace times since 1896.
 </aside>
 </section>
-<section id="validation-on-the-olympic-marathon-data"
-class="slide level2">
+<section id="validation-on-the-olympic-marathon-data" class="slide level2">
 <h2>Validation on the Olympic Marathon Data</h2>
 </section>
 <section id="polynomial-fit-training-error" class="slide level2">
 <h2>Polynomial Fit: Training Error</h2>
-<p>The next thing we’ll do is consider a quadratic fit. We will compute
-the training error for the two fits.</p>
+<p>The next thing we’ll do is consider a quadratic fit. We will compute the training error for the two fits.</p>
 </section>
 <section id="polynomial-fits-to-olympics-data" class="slide level2">
 <h2>Polynomial Fits to Olympics Data</h2>
 <script>
 showDivs(1, 'olympic_LM_polynomial_number');
 </script>
-<p><small></small>
-<input id="range-olympic_LM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_LM_polynomial_number')" oninput="setDivs('olympic_LM_polynomial_number')">
-<button onclick="plusDivs(-1, 'olympic_LM_polynomial_number')">❮</button>
-<button onclick="plusDivs(1, 'olympic_LM_polynomial_number')">❯</button></p>
+<p><small></small> <input id="range-olympic_LM_polynomial_number" type="range" min="1" max="26" value="1" onchange="setDivs('olympic_LM_polynomial_number')" oninput="setDivs('olympic_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_LM_polynomial_number')">❯</button></p>
 <div class="olympic_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
@@ -305,15 +286,13 @@ showDivs(1, 'olympic_LM_polynomial_number');
 </object>
 </div>
 </section>
-<section id="hold-out-validation-on-olympic-marathon-data"
-class="slide level2">
+<section id="hold-out-validation-on-olympic-marathon-data" class="slide level2">
 <h2>Hold Out Validation on Olympic Marathon Data</h2>
 </section>
 <section id="overfitting" class="slide level2">
 <h2>Overfitting</h2>
 <ul>
-<li>Increase number of basis functions we obtain a better ‘fit’ to the
-data.</li>
+<li>Increase number of basis functions we obtain a better ‘fit’ to the data.</li>
 <li>How will the model perform on previously unseen data?</li>
 <li>Let’s consider predicting the future.</li>
 </ul>
@@ -323,62 +302,48 @@ data.</li>
 <script>
 showDivs(1, 'olympic_val_extra_LM_polynomial_number');
 </script>
-<p><small></small>
-<input id="range-olympic_val_extra_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_extra_LM_polynomial_number')" oninput="setDivs('olympic_val_extra_LM_polynomial_number')">
-<button onclick="plusDivs(-1, 'olympic_val_extra_LM_polynomial_number')">❮</button>
-<button onclick="plusDivs(1, 'olympic_val_extra_LM_polynomial_number')">❯</button></p>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<p><small></small> <input id="range-olympic_val_extra_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_extra_LM_polynomial_number')" oninput="setDivs('olympic_val_extra_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_val_extra_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_val_extra_LM_polynomial_number')">❯</button></p>
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_extra_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_extra_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number011.svg" width="80%" style=" ">
 </object>
 </div>
@@ -391,21 +356,17 @@ style="text-align:center;">
 <li>Extrapolation is predicting into the future here, but could be:
 <ul>
 <li>Predicting back to the unseen past (pre 1892)</li>
-<li>Spatial prediction (e.g. Cholera rates outside Manchester given
-rates inside Manchester).</li>
+<li>Spatial prediction (e.g. Cholera rates outside Manchester given rates inside Manchester).</li>
 </ul></li>
 </ul>
 </section>
 <section id="interpolation" class="slide level2">
 <h2>Interpolation</h2>
 <ul>
-<li>Predicting the wining time for 1946 Olympics is
-<em>interpolation</em>.</li>
+<li>Predicting the wining time for 1946 Olympics is <em>interpolation</em>.</li>
 <li>This is because we have times from 1936 and 1948.</li>
-<li>If we want a model for <em>interpolation</em> how can we test
-it?</li>
-<li>One trick is to sample the validation set from throughout the data
-set.</li>
+<li>If we want a model for <em>interpolation</em> how can we test it?</li>
+<li>One trick is to sample the validation set from throughout the data set.</li>
 </ul>
 </section>
 <section id="future-prediction-interpolation" class="slide level2">
@@ -413,62 +374,48 @@ set.</li>
 <script>
 showDivs(1, 'olympic_val_inter_LM_polynomial_number');
 </script>
-<p><small></small>
-<input id="range-olympic_val_inter_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_inter_LM_polynomial_number')" oninput="setDivs('olympic_val_inter_LM_polynomial_number')">
-<button onclick="plusDivs(-1, 'olympic_val_inter_LM_polynomial_number')">❮</button>
-<button onclick="plusDivs(1, 'olympic_val_inter_LM_polynomial_number')">❯</button></p>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<p><small></small> <input id="range-olympic_val_inter_LM_polynomial_number" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_val_inter_LM_polynomial_number')" oninput="setDivs('olympic_val_inter_LM_polynomial_number')"> <button onclick="plusDivs(-1, 'olympic_val_inter_LM_polynomial_number')">❮</button> <button onclick="plusDivs(1, 'olympic_val_inter_LM_polynomial_number')">❯</button></p>
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number001.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number004.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number005.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number006.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number007.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number008.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number009.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number010.svg" width="80%" style=" ">
 </object>
 </div>
-<div class="olympic_val_inter_LM_polynomial_number"
-style="text-align:center;">
+<div class="olympic_val_inter_LM_polynomial_number" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number011.svg" width="80%" style=" ">
 </object>
 </div>
@@ -476,10 +423,8 @@ style="text-align:center;">
 <section id="choice-of-validation-set" class="slide level2">
 <h2>Choice of Validation Set</h2>
 <ul>
-<li>The choice of validation set should reflect how you will use the
-model in practice.</li>
-<li>For extrapolation into the future we tried validating with data from
-the future.</li>
+<li>The choice of validation set should reflect how you will use the model in practice.</li>
+<li>For extrapolation into the future we tried validating with data from the future.</li>
 <li>For interpolation we chose validation set from data.</li>
 <li>For different validation sets we could get different results.</li>
 </ul>
@@ -492,8 +437,7 @@ the future.</li>
 <ul>
 <li>Take training set and remove one point.</li>
 <li>Train on the remaining data.</li>
-<li>Compute the error on the point you removed (which wasn’t in the
-training data).</li>
+<li>Compute the error on the point you removed (which wasn’t in the training data).</li>
 <li>Do this for each point in the training set in turn.</li>
 <li>Average the resulting error.</li>
 <li>This is the leave one out error.</li>
@@ -504,18 +448,12 @@ training data).</li>
 <script>
 showDivs(0, 'olympic_loo_LM_polynomial');
 </script>
-<p><small>fold</small>
-<input id="range-olympic_loo_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_loo_LM_polynomial')" oninput="setDivs('olympic_loo_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo_LM_polynomial')">❯</button></p>
+<p><small>fold</small> <input id="range-olympic_loo_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_loo_LM_polynomial')" oninput="setDivs('olympic_loo_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo_LM_polynomial')">❯</button></p>
 <div class="olympic_loo_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_loo000_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo000_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo000_LM_polynomial')" oninput="setDivs('olympic_loo000_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo000_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo000_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo000_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo000_LM_polynomial')" oninput="setDivs('olympic_loo000_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo000_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo000_LM_polynomial')">❯</button></p>
 <div class="olympic_loo000_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo000_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -565,10 +503,7 @@ showDivs(1, 'olympic_loo000_LM_polynomial');
 <script>
 showDivs(1, 'olympic_loo001_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo001_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo001_LM_polynomial')" oninput="setDivs('olympic_loo001_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo001_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo001_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo001_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo001_LM_polynomial')" oninput="setDivs('olympic_loo001_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo001_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo001_LM_polynomial')">❯</button></p>
 <div class="olympic_loo001_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo001_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -618,10 +553,7 @@ showDivs(1, 'olympic_loo001_LM_polynomial');
 <script>
 showDivs(1, 'olympic_loo002_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo002_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo002_LM_polynomial')" oninput="setDivs('olympic_loo002_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo002_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo002_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo002_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo002_LM_polynomial')" oninput="setDivs('olympic_loo002_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo002_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo002_LM_polynomial')">❯</button></p>
 <div class="olympic_loo002_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo002_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -671,10 +603,7 @@ showDivs(1, 'olympic_loo002_LM_polynomial');
 <script>
 showDivs(1, 'olympic_loo003_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo003_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo003_LM_polynomial')" oninput="setDivs('olympic_loo003_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo003_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo003_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo003_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo003_LM_polynomial')" oninput="setDivs('olympic_loo003_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo003_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo003_LM_polynomial')">❯</button></p>
 <div class="olympic_loo003_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo003_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -724,10 +653,7 @@ showDivs(1, 'olympic_loo003_LM_polynomial');
 <script>
 showDivs(1, 'olympic_loo004_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo004_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo004_LM_polynomial')" oninput="setDivs('olympic_loo004_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo004_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo004_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo004_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo004_LM_polynomial')" oninput="setDivs('olympic_loo004_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo004_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo004_LM_polynomial')">❯</button></p>
 <div class="olympic_loo004_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo004_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -777,10 +703,7 @@ showDivs(1, 'olympic_loo004_LM_polynomial');
 <script>
 showDivs(1, 'olympic_loo005_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_loo005_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo005_LM_polynomial')" oninput="setDivs('olympic_loo005_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_loo005_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_loo005_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_loo005_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_loo005_LM_polynomial')" oninput="setDivs('olympic_loo005_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_loo005_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_loo005_LM_polynomial')">❯</button></p>
 <div class="olympic_loo005_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_loo005_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -831,10 +754,8 @@ showDivs(1, 'olympic_loo005_LM_polynomial');
 <h2><span class="math inline">\(k\)</span>-fold Cross Validation</h2>
 <ul>
 <li>Leave one out error can be very time consuming.</li>
-<li>Need to train your algorithm <span class="math inline">\(n\)</span>
-times.</li>
-<li>An alternative: <span class="math inline">\(k\)</span> fold cross
-validation.</li>
+<li>Need to train your algorithm <span class="math inline">\(n\)</span> times.</li>
+<li>An alternative: <span class="math inline">\(k\)</span> fold cross validation.</li>
 </ul>
 </section>
 <section id="k-fold-cross-validation-1" class="slide level2">
@@ -842,18 +763,12 @@ validation.</li>
 <script>
 showDivs(0, 'olympic_5cv_LM_polynomial');
 </script>
-<p><small>fold</small>
-<input id="range-olympic_5cv_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_5cv_LM_polynomial')" oninput="setDivs('olympic_5cv_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv_LM_polynomial')">❯</button></p>
+<p><small>fold</small> <input id="range-olympic_5cv_LM_polynomial" type="range" min="0" max="1" value="0" onchange="setDivs('olympic_5cv_LM_polynomial')" oninput="setDivs('olympic_5cv_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv_LM_polynomial" style="text-align:center;">
 <script>
 showDivs(1, 'olympic_5cv00_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv00_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv00_LM_polynomial')" oninput="setDivs('olympic_5cv00_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv00_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv00_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv00_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv00_LM_polynomial')" oninput="setDivs('olympic_5cv00_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv00_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv00_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv00_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv00_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -903,10 +818,7 @@ showDivs(1, 'olympic_5cv00_LM_polynomial');
 <script>
 showDivs(1, 'olympic_5cv01_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv01_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv01_LM_polynomial')" oninput="setDivs('olympic_5cv01_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv01_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv01_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv01_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv01_LM_polynomial')" oninput="setDivs('olympic_5cv01_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv01_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv01_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv01_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv01_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -956,10 +868,7 @@ showDivs(1, 'olympic_5cv01_LM_polynomial');
 <script>
 showDivs(1, 'olympic_5cv02_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv02_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv02_LM_polynomial')" oninput="setDivs('olympic_5cv02_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv02_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv02_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv02_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv02_LM_polynomial')" oninput="setDivs('olympic_5cv02_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv02_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv02_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv02_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv02_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -1009,10 +918,7 @@ showDivs(1, 'olympic_5cv02_LM_polynomial');
 <script>
 showDivs(1, 'olympic_5cv03_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv03_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv03_LM_polynomial')" oninput="setDivs('olympic_5cv03_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv03_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv03_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv03_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv03_LM_polynomial')" oninput="setDivs('olympic_5cv03_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv03_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv03_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv03_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv03_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -1062,10 +968,7 @@ showDivs(1, 'olympic_5cv03_LM_polynomial');
 <script>
 showDivs(1, 'olympic_5cv04_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv04_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv04_LM_polynomial')" oninput="setDivs('olympic_5cv04_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv04_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv04_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv04_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv04_LM_polynomial')" oninput="setDivs('olympic_5cv04_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv04_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv04_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv04_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv04_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -1115,10 +1018,7 @@ showDivs(1, 'olympic_5cv04_LM_polynomial');
 <script>
 showDivs(1, 'olympic_5cv05_LM_polynomial');
 </script>
-<p><small>num basis</small>
-<input id="range-olympic_5cv05_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv05_LM_polynomial')" oninput="setDivs('olympic_5cv05_LM_polynomial')">
-<button onclick="plusDivs(-1, 'olympic_5cv05_LM_polynomial')">❮</button>
-<button onclick="plusDivs(1, 'olympic_5cv05_LM_polynomial')">❯</button></p>
+<p><small>num basis</small> <input id="range-olympic_5cv05_LM_polynomial" type="range" min="1" max="11" value="1" onchange="setDivs('olympic_5cv05_LM_polynomial')" oninput="setDivs('olympic_5cv05_LM_polynomial')"> <button onclick="plusDivs(-1, 'olympic_5cv05_LM_polynomial')">❮</button> <button onclick="plusDivs(1, 'olympic_5cv05_LM_polynomial')">❯</button></p>
 <div class="olympic_5cv05_LM_polynomial" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_5cv05_LM_polynomial_number001.svg" width style=" ">
 </object>
@@ -1168,20 +1068,16 @@ showDivs(1, 'olympic_5cv05_LM_polynomial');
 <section id="bias-variance-decomposition" class="slide level2">
 <h2>Bias Variance Decomposition</h2>
 <p>Generalisation error <span class="math display">\[\begin{align*}
-R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2
-\mathbb{P}(y, \mathbf{ x}) \text{d}y\text{d}\mathbf{ x}\\
-&amp; \triangleq \mathbb{E}\left[ \left(y- f^*(\mathbf{ x})\right)^2
-\right].
+R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \mathbf{ x}) \text{d}y\text{d}\mathbf{ x}\\
+&amp; \triangleq \mathbb{E}\left[ \left(y- f^*(\mathbf{ x})\right)^2 \right].
 \end{align*}\]</span></p>
 </section>
 <section id="decompose" class="slide level2">
 <h2>Decompose</h2>
 <p>Decompose as <span class="math display">\[
 \begin{align*}
-\mathbb{E}\left[ \left(y- f(\mathbf{ x})\right)^2 \right] = &amp;
-\text{bias}\left[f^*(\mathbf{ x})\right]^2 \\
-&amp; + \text{variance}\left[f^*(\mathbf{ x})\right] \\ \\
-&amp;+\sigma^2,
+\mathbb{E}\left[ \left(y- f(\mathbf{ x})\right)^2 \right] = &amp; \text{bias}\left[f^*(\mathbf{ x})\right]^2 \\
+&amp; + \text{variance}\left[f^*(\mathbf{ x})\right] \\ \\ &amp;+\sigma^2,
 \end{align*}
 \]</span></p>
 </section>
@@ -1199,13 +1095,9 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2
 <h2>Variance</h2>
 <ul>
 <li><p>Given by <span class="math display">\[
-\text{variance}\left[f^*(\mathbf{ x})\right] =
-\mathbb{E}\left[\left(f^*(\mathbf{ x}) - \mathbb{E}\left[f^*(\mathbf{
-x})\right]\right)^2\right].
+\text{variance}\left[f^*(\mathbf{ x})\right] = \mathbb{E}\left[\left(f^*(\mathbf{ x}) - \mathbb{E}\left[f^*(\mathbf{ x})\right]\right)^2\right].
 \]</span></p></li>
-<li><p>Slight variations in the training set cause changes in the
-prediction. Error due to variance is error in the model due to an overly
-complex model.</p></li>
+<li><p>Slight variations in the training set cause changes in the prediction. Error due to variance is error in the model due to an overly complex model.</p></li>
 </ul>
 </section>
 <section id="section" class="slide level2">
@@ -1371,33 +1263,24 @@ showDivs(0, 'bias-variance-plots');
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Section 1.5 of <span class="citation"
-data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Section 1.5 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a
-href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
-Machines</a></p></li>
-<li><p>newspaper: <a
-href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
-Page</a></p></li>
+<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
+<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a
-href="http://inverseprobability.com/2014/07/01/open-data-science">Open
-Data Science</a></p></li>
+<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent"
-role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
-Press.
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>
 </div>
 </section>
@@ -1412,39 +1295,8 @@ Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Display controls in the bottom right corner
-        controls: true,
-        // Display a presentation progress bar
-        progress: true,
         // Push each slide change to the browser history
         history: true,
-        // Enable keyboard shortcuts for navigation
-        keyboard: true,
-        // Enable the slide overview mode
-        overview: true,
-        // Vertical centering of slides
-        center: true,
-        // Enables touch navigation on devices with touch input
-        touch: true,
-        // Turns fragments on and off globally
-        fragments: true,
-        // Flags if we should show a help overlay when the questionmark
-        // key is pressed
-        help: true,
-        // Number of milliseconds between automatically proceeding to the
-        // next slide, disabled when set to 0, this value can be overwritten
-        // by using a data-autoslide attribute on your slides
-        autoSlide: 0,
-        // Stop auto-sliding after user input
-        autoSlideStoppable: true,
-        // Transition style
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
-        // Transition speed
-        transitionSpeed: 'default', // default/fast/slow
-        // Transition style for full page slide backgrounds
-        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
-        // Number of slides away from the current that are visible
-        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
