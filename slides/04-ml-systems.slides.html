@@ -45,7 +45,8 @@
   <h1 class="title">Data and Machine Learning Systems</h1>
   <p class="author" style="text-align:center"><a href="https://www.linkedin.com/in/meissnereric/">Eric Meissner</a></p>
   <p class="author" style="text-align:center"><a href="https://www.linkedin.com/in/andreipaleyes/">Andrei Paleyes</a></p>
-  <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
+  <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil
+D. Lawrence</a></p>
 </section>
 
 <section class="slide level2">
@@ -364,9 +365,13 @@ A potential path of models in a machine learning system.
 </div>
 </div>
 <aside class="notes">
-Data Science Africa <a href="http://datascienceafrica.org" class="uri">http://datascienceafrica.org</a> is a ground up initiative for capacity building around data science, machine learning and artificial intelligence on the African continent.
+Data Science Africa <a href="http://datascienceafrica.org"
+class="uri">http://datascienceafrica.org</a> is a ground up initiative
+for capacity building around data science, machine learning and
+artificial intelligence on the African continent.
 </aside>
-<p>Data Science Africa is a bottom up initiative for capacity building in data science, machine learning and AI on the African continent</p>
+<p>Data Science Africa is a bottom up initiative for capacity building
+in data science, machine learning and AI on the African continent</p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
@@ -390,7 +395,10 @@ Data Science Africa meetings held up to October 2021.
 </div>
 </div>
 <aside class="notes">
-The lack of existing physical infrastructure on the African continent makes it a particularly interesting environment for deploying solutions based on the <em>information infrastructure</em>. The idea is explored more in this Guardian op-ed on .
+The lack of existing physical infrastructure on the African continent
+makes it a particularly interesting environment for deploying solutions
+based on the <em>information infrastructure</em>. The idea is explored
+more in this Guardian op-ed on .
 </aside>
 </section>
 <section id="crop-monitoring" class="slide level2">
@@ -439,7 +447,8 @@ Martin Mubangizi
 </svg>
 </div>
 <div class="figure">
-<div id="spatiotemporal-models-biosurveillance-figure" class="figure-frame">
+<div id="spatiotemporal-models-biosurveillance-figure"
+class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//africa/spatiotemporal-models-for-biosurveillance.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
@@ -506,11 +515,18 @@ Safe Boda
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>Guardian article on <a href="https://www.theguardian.com/media-network/2015/aug/25/africa-benefit-data-science-information">How African can benefit from the data revolution</a></p></li>
-<li><p>Guardian article on <a href="https://www.theguardian.com/media-network/2015/aug/25/africa-benefit-data-science-information">Data Science Africa</a></p></li>
-<li><p>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>Guardian article on <a
+href="https://www.theguardian.com/media-network/2015/aug/25/africa-benefit-data-science-information">How
+African can benefit from the data revolution</a></p></li>
+<li><p>Guardian article on <a
+href="https://www.theguardian.com/media-network/2015/aug/25/africa-benefit-data-science-information">Data
+Science Africa</a></p></li>
+<li><p>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 scrollable">
@@ -527,8 +543,39 @@ Safe Boda
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

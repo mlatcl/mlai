@@ -1,6 +1,17 @@
 ---
 title: "Data and Machine Learning Systems"
-abstract: "So far we have introduced objective functions, and (linear) prediction functions. This gives us two key ingredients of the machine learning formula. But to build machine learning systems you also need data. This lecture introduces some of the challenges of building machine learning data systems. It will introduce (or review) for you the concepts around joining of databases together. The storage and manipulation of data is at the core of machine learning systems and data science. Note: the notebook makes use of Covid19 data from Nigeria, but the goal of this notebook is to introduce the reader to these concepts, not to authoritatively answer any questions about the state of Nigerian health facilities or Covid19, but to give you an understanding of data infrastructures and bringing data sets together."
+abstract: "So far we have introduced objective functions, and (linear)
+prediction functions. This gives us two key ingredients of the machine
+learning formula. But to build machine learning systems you also need
+data. This lecture introduces some of the challenges of building machine
+learning data systems. It will introduce (or review) for you the
+concepts around joining of databases together. The storage and
+manipulation of data is at the core of machine learning systems and data
+science. Note: the notebook makes use of Covid19 data from Nigeria, but
+the goal of this notebook is to introduce the reader to these concepts,
+not to authoritatively answer any questions about the state of Nigerian
+health facilities or Covid19, but to give you an understanding of data
+infrastructures and bringing data sets together."
 author:
 - given: Eric
   family: Meissner
@@ -43,32 +54,60 @@ categories:
 <!--
 
 -->
-<h2 id="nigerian-health-facility-distribution">Nigerian Health Facility Distribution</h2>
-<p>In this notebook, we explore the question of health facility distribution in Nigeria, spatially, and in relation to population density.</p>
-<p>We explore and visualize the question “How does the number of health facilities per capita vary across Nigeria?”</p>
-<p>Rather than focussing purely on using tools like <code>pandas</code> to manipulate the data, our focus will be on introducing some concepts from databases.</p>
+<h2 id="nigerian-health-facility-distribution">Nigerian Health Facility
+Distribution</h2>
+<p>In this notebook, we explore the question of health facility
+distribution in Nigeria, spatially, and in relation to population
+density.</p>
+<p>We explore and visualize the question “How does the number of health
+facilities per capita vary across Nigeria?”</p>
+<p>Rather than focussing purely on using tools like <code>pandas</code>
+to manipulate the data, our focus will be on introducing some concepts
+from databases.</p>
 <p>Machine learning can be summarized as <span class="math display">\[
-\text{model} + \text{data} \xrightarrow{\text{compute}} \text{prediction}
-\]</span> and many machine learning courses focus a lot on the model part. But to build a machine learning system in practice, a lot of work must be put into the data part. This notebook gives some pointers on that work and how to think about your machine learning systems design.</p>
+\text{model} + \text{data} \xrightarrow{\text{compute}}
+\text{prediction}
+\]</span> and many machine learning courses focus a lot on the model
+part. But to build a machine learning system in practice, a lot of work
+must be put into the data part. This notebook gives some pointers on
+that work and how to think about your machine learning systems
+design.</p>
 <h2 id="datasets">Datasets</h2>
 <p>In this notebook, we download 4 datasets:</p>
 <ul>
 <li>Nigeria NMIS health facility data</li>
-<li>Population data for Administrative Zone 1 (states) areas in Nigeria</li>
+<li>Population data for Administrative Zone 1 (states) areas in
+Nigeria</li>
 <li>Map boundaries for Nigerian states (for plotting and binning)</li>
 <li>Covid cases across Nigeria (as of May 20, 2020)</li>
 </ul>
-<p>But joining these data sets together is just an example. As another example, you could think of <a href="https://safeboda.com/ng/">SafeBoda</a>, a ride-hailing app that’s available in Lagos and Kampala. As well as looking at the health examples, try to imagine how SafeBoda may have had to design their systems to be scalable and reliable for storing and sharing data.</p>
-<h2 id="imports-installs-and-downloads">Imports, Installs, and Downloads</h2>
+<p>But joining these data sets together is just an example. As another
+example, you could think of <a
+href="https://safeboda.com/ng/">SafeBoda</a>, a ride-hailing app that’s
+available in Lagos and Kampala. As well as looking at the health
+examples, try to imagine how SafeBoda may have had to design their
+systems to be scalable and reliable for storing and sharing data.</p>
+<h2 id="imports-installs-and-downloads">Imports, Installs, and
+Downloads</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-installs.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-installs.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-installs.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-installs.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>First, we’re going to download some particular python libraries for dealing with geospatial data. We’re dowloading <a href="https://geopandas.org"><code>geopandas</code></a> which will help us deal with ‘shape files’ that give the geographical lay out of Nigeria. We also need <code>pygeos</code> for indexing.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install geopandas</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pygeos</span></code></pre></div>
+<p>First, we’re going to download some particular python libraries for
+dealing with geospatial data. We’re dowloading <a
+href="https://geopandas.org"><code>geopandas</code></a> which will help
+us deal with ‘shape files’ that give the geographical lay out of
+Nigeria. We also need <code>pygeos</code> for indexing.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install geopandas</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pygeos</span></code></pre></div>
 <h2 id="setup">Setup</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <!--setupplotcode{import seaborn as sns
 sns.set_style('darkgrid')
@@ -76,113 +115,255 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h2 id="notutils">notutils</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>This small package is a helper package for various notebook utilities used</p>
+<p>This small package is a helper package for various notebook utilities
+used</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/notutils" class="uri">https://github.com/lawrennd/notutils</a></p>
-<p>Once <code>notutils</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/notutils"
+class="uri">https://github.com/lawrennd/notutils</a></p>
+<p>Once <code>notutils</code> is installed, it can be imported in the
+usual manner.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
 <h2 id="pods">pods</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
-<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
+<p>In Sheffield we created a suite of software tools for ‘Open Data
+Science’. Open data science is an approach to sharing code, models and
+data that should make it easier for companies, health professionals and
+scientists to gain access to data science techniques.</p>
+<p>You can also check this blog post on <a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
-<p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/ods"
+class="uri">https://github.com/lawrennd/ods</a></p>
+<p>Once <code>pods</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="mlai">mlai</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The <code>mlai</code> software is a suite of helper functions for teaching and demonstrating machine learning algorithms. It was first used in the Machine Learning and Adaptive Intelligence course in Sheffield in 2013.</p>
+<p>The <code>mlai</code> software is a suite of helper functions for
+teaching and demonstrating machine learning algorithms. It was first
+used in the Machine Learning and Adaptive Intelligence course in
+Sheffield in 2013.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/mlai" class="uri">https://github.com/lawrennd/mlai</a></p>
-<p>Once <code>mlai</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/mlai"
+class="uri">https://github.com/lawrennd/mlai</a></p>
+<p>Once <code>mlai</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <h2 id="databases-and-joins">Databases and Joins</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/databases-and-joins.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The main idea we will be working with in this practical is the ‘join.’ A join does exactly what it sounds like, it combines two database tables.</p>
-<p>You may have already started to look at data structures and learning about <code>pandas</code> which is a great way of storing and structuring your data set to make it easier to plot and manipulate your data.</p>
-<p>Pandas is great for the data scientist to analyze data because it makes many operations easier. But it is not so good for building the machine learning system. In a machine learning system, you may have to handle a lot of data. Even if you start with building a system where you only have a few customers, perhaps you build an online taxi system (like <a href="https://safeboda.com/ug/">SafeBoda</a>) for Kampala. Maybe you will have 50 customers. Then maybe your system can be handled with some python scripts and <code>pandas</code>.</p>
+<p>The main idea we will be working with in this practical is the
+‘join’. A join does exactly what it sounds like, it combines two
+database tables.</p>
+<p>You may have already started to look at data structures and learning
+about <code>pandas</code> which is a great way of storing and
+structuring your data set to make it easier to plot and manipulate your
+data.</p>
+<p>Pandas is great for the data scientist to analyze data because it
+makes many operations easier. But it is not so good for building the
+machine learning system. In a machine learning system, you may have to
+handle a lot of data. Even if you start with building a system where you
+only have a few customers, perhaps you build an online taxi system (like
+<a href="https://safeboda.com/ug/">SafeBoda</a>) for Kampala. Maybe you
+will have 50 customers. Then maybe your system can be handled with some
+python scripts and <code>pandas</code>.</p>
 <h2 id="scaling-ml-systems">Scaling ML Systems</h2>
-<p>But what if you are successful? What if everyone in Kampala wants to use your system? There are 1.5 million people in Kampala and maybe 100,000 Boda Boda drivers.</p>
-<p>What if you are even more succesful? What if everyone in Lagos wants to use your system? There are around 20 million people in Lagos … and maybe as many Okada drivers as people in Kampala!</p>
-<p>We want to build safe and reliable machine learning systems. Building them from <code>pandas</code> and python is about as safe and reliable as <a href="https://www.monitor.co.ug/News/National/Boda-accidents-kill-10-city-UN-report-Kampala/688334-4324032-15oru2dz/index.html">taking six children to school on a boda boda</a>.</p>
-<p>To build a reliable system, we need to turn to <em>databases</em>. In this notebook <a href="https://en.wikipedia.org/wiki/Join_(SQL)">we’ll be focusing on SQL databases</a> and how you bring together different streams of data in a Machine Learning System.</p>
-<p>In a machine learning system, you will need to bring different data sets together. In database terminology this is known as a ‘join.’ You have two different data sets, and you want to join them together. Just like you can join two pieces of metal using a welder, or two pieces of wood with screws.</p>
-<p>But instead of using a welder or screws to join data, we join it using columns of the data. We can join data together using people’s names. One database may contain where people live, another database may contain where they go to school. If we join these two databases, we can have a database which shows where people live and where they got to school.</p>
-<p>In the notebook, we will join some data about where the health centers are in Nigeria with data about where there have been cases of Covid19. There are other challenges in the ML System Design that are not going to be covered here. They include how to update the databases and how to control access to the databases from different users (boda boda drivers, riders, administrators etc).</p>
+<p>But what if you are successful? What if everyone in Kampala wants to
+use your system? There are 1.5 million people in Kampala and maybe
+100,000 Boda Boda drivers.</p>
+<p>What if you are even more succesful? What if everyone in Lagos wants
+to use your system? There are around 20 million people in Lagos … and
+maybe as many Okada drivers as people in Kampala!</p>
+<p>We want to build safe and reliable machine learning systems. Building
+them from <code>pandas</code> and python is about as safe and reliable
+as <a
+href="https://www.monitor.co.ug/News/National/Boda-accidents-kill-10-city-UN-report-Kampala/688334-4324032-15oru2dz/index.html">taking
+six children to school on a boda boda</a>.</p>
+<p>To build a reliable system, we need to turn to <em>databases</em>. In
+this notebook <a href="https://en.wikipedia.org/wiki/Join_(SQL)">we’ll
+be focusing on SQL databases</a> and how you bring together different
+streams of data in a Machine Learning System.</p>
+<p>In a machine learning system, you will need to bring different data
+sets together. In database terminology this is known as a ‘join’. You
+have two different data sets, and you want to join them together. Just
+like you can join two pieces of metal using a welder, or two pieces of
+wood with screws.</p>
+<p>But instead of using a welder or screws to join data, we join it
+using columns of the data. We can join data together using people’s
+names. One database may contain where people live, another database may
+contain where they go to school. If we join these two databases, we can
+have a database which shows where people live and where they got to
+school.</p>
+<p>In the notebook, we will join some data about where the health
+centers are in Nigeria with data about where there have been cases of
+Covid19. There are other challenges in the ML System Design that are not
+going to be covered here. They include how to update the databases and
+how to control access to the databases from different users (boda boda
+drivers, riders, administrators etc).</p>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>As an example data set we will use Nigerian Millennium Development Goals Information System Health Facility <span class="citation" data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) and Columbia University, 2014)</span>. It can be found here <a href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014" class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
+<p>As an example data set we will use Nigerian Millennium Development
+Goals Information System Health Facility <span class="citation"
+data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant
+to the President on the Millennium Development Goals (OSSAP-MDGs) and
+Columbia University, 2014)</span>. It can be found here <a
+href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014"
+class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
 <p>Taking from the information on the site,</p>
 <blockquote>
-<p>The Nigeria MDG (Millennium Development Goals) Information System – NMIS health facility data is collected by the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia University. A rigorous, geo-referenced baseline facility inventory across Nigeria is created spanning from 2009 to 2011 with an additional survey effort to increase coverage in 2014, to build Nigeria’s first nation-wide inventory of health facility. The database includes 34,139 health facilities info in Nigeria.</p>
-<p>The goal of this database is to make the data collected available to planners, government officials, and the public, to be used to make strategic decisions for planning relevant interventions.</p>
-<p>For data inquiry, please contact Ms. Funlola Osinupebi, Performance Monitoring &amp; Communications, Advisory Power Team, Office of the Vice President at funlola.osinupebi@aptovp.org</p>
-<p>To learn more, please visit <a href="http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/" class="uri">http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/</a></p>
-<p>Suggested citation: Nigeria NMIS facility database (2014), the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
+<p>The Nigeria MDG (Millennium Development Goals) Information System –
+NMIS health facility data is collected by the Office of the Senior
+Special Assistant to the President on the Millennium Development Goals
+(OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia
+University. A rigorous, geo-referenced baseline facility inventory
+across Nigeria is created spanning from 2009 to 2011 with an additional
+survey effort to increase coverage in 2014, to build Nigeria’s first
+nation-wide inventory of health facility. The database includes 34,139
+health facilities info in Nigeria.</p>
+<p>The goal of this database is to make the data collected available to
+planners, government officials, and the public, to be used to make
+strategic decisions for planning relevant interventions.</p>
+<p>For data inquiry, please contact Ms. Funlola Osinupebi, Performance
+Monitoring &amp; Communications, Advisory Power Team, Office of the Vice
+President at funlola.osinupebi@aptovp.org</p>
+<p>To learn more, please visit <a
+href="http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/"
+class="uri">http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/</a></p>
+<p>Suggested citation: Nigeria NMIS facility database (2014), the Office
+of the Senior Special Assistant to the President on the Millennium
+Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
 </blockquote>
-<p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<p>For ease of use we’ve packaged this data set in the <code>pods</code>
+library</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<p>Alternatively, you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<p>Alternatively, you can access the data directly with the following
+commands.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
-<p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
-<p>In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
-<p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<p>Once it is loaded in the data can be summarized using the
+<code>describe</code> method in pandas.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<p>In python and the Jupyter notebook it is possible to see a list of
+all possible functions and attributes by typing the name of the object
+followed by <code>.&lt;Tab&gt;</code> for example in the above case if
+we type <code>data.&lt;Tab&gt;</code> it show the columns available
+(these are attributes in pandas dataframes) such as
+<code>num_nurses_fulltime</code>, and also functions, such as
+<code>.describe()</code>.</p>
+<p>For functions we can also see the documentation about the function by
+following the name with a question mark. This will open a box with
+documentation at the bottom which can be closed with the x button.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
+<div id="nigerian-health-facilities-magnify" class="magnify"
+onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="nigerian-health-facilities-caption" class="caption-frame">
-<p>Figure: Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
+<p>Figure: Location of the over thirty-four thousand health facilities
+registered in the NMIS data across Nigeria. Each facility plotted
+according to its latitude and longitude.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hospital_data <span class="op">=</span> data</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hospital_data <span class="op">=</span> data</span></code></pre></div>
 <h2 id="administrative-zone-geo-data">Administrative Zone Geo Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-spatial-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>A very common operation is the need to map from locations in a country to the administrative regions. If we were building a ride sharing app, we might also want to map riders to locations in the city, so that we could know how many riders we had in different city areas.</p>
-<p>Administrative regions have various names like cities, counties, districts, or states. These conversions for the administrative regions are important for getting the right information to the right people.</p>
-<p>Of course, if we had a knowledgeable Nigerian, we could ask her about what the right location for each of these health facilities is, which state is it in? But given that we have the latitude and longitude, we should be able to find out automatically what the different states are.</p>
-<p>This is where “geo” data becomes important. We need to download a dataset that stores the location of the different states in Nigeria. These files are known as ‘outline’ files. Because they draw the different states of different countries in outline.</p>
-<p>There are special databases for storing this type of information, the database we are using is in the <code>gdb</code> or GeoDataBase format. It comes in a zip file. Let’s download the outline files for the Nigerian states. They have been made available by the <a href="https://data.humdata.org/">Humanitarian Data Exchange</a>, you can also find other states data from the same site.</p>
-<h2 id="nigerian-administrative-zones-data">Nigerian Administrative Zones Data</h2>
+<p>A very common operation is the need to map from locations in a
+country to the administrative regions. If we were building a ride
+sharing app, we might also want to map riders to locations in the city,
+so that we could know how many riders we had in different city
+areas.</p>
+<p>Administrative regions have various names like cities, counties,
+districts, or states. These conversions for the administrative regions
+are important for getting the right information to the right people.</p>
+<p>Of course, if we had a knowledgeable Nigerian, we could ask her about
+what the right location for each of these health facilities is, which
+state is it in? But given that we have the latitude and longitude, we
+should be able to find out automatically what the different states
+are.</p>
+<p>This is where “geo” data becomes important. We need to download a
+dataset that stores the location of the different states in Nigeria.
+These files are known as ‘outline’ files. Because they draw the
+different states of different countries in outline.</p>
+<p>There are special databases for storing this type of information, the
+database we are using is in the <code>gdb</code> or GeoDataBase format.
+It comes in a zip file. Let’s download the outline files for the
+Nigerian states. They have been made available by the <a
+href="https://data.humdata.org/">Humanitarian Data Exchange</a>, you can
+also find other states data from the same site.</p>
+<h2 id="nigerian-administrative-zones-data">Nigerian Administrative
+Zones Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-administrative-zones-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-administrative-zones-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-administrative-zones-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-administrative-zones-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_administrative_zones()[<span class="st">&#39;Y&#39;</span>]</span>
+<p>For ease of use we’ve packaged this data set in the <code>pods</code>
+library</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_administrative_zones()[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data.set_index(<span class="st">&quot;admin1Name_en&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<p>Alternatively you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> zipfile</span>
+<p>Alternatively you can access the data directly with the following
+commands.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> zipfile</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>admin_zones_url <span class="op">=</span> <span class="st">&#39;https://data.humdata.org/dataset/81ac1d38-f603-4a98-804d-325c658599a3/resource/0bc2f7bb-9ff6-40db-a569-1989b8ffd3bc/download/nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>_, msg <span class="op">=</span> urllib.request.urlretrieve(admin_zones_url, <span class="st">&#39;nga_admbnda_osgof_eha_itos.gdb.zip&#39;</span>)</span>
@@ -204,130 +385,315 @@ sns.set_palette('colorblind')}-->
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/nigerian-state-borders.svg" width="60%" style=" ">
 </object>
 </div>
-<div id="nigerian-state-borders-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-state-borders&#39;)">
+<div id="nigerian-state-borders-magnify" class="magnify"
+onclick="magnifyFigure(&#39;nigerian-state-borders&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="nigerian-state-borders-caption" class="caption-frame">
-<p>Figure: Border locations for the thirty-six different states of Nigeria.</p>
+<p>Figure: Border locations for the thirty-six different states of
+Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>zones_gdf <span class="op">=</span> data</span></code></pre></div>
-<p>Now we have this data of the outlines of the different states in Nigeria.</p>
-<p>The next thing we need to know is how these health facilities map onto different states in Nigeria. Without “binning” facilities somehow, it’s difficult to effectively see how they are distributed across the country.</p>
-<p>We do this by finding a “geo” dataset that contains the spatial outlay of Nigerian states by latitude/longitude coordinates. The dataset we use is of the “gdb” (GeoDataBase) type and comes as a zip file. We don’t need to worry much about this datatype for this notebook, only noting that geopandas knows how to load in the dataset, and that it contains different “layers” for the same map. In this case, each layer is a different degree of granularity of the political boundaries, with layer 0 being the whole country, 1 is by state, or 2 is by local government. We’ll go with a state level view for simplicity, but as an excercise you can change it to layer 2 to view the distribution by local government.</p>
-<p>Once we have these <code>MultiPolygon</code> objects that define the boundaries of different states, we can perform a spatial join (sjoin) from the coordinates of individual health facilities (which we already converted to the appropriate <code>Point</code> type when moving the health data to a GeoDataFrame.)</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>zones_gdf <span class="op">=</span> data</span></code></pre></div>
+<p>Now we have this data of the outlines of the different states in
+Nigeria.</p>
+<p>The next thing we need to know is how these health facilities map
+onto different states in Nigeria. Without “binning” facilities somehow,
+it’s difficult to effectively see how they are distributed across the
+country.</p>
+<p>We do this by finding a “geo” dataset that contains the spatial
+outlay of Nigerian states by latitude/longitude coordinates. The dataset
+we use is of the “gdb” (GeoDataBase) type and comes as a zip file. We
+don’t need to worry much about this datatype for this notebook, only
+noting that geopandas knows how to load in the dataset, and that it
+contains different “layers” for the same map. In this case, each layer
+is a different degree of granularity of the political boundaries, with
+layer 0 being the whole country, 1 is by state, or 2 is by local
+government. We’ll go with a state level view for simplicity, but as an
+excercise you can change it to layer 2 to view the distribution by local
+government.</p>
+<p>Once we have these <code>MultiPolygon</code> objects that define the
+boundaries of different states, we can perform a spatial join (sjoin)
+from the coordinates of individual health facilities (which we already
+converted to the appropriate <code>Point</code> type when moving the
+health data to a GeoDataFrame.)</p>
 <h2 id="joining-a-geodataframe">Joining a GeoDataFrame</h2>
-<p>The first database join we’re going to do is a special one, it’s a ‘spatial join.’ We’re going to join the locations of the hospitals with their states.</p>
-<p>This join is unusual because it requires some mathematics to get right. The outline files give us the borders of the different states in latitude and longitude, the health facilities have given locations in the country.</p>
-<p>A spatial join involves finding out which state each health facility belongs to. Fortunately, the mathematics you need is already programmed for you in GeoPandas. That means all we need to do is convert our <code>pandas</code> dataframe of health facilities into a <code>GeoDataFrame</code> which allows us to do the spatial join.</p>
-<p>First, we convert the hospital data to a <code>geopandas</code> data frame.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>geometry<span class="op">=</span>gpd.points_from_xy(hospital_data.longitude, hospital_data.latitude)</span>
+<p>The first database join we’re going to do is a special one, it’s a
+‘spatial join’. We’re going to join the locations of the hospitals with
+their states.</p>
+<p>This join is unusual because it requires some mathematics to get
+right. The outline files give us the borders of the different states in
+latitude and longitude, the health facilities have given locations in
+the country.</p>
+<p>A spatial join involves finding out which state each health facility
+belongs to. Fortunately, the mathematics you need is already programmed
+for you in GeoPandas. That means all we need to do is convert our
+<code>pandas</code> dataframe of health facilities into a
+<code>GeoDataFrame</code> which allows us to do the spatial join.</p>
+<p>First, we convert the hospital data to a <code>geopandas</code> data
+frame.</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>geometry<span class="op">=</span>gpd.points_from_xy(hospital_data.longitude, hospital_data.latitude)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>hosp_gdf <span class="op">=</span> gpd.GeoDataFrame(hospital_data, </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                            geometry<span class="op">=</span>geometry)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>hosp_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span></code></pre></div>
-<p>There are some technial details here: the <code>crs</code> refers to the coordinate system in use by a particular GeoDataFrame. <code>EPSG:4326</code> is the standard coordinate system of latitude/longitude.</p>
-<h2 id="your-first-join-converting-gps-coordinates-to-states">Your First Join: Converting GPS Coordinates to States</h2>
-<p>Now we have the data in the <code>GeoPandas</code> format, we can start converting into states. We will use the <a href="https://pypi.org/project/Fiona/"><code>fiona</code></a> library for reading the right layers from the files. Before we do the join, lets plot the location of health centers and states on the same map.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>world_gdf <span class="op">=</span> gpd.read_file(gpd.datasets.get_path(<span class="st">&#39;naturalearth_lowres&#39;</span>))</span>
+<p>There are some technial details here: the <code>crs</code> refers to
+the coordinate system in use by a particular GeoDataFrame.
+<code>EPSG:4326</code> is the standard coordinate system of
+latitude/longitude.</p>
+<h2 id="your-first-join-converting-gps-coordinates-to-states">Your First
+Join: Converting GPS Coordinates to States</h2>
+<p>Now we have the data in the <code>GeoPandas</code> format, we can
+start converting into states. We will use the <a
+href="https://pypi.org/project/Fiona/"><code>fiona</code></a> library
+for reading the right layers from the files. Before we do the join, lets
+plot the location of health centers and states on the same map.</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>world_gdf <span class="op">=</span> gpd.read_file(gpd.datasets.get_path(<span class="st">&#39;naturalearth_lowres&#39;</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>world_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>nigeria_gdf <span class="op">=</span> world_gdf[(world_gdf[<span class="st">&#39;name&#39;</span>] <span class="op">==</span> <span class="st">&#39;Nigeria&#39;</span>)]</span></code></pre></div>
 <div class="figure">
-<div id="nigeria-states-and-health-facilities-figure" class="figure-frame">
+<div id="nigeria-states-and-health-facilities-figure"
+class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/nigeria-states-and-health-facilities.svg" width="60%" style=" ">
 </object>
 </div>
-<div id="nigeria-states-and-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigeria-states-and-health-facilities&#39;)">
+<div id="nigeria-states-and-health-facilities-magnify" class="magnify"
+onclick="magnifyFigure(&#39;nigeria-states-and-health-facilities&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="nigeria-states-and-health-facilities-caption" class="caption-frame">
-<p>Figure: The outline of the thirty-six different states of nigeria with the location sof the health centers plotted on the map.</p>
+<div id="nigeria-states-and-health-facilities-caption"
+class="caption-frame">
+<p>Figure: The outline of the thirty-six different states of nigeria
+with the location sof the health centers plotted on the map.</p>
 </div>
 </div>
 <h2 id="performing-the-spatial-join">Performing the Spatial Join</h2>
-<p>We’ve now plotted the different health center locations across the states. You can clearly see that each of the dots falls within a different state. For helping the visualization, we’ve made the dots somewhat transparent (we set the <code>alpha</code> in the plot). This means that we can see the regions where there are more health centers, you should be able to spot where the major cities in Nigeria are given the increased number of health centers in those regions.</p>
-<p>Of course, we can now see by eye, which of the states each of the health centers belongs to. But we want the computer to do our join for us. <code>GeoPandas</code> provides us with the spatial join. Here we’re going to do a <a href="https://en.wikipedia.org/wiki/Join_(SQL)#Left_outer_join"><code>left</code> or <code>outer</code> join</a>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopandas.tools <span class="im">import</span> sjoin</span></code></pre></div>
-<p>We have two GeoPandas data frames, <code>hosp_gdf</code> and <code>zones_gdf</code>. Let’s have a look at the columns the contain.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hosp_gdf.columns</span></code></pre></div>
-<p>We can see that this is the GeoDataFrame containing the information about the hospital. Now let’s have a look at the <code>zones_gdf</code> data frame.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>zones_gdf.columns</span></code></pre></div>
-<p>You can see that this data frame has a different set of columns. It has all the different administrative regions. But there is one column name that overlaps. We can find it by looking for the intersection between the two sets.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_gdf.columns).intersection(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
-<p>Here we’ve converted the lists of columns into python ‘sets,’ and then looked for the intersection. The <em>join</em> will occur on the intersection between these columns. It will try and match the geometry of the hospitals (their location) to the geometry of the states (their outlines). This match is done in one line in GeoPandas.</p>
-<p>We’re having to use GeoPandas because this join is a special one based on geographical locations, if the join was on customer name or some other discrete variable, we could do the join in pandas or directly in SQL.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined <span class="op">=</span> sjoin(hosp_gdf, zones_gdf, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span></code></pre></div>
-<p>The intersection of the two data frames indicates how the two data frames will be joined (if there’s no intersection, they can’t be joined). It’s like indicating the two holes that would need to be bolted together on two pieces of metal. If the holes don’t match, the join can’t be done. There has to be an intersection.</p>
-<p>But what will the result look like? Well, the join should be the ‘union’ of the two data frames. We can have a look at what the union should be by (again) converting the columns to sets.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_gdf.columns).union(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
-<p>That gives a list of all the columns (notice that ‘geometry’ only appears once).</p>
-<p>Let’s check that’s what the join command did, by looking at the columns of our new data frame, <code>hosp_state_joined</code>. Notice also that there’s a new column: <code>index_right</code>. The two original data bases had separate indices. The <code>index_right</code> column represents the index from the <code>zones_gdf</code>, which is the Nigerian state.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_state_joined.columns)</span></code></pre></div>
-<p>Great! They are all there! We have completed our join. We had two separate data frames with information about states and information about hospitals. But by performing an ‘outer’ or a ‘left’ join, we now have a single data frame with all the information in the same place! Let’s have a look at the first frew entries in the new data frame.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined.head()</span></code></pre></div>
+<p>We’ve now plotted the different health center locations across the
+states. You can clearly see that each of the dots falls within a
+different state. For helping the visualization, we’ve made the dots
+somewhat transparent (we set the <code>alpha</code> in the plot). This
+means that we can see the regions where there are more health centers,
+you should be able to spot where the major cities in Nigeria are given
+the increased number of health centers in those regions.</p>
+<p>Of course, we can now see by eye, which of the states each of the
+health centers belongs to. But we want the computer to do our join for
+us. <code>GeoPandas</code> provides us with the spatial join. Here we’re
+going to do a <a
+href="https://en.wikipedia.org/wiki/Join_(SQL)#Left_outer_join"><code>left</code>
+or <code>outer</code> join</a>.</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopandas.tools <span class="im">import</span> sjoin</span></code></pre></div>
+<p>We have two GeoPandas data frames, <code>hosp_gdf</code> and
+<code>zones_gdf</code>. Let’s have a look at the columns the
+contain.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hosp_gdf.columns</span></code></pre></div>
+<p>We can see that this is the GeoDataFrame containing the information
+about the hospital. Now let’s have a look at the <code>zones_gdf</code>
+data frame.</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>zones_gdf.columns</span></code></pre></div>
+<p>You can see that this data frame has a different set of columns. It
+has all the different administrative regions. But there is one column
+name that overlaps. We can find it by looking for the intersection
+between the two sets.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_gdf.columns).intersection(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
+<p>Here we’ve converted the lists of columns into python ‘sets’, and
+then looked for the intersection. The <em>join</em> will occur on the
+intersection between these columns. It will try and match the geometry
+of the hospitals (their location) to the geometry of the states (their
+outlines). This match is done in one line in GeoPandas.</p>
+<p>We’re having to use GeoPandas because this join is a special one
+based on geographical locations, if the join was on customer name or
+some other discrete variable, we could do the join in pandas or directly
+in SQL.</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined <span class="op">=</span> sjoin(hosp_gdf, zones_gdf, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span></code></pre></div>
+<p>The intersection of the two data frames indicates how the two data
+frames will be joined (if there’s no intersection, they can’t be
+joined). It’s like indicating the two holes that would need to be bolted
+together on two pieces of metal. If the holes don’t match, the join
+can’t be done. There has to be an intersection.</p>
+<p>But what will the result look like? Well, the join should be the
+‘union’ of the two data frames. We can have a look at what the union
+should be by (again) converting the columns to sets.</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_gdf.columns).union(<span class="bu">set</span>(zones_gdf.columns))</span></code></pre></div>
+<p>That gives a list of all the columns (notice that ‘geometry’ only
+appears once).</p>
+<p>Let’s check that’s what the join command did, by looking at the
+columns of our new data frame, <code>hosp_state_joined</code>. Notice
+also that there’s a new column: <code>index_right</code>. The two
+original data bases had separate indices. The <code>index_right</code>
+column represents the index from the <code>zones_gdf</code>, which is
+the Nigerian state.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(hosp_state_joined.columns)</span></code></pre></div>
+<p>Great! They are all there! We have completed our join. We had two
+separate data frames with information about states and information about
+hospitals. But by performing an ‘outer’ or a ‘left’ join, we now have a
+single data frame with all the information in the same place! Let’s have
+a look at the first frew entries in the new data frame.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined.head()</span></code></pre></div>
 <h2 id="sql-database">SQL Database</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sql.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sql.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sql.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-sql.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Our first join was a special one, because it involved spatial data. That meant using the special <code>gdb</code> format and the <code>GeoPandas</code> tool for manipulating that data. But we’ve now saved our updated data in a new file.</p>
-<p>To do this, we use the command line utility that comes standard for SQLite database creation. SQLite is a simple database that’s useful for playing with database commands on your local machine. For a real system, you would need to set up a server to run the database. The server is a separate machine with the job of answering database queries. SQLite pretends to be a proper database but doesn’t require us to go to the extra work of setting up a server. Popular SQL server software includes <a href="https://mariadb.org/"><code>MariaDB</code></a> which is open source, or <a href="https://www.microsoft.com/en-gb/sql-server/sql-server-2019">Microsoft’s SQL Server</a>.</p>
-<p>A typical machine learning installation might have you running a database from a cloud service (such as AWS, Azure or Google Cloud Platform). That cloud service would host the database for you, and you would pay according to the number of queries made.</p>
-<p>Many start-up companies were formed on the back of a <code>MySQL</code> server hosted on top of AWS. Although since MySQL was sold to Sun, and then passed on to Oracle, the open source community has turned its attention to <code>MariaDB</code>, here’s the <a href="https://aws.amazon.com/getting-started/hands-on/create-mariadb-db/">AWS instructions on how to set up <code>MariaDB</code></a>.</p>
-<p>If you were designing your own ride hailing app, or any other major commercial software you would want to investigate whether you would need to set up a central SQL server in one of these frameworks.</p>
+<p>Our first join was a special one, because it involved spatial data.
+That meant using the special <code>gdb</code> format and the
+<code>GeoPandas</code> tool for manipulating that data. But we’ve now
+saved our updated data in a new file.</p>
+<p>To do this, we use the command line utility that comes standard for
+SQLite database creation. SQLite is a simple database that’s useful for
+playing with database commands on your local machine. For a real system,
+you would need to set up a server to run the database. The server is a
+separate machine with the job of answering database queries. SQLite
+pretends to be a proper database but doesn’t require us to go to the
+extra work of setting up a server. Popular SQL server software includes
+<a href="https://mariadb.org/"><code>MariaDB</code></a> which is open
+source, or <a
+href="https://www.microsoft.com/en-gb/sql-server/sql-server-2019">Microsoft’s
+SQL Server</a>.</p>
+<p>A typical machine learning installation might have you running a
+database from a cloud service (such as AWS, Azure or Google Cloud
+Platform). That cloud service would host the database for you, and you
+would pay according to the number of queries made.</p>
+<p>Many start-up companies were formed on the back of a
+<code>MySQL</code> server hosted on top of AWS. Although since MySQL was
+sold to Sun, and then passed on to Oracle, the open source community has
+turned its attention to <code>MariaDB</code>, here’s the <a
+href="https://aws.amazon.com/getting-started/hands-on/create-mariadb-db/">AWS
+instructions on how to set up <code>MariaDB</code></a>.</p>
+<p>If you were designing your own ride hailing app, or any other major
+commercial software you would want to investigate whether you would need
+to set up a central SQL server in one of these frameworks.</p>
 <h2 id="create-the-mariadb-instance">Create the MariaDB Instance</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-mariadb.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-mariadb.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-mariadb.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-mariadb.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined.to_csv(<span class="st">&#39;hospitals_zones_joined.csv&#39;</span>, header<span class="op">=</span><span class="va">None</span>)</span></code></pre></div>
-<p>We will now set up a <code>MariaDB</code> database instance for storing our data.</p>
-<h2 id="creating-a-mariadb-server-on-aws">Creating a MariaDB Server on AWS</h2>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined.to_csv(<span class="st">&#39;hospitals_zones_joined.csv&#39;</span>, header<span class="op">=</span><span class="va">None</span>)</span></code></pre></div>
+<p>We will now set up a <code>MariaDB</code> database instance for
+storing our data.</p>
+<h2 id="creating-a-mariadb-server-on-aws">Creating a MariaDB Server on
+AWS</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-mariadb-server.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-mariadb-server.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-mariadb-server.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-mariadb-server.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>In this section we’ll go through the set up required to create a MariaDB server on AWS.</p>
-<p>Before you start, you’re going to need a username and password for accessing the database. You will need to tell the MariaDB server what that username and password is, and you’ll also need to make use of it when your client connects to the database. It’s good practice to never expose passwords in your code directly. So to protect your passowrd, we’re going to create a <code>credentials.yaml</code> file locally that will store your username and password so that the client can access the server without ever showing your password in the notebook.</p>
-<p>We suggest you set the <code>username</code> as <code>admin</code> and make secure choice of password for your password.</p>
-<p>We’ll use the following code for recording the username and password for the SQL client.</p>
+<p>In this section we’ll go through the set up required to create a
+MariaDB server on AWS.</p>
+<p>Before you start, you’re going to need a username and password for
+accessing the database. You will need to tell the MariaDB server what
+that username and password is, and you’ll also need to make use of it
+when your client connects to the database. It’s good practice to never
+expose passwords in your code directly. So to protect your passowrd,
+we’re going to create a <code>credentials.yaml</code> file locally that
+will store your username and password so that the client can access the
+server without ever showing your password in the notebook.</p>
+<p>We suggest you set the <code>username</code> as <code>admin</code>
+and make secure choice of password for your password.</p>
+<p>We’ll use the following code for recording the username and password
+for the SQL client.</p>
 <h3 id="saving-a-credentials-file">Saving a Credentials File</h3>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/save-credentials-file.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/save-credentials-file.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/save-credentials-file.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/save-credentials-file.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact_manual, Text, Password</span></code></pre></div>
-<p>If you click <code>Run Interact</code> then the credentials you’ve selected will be saved in the <code>yaml</code> file. Remember them, as you’ll need them when you set up the database server below.</p>
+<p>If you click <code>Run Interact</code> then the credentials you’ve
+selected will be saved in the <code>yaml</code> file. Remember them, as
+you’ll need them when you set up the database server below.</p>
 <h2 id="brief-history-of-the-cloud">Brief History of the Cloud</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/history-of-cloud.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/history-of-cloud.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/history-of-cloud.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/history-of-cloud.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>In the early days of the internet, companies could make use of open source software, such as the Apache web server and the MySQL database for providing on line stores, or other capabilities. But as part of that, they normally had to provide their own server farms. For example, the earliest server for running PageRank from 1996 was hosted on custom made hardware built in a case of Mega Blocks (see Figure ).</p>
+<p>In the early days of the internet, companies could make use of open
+source software, such as the Apache web server and the MySQL database
+for providing on line stores, or other capabilities. But as part of
+that, they normally had to provide their own server farms. For example,
+the earliest server for running PageRank from 1996 was hosted on custom
+made hardware built in a case of Mega Blocks (see Figure <span
+class="math inline">\(\ref{the-first-google-computer-at-stanford}\)</span>).</p>
 <div class="figure">
-<div id="the-first-google-computer-at-stanford-figure" class="figure-frame">
+<div id="the-first-google-computer-at-stanford-figure"
+class="figure-frame">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//cloud/The_first_Google_computer_at_Stanford.jpg" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="the-first-google-computer-at-stanford-magnify" class="magnify" onclick="magnifyFigure(&#39;the-first-google-computer-at-stanford&#39;)">
+<div id="the-first-google-computer-at-stanford-magnify" class="magnify"
+onclick="magnifyFigure(&#39;the-first-google-computer-at-stanford&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="the-first-google-computer-at-stanford-caption" class="caption-frame">
-<p>Figure: The web search engine was hosted on custom built hardware. Photo credit <a href="https://www.flickr.com/photos/11414938@N00/2821326488">Christian Heilmann on Flickr</a>.</p>
+<div id="the-first-google-computer-at-stanford-caption"
+class="caption-frame">
+<p>Figure: The web search engine was hosted on custom built hardware.
+Photo credit <a
+href="https://www.flickr.com/photos/11414938@N00/2821326488">Christian
+Heilmann on Flickr</a>.</p>
 </div>
 </div>
-<p>By September 2000, Google operated 5000 PCs for searching and web crawling, using the LINUX operating system.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Cloud computing gives you access to computing at a simular scale, but on an as-needed basis. AWS launched S3 cloud storage in March 2006 and the Elastic Compute Cloud followed in August 2006. These services were inspired by the challenges they had scaling their own web service for running the world’s largest e-commerce site. Recent market share estimates indicate that AWS still retains around a third of the cloud infrastructure market.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>By September 2000, Google operated 5000 PCs for searching and web
+crawling, using the LINUX operating system.<a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Cloud computing gives you access to computing at a simular scale, but
+on an as-needed basis. AWS launched S3 cloud storage in March 2006 and
+the Elastic Compute Cloud followed in August 2006. These services were
+inspired by the challenges they had scaling their own web service for
+running the world’s largest e-commerce site. Recent market share
+estimates indicate that AWS still retains around a third of the cloud
+infrastructure market.<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></p>
 <h2 id="aws-sign-up">AWS Sign Up</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-sign-up.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-sign-up.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-sign-up.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_cloud/includes/aws-sign-up.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Alternative cloud providers to AWS include Azure, Alibaba, Google, Huawei and others. Here we will use AWS services.</p>
-<p>If you don’t already have an AWS account, you’ll need to sign up for one. Students can obtain accounts with $100 dollars free credit through <a href="https://aws.amazon.com/education/awseducate/">AWS Educate</a>.</p>
-<p>If you’re a student at the University of Cambridge you can find details of how to sign up to your AWS Educate account at <a href="https://help.uis.cam.ac.uk/news/aws-educate">this UIS information page</a>, it includes a direct link for signing up from the University.</p>
-<p>The earliest AWS services of S3 and EC2 gave storage and compute. Together these could be combined to host a database service. Today cloud providers also provide machines that are already set up to provide a database service. We will make use of AWS’s Relational Database Service to provide our <code>MariaDB</code> server.</p>
+<p>Alternative cloud providers to AWS include Azure, Alibaba, Google,
+Huawei and others. Here we will use AWS services.</p>
+<p>If you don’t already have an AWS account, you’ll need to sign up for
+one. Students can obtain accounts with $100 dollars free credit through
+<a href="https://aws.amazon.com/education/awseducate/">AWS
+Educate</a>.</p>
+<p>If you’re a student at the University of Cambridge you can find
+details of how to sign up to your AWS Educate account at <a
+href="https://help.uis.cam.ac.uk/news/aws-educate">this UIS information
+page</a>, it includes a direct link for signing up from the
+University.</p>
+<p>The earliest AWS services of S3 and EC2 gave storage and compute.
+Together these could be combined to host a database service. Today cloud
+providers also provide machines that are already set up to provide a
+database service. We will make use of AWS’s Relational Database Service
+to provide our <code>MariaDB</code> server.</p>
 <ol type="1">
-<li><p>Log in to your AWS account and go to the AWS RDS console <a href="https://console.aws.amazon.com/rds/home">here</a>.</p></li>
-<li><p>Make sure the region is set to Europe (London) which is denoted as eu-west-2.</p></li>
-<li><p>Scroll down to “Create Database.” Do <em>not</em> create an Aurora database instance.</p></li>
-<li><p><code>Standard Create</code> should be selected. In the box below, which is titled <code>Engine Options</code> you should select <code>MariaDB</code>. You can leave the <code>Version</code> as it’s set,</p></li>
+<li><p>Log in to your AWS account and go to the AWS RDS console <a
+href="https://console.aws.amazon.com/rds/home">here</a>.</p></li>
+<li><p>Make sure the region is set to Europe (London) which is denoted
+as eu-west-2.</p></li>
+<li><p>Scroll down to “Create Database”. Do <em>not</em> create an
+Aurora database instance.</p></li>
+<li><p><code>Standard Create</code> should be selected. In the box
+below, which is titled <code>Engine Options</code> you should select
+<code>MariaDB</code>. You can leave the <code>Version</code> as it’s
+set,</p></li>
 </ol>
 <div class="figure">
 <div id="aws-select-mariadb-rds-figure" class="figure-frame">
@@ -335,15 +701,18 @@ sns.set_palette('colorblind')}-->
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//cloud/aws-select-mariadb-rds.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="aws-select-mariadb-rds-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-select-mariadb-rds&#39;)">
+<div id="aws-select-mariadb-rds-magnify" class="magnify"
+onclick="magnifyFigure(&#39;aws-select-mariadb-rds&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="aws-select-mariadb-rds-caption" class="caption-frame">
-<p>Figure: The AWS console box for selecting the <code>MariaDB</code> database.</p>
+<p>Figure: The AWS console box for selecting the <code>MariaDB</code>
+database.</p>
 </div>
 </div>
 <ol start="5" type="1">
-<li>In the box below that, make sure you select <code>Free tier</code>.</li>
+<li>In the box below that, make sure you select
+<code>Free tier</code>.</li>
 </ol>
 <div class="figure">
 <div id="aws-select-free-tier-figure" class="figure-frame">
@@ -351,16 +720,20 @@ sns.set_palette('colorblind')}-->
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//cloud/aws-select-free-tier.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="aws-select-free-tier-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-select-free-tier&#39;)">
+<div id="aws-select-free-tier-magnify" class="magnify"
+onclick="magnifyFigure(&#39;aws-select-free-tier&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="aws-select-free-tier-caption" class="caption-frame">
-<p>Figure: Make sure you select the free tier option for your database.</p>
+<p>Figure: Make sure you select the free tier option for your
+database.</p>
 </div>
 </div>
 <ol start="6" type="1">
-<li><p>Name your database. For this setup we suggest you use <code>testdatabase-mariadb</code> for the name.</p></li>
-<li><p>Set a master password for accessing the data base as admin.</p></li>
+<li><p>Name your database. For this setup we suggest you use
+<code>testdatabase-mariadb</code> for the name.</p></li>
+<li><p>Set a master password for accessing the data base as
+admin.</p></li>
 </ol>
 <div class="figure">
 <div id="aws-mariadb-settings-figure" class="figure-frame">
@@ -368,7 +741,8 @@ sns.set_palette('colorblind')}-->
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//cloud/aws-mariadb-settings.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="aws-mariadb-settings-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-mariadb-settings&#39;)">
+<div id="aws-mariadb-settings-magnify" class="magnify"
+onclick="magnifyFigure(&#39;aws-mariadb-settings&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="aws-mariadb-settings-caption" class="caption-frame">
@@ -377,45 +751,83 @@ sns.set_palette('colorblind')}-->
 </div>
 <ol start="8" type="1">
 <li><p>Leave the <code>DB instance class</code> as it is.</p></li>
-<li><p>Leave the <code>DB instance size</code> at the default setting. Leave the storage type and allocated storage at the default settings of <code>General Purpose</code> (SSD) and <code>20</code>.</p></li>
+<li><p>Leave the <code>DB instance size</code> at the default setting.
+Leave the storage type and allocated storage at the default settings of
+<code>General Purpose</code> (SSD) and <code>20</code>.</p></li>
 <li><p><em>Disable</em> autoscaling.</p></li>
-<li><p>In the connectivity leave VPC selection as <code>Default VPC</code> and <em>enable</em> <code>Publicly accessible</code> so that you’ll have an IP address for your database.</p></li>
-<li><p>In <code>VPC security group</code> select <code>Create new</code> to create a new security group for the instance.</p></li>
-<li><p>Write <code>ADSMariaDB</code> as the group name for the VPC security group.</p></li>
-<li><p>Select <code>Create database</code> at the bottom to launch the database.}</p></li>
+<li><p>In the connectivity leave VPC selection as
+<code>Default VPC</code> and <em>enable</em>
+<code>Publicly accessible</code> so that you’ll have an IP address for
+your database.</p></li>
+<li><p>In <code>VPC security group</code> select <code>Create new</code>
+to create a new security group for the instance.</p></li>
+<li><p>Write <code>ADSMariaDB</code> as the group name for the VPC
+security group.</p></li>
+<li><p>Select <code>Create database</code> at the bottom to launch the
+database.}</p></li>
 </ol>
 <p>Your database will take a few minutes to launch.</p>
-<p>While it’s launching you can check the access rules for the database <a href="https://eu-west-2.console.aws.amazon.com/ec2/v2/home?region=eu-west-2#SecurityGroups:">here</a>.</p>
+<p>While it’s launching you can check the access rules for the database
+<a
+href="https://eu-west-2.console.aws.amazon.com/ec2/v2/home?region=eu-west-2#SecurityGroups:">here</a>.</p>
 <ol type="1">
 <li>Select the <code>Default</code> security group.</li>
-<li>The source of the active inbound rule must be set to <code>0.0.0.0/0</code>. It means you can connect from any source using IPv4.</li>
+<li>The source of the active inbound rule must be set to
+<code>0.0.0.0/0</code>. It means you can connect from any source using
+IPv4.</li>
 </ol>
-<p>A wrong inbound rule can cause you fail connecting to the database from this notebook.</p>
-<p><em>Note:</em> by setting the inbound rule to <code>0.0.0.0/0</code> we have opened up access to <em>any</em> IP address. If this were production code you wouldn’t do this, you would specify a range of addresses or the specific address of the compute server that needed to access the system. Because we’re using Google colab or another notebook client to access, and we can’t control the IP address of that access, for simplicity we’ve set it up so that any IP address can access the database, but that is <em>not good practice</em> for production systems.</p>
-<p>Once the database is up and running you should be able to find its url on <a href="https://eu-west-2.console.aws.amazon.com/rds/home?region=eu-west-2#databases:">this page</a>. You can add that to the credentials file using the following code.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert your database url below</span></span>
+<p>A wrong inbound rule can cause you fail connecting to the database
+from this notebook.</p>
+<p><em>Note:</em> by setting the inbound rule to <code>0.0.0.0/0</code>
+we have opened up access to <em>any</em> IP address. If this were
+production code you wouldn’t do this, you would specify a range of
+addresses or the specific address of the compute server that needed to
+access the system. Because we’re using Google colab or another notebook
+client to access, and we can’t control the IP address of that access,
+for simplicity we’ve set it up so that any IP address can access the
+database, but that is <em>not good practice</em> for production
+systems.</p>
+<p>Once the database is up and running you should be able to find its
+url on <a
+href="https://eu-west-2.console.aws.amazon.com/rds/home?region=eu-west-2#databases:">this
+page</a>. You can add that to the credentials file using the following
+code.</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert your database url below</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>database_details <span class="op">=</span> {<span class="st">&quot;url&quot;</span>: INSERT_YOUR_DATABASE_URL_HERE, </span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;port&quot;</span>: <span class="dv">3306</span>}</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install ipython<span class="op">-</span>sql</span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install PyMySQL</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext sql</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;credentials.yaml&quot;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install ipython<span class="op">-</span>sql</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install PyMySQL</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext sql</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;credentials.yaml&quot;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  credentials <span class="op">=</span> yaml.safe_load(<span class="bu">file</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> credentials[<span class="st">&quot;username&quot;</span>]</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>password <span class="op">=</span> credentials[<span class="st">&quot;password&quot;</span>]</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> database_details[<span class="st">&quot;url&quot;</span>]</span></code></pre></div>
-<p>Connect to the database, enabling the uploading of local files as part of the connection.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>sql mariadb<span class="op">+</span>pymysql:<span class="op">//</span>$username:$password<span class="op">@</span>$url?local_infile<span class="op">=</span><span class="dv">1</span></span></code></pre></div>
-<p>Now that we have the database connection, we’re going to create a new database called <code>nigeria_nmis</code> for doing our work in.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<p>Connect to the database, enabling the uploading of local files as
+part of the connection.</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>sql mariadb<span class="op">+</span>pymysql:<span class="op">//</span>$username:$password<span class="op">@</span>$url?local_infile<span class="op">=</span><span class="dv">1</span></span></code></pre></div>
+<p>Now that we have the database connection, we’re going to create a new
+database called <code>nigeria_nmis</code> for doing our work in.</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>SET SQL_MODE <span class="op">=</span> <span class="st">&quot;NO_AUTO_VALUE_ON_ZERO&quot;</span><span class="op">;</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>SET time_zone <span class="op">=</span> <span class="st">&quot;+00:00&quot;</span><span class="op">;</span></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>CREATE DATABASE IF NOT EXISTS `nigeria_nmis` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>USE `nigeria_nmis`<span class="op">;</span></span></code></pre></div>
-<p>For the data to be loaded in to the table, we need to describe the <em>schema</em>. The schema tells the database server what to expect in the columns of the table.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<p>For the data to be loaded in to the table, we need to describe the
+<em>schema</em>. The schema tells the database server what to expect in
+the columns of the table.</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Table structure <span class="cf">for</span> table `hospitals_zones_joined`</span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
@@ -467,69 +879,134 @@ sns.set_palette('colorblind')}-->
 <span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>  `Shape_Length` decimal(<span class="dv">10</span>,<span class="dv">10</span>) NOT NULL,</span>
 <span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>  `Shape_Area` decimal(<span class="dv">10</span>,<span class="dv">10</span>) NOT NULL  </span>
 <span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>) DEFAULT CHARSET<span class="op">=</span>utf8 COLLATE<span class="op">=</span>utf8_bin AUTO_INCREMENT<span class="op">=</span><span class="dv">1</span> <span class="op">;</span></span></code></pre></div>
-<p>We also need to tell the server what the index of the data base is. Here we’re adding <code>db_id</code> as the primary key in the index.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<p>We also need to tell the server what the index of the data base is.
+Here we’re adding <code>db_id</code> as the primary key in the
+index.</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Indexes <span class="cf">for</span> table `hospitals_zones_joined`</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>ALTER TABLE `hospitals_zones_joined`</span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a> ADD PRIMARY KEY (`db_id`)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> AUTO_INCREMENT <span class="cf">for</span> table `hospitals_zones_joined`</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>ALTER TABLE `hospitals_zones_joined`</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>MODIFY `db_id` bigint(<span class="dv">20</span>) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span></code></pre></div>
-<p>Now we’re ready to load the data into the table. This can be done with <a href="https://mariadb.com/kb/en/load-data-infile/">the SQL command <code>LOAD DATA</code></a>. When connecting to the database we used the flag <code>local_infile=1</code> to ensure we could load local files into the database.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<p>Now we’re ready to load the data into the table. This can be done
+with <a href="https://mariadb.com/kb/en/load-data-infile/">the SQL
+command <code>LOAD DATA</code></a>. When connecting to the database we
+used the flag <code>local_infile=1</code> to ensure we could load local
+files into the database.</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>LOAD DATA LOCAL INFILE <span class="st">&#39;hospitals_zones_joined.csv&#39;</span> INTO TABLE hospitals_zones_joined</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>FIELDS TERMINATED BY <span class="st">&#39;,&#39;</span></span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>LINES STARTING BY <span class="st">&#39;&#39;</span> TERMINATED BY <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>sql SELECT <span class="op">*</span> FROM hospitals_zones_joined LIMIT <span class="dv">10</span></span></code></pre></div>
-<p>In the database there can be several ‘tables.’ Each table can be thought of as like a separate dataframe. The table name we’ve just saved is <code>hospitals_zones_joined</code>.</p>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>sql SELECT <span class="op">*</span> FROM hospitals_zones_joined LIMIT <span class="dv">10</span></span></code></pre></div>
+<p>In the database there can be several ‘tables’. Each table can be
+thought of as like a separate dataframe. The table name we’ve just saved
+is <code>hospitals_zones_joined</code>.</p>
 <h2 id="accessing-the-sql-database">Accessing the SQL Database</h2>
-<p>Now that we have a SQL database, we can create a connection to it and query it using SQL commands. Let’s try to simply select the data we wrote to it, to make sure it’s the same.</p>
-<p>Start by making a connection to the database. This will often be done via remote connections, but for this example we’ll connect locally to the database using the filepath directly.</p>
-<p>To access a data base, the first thing that is made is a connection. Then SQL is used to extract the information required. A typical SQL command is <code>SELECT</code>. It allows us to extract rows from a given table. It operates a bit like the <code>.head()</code> method in <code>pandas</code>, it will return the first <code>N</code> rows (by default the <code>.head()</code> command returns the first 5 rows, but you can set <code>N</code> to whatever you like. Here we’ve included a default value of 5 to make it match the <code>pandas</code> command.</p>
-<p>We do this using an <code>execute</code> command on the connection.</p>
-<p>Typically, its good software engineering practice to ‘wrap’ the database command in some python code. This allows the commands to be maintained. Below we wrap the SQL command</p>
+<p>Now that we have a SQL database, we can create a connection to it and
+query it using SQL commands. Let’s try to simply select the data we
+wrote to it, to make sure it’s the same.</p>
+<p>Start by making a connection to the database. This will often be done
+via remote connections, but for this example we’ll connect locally to
+the database using the filepath directly.</p>
+<p>To access a data base, the first thing that is made is a connection.
+Then SQL is used to extract the information required. A typical SQL
+command is <code>SELECT</code>. It allows us to extract rows from a
+given table. It operates a bit like the <code>.head()</code> method in
+<code>pandas</code>, it will return the first <code>N</code> rows (by
+default the <code>.head()</code> command returns the first 5 rows, but
+you can set <code>N</code> to whatever you like. Here we’ve included a
+default value of 5 to make it match the <code>pandas</code> command.</p>
+<p>We do this using an <code>execute</code> command on the
+connection.</p>
+<p>Typically, its good software engineering practice to ‘wrap’ the
+database command in some python code. This allows the commands to be
+maintained. Below we wrap the SQL command</p>
 <pre><code>SELECT * FROM table_name LIMIT N</code></pre>
-<p>in python code. This SQL command selects the first <code>N</code> entries from a given database called <code>table_name</code>.</p>
-<p>We can pass the <code>table_name</code> and number of rows, <code>n</code>, to the python command.</p>
-<p>Now we make the connection using the details stored in <code>credentials</code> and <code>database_details</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> create_connection(user<span class="op">=</span>credentials[<span class="st">&quot;username&quot;</span>], </span>
+<p>in python code. This SQL command selects the first <code>N</code>
+entries from a given database called <code>table_name</code>.</p>
+<p>We can pass the <code>table_name</code> and number of rows,
+<code>n</code>, to the python command.</p>
+<p>Now we make the connection using the details stored in
+<code>credentials</code> and <code>database_details</code>.</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> create_connection(user<span class="op">=</span>credentials[<span class="st">&quot;username&quot;</span>], </span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                         password<span class="op">=</span>credentials[<span class="st">&quot;password&quot;</span>], </span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                         host<span class="op">=</span>database_details[<span class="st">&quot;url&quot;</span>],</span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                         database<span class="op">=</span><span class="st">&quot;nigeria_nmis&quot;</span>)</span></code></pre></div>
-<p>Now that we have a connection, we can write a command and pass it to the database.</p>
-<p>The python library, <code>pymysql</code>, allows us to access the SQL database directly from python.</p>
-<p>Let’s have a go at calling the command to extract the first three facilities from our health center database. Let’s try creating a function that does the same thing the pandas <code>.head()</code> method does so we can inspect our database.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> head(conn, table, n<span class="op">=</span><span class="dv">5</span>):</span>
+<p>Now that we have a connection, we can write a command and pass it to
+the database.</p>
+<p>The python library, <code>pymysql</code>, allows us to access the SQL
+database directly from python.</p>
+<p>Let’s have a go at calling the command to extract the first three
+facilities from our health center database. Let’s try creating a
+function that does the same thing the pandas <code>.head()</code> method
+does so we can inspect our database.</p>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> head(conn, table, n<span class="op">=</span><span class="dv">5</span>):</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  rows <span class="op">=</span> select_top(conn, table, n)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> r <span class="kw">in</span> rows:</span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(r)</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>head(conn, <span class="st">&quot;hospitals_zones_joined&quot;</span>)</span></code></pre></div>
-<p>Great! We now have the database in and some python functions that operate on the data base by wrapping SQL commands.</p>
-<p>We will return to the SQL command style after download and add the other datasets to the database using a combination of <code>pandas</code> and the database utilities.</p>
-<p>Our next task will be to introduce data on COVID19 so that we can join that to our other data sets.</p>
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>head(conn, <span class="st">&quot;hospitals_zones_joined&quot;</span>)</span></code></pre></div>
+<p>Great! We now have the database in and some python functions that
+operate on the data base by wrapping SQL commands.</p>
+<p>We will return to the SQL command style after download and add the
+other datasets to the database using a combination of
+<code>pandas</code> and the database utilities.</p>
+<p>Our next task will be to introduce data on COVID19 so that we can
+join that to our other data sets.</p>
 <h2 id="covid-data">Covid Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Now we have the health data, we’re going to combine it with <a href="https://github.com/dsfsi/covid19africa">data about COVID-19 cases in Nigeria over time</a>. This data is kindly provided by Africa open COVID-19 data working group, which <a href="https://www.bu.edu/sph/profile/elaine-nsoesie/">Elaine Nsoesie</a> has been working with. The data is taken from Twitter, and only goes up until May 2020.</p>
-<p>They provide their data in GitHub. We can access the cases we’re interested in from the following URL.</p>
-<p>For convenience, we’ll load the data into pandas first, but our next step will be to create a new SQLite table containing the data. Then we’ll join that table to our existing tables.</p>
+<p>Now we have the health data, we’re going to combine it with <a
+href="https://github.com/dsfsi/covid19africa">data about COVID-19 cases
+in Nigeria over time</a>. This data is kindly provided by Africa open
+COVID-19 data working group, which <a
+href="https://www.bu.edu/sph/profile/elaine-nsoesie/">Elaine Nsoesie</a>
+has been working with. The data is taken from Twitter, and only goes up
+until May 2020.</p>
+<p>They provide their data in GitHub. We can access the cases we’re
+interested in from the following URL.</p>
+<p>For convenience, we’ll load the data into pandas first, but our next
+step will be to create a new SQLite table containing the data. Then
+we’ll join that table to our existing tables.</p>
 <h1 id="nigerian-covid-data">Nigerian COVID Data</h1>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-covid-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-covid-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-covid-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-covid-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>At the beginning of the COVID-19 outbreak, the Consortium for African COVID-19 Data formed to bring together data from across the African continent on COVID-19 cases <span class="citation" data-cites="Marivate-covid20">(Marivate et al., 2020)</span>. These cases are recorded in the following GitHub repository: <a href="https://github.com/dsfsi/covid19africa" class="uri">https://github.com/dsfsi/covid19africa</a>.</p>
-<p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_covid()[<span class="st">&#39;Y&#39;</span>]</span>
+<p>At the beginning of the COVID-19 outbreak, the Consortium for African
+COVID-19 Data formed to bring together data from across the African
+continent on COVID-19 cases <span class="citation"
+data-cites="Marivate-covid20">(Marivate et al., 2020)</span>. These
+cases are recorded in the following GitHub repository: <a
+href="https://github.com/dsfsi/covid19africa"
+class="uri">https://github.com/dsfsi/covid19africa</a>.</p>
+<p>For ease of use we’ve packaged this data set in the <code>pods</code>
+library</p>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_covid()[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<p>Alternatively, you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<p>Alternatively, you can access the data directly with the following
+commands.</p>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/dsfsi/covid19africa/master/data/line_lists/line-list-nigeria.csv&#39;</span>, <span class="st">&#39;line-list-nigeria.csv&#39;</span>)</span>
@@ -538,25 +1015,31 @@ sns.set_palette('colorblind')}-->
 <span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;date_admission_hospital&#39;</span>, </span>
 <span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;date_onset_symptoms&#39;</span>,</span>
 <span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;death_date&#39;</span>])</span></code></pre></div>
-<p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<p>Once it is loaded in the data can be summarized using the
+<code>describe</code> method in pandas.</p>
+<div class="sourceCode" id="cb50"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-covid-data-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//datasets/nigerian-covid-data.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="nigerian-covid-data-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-covid-data&#39;)">
+<div id="nigerian-covid-data-magnify" class="magnify"
+onclick="magnifyFigure(&#39;nigerian-covid-data&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="nigerian-covid-data-caption" class="caption-frame">
 <p>Figure: Evolution of COVID-19 cases in Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>covid_data<span class="op">=</span>data</span>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>covid_data<span class="op">=</span>data</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>covid_data.to_csv(<span class="st">&#39;cases.csv&#39;</span>, header<span class="op">=</span><span class="va">None</span>)</span></code></pre></div>
-<p>Now we convert this CSV file we’ve downloaded into a new table in the database file.</p>
+<p>Now we convert this CSV file we’ve downloaded into a new table in the
+database file.</p>
 <p>Once again we have to construct a schema for the data.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Table structure <span class="cf">for</span> table `cases`</span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
@@ -585,37 +1068,67 @@ sns.set_palette('colorblind')}-->
 <span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>  `Unnamed: <span class="dv">19</span>` text COLLATE utf8_bin</span>
 <span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>) DEFAULT CHARSET<span class="op">=</span>utf8 COLLATE<span class="op">=</span>utf8_bin AUTO_INCREMENT<span class="op">=</span><span class="dv">1</span> <span class="op">;</span></span></code></pre></div>
 <p>Once again we need to set the index.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Indexes <span class="cf">for</span> table `cases`</span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="op">--</span></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>ALTER TABLE `cases`</span>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a> ADD PRIMARY KEY (`index`)<span class="op">;</span></span></code></pre></div>
 <p>And now we can load the data into the table.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<div class="sourceCode" id="cb54"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>LOAD DATA LOCAL INFILE <span class="st">&#39;cases.csv&#39;</span> INTO TABLE cases</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>FIELDS TERMINATED BY <span class="st">&#39;,&#39;</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>LINES STARTING BY <span class="st">&#39;&#39;</span> TERMINATED BY <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span><span class="op">;</span></span></code></pre></div>
 <h2 id="population-data">Population Data</h2>
-<p>Now we have information about COVID cases, and we have information about how many health centers and how many doctors and nurses there are in each health center. But unless we understand how many people there are in each state, then we cannot make decisions about where they may be problems with the disease.</p>
-<p>If we were running our ride hailing service, we would also need information about how many people there were in different areas, so we could understand what the <em>demand</em> for the boda boda rides might be.</p>
-<p>To access the number of people we can get population statistics from the <a href="https://data.humdata.org/">Humanitarian Data Exchange</a>.</p>
-<p>We also want to have population data for each state in Nigeria, so that we can see attributes like whether there are zones of high health facility density but low population density.</p>
+<p>Now we have information about COVID cases, and we have information
+about how many health centers and how many doctors and nurses there are
+in each health center. But unless we understand how many people there
+are in each state, then we cannot make decisions about where they may be
+problems with the disease.</p>
+<p>If we were running our ride hailing service, we would also need
+information about how many people there were in different areas, so we
+could understand what the <em>demand</em> for the boda boda rides might
+be.</p>
+<p>To access the number of people we can get population statistics from
+the <a href="https://data.humdata.org/">Humanitarian Data
+Exchange</a>.</p>
+<p>We also want to have population data for each state in Nigeria, so
+that we can see attributes like whether there are zones of high health
+facility density but low population density.</p>
 <h2 id="population-data-1">Population Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-population-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-population-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-population-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/nigerian-population-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Now we have information about COVID cases, and we have information about how many health centers and how many doctors and nurses there are in each health center. But unless we understand how many people there are in each state, then we cannot make decisions about where they may be problems with the disease.</p>
-<p>If we were running our ride hailing service, we would also need information about how many people there were in different areas, so we could understand what the demand for the boda boda rides might be.</p>
-<p>To access the number of people we can get population statistics from the <a href="https://data.humdata.org/">Humanitarian Data Exchange</a>.</p>
-<p>We also want to have population data for each state in Nigeria, so that we can see attributes like whether there are zones of high health facility density but low population density.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
+<p>Now we have information about COVID cases, and we have information
+about how many health centers and how many doctors and nurses there are
+in each health center. But unless we understand how many people there
+are in each state, then we cannot make decisions about where they may be
+problems with the disease.</p>
+<p>If we were running our ride hailing service, we would also need
+information about how many people there were in different areas, so we
+could understand what the demand for the boda boda rides might be.</p>
+<p>To access the number of people we can get population statistics from
+the <a href="https://data.humdata.org/">Humanitarian Data
+Exchange</a>.</p>
+<p>We also want to have population data for each state in Nigeria, so
+that we can see attributes like whether there are zones of high health
+facility density but low population density.</p>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>pop_url <span class="op">=</span> <span class="st">&quot;https://data.humdata.org/dataset/a7c3de5e-ff27-4746-99cd-05f2ad9b1066/resource/d9fc551a-b5e4-4bed-9d0d-b047b6961817/download/nga_admpop_adm1_2020.csv&quot;</span></span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>_, msg <span class="op">=</span> urllib.request.urlretrieve(pop_url,<span class="st">&quot;nga_admpop_adm1_2020.csv&quot;</span>)</span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&quot;nga_admpop_adm1_2020.csv&quot;</span>)</span></code></pre></div>
-<p>To do joins with this data, we must first make sure that the columns have the right names. The name should match the same name of the column in our existing data. So we reset the column names, and the name of the index, as follows.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data.dropna(axis<span class="op">=</span><span class="dv">0</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<p>To do joins with this data, we must first make sure that the columns
+have the right names. The name should match the same name of the column
+in our existing data. So we reset the column names, and the name of the
+index, as follows.</p>
+<div class="sourceCode" id="cb56"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data.dropna(axis<span class="op">=</span><span class="dv">0</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>data.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>data.rename(columns <span class="op">=</span> {<span class="st">&quot;ADM0_NAME&quot;</span> : <span class="st">&quot;admin0Name_en&quot;</span>, </span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;ADM0_PCODE&quot;</span> : <span class="st">&quot;admin0Pcode&quot;</span>, </span>
@@ -627,104 +1140,217 @@ sns.set_palette('colorblind')}-->
 <span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&quot;admin1Name_en&quot;</span>] <span class="op">=</span> data[<span class="st">&quot;admin1Name_en&quot;</span>].<span class="bu">str</span>.title()</span>
 <span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.set_index(<span class="st">&quot;admin1Name_en&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_population()[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>pop_data<span class="op">=</span>data</span></code></pre></div>
-<p>When doing this for real world data, you should also make sure that the names used in the rows are the same across the different data bases. For example, has someone decided to use an abbreviation for ‘Federal Capital Territory’ and set it as ‘FCT.’ The computer won’t understand these are the same states, and if you do a join with such data, you can get duplicate entries or missing entries. This sort of thing happens a lot in real world data and takes a lot of time to sort out. Fortunately, in this case, the data is well curated, and we don’t have these problems.</p>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigerian_population()[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>pop_data<span class="op">=</span>data</span></code></pre></div>
+<p>When doing this for real world data, you should also make sure that
+the names used in the rows are the same across the different data bases.
+For example, has someone decided to use an abbreviation for ‘Federal
+Capital Territory’ and set it as ‘FCT’. The computer won’t understand
+these are the same states, and if you do a join with such data, you can
+get duplicate entries or missing entries. This sort of thing happens a
+lot in real world data and takes a lot of time to sort out. Fortunately,
+in this case, the data is well curated, and we don’t have these
+problems.</p>
 <h2 id="save-to-database-file">Save to database file</h2>
-<p>The next step is to add this new CSV file as an additional table in our database.</p>
-<h2 id="computing-per-capita-hospitals-and-covid">Computing per capita hospitals and COVID</h2>
+<p>The next step is to add this new CSV file as an additional table in
+our database.</p>
+<h2 id="computing-per-capita-hospitals-and-covid">Computing per capita
+hospitals and COVID</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_systems/includes/nigeria-nmis-covid-join.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The Minister of Health in Abuja may be interested in which states are most vulnerable to COVID19. We now have all the information in our SQL data bases to compute what our health center provision is per capita, and what the COVID19 situation is.</p>
-<p>To do this, we will use the <code>JOIN</code> operation from SQL and introduce a new operation called <code>GROUPBY</code>.</p>
+<p>The Minister of Health in Abuja may be interested in which states are
+most vulnerable to COVID19. We now have all the information in our SQL
+data bases to compute what our health center provision is per capita,
+and what the COVID19 situation is.</p>
+<p>To do this, we will use the <code>JOIN</code> operation from SQL and
+introduce a new operation called <code>GROUPBY</code>.</p>
 <h3 id="joining-in-pandas">Joining in Pandas</h3>
-<p>As before, these operations can be done in pandas or GeoPandas. Before we create the SQL commands, we’ll show how you can do that in pandas.</p>
-<p>In <code>pandas</code>, the equivalent of a database table is a dataframe. So, the JOIN operation takes two dataframes and joins them based on the key. The key is that special shared column between the two tables. The place where the ‘holes align’ so the two databases can be joined together.</p>
-<p>In GeoPandas we used an outer join. In an outer join you keep all rows from both tables, even if there is no match on the key. In an inner join, you only keep the rows if the two tables have a matching key.</p>
-<p>This is sometimes where problems can creep in. If in one table Abuja’s state is encoded as ‘FCT’ or ‘FCT-Abuja,’ and in another table it’s encoded as ‘Federal Capital Territory,’ they won’t match, and that data wouldn’t appear in the joined table.</p>
-<p>In simple terms, a JOIN operation takes two tables (or dataframes) and combines them based on some key, in this case the index of the Pandas data frame which is the state name.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>zones_gdf.set_index(<span class="st">&quot;admin1Name_en&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<p>As before, these operations can be done in pandas or GeoPandas.
+Before we create the SQL commands, we’ll show how you can do that in
+pandas.</p>
+<p>In <code>pandas</code>, the equivalent of a database table is a
+dataframe. So, the JOIN operation takes two dataframes and joins them
+based on the key. The key is that special shared column between the two
+tables. The place where the ‘holes align’ so the two databases can be
+joined together.</p>
+<p>In GeoPandas we used an outer join. In an outer join you keep all
+rows from both tables, even if there is no match on the key. In an inner
+join, you only keep the rows if the two tables have a matching key.</p>
+<p>This is sometimes where problems can creep in. If in one table
+Abuja’s state is encoded as ‘FCT’ or ‘FCT-Abuja’, and in another table
+it’s encoded as ‘Federal Capital Territory’, they won’t match, and that
+data wouldn’t appear in the joined table.</p>
+<p>In simple terms, a JOIN operation takes two tables (or dataframes)
+and combines them based on some key, in this case the index of the
+Pandas data frame which is the state name.</p>
+<div class="sourceCode" id="cb60"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>zones_gdf.set_index(<span class="st">&quot;admin1Name_en&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>pop_joined <span class="op">=</span> zones_gdf.join(pop_data[<span class="st">&#39;population&#39;</span>], how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)</span></code></pre></div>
 <h2 id="groupby-in-pandas">GroupBy in Pandas</h2>
-<p>Our COVID19 data is in the form of individual cases. But we are interested in total case counts for each state. There is a special data base operation known as <code>GROUP BY</code> for collecting information about the individual states. The type of information you might want could be a sum, the maximum value, an average, the minimum value. We can use a GroupBy operation in <code>pandas</code> and SQL to summarize the counts of covid cases in each state.</p>
-<p>A <code>GROUPBY</code> operation groups rows with the same key (in this case ‘province/state’) into separate objects, that we can operate on further such as to count the rows in each group, or to sum or take the mean over the values in some column (imagine each case row had the age of the patient, and you were interested in the mean age of patients.)</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>covid_cases_by_state <span class="op">=</span> covid_data.groupby([<span class="st">&#39;province/state&#39;</span>]).count()[<span class="st">&#39;case_id&#39;</span>]</span></code></pre></div>
-<p>The <code>.groupby()</code> method on the dataframe has now given us a new data series that contains the total number of covid cases in each state. We can examine it to check we have something sensible.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>covid_cases_by_state</span></code></pre></div>
-<p>Now we have this new data series, it can be added to the pandas dataframe as a new column.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>pop_joined[<span class="st">&#39;covid_cases_by_state&#39;</span>] <span class="op">=</span> covid_cases_by_state</span></code></pre></div>
-<p>The spatial join we did on the original data frame to obtain hosp_state_joined introduced a new column, <code>index_right</code> that contains the state of each of the hospitals. Let’s have a quick look at it below.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined[<span class="st">&#39;index_right&#39;</span>]</span></code></pre></div>
-<p>To count the hospitals in each of the states, we first create a grouped series where we’ve grouped on these states.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> hosp_state_joined.groupby(<span class="st">&#39;admin1Name_en&#39;</span>)</span></code></pre></div>
-<p>This python operation now goes through each of the groups and counts how many hospitals there are in each state. It stores the result in a dictionary. If you’re new to python, then to understand this code you need to understand what a ‘dictionary comprehension’ is. In this case the dictionary comprehension is being used to create a python dictionary of states and total hospital counts. That’s then being converted into a <code>pandas</code> Data Series and added to the <code>pop_joined</code> dataframe.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>counted_groups <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> grouped.groups.items()}</span>
+<p>Our COVID19 data is in the form of individual cases. But we are
+interested in total case counts for each state. There is a special data
+base operation known as <code>GROUP BY</code> for collecting information
+about the individual states. The type of information you might want
+could be a sum, the maximum value, an average, the minimum value. We can
+use a GroupBy operation in <code>pandas</code> and SQL to summarize the
+counts of covid cases in each state.</p>
+<p>A <code>GROUPBY</code> operation groups rows with the same key (in
+this case ‘province/state’) into separate objects, that we can operate
+on further such as to count the rows in each group, or to sum or take
+the mean over the values in some column (imagine each case row had the
+age of the patient, and you were interested in the mean age of
+patients.)</p>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>covid_cases_by_state <span class="op">=</span> covid_data.groupby([<span class="st">&#39;province/state&#39;</span>]).count()[<span class="st">&#39;case_id&#39;</span>]</span></code></pre></div>
+<p>The <code>.groupby()</code> method on the dataframe has now given us
+a new data series that contains the total number of covid cases in each
+state. We can examine it to check we have something sensible.</p>
+<div class="sourceCode" id="cb62"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>covid_cases_by_state</span></code></pre></div>
+<p>Now we have this new data series, it can be added to the pandas
+dataframe as a new column.</p>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>pop_joined[<span class="st">&#39;covid_cases_by_state&#39;</span>] <span class="op">=</span> covid_cases_by_state</span></code></pre></div>
+<p>The spatial join we did on the original data frame to obtain
+hosp_state_joined introduced a new column, <code>index_right</code> that
+contains the state of each of the hospitals. Let’s have a quick look at
+it below.</p>
+<div class="sourceCode" id="cb64"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>hosp_state_joined[<span class="st">&#39;index_right&#39;</span>]</span></code></pre></div>
+<p>To count the hospitals in each of the states, we first create a
+grouped series where we’ve grouped on these states.</p>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> hosp_state_joined.groupby(<span class="st">&#39;admin1Name_en&#39;</span>)</span></code></pre></div>
+<p>This python operation now goes through each of the groups and counts
+how many hospitals there are in each state. It stores the result in a
+dictionary. If you’re new to python, then to understand this code you
+need to understand what a ‘dictionary comprehension’ is. In this case
+the dictionary comprehension is being used to create a python dictionary
+of states and total hospital counts. That’s then being converted into a
+<code>pandas</code> Data Series and added to the <code>pop_joined</code>
+dataframe.</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>counted_groups <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> grouped.groups.items()}</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">=</span> pd.Series(counted_groups)</span></code></pre></div>
-<p>For convenience, we can now add a new data series to the data frame that contains the per capita information about hospitals. that makes it easy to retrieve later.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>pop_joined[<span class="st">&#39;hosp_per_capita_10k&#39;</span>] <span class="op">=</span> (pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">*</span> <span class="dv">10000</span> )<span class="op">/</span> pop_joined[<span class="st">&#39;population&#39;</span>]</span></code></pre></div>
+<p>For convenience, we can now add a new data series to the data frame
+that contains the per capita information about hospitals. that makes it
+easy to retrieve later.</p>
+<div class="sourceCode" id="cb68"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>pop_joined[<span class="st">&#39;hosp_per_capita_10k&#39;</span>] <span class="op">=</span> (pop_joined[<span class="st">&#39;hosp_state&#39;</span>] <span class="op">*</span> <span class="dv">10000</span> )<span class="op">/</span> pop_joined[<span class="st">&#39;population&#39;</span>]</span></code></pre></div>
 <h2 id="sql-style">SQL-style</h2>
-<p>That’s the <code>pandas</code> approach to doing it. But <code>pandas</code> itself is inspired by database languages, in particular relational databases such as SQL. To do these types of joins at scale, e.g., for a ride hailing app, we need to do these joins in a database.</p>
-<p>As before, we’ll wrap the underlying SQL commands with a convenient python command.</p>
-<p>What you see below gives the full SQL command. There is a <a href="https://www.w3schools.com/sql/sql_select.asp"><code>SELECT</code> command</a>, which extracts <code>FROM</code> a particular table. It then completes an <a href="https://www.w3schools.com/sql/sql_join_inner.asp"><code>INNER JOIN</code></a> using particular columns (<code>province/state</code> and <code>admin1Name_en</code>)</p>
-<p>Now we’ve created our python wrapper, we can connect to the data base and run our SQL command on the database using the wrapper.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> create_connection(user<span class="op">=</span>credentials[<span class="st">&quot;username&quot;</span>], </span>
+<p>That’s the <code>pandas</code> approach to doing it. But
+<code>pandas</code> itself is inspired by database languages, in
+particular relational databases such as SQL. To do these types of joins
+at scale, e.g., for a ride hailing app, we need to do these joins in a
+database.</p>
+<p>As before, we’ll wrap the underlying SQL commands with a convenient
+python command.</p>
+<p>What you see below gives the full SQL command. There is a <a
+href="https://www.w3schools.com/sql/sql_select.asp"><code>SELECT</code>
+command</a>, which extracts <code>FROM</code> a particular table. It
+then completes an <a
+href="https://www.w3schools.com/sql/sql_join_inner.asp"><code>INNER JOIN</code></a>
+using particular columns (<code>province/state</code> and
+<code>admin1Name_en</code>)</p>
+<p>Now we’ve created our python wrapper, we can connect to the data base
+and run our SQL command on the database using the wrapper.</p>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> create_connection(user<span class="op">=</span>credentials[<span class="st">&quot;username&quot;</span>], </span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                         password<span class="op">=</span>credentials[<span class="st">&quot;password&quot;</span>],</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>             host<span class="op">=</span>database_details[<span class="st">&quot;url&quot;</span>],</span>
 <span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>             database<span class="op">=</span><span class="st">&quot;nigeria_nmis&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>state_cases_hosps <span class="op">=</span> join_counts(conn)</span></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> state_cases_hosps:</span>
+<div class="sourceCode" id="cb70"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>state_cases_hosps <span class="op">=</span> join_counts(conn)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> state_cases_hosps:</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;State </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Covid Cases </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t\t</span><span class="st"> Health Facilities </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(row[<span class="dv">0</span>], row[<span class="dv">1</span>], row[<span class="dv">2</span>]))</span></code></pre></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<div class="sourceCode" id="cb72"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;population&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>base.set_title(<span class="st">&quot;Population of Nigerian States&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;hosp_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>base.set_title(<span class="st">&quot;Hospitals Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
-<p>Add a new column the dataframe for covid cases per 10,000 population, in the same way we computed health facilities per 10k capita.</p>
+<p>Add a new column the dataframe for covid cases per 10,000 population,
+in the same way we computed health facilities per 10k capita.</p>
 <h3 id="exercise-2">Exercise 2</h3>
 <p>Add a new column for covid cases per health facility.</p>
 <h3 id="exercise-3">Exercise 3</h3>
-<p>Do this in both the SQL and the Pandas styles to get a feel for how they differ.</p>
+<p>Do this in both the SQL and the Pandas styles to get a feel for how
+they differ.</p>
 <h3 id="exercise-4">Exercise 4</h3>
-<p>Perform an inner join using SQL on your databases and convert the result into a <code>pandas</code> DataFrame.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a></span>
+<p>Perform an inner join using SQL on your databases and convert the
+result into a <code>pandas</code> DataFrame.</p>
+<div class="sourceCode" id="cb74"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pop_joined[&#39;cases_per_capita_10k&#39;] = ???</span></span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pop_joined[&#39;cases_per_facility&#39;] = ???</span></span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_capita_10k&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>base.set_title(<span class="st">&quot;Covid Cases Per Capita (10k) of Nigerian States&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<div class="sourceCode" id="cb76"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;covid_cases_by_state&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>base.set_title(<span class="st">&quot;Covid Cases by State&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
+<div class="sourceCode" id="cb77"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nigeria_gdf.plot(color<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">11</span>))</span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>pop_joined.plot(ax<span class="op">=</span>base, column<span class="op">=</span><span class="st">&#39;cases_per_facility&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, legend<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>base.set_title(<span class="st">&quot;Covid Cases per Health Facility&quot;</span>)</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
-<p>For more information on these subjects and more you might want to check the following resources.</p>
+<p>For more information on these subjects and more you might want to
+check the following resources.</p>
 <ul>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+<li>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
 <div id="ref-Marivate-covid20" class="csl-entry" role="doc-biblioentry">
-Marivate, V., Nsoesie, E., Bekele, E., Africa open COVID-19 data working group, 2020. <span class="nocase">Coronavirus COVID-19 (2019-nCoV) Data Repository for Africa</span>. <a href="https://doi.org/10.5281/zenodo.3757554">https://doi.org/10.5281/zenodo.3757554</a>
+Marivate, V., Nsoesie, E., Bekele, E., Africa open COVID-19 data working
+group, 2020. <span class="nocase">Coronavirus COVID-19 (2019-nCoV) Data
+Repository for Africa</span>. <a
+href="https://doi.org/10.5281/zenodo.3757554">https://doi.org/10.5281/zenodo.3757554</a>
 </div>
 <div id="ref-Nigeria-nmis14" class="csl-entry" role="doc-biblioentry">
-The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014. Nigeria <span>NMIS</span> facility database.
+The Office of the Senior Special Assistant to the President on the
+Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014.
+Nigeria <span>NMIS</span> facility database.
 </div>
 </div>
-<section class="footnotes" role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>See <a href="http://infolab.stanford.edu/pub/voy/museum/pictures/display/0-4-Google.htm">infolab at Stanford</a> for more details.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>There are various reports that try to track market share, here’s one from Gartner from June 2021: <a href="https://www.gartner.com/en/newsroom/press-releases/2021-06-28-gartner-says-worldwide-iaas-public-cloud-services-market-grew-40-7-percent-in-2020" class="uri">https://www.gartner.com/en/newsroom/press-releases/2021-06-28-gartner-says-worldwide-iaas-public-cloud-services-market-grew-40-7-percent-in-2020</a>. It looks at revenue that suggests Amazon retains 40% with Microsoft second largest on 20%.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>See <a
+href="http://infolab.stanford.edu/pub/voy/museum/pictures/display/0-4-Google.htm">infolab
+at Stanford</a> for more details.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>There are various reports that try to track market
+share, here’s one from Gartner from June 2021: <a
+href="https://www.gartner.com/en/newsroom/press-releases/2021-06-28-gartner-says-worldwide-iaas-public-cloud-services-market-grew-40-7-percent-in-2020"
+class="uri">https://www.gartner.com/en/newsroom/press-releases/2021-06-28-gartner-says-worldwide-iaas-public-cloud-services-market-grew-40-7-percent-in-2020</a>.
+It looks at revenue that suggests Amazon retains 40% with Microsoft
+second largest on 20%.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
