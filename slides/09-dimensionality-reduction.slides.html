@@ -42,7 +42,8 @@
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Dimensionality Reduction: Latent Variable Modelling</h1>
+  <h1 class="title">Dimensionality Reduction: Latent Variable
+Modelling</h1>
 </section>
 
 <section class="slide level2">
@@ -71,17 +72,22 @@ sns.set_palette('colorblind')}-->
 <h2>Clustering</h2>
 <ul>
 <li>One common approach, not deeply covered in this course.</li>
-<li>Associate each data point, <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> with one of <span class="math inline">\(k\)</span> different discrete groups.</li>
+<li>Associate each data point, <span class="math inline">\(\mathbf{
+y}_{i, :}\)</span> with one of <span class="math inline">\(k\)</span>
+different discrete groups.</li>
 <li>For example:
 <ul>
-<li>Clustering animals into discrete groups. Are animals discrete or continuous?</li>
-<li>Clustering into different different <em>political</em> affiliations.</li>
+<li>Clustering animals into discrete groups. Are animals discrete or
+continuous?</li>
+<li>Clustering into different different <em>political</em>
+affiliations.</li>
 </ul></li>
 <li>Humans do seem to like clusters:
 <ul>
 <li>Very useful when interacting with biologists.</li>
 </ul></li>
-<li>Subtle difference between clustering and <em>vector quantisation</em></li>
+<li>Subtle difference between clustering and <em>vector
+quantisation</em></li>
 </ul>
 </section>
 <section id="trying-to-teach-about-infinity" class="slide level2">
@@ -93,11 +99,13 @@ sns.set_palette('colorblind')}-->
 <section id="clustering-and-vector-quantisation" class="slide level2">
 <h2>Clustering and Vector Quantisation</h2>
 <ul>
-<li>To my mind difference is in clustering there should be a reduction in data density between samples.</li>
+<li>To my mind difference is in clustering there should be a reduction
+in data density between samples.</li>
 <li>This definition is not universally applied.</li>
 <li>For today’s purposes we merge them:
 <ul>
-<li>Determine how to allocate each point to a group and <em>harder</em> total number of groups.</li>
+<li>Determine how to allocate each point to a group and <em>harder</em>
+total number of groups.</li>
 </ul></li>
 </ul>
 </section>
@@ -105,13 +113,15 @@ sns.set_palette('colorblind')}-->
 <h2><span class="math inline">\(k\)</span>-means Clustering</h2>
 <ul>
 <li>Simple algorithm for allocating points to groups.</li>
-<li><em>Require</em>: Set of <span class="math inline">\(k\)</span> cluster centres &amp; assignment of each points to a cluster.</li>
+<li><em>Require</em>: Set of <span class="math inline">\(k\)</span>
+cluster centres &amp; assignment of each points to a cluster.</li>
 </ul>
 <ol type="1">
 <li>Initialize cluster centres as randomly selected data points.
 <ol start="2" type="1">
 <li>Assign each data point to <em>nearest</em> cluster centre.</li>
-<li>Update each cluster centre by setting it to the mean of assigned data points.</li>
+<li>Update each cluster centre by setting it to the mean of assigned
+data points.</li>
 <li>Repeat 2 and 3 until cluster allocations do not change.</li>
 </ol></li>
 </ol>
@@ -119,51 +129,68 @@ sns.set_palette('colorblind')}-->
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>This minimizes the objective <span class="math display">\[
-E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
-\]</span> <em>i.e.</em> it minimizes thesum of Euclidean squared distances betwen points and their associated centres.</li>
-<li>The minimum is <em>not</em> guaranteed to be <em>global</em> or <em>unique</em>.</li>
-<li>This objective is a non-convex optimization problem.</li>
-</ul>
-<p>import numpy as np import mlai}</p>
-<ul>
-<li><em>Task</em>: associate each data point with a different label.</li>
-<li>Label is <em>not</em> provided.</li>
-<li>Quite intuitive for humans, we do it naturally.</li>
+<li><p>This minimizes the objective <span class="math display">\[
+E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i,
+:} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} -
+\boldsymbol{ \mu}_{j, :}\right)
+\]</span> <em>i.e.</em> it minimizes thesum of Euclidean squared
+distances betwen points and their associated centres.</p></li>
+<li><p>The minimum is <em>not</em> guaranteed to be <em>global</em> or
+<em>unique</em>.</p></li>
+<li><p>This objective is a non-convex optimization problem.</p></li>
+<li><p><em>Task</em>: associate each data point with a different
+label.</p></li>
+<li><p>Label is <em>not</em> provided.</p></li>
+<li><p>Quite intuitive for humans, we do it naturally.</p></li>
 </ul>
 </section>
 <section id="platonic-ideals" class="slide level2">
 <h2>Platonic Ideals</h2>
 <ul>
-<li>Names for animals originally invented by humans through ‘clustering’</li>
-<li>Can we have the computer to recreate that process of inventing the label?</li>
-<li>Greek philosopher, Plato, thought about ideas, he considered the concept of the Platonic ideal.</li>
-<li>Platonic ideal bird is the bird that is most bird-like or the chair that is most chair-like.</li>
+<li>Names for animals originally invented by humans through
+‘clustering’</li>
+<li>Can we have the computer to recreate that process of inventing the
+label?</li>
+<li>Greek philosopher, Plato, thought about ideas, he considered the
+concept of the Platonic ideal.</li>
+<li>Platonic ideal bird is the bird that is most bird-like or the chair
+that is most chair-like.</li>
 </ul>
 </section>
 <section id="cluster-center" class="slide level2">
 <h2>Cluster Center</h2>
 <ul>
-<li>Can define different clusters, by finding their Platonic ideal (known as the cluster center)</li>
-<li>Allocate each data point to the relevant nearest cluster center.</li>
-<li>Allocate each animal to the class defined by its nearest cluster center.</li>
+<li>Can define different clusters, by finding their Platonic ideal
+(known as the cluster center)</li>
+<li>Allocate each data point to the relevant nearest cluster
+center.</li>
+<li>Allocate each animal to the class defined by its nearest cluster
+center.</li>
 </ul>
 </section>
 <section id="similarity-and-distance-measures" class="slide level2">
 <h2>Similarity and Distance Measures</h2>
 <ul>
-<li>Define a notion of either similarity or distance between the objects and their Platonic ideal.</li>
-<li>If objects are vectors of data, <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
-<li>Represent cluster center for category <span class="math inline">\(j\)</span> by a vector <span class="math inline">\(\boldsymbol{ \mu}_j\)</span>.</li>
-<li>This vector contains the ideal features of a bird, a chair, or whatever category <span class="math inline">\(j\)</span> is.</li>
+<li>Define a notion of either similarity or distance between the objects
+and their Platonic ideal.</li>
+<li>If objects are vectors of data, <span class="math inline">\(\mathbf{
+x}_i\)</span>.</li>
+<li>Represent cluster center for category <span
+class="math inline">\(j\)</span> by a vector <span
+class="math inline">\(\boldsymbol{ \mu}_j\)</span>.</li>
+<li>This vector contains the ideal features of a bird, a chair, or
+whatever category <span class="math inline">\(j\)</span> is.</li>
 </ul>
 </section>
 <section id="similarity-or-distance" class="slide level2">
 <h2>Similarity or Distance</h2>
 <ul>
-<li>Can either think in terms of similarity of the objects, or distances.</li>
-<li>We want objects that are similar to each other to cluster together. We want objects that are distant from each other to cluster apart.</li>
-<li>Use mathematical function to formalize this notion, e.g. for distance <span class="math display">\[
+<li>Can either think in terms of similarity of the objects, or
+distances.</li>
+<li>We want objects that are similar to each other to cluster together.
+We want objects that are distant from each other to cluster apart.</li>
+<li>Use mathematical function to formalize this notion, e.g. for
+distance <span class="math display">\[
 d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j).
 \]</span></li>
 </ul>
@@ -171,8 +198,10 @@ d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j).
 <section id="squared-distance" class="slide level2">
 <h2>Squared Distance</h2>
 <ul>
-<li>Find cluster centers that are close to as many data points as possible.</li>
-<li>A commonly used distance is the squared distance, <span class="math display">\[
+<li>Find cluster centers that are close to as many data points as
+possible.</li>
+<li>A commonly used distance is the squared distance, <span
+class="math display">\[
 d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2.
 \]</span></li>
 <li>Already seen for regression.</li>
@@ -181,26 +210,36 @@ d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2.
 <section id="objective-function-1" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>Given similarity measure, need number of cluster centers, <span class="math inline">\(K\)</span>.</li>
-<li>Find their location by allocating each center to a sub-set of the points and minimizing the sum of the squared errors, <span class="math display">\[
-E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
-\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all indices of data points allocated to the <span class="math inline">\(j\)</span>th center.</li>
+<li>Given similarity measure, need number of cluster centers, <span
+class="math inline">\(K\)</span>.</li>
+<li>Find their location by allocating each center to a sub-set of the
+points and minimizing the sum of the squared errors, <span
+class="math display">\[
+E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{
+\mu}_j)^2
+\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all
+indices of data points allocated to the <span
+class="math inline">\(j\)</span>th center.</li>
 </ul>
 </section>
 <section id="k-means-clustering-1" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
 <ul>
-<li><em><span class="math inline">\(k\)</span>-means clustering</em> is simple and quick to implement.</li>
+<li><em><span class="math inline">\(k\)</span>-means clustering</em> is
+simple and quick to implement.</li>
 <li>Very <em>initialisation</em> sensitive.</li>
 </ul>
 </section>
 <section id="initialisation" class="slide level2">
 <h2>Initialisation</h2>
 <ul>
-<li>Initialisation is the process of selecting a starting set of parameters.</li>
+<li>Initialisation is the process of selecting a starting set of
+parameters.</li>
 <li>Optimisation result can depend on the starting point.</li>
-<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centers.</li>
-<li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
+<li>For <span class="math inline">\(k\)</span>-means clustering you need
+to choose an initial set of centers.</li>
+<li>Optimisation surface has many local optima, algorithm gets stuck in
+ones near initialisation.</li>
 </ul>
 </section>
 <section id="k-means-clustering-2" class="slide level2">
@@ -208,60 +247,64 @@ E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^
 <script>
 showDivs(1, 'kmeans-clustering');
 </script>
-<p><small></small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering')">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering')">❯</button></p>
+<p><small></small>
+<input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')">
+<button onclick="plusDivs(-1, 'kmeans-clustering')">❮</button>
+<button onclick="plusDivs(1, 'kmeans-clustering')">❯</button></p>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_001.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_002.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_002.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_003.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_003.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_004.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_004.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_005.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_005.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_006.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_006.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_007.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_007.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_008.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_008.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_009.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_009.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_010.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_010.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_011.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_011.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_012.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_012.svg" width="40%" style=" ">
 </object>
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans-clustering/kmeans_clustering_013.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
 </object>
 </div>
-<p><em>Clustering with the <span class="math inline">\(k\)</span>-means clustering algorithm.</em></p>
+<p><em>Clustering with the <span class="math inline">\(k\)</span>-means
+clustering algorithm.</em></p>
 </section>
 <section id="k-means-clustering-3" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
@@ -274,7 +317,8 @@ showDivs(1, 'kmeans-clustering');
 <aside class="notes">
 <span class="math inline">\(k\)</span>-means clustering by Alex Ihler.
 </aside>
-<p><em><span class="math inline">\(k\)</span>-means clustering by Alex Ihler</em></p>
+<p><em><span class="math inline">\(k\)</span>-means clustering by Alex
+Ihler</em></p>
 </section>
 <section id="hierarchical-clustering" class="slide level2">
 <h2>Hierarchical Clustering</h2>
@@ -283,7 +327,8 @@ showDivs(1, 'kmeans-clustering');
 <li>Like humans apply to animals, to form <em>phylogenies</em></li>
 </ul>
 <div class="figure">
-<div id="alex-ihler-hierarchical-clustering-figure" class="figure-frame">
+<div id="alex-ihler-hierarchical-clustering-figure"
+class="figure-frame">
 <iframe width="600" height="450" src="https://www.youtube.com/embed/OcoE7JlbXvY?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
 </div>
@@ -295,8 +340,10 @@ Hierarchical Clustering by Alex Ihler.
 <section id="phylogenetic-trees" class="slide level2">
 <h2>Phylogenetic Trees</h2>
 <ul>
-<li>Perform a hierarchical clustering based on genetic data, i.e. the actual contents of the genome.</li>
-<li>Perform across a number of species and produce a <em>phylogenetic tree</em>.</li>
+<li>Perform a hierarchical clustering based on genetic data, i.e. the
+actual contents of the genome.</li>
+<li>Perform across a number of species and produce a <em>phylogenetic
+tree</em>.</li>
 <li>Represents a guess at actual evolution of the species.</li>
 <li>Used to estimate the origin of viruses like AIDS or Bird flu</li>
 </ul>
@@ -304,9 +351,11 @@ Hierarchical Clustering by Alex Ihler.
 <section id="product-clustering" class="slide level2">
 <h2>Product Clustering</h2>
 <ul>
-<li>Could apply hierarchical clustering to an e-commerce company’s products.</li>
+<li>Could apply hierarchical clustering to an e-commerce company’s
+products.</li>
 <li>Would give us a phylogeny of products.</li>
-<li>Each cluster of products would be split into sub-clusters of products until we got down to individual products.
+<li>Each cluster of products would be split into sub-clusters of
+products until we got down to individual products.
 <ul>
 <li>E.g. at high level Electronics/Clothing</li>
 </ul></li>
@@ -315,26 +364,33 @@ Hierarchical Clustering by Alex Ihler.
 <section id="hierarchical-clustering-challenge" class="slide level2">
 <h2>Hierarchical Clustering Challenge</h2>
 <ul>
-<li>Many products belong in more than one cluster: e.g. running shoes are ‘sporting goods’ and they are ‘clothing.’</li>
+<li>Many products belong in more than one cluster: e.g. running shoes
+are ‘sporting goods’ and they are ‘clothing’.</li>
 <li>Tree structure doesn’t allow this allocation.</li>
-<li>Our own psychological grouping capabilities are in cognitive science.
+<li>Our own psychological grouping capabilities are in cognitive
+science.
 <ul>
-<li>E.g. Josh Tenenbaum and collaborators cluster data in more complex ways.</li>
+<li>E.g. Josh Tenenbaum and collaborators cluster data in more complex
+ways.</li>
 </ul></li>
 </ul>
 </section>
 <section id="other-clustering-approaches" class="slide level2">
 <h2>Other Clustering Approaches</h2>
 <ul>
-<li>Spectral clustering (<span class="citation" data-cites="Shi:normalized00">Shi and Malik (2000)</span>,<span class="citation" data-cites="Ng:spectral02">Ng et al. (n.d.)</span>)
+<li>Spectral clustering (<span class="citation"
+data-cites="Shi:normalized00">Shi and Malik (2000)</span>,<span
+class="citation" data-cites="Ng:spectral02">Ng et al. (n.d.)</span>)
 <ul>
 <li>Allows clusters which aren’t convex hulls.</li>
 </ul></li>
 <li>Dirichlet process
 <ul>
-<li>A probabilistic formulation for a clustering algorithm that is <em>non-parametric</em>.</li>
+<li>A probabilistic formulation for a clustering algorithm that is
+<em>non-parametric</em>.</li>
 <li>Loosely speaking it allows infinite clusters</li>
-<li>In practice useful for dealing with previously unknown species (e.g. a “Black Swan Event”).</li>
+<li>In practice useful for dealing with previously unknown species
+(e.g. a “Black Swan Event”).</li>
 </ul></li>
 </ul>
 </section>
@@ -351,7 +407,10 @@ Hierarchical Clustering by Alex Ihler.
 <script>
 showDivs(0, 'dem-six-sample');
 </script>
-<p><small></small> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')"> <button onclick="plusDivs(-1, 'dem-six-sample')">❮</button> <button onclick="plusDivs(1, 'dem-six-sample')">❯</button></p>
+<p><small></small>
+<input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')">
+<button onclick="plusDivs(-1, 'dem-six-sample')">❮</button>
+<button onclick="plusDivs(1, 'dem-six-sample')">❯</button></p>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/dem_six000.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -373,7 +432,8 @@ showDivs(0, 'dem-six-sample');
 </div>
 </div>
 <ul>
-<li>Even if we sample every nanonsecond from now until end of universe you won’t see original six!</li>
+<li>Even if we sample every nanonsecond from now until end of universe
+you won’t see original six!</li>
 </ul>
 </section>
 <section id="simple-model-of-digit" class="slide level2">
@@ -384,7 +444,10 @@ showDivs(0, 'dem-six-sample');
 <script>
 showDivs(1, 'dem-six-rotate');
 </script>
-<p><small></small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate')">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate')">❯</button></p>
+<p><small></small>
+<input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')">
+<button onclick="plusDivs(-1, 'dem-six-rotate')">❮</button>
+<button onclick="plusDivs(1, 'dem-six-rotate')">❯</button></p>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/dem_six_rotate001.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -437,7 +500,9 @@ showDivs(1, 'dem-six-rotate');
 </div>
 </div>
 <aside class="notes">
-The rotated sixes projected onto the first two principal components of the ‘rotated data set.’ The data lives on a one dimensional manifold in the 3,648 dimensional space.
+The rotated sixes projected onto the first two principal components of
+the ‘rotated data set’. The data lives on a one dimensional manifold in
+the 3,648 dimensional space.
 </aside>
 </section>
 <section id="low-dimensional-manifolds" class="slide level2">
@@ -450,8 +515,10 @@ The rotated sixes projected onto the first two principal components of the ‘ro
 <li>For high dimensional data with <em>structure</em>:
 <ul>
 <li>We expect fewer distortions than dimensions;</li>
-<li>Therefore we expect the data to live on a lower dimensional manifold.</li>
-<li>Conclusion: Deal with high dimensional data by looking for a lower dimensional non-linear embedding.</li>
+<li>Therefore we expect the data to live on a lower dimensional
+manifold.</li>
+<li>Conclusion: Deal with high dimensional data by looking for a lower
+dimensional non-linear embedding.</li>
 </ul></li>
 </ul>
 <!-- SECTION Latent Variables -->
@@ -491,40 +558,48 @@ f_j(\mathbf{ z}) =
 <h2>Data Representation</h2>
 <p><span class="math display">\[
 \mathbf{Y}
-= \begin{bmatrix} \mathbf{ y}_{1, :}^\top \\ \mathbf{ y}_{2, :}^\top \\ \vdots \\
+= \begin{bmatrix} \mathbf{ y}_{1, :}^\top \\ \mathbf{ y}_{2, :}^\top \\
+\vdots \\
 \mathbf{ y}_{n, :}^\top\end{bmatrix},
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{F} = \mathbf{Z}\mathbf{W}^\top,
 \]</span></p>
 </section>
-<section id="latent-variables-vs-linear-regression" class="slide level2">
+<section id="latent-variables-vs-linear-regression"
+class="slide level2">
 <h2>Latent Variables vs Linear Regression</h2>
 <p><span class="math display">\[
 x_{i,j} \sim
 \mathcal{N}\left(0,1\right),
-\]</span> and we can write the density governing the latent variable associated with a single point as, <span class="math display">\[
+\]</span> and we can write the density governing the latent variable
+associated with a single point as, <span class="math display">\[
 \mathbf{ z}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{I}\right).
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{f}_{i, :} =
-\mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :} 
+\mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :}
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{f}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{f}_{i, :} \sim
+\mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
 </section>
 <section id="data-distribution" class="slide level2">
 <h2>Data Distribution</h2>
 <p><span class="math display">\[
-\mathbf{ y}_{i, :} = \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\right)
+\mathbf{ y}_{i, :} = \sim
+\mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top +
+\boldsymbol{\Sigma}\right)
 \]</span></p>
 <p><span class="math display">\[
-\boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp; 0\\
+\boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp;
+0\\
 0 &amp; \sigma^2_{2} &amp; 0 &amp; 0\\
                                      0 &amp; 0 &amp; \ddots &amp;
 0\\
-                                     0 &amp; 0 &amp; 0 &amp; \sigma^2_p\end{bmatrix}.
+                                     0 &amp; 0 &amp; 0 &amp;
+\sigma^2_p\end{bmatrix}.
 \]</span></p>
 </section>
 <section id="mean-vector" class="slide level2">
@@ -536,13 +611,18 @@ x_{i,j} \sim
 <p><span class="math display">\[
 \boldsymbol{ \mu}= \frac{1}{n} \sum_{i=1}^n
 \mathbf{ y}_{i, :},
-\]</span> <span class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\)</span></p>
+\]</span> <span class="math inline">\(\mathbf{C}=
+\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\)</span></p>
 <!-- SECTION Principal Component Analysis -->
 </section>
 <section id="principal-component-analysis" class="slide level2">
 <h2>Principal Component Analysis</h2>
-<p><span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span> so <span class="math display">\[
-\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
+<p><span class="citation" data-cites="Hotelling:analysis33">Hotelling
+(1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow
+0\)</span> so <span class="math display">\[
+\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0}
+\mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2
+\mathbf{I}\right).
 \]</span></p>
 </section>
 <section id="degenerate-covariance" class="slide level2">
@@ -551,25 +631,36 @@ x_{i,j} \sim
 p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 \lim_{\sigma^2 \rightarrow 0} \frac{1}{(2\pi)^\frac{p}{2}
 |\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}|^{\frac{1}{2}}}
-\exp\left(-\frac{1}{2}\mathbf{ y}_{i, :}\left[\mathbf{W}\mathbf{W}^\top+ \sigma^2
+\exp\left(-\frac{1}{2}\mathbf{ y}_{i, :}\left[\mathbf{W}\mathbf{W}^\top+
+\sigma^2
 \mathbf{I}\right]^{-1}\mathbf{ y}_{i, :}\right),
 \]</span></small></p>
 </section>
-<section id="computation-of-the-marginal-likelihood" class="slide level2">
+<section id="computation-of-the-marginal-likelihood"
+class="slide level2">
 <h2>Computation of the Marginal Likelihood</h2>
 <p><span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
+\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{
+\epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim
+\mathcal{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{
+\epsilon}_{i,:} \sim
+\mathcal{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{W}\mathbf{ z}_{i,:} \sim
+\mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
+\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim
+\mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2
+\mathbf{I}\right)
 \]</span></p>
 </section>
 <section id="linear-latent-variable-model-ii" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999)</span>)</p>
+<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span
+class="citation" data-cites="Tipping:probpca99">Tipping and Bishop
+(1999)</span>)</p>
 <div class="figure">
 <div id="ppca-graph-figure" class="figure-frame">
 <div class="centered" style="">
@@ -580,56 +671,91 @@ p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 <aside class="notes">
 Graphical model representing probabilistic PCA.
 </aside>
-<p><span class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
+<p><span
+class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{
+y}_{i,
+:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
 </section>
 <section id="linear-latent-variable-model-ii-1" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping:probpca99">Tipping and Bishop (1999)</span>) <span class="math display">\[
-  p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad \mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
+<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span
+class="citation" data-cites="Tipping:probpca99">Tipping and Bishop
+(1999)</span>) <span class="math display">\[
+  p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{
+y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad
+\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
   \]</span> <span class="math display">\[
-  \log p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
-  \]</span> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are first <span class="math inline">\(q\)</span> principal eigenvectors of <span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the corresponding eigenvalues are <span class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <span class="math display">\[
+  \log
+p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
+  \]</span> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are
+first <span class="math inline">\(q\)</span> principal eigenvectors of
+<span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span>
+and the corresponding eigenvalues are <span
+class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <span
+class="math display">\[
   \mathbf{W}=\mathbf{U}_{q}\mathbf{L}\mathbf{R}^{\top},\quad\mathbf{L}=\left(\boldsymbol{\Lambda}_{q}-\sigma^{2}\mathbf{I}\right)^{\frac{1}{2}}
-  \]</span> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
+  \]</span> where <span class="math inline">\(\mathbf{R}\)</span> is an
+arbitrary rotation matrix.</p>
 </section>
 <section id="principal-component-analysis-1" class="slide level2">
 <h2>Principal Component Analysis</h2>
 <ul>
-<li>PCA (<span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span>) is a linear embedding.</li>
+<li>PCA (<span class="citation"
+data-cites="Hotelling:analysis33">Hotelling (1933)</span>) is a linear
+embedding.</li>
 <li>Today its presented as:
 <ul>
 <li>Rotate to find ‘directions’ in data with maximal variance.</li>
 <li>How do we find these directions?</li>
 </ul></li>
-<li>Algorithmically we do this by diagonalizing the sample covariance matrix <span class="math display">\[
-\mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{ \mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
+<li>Algorithmically we do this by diagonalizing the sample covariance
+matrix <span class="math display">\[
+\mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{
+\mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
 \]</span></li>
 </ul>
 </section>
 <section id="principal-component-analysis-2" class="slide level2">
 <h2>Principal Component Analysis</h2>
 <ul>
-<li>Find directions in the data, <span class="math inline">\(\mathbf{ z}= \mathbf{U}\mathbf{ y}\)</span>, for which variance is maximized.</li>
+<li>Find directions in the data, <span class="math inline">\(\mathbf{
+z}= \mathbf{U}\mathbf{ y}\)</span>, for which variance is
+maximized.</li>
 </ul>
 </section>
 <section id="lagrangian" class="slide level2">
 <h2>Lagrangian</h2>
 <ul>
-<li><p>Solution is found via constrained optimisation (which uses <a href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange multipliers</a>): <span class="math display">\[
+<li><p>Solution is found via constrained optimisation (which uses <a
+href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange
+multipliers</a>): <span class="math display">\[
 L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{u}_{1}+\lambda_{1}\left(1-\mathbf{u}_{1}^{\top}\mathbf{u}_{1}\right)
 \]</span></p></li>
-<li><p>Gradient with respect to <span class="math inline">\(\mathbf{u}_{1}\)</span> <span class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span> rearrange to form <span class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span> Which is known as an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue problem</em></a>.</p></li>
-<li><p>Further directions that are <em>orthogonal</em> to the first can also be shown to be eigenvectors of the covariance.</p></li>
+<li><p>Gradient with respect to <span
+class="math inline">\(\mathbf{u}_{1}\)</span> <span
+class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span>
+rearrange to form <span
+class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span>
+Which is known as an <a
+href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue
+problem</em></a>.</p></li>
+<li><p>Further directions that are <em>orthogonal</em> to the first can
+also be shown to be eigenvectors of the covariance.</p></li>
 </ul>
 </section>
 <section id="linear-dimensionality-reduction" class="slide level2">
 <h2>Linear Dimensionality Reduction</h2>
 <ul>
-<li>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>, with a lower dimensional set of latent variables <span class="math inline">\(\mathbf{Z}\)</span>.</li>
-<li>Assume a linear relationship of the form <span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},
+<li>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>,
+with a lower dimensional set of latent variables <span
+class="math inline">\(\mathbf{Z}\)</span>.</li>
+<li>Assume a linear relationship of the form <span
+class="math display">\[
+\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{
+\epsilon}_{i,:},
 \]</span> where <span class="math display">\[
-\boldsymbol{ \epsilon}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
+\boldsymbol{ \epsilon}_{i,:} \sim
+\mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
 \]</span></li>
 </ul>
 </section>
@@ -640,10 +766,12 @@ L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{
 <tr>
 <td width>
 <ul>
-<li>Define <em>linear-Gaussian relationship</em> between latent variables and data.</li>
+<li>Define <em>linear-Gaussian relationship</em> between latent
+variables and data.</li>
 <li><strong>Standard</strong> Latent variable approach:
 <ul>
-<li>Define Gaussian prior over <em>latent space</em>, <span class="math inline">\(\mathbf{Z}\)</span>.</li>
+<li>Define Gaussian prior over <em>latent space</em>, <span
+class="math inline">\(\mathbf{Z}\)</span>.</li>
 </ul></li>
 <li>Integrate out <em>latent variables</em>.
 </td>
@@ -659,14 +787,17 @@ L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{
 Graphical model representing probabilistic PCA.
 </aside>
 <small> <span class="math display">\[
-p\left(\mathbf{Y}|\mathbf{Z},\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{W}\mathbf{ z}_{i,:},\sigma^2\mathbf{I}\right)
+p\left(\mathbf{Y}|\mathbf{Z},\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{
+y}_{i,:}|\mathbf{W}\mathbf{ z}_{i,:},\sigma^2\mathbf{I}\right)
 \]</span></li>
 </ul>
 <p><span class="math display">\[
-p\left(\mathbf{Z}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ z}_{i,:}|\mathbf{0},\mathbf{I}\right)
+p\left(\mathbf{Z}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{
+z}_{i,:}|\mathbf{0},\mathbf{I}\right)
 \]</span></p>
 <span class="math display">\[
-p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)
+p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{
+y}_{i,:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)
 \]</span></small>
 </td>
 </tr>
@@ -674,9 +805,16 @@ p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_
 </section>
 <section id="examples-motion-capture-data" class="slide level2">
 <h2>Examples: Motion Capture Data</h2>
-<p>For our first example we’ll consider some motion capture data of a man breaking into a run. <a href="http://en.wikipedia.org/wiki/Motion_capture">Motion capture data</a> involves capturing a 3-d point cloud to represent a character, often by an underlying skeleton. For this data set, from Ohio State University, we have 54 frame of motion capture, each frame containing 102 values, which are the 3-d locations of 34 different points from the subject’s skeleton.</p>
-<p>Once the data is loaded in we can examine the first two principal components as follows,</p>
-<p>Here because the data is a time course, we have connected points that are neighbouring in time. This highlights the form of the run, which involves 3 paces. This projects in our low dimensional space to 3 loops. We can examin how much residual variance there is in the system by looking at <code>sigma2</code>.</p>
+<div class="figure">
+<div id="dem-osu-run1-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/dem_osu_run1.svg" width="70%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+First two principle components of motion capture data of an individual
+running.
+</aside>
 </section>
 <section id="robot-navigation-example" class="slide level2">
 <h2>Robot Navigation Example</h2>
@@ -687,24 +825,29 @@ p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_
 </ul>
 <!-- SECTION Interpretations of Principal Component Analysis -->
 </section>
-<section id="interpretations-of-principal-component-analysis" class="slide level2">
+<section id="interpretations-of-principal-component-analysis"
+class="slide level2">
 <h2>Interpretations of Principal Component Analysis</h2>
 </section>
 <section id="relationship-to-matrix-factorization" class="slide level2">
 <h2>Relationship to Matrix Factorization</h2>
 <ul>
 <li><p>PCA is closely related to matrix factorisation.</p></li>
-<li><p>Instead of <span class="math inline">\(\mathbf{Z}\)</span>, <span class="math inline">\(\mathbf{W}\)</span></p></li>
-<li><p>Define Users <span class="math inline">\(\mathbf{U}\)</span> and items <span class="math inline">\(\mathbf{V}\)</span></p></li>
+<li><p>Instead of <span class="math inline">\(\mathbf{Z}\)</span>, <span
+class="math inline">\(\mathbf{W}\)</span></p></li>
+<li><p>Define Users <span class="math inline">\(\mathbf{U}\)</span> and
+items <span class="math inline">\(\mathbf{V}\)</span></p></li>
 <li><p>Matrix factorisation: <span class="math display">\[
 f_{i, j} =
-\mathbf{u}_{i, :}^\top \mathbf{v}_{j, :} 
+\mathbf{u}_{i, :}^\top \mathbf{v}_{j, :}
 \]</span> PCA: <span class="math display">\[
-f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :} 
+f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 \]</span></p></li>
 </ul>
 </section>
-<section id="other-interpretations-of-pca-separating-model-and-algorithm" class="slide level2">
+<section
+id="other-interpretations-of-pca-separating-model-and-algorithm"
+class="slide level2">
 <h2>Other Interpretations of PCA: Separating Model and Algorithm</h2>
 <ul>
 <li>PCA introduced as latent variable model (a model).</li>
@@ -716,14 +859,16 @@ f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{Y}^\top\mathbf{Y}=
-\mathbf{U}\boldsymbol{\Lambda}\mathbf{V}^\top\mathbf{V} \boldsymbol{\Lambda}
+\mathbf{U}\boldsymbol{\Lambda}\mathbf{V}^\top\mathbf{V}
+\boldsymbol{\Lambda}
 \mathbf{U}^\top = \mathbf{U}\boldsymbol{\Lambda}^2 \mathbf{U}^\top
 \]</span></p>
 </section>
 <section id="separating-model-and-algorithm" class="slide level2">
 <h2>Separating Model and Algorithm</h2>
 <ul>
-<li>Separation between <em>model</em> and <em>algorithm</em> is helpful conceptually.</li>
+<li>Separation between <em>model</em> and <em>algorithm</em> is helpful
+conceptually.</li>
 <li>Even if in practice they conflate (e.g. deep neural networks).</li>
 <li>Sometimes difficult to pull apart.</li>
 <li>Helpful to revisit algorithms with modelling perspective in mind.
@@ -735,63 +880,147 @@ f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 </section>
 <section id="ppca-marginal-likelihood" class="slide level2">
 <h2>PPCA Marginal Likelihood</h2>
-<p>We have developed the posterior density over the latent variables given the data and the parameters, and due to symmetries in the underlying prediction function, it has a very similar form to its sister density, the posterior of the weights given the data from Bayesian regression. Two key differences are as follows. If we were to do a Bayesian multiple output regression we would find that the marginal likelihood of the data is independent across the features and correlated across the data, <span class="math display">\[
+<p>We have developed the posterior density over the latent variables
+given the data and the parameters, and due to symmetries in the
+underlying prediction function, it has a very similar form to its sister
+density, the posterior of the weights given the data from Bayesian
+regression. Two key differences are as follows. If we were to do a
+Bayesian multiple output regression we would find that the marginal
+likelihood of the data is independent across the features and correlated
+across the data, <span class="math display">\[
 p(\mathbf{Y}|\mathbf{Z})
 = \prod_{j=1}^p \mathcal{N}\left(\mathbf{ y}_{:, j}|\mathbf{0},
 \alpha\mathbf{Z}\mathbf{Z}^\top + \sigma^2 \mathbf{I}\right)
-\]</span> where <span class="math inline">\(\mathbf{ y}_{:, j}\)</span> is a column of the data matrix and the independence is across the <em>features</em>, in probabilistic PCA the marginal likelihood has the form, <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{ y}_{:, j}\)</span>
+is a column of the data matrix and the independence is across the
+<em>features</em>, in probabilistic PCA the marginal likelihood has the
+form, <span class="math display">\[
 p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
-\]</span> where <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> is a row of the data matrix <span class="math inline">\(\mathbf{Y}\)</span> and the independence is across the data points.</p>
+\]</span> where <span class="math inline">\(\mathbf{ y}_{i, :}\)</span>
+is a row of the data matrix <span
+class="math inline">\(\mathbf{Y}\)</span> and the independence is across
+the data points.</p>
 <!-- SECTION Computation of the Log Likelihood -->
 </section>
 <section id="computation-of-the-log-likelihood" class="slide level2">
 <h2>Computation of the Log Likelihood</h2>
-<p>The quality of the model can be assessed using the log likelihood of this Gaussian form. <span class="math display">\[
+<p>The quality of the model can be assessed using the log likelihood of
+this Gaussian form. <span class="math display">\[
 \log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \log \left|
 \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right| -\frac{1}{2}
-\sum_{i=1}^n\mathbf{ y}_{i, :}^\top \left(\mathbf{W}\mathbf{W}^\top + \sigma^2
+\sum_{i=1}^n\mathbf{ y}_{i, :}^\top \left(\mathbf{W}\mathbf{W}^\top +
+\sigma^2
 \mathbf{I}\right)^{-1} \mathbf{ y}_{i, :} +\text{const}
-\]</span> but this can be computed more rapidly by exploiting the low rank form of the covariance covariance, <span class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\)</span> and the fact that <span class="math inline">\(\mathbf{W}= \mathbf{U}\mathbf{L}\mathbf{R}^\top\)</span>. Specifically, we first use the decomposition of <span class="math inline">\(\mathbf{W}\)</span> to write: <span class="math display">\[
--\frac{n}{2} \log \left| \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right|
-= -\frac{n}{2} \sum_{i=1}^q \log (\ell_i^2 + \sigma^2) - \frac{n(p-q)}{2}\log
+\]</span> but this can be computed more rapidly by exploiting the low
+rank form of the covariance covariance, <span
+class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \sigma^2
+\mathbf{I}\)</span> and the fact that <span
+class="math inline">\(\mathbf{W}=
+\mathbf{U}\mathbf{L}\mathbf{R}^\top\)</span>. Specifically, we first use
+the decomposition of <span class="math inline">\(\mathbf{W}\)</span> to
+write: <span class="math display">\[
+-\frac{n}{2} \log \left| \mathbf{W}\mathbf{W}^\top + \sigma^2
+\mathbf{I}\right|
+= -\frac{n}{2} \sum_{i=1}^q \log (\ell_i^2 + \sigma^2) -
+\frac{n(p-q)}{2}\log
 \sigma^2,
-\]</span> where <span class="math inline">\(\ell_i\)</span> is the <span class="math inline">\(i\)</span>th diagonal element of <span class="math inline">\(\mathbf{L}\)</span>. Next, we use the <a href="http://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> which allows us to write the inverse as a quantity which contains another inverse in a smaller matrix: <span class="math display">\[
+\]</span> where <span class="math inline">\(\ell_i\)</span> is the <span
+class="math inline">\(i\)</span>th diagonal element of <span
+class="math inline">\(\mathbf{L}\)</span>. Next, we use the <a
+href="http://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury
+matrix identity</a> which allows us to write the inverse as a quantity
+which contains another inverse in a smaller matrix: <span
+class="math display">\[
 (\sigma^2 \mathbf{I}+ \mathbf{W}\mathbf{W}^\top)^{-1} =
 \sigma^{-2}\mathbf{I}-\sigma^{-4}\mathbf{W}{\underbrace{(\mathbf{I}+\sigma^{-2}\mathbf{W}^\top\mathbf{W})}_{\mathbf{C}_x}}^{-1}\mathbf{W}^\top
-\]</span> So, it turns out that the original inversion of the <span class="math inline">\(p \times p\)</span> matrix can be done by forming a quantity which contains the inversion of a <span class="math inline">\(q \times q\)</span> matrix which, moreover, turns out to be the quantity <span class="math inline">\(\mathbf{C}_x\)</span> of the posterior.</p>
-<p>Now, we put everything together to obtain: <span class="math display">\[
+\]</span> So, it turns out that the original inversion of the <span
+class="math inline">\(p \times p\)</span> matrix can be done by forming
+a quantity which contains the inversion of a <span
+class="math inline">\(q \times q\)</span> matrix which, moreover, turns
+out to be the quantity <span class="math inline">\(\mathbf{C}_x\)</span>
+of the posterior.</p>
+<p>Now, we put everything together to obtain: <span
+class="math display">\[
 \log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \sum_{i=1}^q
 \log (\ell_i^2 + \sigma^2)
-- \frac{n(p-q)}{2}\log \sigma^2 - \frac{1}{2} \text{tr}\left(\mathbf{Y}^\top \left(
+- \frac{n(p-q)}{2}\log \sigma^2 - \frac{1}{2}
+\text{tr}\left(\mathbf{Y}^\top \left(
 \sigma^{-2}\mathbf{I}-\sigma^{-4}\mathbf{W}\mathbf{C}_x
 \mathbf{W}^\top \right) \mathbf{Y}\right) + \text{const},
-\]</span> where we used the fact that a scalar sum can be written as <span class="math inline">\(\sum_{i=1}^n\mathbf{ y}_{i,:}^\top \mathbf{K}\mathbf{ y}_{i,:} = \text{tr}\left(\mathbf{Y}^\top \mathbf{K}\mathbf{Y}\right)\)</span>, for any matrix <span class="math inline">\(\mathbf{K}\)</span> of appropriate dimensions. We now use the properties of the trace <span class="math inline">\(\text{tr}\left(\mathbf{A}+\mathbf{B}\right)=\text{tr}\left(\mathbf{A}\right)+\text{tr}\left(\mathbf{B}\right)\)</span> and <span class="math inline">\(\text{tr}\left(c \mathbf{A}\right) = c \text{tr}\left(\mathbf{A}\right)\)</span>, where <span class="math inline">\(c\)</span> is a scalar and <span class="math inline">\(\mathbf{A},\mathbf{B}\)</span> matrices of compatible sizes. Therefore, the final log likelihood takes the form: <span class="math display">\[
+\]</span> where we used the fact that a scalar sum can be written as
+<span class="math inline">\(\sum_{i=1}^n\mathbf{ y}_{i,:}^\top
+\mathbf{K}\mathbf{ y}_{i,:} = \text{tr}\left(\mathbf{Y}^\top
+\mathbf{K}\mathbf{Y}\right)\)</span>, for any matrix <span
+class="math inline">\(\mathbf{K}\)</span> of appropriate dimensions. We
+now use the properties of the trace <span
+class="math inline">\(\text{tr}\left(\mathbf{A}+\mathbf{B}\right)=\text{tr}\left(\mathbf{A}\right)+\text{tr}\left(\mathbf{B}\right)\)</span>
+and <span class="math inline">\(\text{tr}\left(c \mathbf{A}\right) = c
+\text{tr}\left(\mathbf{A}\right)\)</span>, where <span
+class="math inline">\(c\)</span> is a scalar and <span
+class="math inline">\(\mathbf{A},\mathbf{B}\)</span> matrices of
+compatible sizes. Therefore, the final log likelihood takes the form:
+<span class="math display">\[
 \log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2}
-\sum_{i=1}^q \log (\ell_i^2 + \sigma^2) - \frac{n(p-q)}{2}\log \sigma^2 -
+\sum_{i=1}^q \log (\ell_i^2 + \sigma^2) - \frac{n(p-q)}{2}\log \sigma^2
+-
 \frac{\sigma^{-2}}{2} \text{tr}\left(\mathbf{Y}^\top \mathbf{Y}\right)
-+\frac{\sigma^{-4}}{2} \text{tr}\left(\mathbf{B}\mathbf{C}_x\mathbf{B}^\top\right) +
++\frac{\sigma^{-4}}{2}
+\text{tr}\left(\mathbf{B}\mathbf{C}_x\mathbf{B}^\top\right) +
 \text{const}
-\]</span> where we also defined <span class="math inline">\(\mathbf{B}=\mathbf{Y}^\top\mathbf{W}\)</span>. Finally, notice that <span class="math inline">\(\text{tr}\left(\mathbf{Y}\mathbf{Y}^\top\right)=\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right)\)</span> can be computed faster as the sum of all the elements of <span class="math inline">\(\mathbf{Y}\circ\mathbf{Y}\)</span>, where <span class="math inline">\(\circ\)</span> denotes the element-wise (or <a href="http://en.wikipedia.org/wiki/Hadamard_product_(matrices)">Hadamard</a>) product.</p>
+\]</span> where we also defined <span
+class="math inline">\(\mathbf{B}=\mathbf{Y}^\top\mathbf{W}\)</span>.
+Finally, notice that <span
+class="math inline">\(\text{tr}\left(\mathbf{Y}\mathbf{Y}^\top\right)=\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right)\)</span>
+can be computed faster as the sum of all the elements of <span
+class="math inline">\(\mathbf{Y}\circ\mathbf{Y}\)</span>, where <span
+class="math inline">\(\circ\)</span> denotes the element-wise (or <a
+href="http://en.wikipedia.org/wiki/Hadamard_product_(matrices)">Hadamard</a>)
+product.</p>
 </section>
 <section id="reconstruction-of-the-data" class="slide level2">
 <h2>Reconstruction of the Data</h2>
-<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
-<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
+<p>Given any posterior projection of a data point, we can replot the
+original data as a function of the input space.</p>
+<p>We will now try to reconstruct the motion capture figure form some
+different places in the latent plot.</p>
 </section>
 <section id="other-data-sets-to-explore" class="slide level2">
 <h2>Other Data Sets to Explore</h2>
-<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
-<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(p\times p\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(p\)</span>.</p>
-<p>The original eigenvalue problem has the form <span class="math display">\[
+<p>Below there are a few other data sets from <code>pods</code> you
+might want to explore with PCA. Both of them have <span
+class="math inline">\(p\)</span>&gt;<span
+class="math inline">\(n\)</span> so you need to consider how to do the
+larger eigenvalue probleme efficiently without large demands on computer
+memory.</p>
+<p>The data is actually quite high dimensional, and solving the
+eigenvalue problem in the high dimensional space can take some time. At
+this point we turn to a neat trick, you don’t have to solve the full
+eigenvalue problem in the <span class="math inline">\(p\times p\)</span>
+covariance, you can choose instead to solve the related eigenvalue
+problem in the <span class="math inline">\(n\times n\)</span> space, and
+in this case <span class="math inline">\(n=200\)</span> which is much
+smaller than <span class="math inline">\(p\)</span>.</p>
+<p>The original eigenvalue problem has the form <span
+class="math display">\[
 \mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
-\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
-\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
-\]</span> but it turns out that we can write <span class="math display">\[
+\]</span> But if we premultiply by <span
+class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span
+class="math display">\[
+\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} =
+\mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
+\]</span> but it turns out that we can write <span
+class="math display">\[
 \mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
-\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
-\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span>
+is an orthorormal matrix because <span class="math display">\[
+\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime =
+\Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U}
+\Lambda^{-\frac{1}{2}}
+\]</span> and since <span class="math inline">\(\mathbf{U}\)</span>
+diagonalises <span
+class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span
+class="math display">\[
 \mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
 \]</span> then <span class="math display">\[
 \left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
@@ -799,62 +1028,94 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 </section>
 <section id="olivetti-faces" class="slide level2">
 <h2>Olivetti Faces</h2>
-<p>You too can create your own eigenfaces. In this example we load in the ‘Olivetti Face’ data set, a small data set of 200 faces from the <a href="http://en.wikipedia.org/wiki/Olivetti_Research_Laboratory">Olivetti Research Laboratory</a>. Below we load in the data and display an image of the second face in the data set (i.e., indexed by 1).</p>
-<p>Note that to display the face we had to reshape the appropriate row of the data matrix. This is because the images are turned into vectors by stacking columns of the image on top of each other to form a vector. The operation</p>
+<div class="figure">
+<div id="olivetti-faces-data-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Data set from Olivetti Research Laboratory of faces.
+</aside>
 <p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
-<p>recovers the original image into a matrix <code>im</code> by using the <code>np.reshape</code> function to return the vector to a matrix.</p>
 </section>
 <section id="visualizing-the-eigenvectors" class="slide level2">
 <h2>Visualizing the Eigenvectors</h2>
-<p>Each retained eigenvector is stored in the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\mathbf{U}\)</span>. Each of these eigenvectors is associated with particular directions of variation in the original data. Principal component analysis implies that we can reconstruct any face by using a weighted sum of these eigenvectors where the weights for each face are given by the relevant vector of the latent variables, <span class="math inline">\(\mathbf{ z}_{i, :}\)</span> and the diagonal elements of the matrix <span class="math inline">\(\mathbf{L}\)</span>. We can visualize the eigenvectors <span class="math inline">\(\mathbf{U}\)</span> as images by performing the same reshape operation we used to recover the image associated with a data point above. Below we do this for the first nine eigenvectors of the Olivetti Faces data.</p>
+<div class="figure">
+<div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+First 9 eigenvectors of the Olivetti faces data.
+</aside>
 </section>
 <section id="reconstruction" class="slide level2">
 <h2>Reconstruction</h2>
-<p>We can now attempt to reconstruct a given training point from these eigenvectors. As we mentioned above, the reconstruction is dependent on the value of the latent variable and the weights from the matrix <span class="math inline">\(\mathbf{L}\)</span>. First let’s compute the value of the latent variables for the point we want to construct. Then we’ll use them to compute the weightings of each of the eigenvectors.</p>
-<p>This vector of reconstruction weights is applied to the ‘template images’ given by the eigenvectors to give us our reconstruction. Below we weight these templates and combine to form the reconstructed image, and show the comparison to the original image.</p>
-<p>The quality of the reconstruction is a bit blurry, it can be improved by increasing the number of template images used (i.e. increasing the <em>latent dimensionality</em>).</p>
+<div class="figure">
+<div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Reconstruction from the latent space of the faces data.
+</aside>
 </section>
 <section id="gene-expression" class="slide level2">
 <h2>Gene Expression</h2>
-<p>Each of the cells in your body stores your entire genetic code in your DNA, but at any one moment it is only ‘expressing’ a small portion of that code. Your cells are mainly constructed of protein, and these proteins are manufactured by first transcribing the DNA to RNA and then translating the RNA to protein. If the DNA is the cells hard drive, then one role of the RNA is to act like a cache of data that is being read from the hard drive at any one time. Gene expression arrays allow us to measure the quantity of different types of RNA in the cell, effectively analyzing what’s in the cache (although we have to destroy the cell or the tissue to access it). A gene expression experiment often consists of a time course or a series of experiments that characterise the gene expression of cells at any given time.</p>
-<p>We will now load in one of the earliest gene expression data sets from a <a href="http://www.ncbi.nlm.nih.gov/pubmed/9843569">1998 paper by Spellman et al.</a>, it consists of gene expression measurements of over six thousand genes in a range of conditions for brewer’s yeast. The experiment was designed for understanding the cell cycle of the genes. The expectation is that there should be oscillating signals inside the cell.</p>
-<p>First we extract the principal components of the gene expression.</p>
-<p>Now, looking through, we find that there is indeed a latent variable that appears to oscilate at approximately the right frequency. The 4th latent dimension (<code>index=3</code>) can be plotted across the time course as follows.</p>
-<p>To reveal an oscillating shape. We can see which genes correspond to this shape by examining the associated column of <span class="math inline">\(\mathbf{U}\)</span>. Let’s augment our data matrix with this score.</p>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Chapter 7 up to pg 249 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Chapter 7 up to pg 249 of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Hotelling:analysis33" class="csl-entry" role="doc-biblioentry">
-Hotelling, H., 1933. Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology 24, 417–441.
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Hotelling:analysis33" class="csl-entry" role="listitem">
+Hotelling, H., 1933. Analysis of a complex of statistical variables into
+principal components. Journal of Educational Psychology 24, 417–441.
 </div>
-<div id="ref-Ng:spectral02" class="csl-entry" role="doc-biblioentry">
-Ng, A.Y., Jordan, M.I., Weiss, Y., n.d. On spectral clustering: Analysis and an algorithm.
+<div id="ref-Ng:spectral02" class="csl-entry" role="listitem">
+Ng, A.Y., Jordan, M.I., Weiss, Y., n.d. On spectral clustering: Analysis
+and an algorithm.
 </div>
-<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+<div id="ref-Rogers:book11" class="csl-entry" role="listitem">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
-<div id="ref-Shi:normalized00" class="csl-entry" role="doc-biblioentry">
-Shi, J., Malik, J., 2000. Normalized cuts and image segmentation. IEEE Transactions on Pattern Analysis and Machine Intelligence 22, 888–905.
+<div id="ref-Shi:normalized00" class="csl-entry" role="listitem">
+Shi, J., Malik, J., 2000. Normalized cuts and image segmentation. IEEE
+Transactions on Pattern Analysis and Machine Intelligence 22, 888–905.
 </div>
-<div id="ref-Tipping:probpca99" class="csl-entry" role="doc-biblioentry">
-Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>
+<div id="ref-Tipping:probpca99" class="csl-entry" role="listitem">
+Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component
+analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a
+href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>
 </div>
 </div>
 </section>
@@ -869,8 +1130,39 @@ Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. J
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

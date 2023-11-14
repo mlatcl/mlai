@@ -1,12 +1,16 @@
 ---
 title: "Basis Functions"
-abstract: "<p>In the last session we explored least squares for univariate and multivariate <em>regression</em>. We introduced <em>matrices</em>, <em>linear algebra</em> and <em>derivatives</em>.</p>
-<p>In this session we will introduce <em>basis functions</em> which allow us to implement <em>non-linear regression models</em>.</p>"
-edit_url: https://github.com/lawrennd/talks/edit/gh-pages/_mlai/basis-functions.md
+abstract: "<p>In the last session we explored least squares for
+univariate and multivariate <em>regression</em>. We introduced
+<em>matrices</em>, <em>linear algebra</em> and <em>derivatives</em>.</p>
+<p>In this session we will introduce <em>basis functions</em> which
+allow us to implement <em>non-linear regression models</em>.</p>"
+edit_url: https://github.com/mlatcl/mlai/edit/gh-pages/_lamd/basis-functions.md
 week: 6
 featured_image: slides/diagrams/ml/radial_function002.svg
 reveal: 06-basis-functions.slides.html
 ipynb: 06-basis-functions.ipynb
+pptx: 06-basis-functions.pptx
 layout: lecture
 categories:
 - notes
@@ -24,7 +28,9 @@ categories:
 -->
 <h2 id="setup">Setup</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_notebooks/includes/notebook-setup.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_notebooks/includes/notebook-setup.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <!--setupplotcode{import seaborn as sns
 sns.set_style('darkgrid')
@@ -32,331 +38,545 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h2 id="notutils">notutils</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>This small package is a helper package for various notebook utilities used</p>
+<p>This small package is a helper package for various notebook utilities
+used below.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/notutils" class="uri">https://github.com/lawrennd/notutils</a></p>
-<p>Once <code>notutils</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/notutils"
+class="uri">https://github.com/lawrennd/notutils</a></p>
+<p>Once <code>notutils</code> is installed, it can be imported in the
+usual manner.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
 <h2 id="pods">pods</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
-<p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
+<p>In Sheffield we created a suite of software tools for ‘Open Data
+Science’. Open data science is an approach to sharing code, models and
+data that should make it easier for companies, health professionals and
+scientists to gain access to data science techniques.</p>
+<p>You can also check this blog post on <a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
-<p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/ods"
+class="uri">https://github.com/lawrennd/ods</a></p>
+<p>Once <code>pods</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="mlai">mlai</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The <code>mlai</code> software is a suite of helper functions for teaching and demonstrating machine learning algorithms. It was first used in the Machine Learning and Adaptive Intelligence course in Sheffield in 2013.</p>
+<p>The <code>mlai</code> software is a suite of helper functions for
+teaching and demonstrating machine learning algorithms. It was first
+used in the Machine Learning and Adaptive Intelligence course in
+Sheffield in 2013.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
-<p>from the command prompt where you can access your python installation.</p>
-<p>The code is also available on GitHub: <a href="https://github.com/lawrennd/mlai" class="uri">https://github.com/lawrennd/mlai</a></p>
-<p>Once <code>mlai</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/mlai"
+class="uri">https://github.com/lawrennd/mlai</a></p>
+<p>Once <code>mlai</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <h2 id="nonlinear-regression">Nonlinear Regression</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/non-linear-regression-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/non-linear-regression-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-regression-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-regression-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>We’ve now seen how we may perform linear regression. Now, we are going to consider how we can perform <em>non-linear</em> regression. However, before we get into the details of how to do that we first need to consider in what ways the regression can be non-linear. Multivariate linear regression allows us to build models that take many features into account when making our prediction. In this session we are going to introduce <em>basis functions</em>. The term seems complicted, but they are actually based on rather a simple idea. If we are doing a multivariate linear regression, we get extra features that <em>might</em> help us predict our required response varible (or target value), <span class="math inline">\(y\)</span>. But what if we only have one input value? We can actually artificially generate more input values with basis functions.</p>
+<p>We’ve now seen how we may perform linear regression. Now, we are
+going to consider how we can perform <em>non-linear</em> regression.
+However, before we get into the details of how to do that we first need
+to consider in what ways the regression can be non-linear. Multivariate
+linear regression allows us to build models that take many features into
+account when making our prediction. In this session we are going to
+introduce <em>basis functions</em>. The term seems complicted, but they
+are actually based on rather a simple idea. If we are doing a
+multivariate linear regression, we get extra features that
+<em>might</em> help us predict our required response varible (or target
+value), <span class="math inline">\(y\)</span>. But what if we only have
+one input value? We can actually artificially generate more input values
+with basis functions.</p>
 <h2 id="non-linear-in-the-inputs">Non-linear in the Inputs</h2>
-<p>When we refer to non-linear regression, we are normally referring to whether the regression is non-linear in the input space, or non-linear in the <em>covariates</em>. The covariates are the observations that move with the target (or <em>response</em>) variable. In our notation we have been using <span class="math inline">\(\mathbf{ x}_i\)</span> to represent a vector of the covariates associated with the <span class="math inline">\(i\)</span>th observation. The coresponding response variable is <span class="math inline">\(y_i\)</span>. If a model is non-linear in the inputs, it means that there is a non-linear function between the inputs and the response variable. Linear functions are functions that only involve multiplication and addition, in other words they can be represented through <em>linear algebra</em>. Linear regression involves assuming that a function takes the form <span class="math display">\[
+<p>When we refer to non-linear regression, we are normally referring to
+whether the regression is non-linear in the input space, or non-linear
+in the <em>covariates</em>. The covariates are the observations that
+move with the target (or <em>response</em>) variable. In our notation we
+have been using <span class="math inline">\(\mathbf{ x}_i\)</span> to
+represent a vector of the covariates associated with the <span
+class="math inline">\(i\)</span>th observation. The coresponding
+response variable is <span class="math inline">\(y_i\)</span>. If a
+model is non-linear in the inputs, it means that there is a non-linear
+function between the inputs and the response variable. Linear functions
+are functions that only involve multiplication and addition, in other
+words they can be represented through <em>linear algebra</em>. Linear
+regression involves assuming that a function takes the form <span
+class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
-\]</span> where <span class="math inline">\(\mathbf{ w}\)</span> are our regression weights. A very easy way to make the linear regression non-linear is to introduce non-linear functions. When we are introducing non-linear regression these functions are known as <em>basis functions</em>.</p>
+\]</span> where <span class="math inline">\(\mathbf{ w}\)</span> are our
+regression weights. A very easy way to make the linear regression
+non-linear is to introduce non-linear functions. When we are introducing
+non-linear regression these functions are known as <em>basis
+functions</em>.</p>
 <h1 id="basis-functions">Basis Functions</h1>
 <h2 id="basis-functions-1">Basis Functions</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-functions-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-functions-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Here’s the idea, instead of working directly on the original input space, <span class="math inline">\(\mathbf{ x}\)</span>, we build models in a new space, <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{ x})\)</span> where <span class="math inline">\(\boldsymbol{ \phi}(\cdot)\)</span> is a <em>vector-valued</em> function that is defined on the space <span class="math inline">\(\mathbf{ x}\)</span>.</p>
+<p>Here’s the idea, instead of working directly on the original input
+space, <span class="math inline">\(\mathbf{ x}\)</span>, we build models
+in a new space, <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{
+x})\)</span> where <span class="math inline">\(\boldsymbol{
+\phi}(\cdot)\)</span> is a <em>vector-valued</em> function that is
+defined on the space <span class="math inline">\(\mathbf{
+x}\)</span>.</p>
 <h2 id="quadratic-basis">Quadratic Basis</h2>
-<p>Remember, that a <em>vector-valued function</em> is just a vector that contains functions instead of values. Here’s an example for a one dimensional input space, <span class="math inline">\(x\)</span>, being projected to a <em>quadratic</em> basis. First we consider each basis function in turn, we can think of the elements of our vector as being indexed so that we have <span class="math display">\[
+<p>Remember, that a <em>vector-valued function</em> is just a vector
+that contains functions instead of values. Here’s an example for a one
+dimensional input space, <span class="math inline">\(x\)</span>, being
+projected to a <em>quadratic</em> basis. First we consider each basis
+function in turn, we can think of the elements of our vector as being
+indexed so that we have <span class="math display">\[
 \begin{align*}
 \phi_1(x) &amp; = 1, \\
 \phi_2(x) &amp; = x, \\
 \phi_3(x) &amp; = x^2.
 \end{align*}
-\]</span> Now we can consider them together by placing them in a vector, <span class="math display">\[
+\]</span> Now we can consider them together by placing them in a vector,
+<span class="math display">\[
 \boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x\\ x^2\end{bmatrix}.
-\]</span> For the vector-valued function, we have simply collected the different functions together in the same vector making them notationally easier to deal with in our mathematics.</p>
-<p>When we consider the vector-valued function for each data point, then we place all the data into a matrix. The result is a matrix valued function, <span class="math display">\[
-\boldsymbol{ \Phi}(\mathbf{ x}) = 
+\]</span> For the vector-valued function, we have simply collected the
+different functions together in the same vector making them notationally
+easier to deal with in our mathematics.</p>
+<p>When we consider the vector-valued function for each data point, then
+we place all the data into a matrix. The result is a matrix valued
+function, <span class="math display">\[
+\boldsymbol{ \Phi}(\mathbf{ x}) =
 \begin{bmatrix} 1 &amp; x_1 &amp;
 x_1^2 \\
 1 &amp; x_2 &amp; x_2^2\\
 \vdots &amp; \vdots &amp; \vdots \\
 1 &amp; x_n&amp; x_n^2
 \end{bmatrix}
-\]</span> where we are still in the one dimensional input setting so <span class="math inline">\(\mathbf{ x}\)</span> here represents a vector of our inputs with <span class="math inline">\(n\)</span> elements.</p>
-<p>Let’s try constructing such a matrix for a set of inputs. First of all, we create a function that returns the matrix valued function.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</span>
+\]</span> where we are still in the one dimensional input setting so
+<span class="math inline">\(\mathbf{ x}\)</span> here represents a
+vector of our inputs with <span class="math inline">\(n\)</span>
+elements.</p>
+<p>Let’s try constructing such a matrix for a set of inputs. First of
+all, we create a function that returns the matrix valued function.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated </span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    with the basis functions.&quot;&quot;&quot;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.hstack([np.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
-<h2 id="functions-derived-from-quadratic-basis">Functions Derived from Quadratic Basis</h2>
+<h2 id="functions-derived-from-quadratic-basis">Functions Derived from
+Quadratic Basis</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/quadratic-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/quadratic-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/quadratic-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/quadratic-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p><span class="math display">\[
-f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}}
+f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2
+x^2}}
 \]</span></p>
 <div class="figure">
 <div id="quadratic-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/quadratic_basis002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="quadratic-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;quadratic-basis-2&#39;)">
+<div id="quadratic-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;quadratic-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="quadratic-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a <em>quadratic</em> basis.</p>
+<p>Figure: The set of functions which are combined to form a
+<em>quadratic</em> basis.</p>
 </div>
 </div>
-<p>This function takes in an <span class="math inline">\(n\times 1\)</span> dimensional vector and returns an <span class="math inline">\(n\times 3\)</span> dimensional <em>design matrix</em> containing the basis functions. We can plot those basis functions against there input as follows.</p>
-<p>The actual function we observe is then made up of a sum of these functions. This is the reason for the name basis. The term <em>basis</em> means ‘the underlying support or foundation for an idea, argument, or process,’ and in this context they form the underlying support for our prediction function. Our prediction function can only be composed of a weighted linear sum of our basis functions.</p>
+<p>This function takes in an <span class="math inline">\(n\times
+1\)</span> dimensional vector and returns an <span
+class="math inline">\(n\times 3\)</span> dimensional <em>design
+matrix</em> containing the basis functions. We can plot those basis
+functions against there input as follows.</p>
+<p>The actual function we observe is then made up of a sum of these
+functions. This is the reason for the name basis. The term
+<em>basis</em> means ‘the underlying support or foundation for an idea,
+argument, or process’, and in this context they form the underlying
+support for our prediction function. Our prediction function can only be
+composed of a weighted linear sum of our basis functions.</p>
 <h2 id="quadratic-functions">Quadratic Functions</h2>
 <div class="figure">
 <div id="quadratic-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/quadratic_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="quadratic-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;quadratic-function-2&#39;)">
+<div id="quadratic-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;quadratic-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="quadratic-function-2-caption" class="caption-frame">
-<p>Figure: Functions constructed by weighted sum of the components of a quadratic basis.</p>
+<p>Figure: Functions constructed by weighted sum of the components of a
+quadratic basis.</p>
 </div>
 </div>
 <h2 id="different-bases">Different Bases</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-functions.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-functions.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Our choice of basis can be made based on what our beliefs about what is appropriate for the data. For example, the polynomial basis extends the quadratic basis to aribrary degree, so we might define the <span class="math inline">\(j\)</span>th basis function associated with the model as <span class="math display">\[
+<p>Our choice of basis can be made based on what our beliefs about what
+is appropriate for the data. For example, the polynomial basis extends
+the quadratic basis to aribrary degree, so we might define the <span
+class="math inline">\(j\)</span>th basis function associated with the
+model as <span class="math display">\[
 \phi_j(x_i) = x_i^j
 \]</span> which is known as the <em>polynomial basis</em>.</p>
 <h2 id="polynomial-basis">Polynomial Basis</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/polynomial-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/polynomial-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/polynomial-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/polynomial-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The polynomial basis combines higher order polynomials together to create the function. For example, the fourth order polynomial has five components to its basis function. <span class="math display">\[
+<p>The polynomial basis combines higher order polynomials together to
+create the function. For example, the fourth order polynomial has five
+components to its basis function. <span class="math display">\[
 \phi_j(x) = x^j
 \]</span></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <div class="figure">
 <div id="polynomial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/polynomial_basis004.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="polynomial-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;polynomial-basis-2&#39;)">
+<div id="polynomial-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;polynomial-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="polynomial-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a <em>polynomial</em> basis.</p>
+<p>Figure: The set of functions which are combined to form a
+<em>polynomial</em> basis.</p>
 </div>
 </div>
-<h2 id="functions-derived-from-polynomial-basis">Functions Derived from Polynomial Basis</h2>
+<h2 id="functions-derived-from-polynomial-basis">Functions Derived from
+Polynomial Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}} + {\color{green}{w_3 x^3}} + {\color{cyan}{w_4 x^4}}
+f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2
+x^2}} + {\color{green}{w_3 x^3}} + {\color{cyan}{w_4 x^4}}
 \]</span></p>
 <div class="figure">
 <div id="polynomial-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/polynomial_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="polynomial-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;polynomial-function-2&#39;)">
+<div id="polynomial-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;polynomial-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="polynomial-function-2-caption" class="caption-frame">
-<p>Figure: A random combination of functions from the polynomial basis.</p>
+<p>Figure: A random combination of functions from the polynomial
+basis.</p>
 </div>
 </div>
-<p>To aid in understanding how a basis works, we’ve provided you with a small interactive tool for exploring this polynomial basis. The tool can be summoned with the following command.</p>
-<p>Try moving the sliders around to change the weight of each basis function. Click the control box <code>display_basis</code> to show the underlying basis functions (in red). The prediction function is shown in a thick blue line. <em>Warning</em> the sliders aren’t presented quite in the correct order. <code>w_0</code> is associated with the bias, <code>w_1</code> is the linear term, <code>w_2</code> the quadratic and here (because we have four basis functions) we have <code>w_3</code> for the <em>cubic</em> term. So the subscript of the weight parameter is always associated with the corresponding polynomial’s degree.</p>
+<p>To aid in understanding how a basis works, we’ve provided you with a
+small interactive tool for exploring this polynomial basis. The tool can
+be summoned with the following command.</p>
+<p>Try moving the sliders around to change the weight of each basis
+function. Click the control box <code>display_basis</code> to show the
+underlying basis functions (in red). The prediction function is shown in
+a thick blue line. <em>Warning</em> the sliders aren’t presented quite
+in the correct order. <code>w_0</code> is associated with the bias,
+<code>w_1</code> is the linear term, <code>w_2</code> the quadratic and
+here (because we have four basis functions) we have <code>w_3</code> for
+the <em>cubic</em> term. So the subscript of the weight parameter is
+always associated with the corresponding polynomial’s degree.</p>
 <h3 id="exercise-1">Exercise 1</h3>
-<p>Try increasing the number of basis functions (thereby increasing the <em>degree</em> of the resulting polynomial). Describe what you see as you increase number of basis up to 10. Is it easy to change the function in intiutive ways?</p>
+<p>Try increasing the number of basis functions (thereby increasing the
+<em>degree</em> of the resulting polynomial). Describe what you see as
+you increase number of basis up to 10. Is it easy to change the function
+in intiutive ways?</p>
 <h2 id="different-basis">Different Basis</h2>
-<p>The polynomial basis is widely used in Engineering and graphics, but it has some drawbacks in machine learning: outside the input region between -1 and 1, the values of the polynomial basis rise very quickly.</p>
-<p>Now we look at basis functions that have been used as the <em>activation</em> functions in neural network model.</p>
+<p>The polynomial basis is widely used in Engineering and graphics, but
+it has some drawbacks in machine learning: outside the input region
+between -1 and 1, the values of the polynomial basis rise very
+quickly.</p>
+<p>Now we look at basis functions that have been used as the
+<em>activation</em> functions in neural network model.</p>
 <h2 id="radial-basis-functions">Radial Basis Functions</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/radial-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/radial-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/radial-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/radial-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Another type of basis is sometimes known as a ‘radial basis’ because the effect basis functions are constructed on ‘centres’ and the effect of each basis function decreases as the radial distance from each centre increases.</p>
+<p>Another type of basis is sometimes known as a ‘radial basis’ because
+the effect basis functions are constructed on ‘centres’ and the effect
+of each basis function decreases as the radial distance from each centre
+increases.</p>
 <p><span class="math display">\[
 \phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
 \]</span></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> radial</span></code></pre></div>
 <div class="figure">
 <div id="radial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/radial_basis002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="radial-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;radial-basis-2&#39;)">
+<div id="radial-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;radial-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="radial-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form the radial basis.</p>
+<p>Figure: The set of functions which are combined to form the radial
+basis.</p>
 </div>
 </div>
-<h2 id="functions-derived-from-radial-basis">Functions Derived from Radial Basis</h2>
+<h2 id="functions-derived-from-radial-basis">Functions Derived from
+Radial Basis</h2>
 <p><span class="math display">\[
-f(x) = \color{red}{w_1 e^{-2(x+1)^2}}  + \color{magenta}{w_2e^{-2x^2}} + \color{blue}{w_3 e^{-2(x-1)^2}}
+f(x) = \color{red}{w_1 e^{-2(x+1)^2}}  + \color{magenta}{w_2e^{-2x^2}} +
+\color{blue}{w_3 e^{-2(x-1)^2}}
 \]</span></p>
 <div class="figure">
 <div id="radial-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/radial_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="radial-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;radial-function-2&#39;)">
+<div id="radial-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;radial-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="radial-function-2-caption" class="caption-frame">
-<p>Figure: A radial basis is made up of different locally effective functions centered at different points.</p>
+<p>Figure: A radial basis is made up of different locally effective
+functions centered at different points.</p>
 </div>
 </div>
 <h2 id="rectified-linear-units">Rectified Linear Units</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/relu-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/relu-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The rectified linear unit is a basis function that emerged out of the deep learning community. Rectified linear units are popular in the current generation of multilayer perceptron models, or deep networks. These basis functions start flat, and then become linear functions at a certain threshold. <span class="math display">\[
+<p>The rectified linear unit is a basis function that emerged out of the
+deep learning community. Rectified linear units are popular in the
+current generation of multilayer perceptron models, or deep networks.
+These basis functions start flat, and then become linear functions at a
+certain threshold. <span class="math display">\[
 \phi_j(x) = xH(v_j x+ v_0)
 \]</span></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
 <div class="figure">
 <div id="relu-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/relu_basis004.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="relu-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;relu-basis-2&#39;)">
+<div id="relu-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;relu-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="relu-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a rectified linear unit basis.</p>
+<p>Figure: The set of functions which are combined to form a rectified
+linear unit basis.</p>
 </div>
 </div>
-<h2 id="functions-derived-from-relu-basis">Functions Derived from Relu Basis</h2>
+<h2 id="functions-derived-from-relu-basis">Functions Derived from Relu
+Basis</h2>
 <p><span class="math display">\[
-f(x) = \color{red}{w_0}   + \color{magenta}{w_1 xH(x+1.0) } + \color{blue}{w_2 xH(x+0.33) } + \color{green}{w_3 xH(x-0.33)} +  \color{cyan}{w_4 xH(x-1.0)}
+f(x) = \color{red}{w_0}   + \color{magenta}{w_1 xH(x+1.0) } +
+\color{blue}{w_2 xH(x+0.33) } + \color{green}{w_3 xH(x-0.33)}
++  \color{cyan}{w_4 xH(x-1.0)}
 \]</span></p>
 <div class="figure">
 <div id="relu-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/relu_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="relu-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;relu-function-2&#39;)">
+<div id="relu-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;relu-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="relu-function-2-caption" class="caption-frame">
-<p>Figure: A rectified linear unit basis is made up of different rectified linear unit functions centered at different points.</p>
+<p>Figure: A rectified linear unit basis is made up of different
+rectified linear unit functions centered at different points.</p>
 </div>
 </div>
 <h2 id="hyperbolic-tangent-basis">Hyperbolic Tangent Basis</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/hyperbolic-tangent-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/hyperbolic-tangent-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/hyperbolic-tangent-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/hyperbolic-tangent-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The rectified linear unit is a basis function that used to be used a lot for neural network models. It’s related to the sigmoid function by a scaling. <span class="math display">\[
+<p>The rectified linear unit is a basis function that used to be used a
+lot for neural network models. It’s related to the sigmoid function by a
+scaling. <span class="math display">\[
 \phi_j(x) = \tanh(v_j x+ v_0)
 \]</span></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> hyperbolic_tangent</span></code></pre></div>
-<p>Sigmoid or hyperbolic tangent basis was popular in the original generation of multilayer perceptron models, or deep networks. These basis functions start flat, rise and then saturate.</p>
+<p>Sigmoid or hyperbolic tangent basis was popular in the original
+generation of multilayer perceptron models, or deep networks. These
+basis functions start flat, rise and then saturate.</p>
 <div class="figure">
 <div id="hyperbolic_tangent-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/hyperbolic_tangent_basis004.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="hyperbolic_tangent-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;hyperbolic_tangent-basis-2&#39;)">
+<div id="hyperbolic_tangent-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;hyperbolic_tangent-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="hyperbolic_tangent-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a <em>hyberbolic tangent</em> basis.</p>
+<p>Figure: The set of functions which are combined to form a
+<em>hyberbolic tangent</em> basis.</p>
 </div>
 </div>
-<h2 id="functions-derived-from-tanh-basis">Functions Derived from Tanh Basis</h2>
+<h2 id="functions-derived-from-tanh-basis">Functions Derived from Tanh
+Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{red}{w_0}}   + {\color{magenta}{w_1 \text{tanh}\left(x+1\right)}}  + {\color{blue}{w_2 \text{tanh}\left(x+0.33\right)}}  + {\color{green}{w_3 \text{tanh}\left(x-0.33\right)}} + {\color{cyan}{w_4 \text{tanh}\left(x-1\right)}}
+f(x) = {\color{red}{w_0}}   + {\color{magenta}{w_1
+\text{tanh}\left(x+1\right)}}  + {\color{blue}{w_2
+\text{tanh}\left(x+0.33\right)}}  + {\color{green}{w_3
+\text{tanh}\left(x-0.33\right)}} + {\color{cyan}{w_4
+\text{tanh}\left(x-1\right)}}
 \]</span></p>
 <div class="figure">
 <div id="hyperbolic_tangent-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/hyperbolic_tangent_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="hyperbolic_tangent-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;hyperbolic_tangent-function-2&#39;)">
+<div id="hyperbolic_tangent-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;hyperbolic_tangent-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="hyperbolic_tangent-function-2-caption" class="caption-frame">
-<p>Figure: A hyperbolic tangent basis is made up of s-shaped basis functions centered at different points.</p>
+<p>Figure: A hyperbolic tangent basis is made up of s-shaped basis
+functions centered at different points.</p>
 </div>
 </div>
 <h2 id="fourier-basis">Fourier Basis</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/fourier-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/fourier-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/fourier-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/fourier-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Joseph_Fourier">Joseph Fourier</a> suggested that functions could be converted to a sum of sines and cosines. A Fourier basis is a linear weighted sum of these functions. <span class="math display">\[
+<p><a href="https://en.wikipedia.org/wiki/Joseph_Fourier">Joseph
+Fourier</a> suggested that functions could be converted to a sum of
+sines and cosines. A Fourier basis is a linear weighted sum of these
+functions. <span class="math display">\[
 f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
 \]</span></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> fourier</span></code></pre></div>
 <div class="figure">
 <div id="fourier-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/fourier_basis004.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="fourier-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;fourier-basis-2&#39;)">
+<div id="fourier-basis-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;fourier-basis-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="fourier-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a <em>Fourier</em> basis.</p>
+<p>Figure: The set of functions which are combined to form a
+<em>Fourier</em> basis.</p>
 </div>
 </div>
-<p>In this code, basis functions with an <em>odd</em> index are sine and basis functions with an <em>even</em> index are cosine. The first basis function (index 0, so cosine) has a frequency of 0 and then frequencies increase every time a sine and cosine are included.</p>
-<h2 id="functions-derived-from-fourier-basis">Functions Derived from Fourier Basis</h2>
+<p>In this code, basis functions with an <em>odd</em> index are sine and
+basis functions with an <em>even</em> index are cosine. The first basis
+function (index 0, so cosine) has a frequency of 0 and then frequencies
+increase every time a sine and cosine are included.</p>
+<h2 id="functions-derived-from-fourier-basis">Functions Derived from
+Fourier Basis</h2>
 <p><span class="math display">\[
-f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 \cos(x)}} + {\color{green}{w_3 \sin(2x)}} + {\color{cyan}{w_4 \cos(2x)}}
+f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} +
+{\color{blue}{w_2 \cos(x)}} + {\color{green}{w_3 \sin(2x)}} +
+{\color{cyan}{w_4 \cos(2x)}}
 \]</span></p>
 <div class="figure">
 <div id="fourier-function-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/fourier_function002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="fourier-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;fourier-function-2&#39;)">
+<div id="fourier-function-2-magnify" class="magnify"
+onclick="magnifyFigure(&#39;fourier-function-2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="fourier-function-2-caption" class="caption-frame">
-<p>Figure: A random combination of functions from the Fourier basis. Fourier basis is made up of sine and cosine functions with different frequencies.</p>
+<p>Figure: A random combination of functions from the Fourier basis.
+Fourier basis is made up of sine and cosine functions with different
+frequencies.</p>
 </div>
 </div>
 <h2 id="fitting-to-data">Fitting to Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
+<p>Now we are going to consider how these basis functions can be
+adjusted to fit to a particular data set. We will return to the olympic
+marathon data from last time. First we will scale the output of the data
+to be zero mean and variance 1.</p>
 <h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <table>
 <tr>
@@ -365,21 +585,28 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 <li>Gold medal times for Olympic Marathon since 1896.</li>
 <li>Marathons before 1924 didn’t have a standardized distance.</li>
 <li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
+<li>In 1904 Marathon was badly organized leading to very slow
+times.</li>
 </ul>
 </td>
 <td width="30%">
-<div class="centered centered" style="">
+<div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlai/./slides/diagrams//Stephen_Kiprotich.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ" class="uri">http://bit.ly/16kMKHQ</a></small>
+<small>Image from Wikimedia Commons <a href="http://bit.ly/16kMKHQ"
+class="uri">http://bit.ly/16kMKHQ</a></small>
 </td>
 </tr>
 </table>
-<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<p>The first thing we will do is load a standard data set for regression
+modelling. The data consists of the pace of Olympic Gold Medal Marathon
+winners for the Olympics from 1896 to present. Let’s load in the data
+and plot.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -391,26 +618,37 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
+<div id="olympic-marathon-magnify" class="magnify"
+onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="olympic-marathon-caption" class="caption-frame">
 <p>Figure: Olympic marathon pace times since 1896.</p>
 </div>
 </div>
-<p>Things to notice about the data include the outlier in 1904, in that year the Olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed. More recent years see more consistently quick marathons.</p>
+<p>Things to notice about the data include the outlier in 1904, in that
+year the Olympics was in St Louis, USA. Organizational problems and
+challenges with dust kicked up by the cars following the race meant that
+participants got lost, and only very few participants completed. More
+recent years see more consistently quick marathons.</p>
 <h3 id="exercise-2">Exercise 2</h3>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-function-models.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-function-models.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
+<p>Use the tool provided above to try and find the best fit you can to
+the data. Explore the parameter space and give the weight values you
+used for the</p>
 <ol type="a">
 <li>polynomial basis</li>
 <li>Radial basis</li>
 <li>Fourier basis</li>
 </ol>
-<p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<p>Write your answers in the code box below creating a new vector of
+parameters (in the correct order!) for each basis.</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
 <h2 id="basis-function-models">Basis Function Models</h2>
 <p><span class="math display">\[
   f(\mathbf{ x}_i) = \sum_{j=1}^mw_j \phi_{i, j}
@@ -418,60 +656,139 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 <p><span class="math display">\[
   f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}_i
   \]</span></p>
-<h2 id="log-likelihood-for-basis-function-model">Log Likelihood for Basis Function Model</h2>
-<p>The likelihood of a single data point given the model parameters is given by <span class="math display">\[
-  p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}\right).
-  \]</span> and making an assumption of <em>conditional independence</em> given the parameters we can write</p>
+<h2 id="log-likelihood-for-basis-function-model">Log Likelihood for
+Basis Function Model</h2>
+<p>The likelihood of a single data point given the model parameters is
+given by <span class="math display">\[
+  p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{
+w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}\right).
+  \]</span> and making an assumption of <em>conditional
+independence</em> given the parameters we can write</p>
 <p><span class="math display">\[
-  L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+  L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log
+2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\right)^{2}}{2\sigma^2}.
   \]</span> to give us the likelihood for the whole data set.</p>
 <h2 id="objective-function">Objective Function</h2>
-<p>Traditionally in optimization, we choose to minmize an object function (or loss function, or cost function) rather than maximizing a likelihood. For these models we <em>minimize the negative log likelihood</em>. This function takes the form,</p>
+<p>Traditionally in optimization, we choose to minmize an object
+function (or loss function, or cost function) rather than maximizing a
+likelihood. For these models we <em>minimize the negative log
+likelihood</em>. This function takes the form,</p>
 <p><span class="math display">\[
-E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 +
+\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\right)^{2}}{2\sigma^2}.
 \]</span></p>
-<p>To minimize this objective, we first expand the brackets as follows, <span class="math display">\[
+<p>To minimize this objective, we first expand the brackets as follows,
+<span class="math display">\[
 \begin{align}
-  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\\ &amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
+  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 +
+\frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{
+w}^{\top}\boldsymbol{ \phi}_i\\
+&amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
 \end{align}
 \]</span></p>
-<p>Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, to highlight that what we have is a multivariate quadratic form in <span class="math inline">\(\mathbf{ w}\)</span>. <span class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{ w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp; +\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}+\text{const}.\end{align}\]</span></p>
+<p>Now we pull out the vectors, <span class="math inline">\(\mathbf{
+w}\)</span>, to highlight that what we have is a multivariate quadratic
+form in <span class="math inline">\(\mathbf{ w}\)</span>. <span
+class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) = &amp;
+\frac{n}{2}\log \sigma^2 +
+\frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{
+w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp;
++\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{
+w}+\text{const}.\end{align}\]</span></p>
 <h2 id="design-matrices">Design Matrices</h2>
-<p>We like to make use of <em>design</em> matrices for our data. Design matrices involve placing the data points into rows of the matrix and data features into the columns of the matrix. By convention, we are referincing a vector with a bold lower case letter, and a matrix with a bold upper case letter. The design matrix is therefore given by <span class="math display">\[
-  \boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ x}&amp; \mathbf{ x}^2\end{bmatrix}
+<p>We like to make use of <em>design</em> matrices for our data. Design
+matrices involve placing the data points into rows of the matrix and
+data features into the columns of the matrix. By convention, we are
+referincing a vector with a bold lower case letter, and a matrix with a
+bold upper case letter. The design matrix is therefore given by <span
+class="math display">\[
+  \boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ x}&amp;
+\mathbf{ x}^2\end{bmatrix}
   \]</span> so that <span class="math display">\[
   \boldsymbol{ \Phi}\in \Re^{n\times p}.
   \]</span></p>
-<h3 id="multivariate-derivatives-reminder">Multivariate Derivatives Reminder</h3>
-<p>To find the minimum of the objective function, we need to make use of multivariate calculus. The two results we need from multivariate calculus have the following form.</p>
-<p><span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></p>
+<h3 id="multivariate-derivatives-reminder">Multivariate Derivatives
+Reminder</h3>
+<p>To find the minimum of the objective function, we need to make use of
+multivariate calculus. The two results we need from multivariate
+calculus have the following form.</p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{
+w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span
+class="math display">\[\frac{\text{d}\mathbf{
+w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{
+w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if
+<span class="math inline">\(\mathbf{A}\)</span> is symmetric
+(<em>i.e.</em> <span
+class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span
+class="math display">\[\frac{\text{d}\mathbf{
+w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{
+w}.\]</span></p>
 <h2 id="differentiate">Differentiate</h2>
-<p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
-<p>Rewriting this result in matrix notation we obtain: <span class="math display">\[
-\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top = \boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i = \boldsymbol{ \Phi}^\top \mathbf{ y}
+<p>Differentiating with respect to the vector <span
+class="math inline">\(\mathbf{ w}\)</span> we obtain <span
+class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2
+\right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2}
+\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2}
+\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{
+\phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span
+class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{
+\phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{
+\phi}_iy_i,\]</span></p>
+<p>Rewriting this result in matrix notation we obtain: <span
+class="math display">\[
+\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top =
+\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span
+class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i =
+\boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></p>
-<p>Setting the derivative to zero we obtain update equations for the parameter vector and the noise variance.</p>
+<p>Setting the derivative to zero we obtain update equations for the
+parameter vector and the noise variance.</p>
 <p><span class="math display">\[
-  \mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
+  \mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{
+\Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
   \]</span></p>
 <p><span class="math display">\[
-  \left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
+  \left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{
+w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
   \]</span></p>
-<p>In practice we should avoid solving these equations through direct use of the inverse. Instead we solve for <span class="math inline">\(\mathbf{ w}\)</span> in the following linear system.</p>
+<p>In practice we should avoid solving these equations through direct
+use of the inverse. Instead we solve for <span
+class="math inline">\(\mathbf{ w}\)</span> in the following linear
+system.</p>
 <p><span class="math display">\[
-  \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
-\]</span> Compare this system with <em>solve for</em> <span class="math inline">\(\mathbf{x}\)</span> in <span class="math display">\[
+  \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}=
+\boldsymbol{ \Phi}^\top \mathbf{ y}
+\]</span> Compare this system with <em>solve for</em> <span
+class="math inline">\(\mathbf{x}\)</span> in <span
+class="math display">\[
 \mathbf{A}\mathbf{x} = \mathbf{b}.
-\]</span> For example see the <code>numpy.linalg.solve</code> or <code>torch.linalg.solve</code>.</p>
-<p>But the correct and more stable approach is to make use of the QR decomposition.</p>
-<h2 id="solution-with-qr-decomposition">Solution with QR Decomposition</h2>
+\]</span> For example see the <code>numpy.linalg.solve</code> or
+<code>torch.linalg.solve</code>.</p>
+<p>But the correct and more stable approach is to make use of the QR
+decomposition.</p>
+<h2 id="solution-with-qr-decomposition">Solution with QR
+Decomposition</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/qr-decomposition-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/qr-decomposition-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/qr-decomposition-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/qr-decomposition-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Performing a solve instead of a matrix inverse is the more numerically stable approach, but we can do even better. A <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a> of a matrix factorizes it into a matrix which is an orthogonal matrix <span class="math inline">\(\mathbf{Q}\)</span>, so that <span class="math inline">\(\mathbf{Q}^\top \mathbf{Q} = \mathbf{I}\)</span>. And a matrix which is upper triangular, <span class="math inline">\(\mathbf{R}\)</span>. <span class="math display">\[
+<p>Performing a solve instead of a matrix inverse is the more
+numerically stable approach, but we can do even better. A <a
+href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>
+of a matrix factorizes it into a matrix which is an orthogonal matrix
+<span class="math inline">\(\mathbf{Q}\)</span>, so that <span
+class="math inline">\(\mathbf{Q}^\top \mathbf{Q} = \mathbf{I}\)</span>.
+And a matrix which is upper triangular, <span
+class="math inline">\(\mathbf{R}\)</span>. <span class="math display">\[
 \designMatrix^\top \designMatrix \boldsymbol{\beta} =
 \designMatrix^\top \mathbf{ y}
-\]</span> and we substitute <span class="math inline">\(\designMatrix = \mathbf{Q}{\mathbf{R}\)</span> so we have <span class="math display">\[
+\]</span> and we substitute <span class="math inline">\(\designMatrix =
+\mathbf{Q}{\mathbf{R}\)</span> so we have <span class="math display">\[
 (\mathbf{Q}\mathbf{R})^\top
 (\mathbf{Q}\mathbf{R})\boldsymbol{\beta} = (\mathbf{Q}\mathbf{R})^\top
 \mathbf{ y}
@@ -480,25 +797,46 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 \boldsymbol{\beta} = \mathbf{R}^\top \mathbf{Q}^\top \mathbf{ y}
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top \mathbf{Q}^\top
+\mathbf{R}^\top \mathbf{R} \boldsymbol{\beta} = \mathbf{R}^\top
+\mathbf{Q}^\top
 \mathbf{ y}
 \]</span> <span class="math display">\[
 \mathbf{R} \boldsymbol{\beta} = \mathbf{Q}^\top \mathbf{ y}
 \]</span> which leaves us with a lower triangular system to solve.</p>
-<p>This is a more numerically stable solution because it removes the need to compute <span class="math inline">\(\designMatrix^\top\designMatrix\)</span> as an intermediate. Computing <span class="math inline">\(\designMatrix^\top\designMatrix\)</span> is a bad idea because it involves squaring all the elements of <span class="math inline">\(\designMatrix\)</span> and thereby potentially reducing the numerical precision with which we can represent the solution. Operating on <span class="math inline">\(\designMatrix\)</span> directly preserves the numerical precision of the model.</p>
-<p>This can be more particularly seen when we begin to work with <em>basis functions</em> in the next session. Some systems that can be resolved with the QR decomposition cannot be resolved by using solve directly.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(<span class="op">\</span>designVariable)</span>
+<p>This is a more numerically stable solution because it removes the
+need to compute <span
+class="math inline">\(\designMatrix^\top\designMatrix\)</span> as an
+intermediate. Computing <span
+class="math inline">\(\designMatrix^\top\designMatrix\)</span> is a bad
+idea because it involves squaring all the elements of <span
+class="math inline">\(\designMatrix\)</span> and thereby potentially
+reducing the numerical precision with which we can represent the
+solution. Operating on <span
+class="math inline">\(\designMatrix\)</span> directly preserves the
+numerical precision of the model.</p>
+<p>This can be more particularly seen when we begin to work with
+<em>basis functions</em> in the next session. Some systems that can be
+resolved with the QR decomposition cannot be resolved by using solve
+directly.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(\designVariable)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=\</span>designVariable.columns)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>\designVariable.columns)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
-<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
+<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic
+Data</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,8 +846,10 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
@@ -519,94 +859,157 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
 <div class="figure">
-<div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
+<div id="olympic-lm-polynomial-num-basis-02-figure"
+class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
+<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify"
+onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="olympic-lm-polynomial-num-basis-02-caption" class="caption-frame">
-<p>Figure: Fit of a 1 degree polynomial to the olympic marathon data.</p>
+<div id="olympic-lm-polynomial-num-basis-02-caption"
+class="caption-frame">
+<p>Figure: Fit of a 1 degree polynomial to the olympic marathon
+data.</p>
 </div>
 </div>
 <div class="figure">
-<div id="olympic-lm-polynomial-num-basis-03-figure" class="figure-frame">
+<div id="olympic-lm-polynomial-num-basis-03-figure"
+class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlai/./slides/diagrams//ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
+<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify"
+onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="olympic-lm-polynomial-num-basis-03-caption" class="caption-frame">
-<p>Figure: Fit of a 2 degree polynomial to the olympic marathon data.</p>
+<div id="olympic-lm-polynomial-num-basis-03-caption"
+class="caption-frame">
+<p>Figure: Fit of a 2 degree polynomial to the olympic marathon
+data.</p>
 </div>
 </div>
-<h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear in the Parameters</h2>
-<p>One rather nice aspect of our model is that whilst it is non-linear in the inputs, it is still linear in the parameters <span class="math inline">\(\mathbf{ w}\)</span>. This means that our derivations from before continue to operate to allow us to work with this model. In fact, although this is a non-linear regression it is still known as a <em>linear model</em> because it is linear in the parameters,</p>
+<h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear
+in the Parameters</h2>
+<p>One rather nice aspect of our model is that whilst it is non-linear
+in the inputs, it is still linear in the parameters <span
+class="math inline">\(\mathbf{ w}\)</span>. This means that our
+derivations from before continue to operate to allow us to work with
+this model. In fact, although this is a non-linear regression it is
+still known as a <em>linear model</em> because it is linear in the
+parameters,</p>
 <p><span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
-\]</span> where the vector <span class="math inline">\(\mathbf{ x}\)</span> appears inside the basis functions, making our result, <span class="math inline">\(f(\mathbf{ x})\)</span> non-linear in the inputs, but <span class="math inline">\(\mathbf{ w}\)</span> appears outside our basis function, making our result <em>linear</em> in the parameters. In practice, our basis function itself may contain its own set of parameters, <span class="math display">\[
+\]</span> where the vector <span class="math inline">\(\mathbf{
+x}\)</span> appears inside the basis functions, making our result, <span
+class="math inline">\(f(\mathbf{ x})\)</span> non-linear in the inputs,
+but <span class="math inline">\(\mathbf{ w}\)</span> appears outside our
+basis function, making our result <em>linear</em> in the parameters. In
+practice, our basis function itself may contain its own set of
+parameters, <span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 \boldsymbol{\theta}),
-\]</span> that we’ve denoted here as <span class="math inline">\(\boldsymbol{\theta}\)</span>. If these parameters appear inside the basis function then our model is <em>non-linear</em> in these parameters.</p>
+\]</span> that we’ve denoted here as <span
+class="math inline">\(\boldsymbol{\theta}\)</span>. If these parameters
+appear inside the basis function then our model is <em>non-linear</em>
+in these parameters.</p>
 <h3 id="exercise-3">Exercise 3</h3>
-<p>For the following prediction functions state whether the model is linear in the inputs, the parameters or both.</p>
+<p>For the following prediction functions state whether the model is
+linear in the inputs, the parameters or both.</p>
 <ol type="a">
 <li><p><span class="math inline">\(f(x) = w_1x_1 + w_2\)</span></p></li>
-<li><p><span class="math inline">\(f(x) = w_1\exp(x_1) + w_2x_2 + w_3\)</span></p></li>
-<li><p><span class="math inline">\(f(x) = \log(x_1^{w_1}) + w_2x_2^2 + w_3\)</span></p></li>
-<li><p><span class="math inline">\(f(x) = \exp(-\sum_i(x_i - w_i)^2)\)</span></p></li>
-<li><p><span class="math inline">\(f(x) = \exp(-\mathbf{ w}^\top \mathbf{ x})\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = w_1\exp(x_1) + w_2x_2 +
+w_3\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \log(x_1^{w_1}) + w_2x_2^2 +
+w_3\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \exp(-\sum_i(x_i -
+w_i)^2)\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \exp(-\mathbf{ w}^\top
+\mathbf{ x})\)</span></p></li>
 </ol>
 <h2 id="fitting-the-model-yourself">Fitting the Model Yourself</h2>
-<p>You now have everything you need to fit a non- linear (in the inputs) basis function model to the marathon data.</p>
+<p>You now have everything you need to fit a non- linear (in the inputs)
+basis function model to the marathon data.</p>
 <h3 id="exercise-4">Exercise 4</h3>
-<p>Choose one of the basis functions you have explored above. Compute the design matrix on the covariates (or input data), <code>x</code>. Use the design matrix and the response variable <code>y</code> to solve the following linear system for the model parameters <code>w</code>. <span class="math display">\[
-\boldsymbol{ \phi}^\top\boldsymbol{ \phi}\mathbf{ w}= \boldsymbol{ \phi}^\top \mathbf{ y}
-\]</span> Compute the corresponding error on the training data. How does it compare to the error you were able to achieve fitting the basis above? Plot the form of your prediction function from the least squares estimate alongside the form of you prediction function you fitted by hand.</p>
-<h2 id="lecture-on-basis-functions-from-gprs-uganda">Lecture on Basis Functions from GPRS Uganda</h2>
+<p>Choose one of the basis functions you have explored above. Compute
+the design matrix on the covariates (or input data), <code>x</code>. Use
+the design matrix and the response variable <code>y</code> to solve the
+following linear system for the model parameters <code>w</code>. <span
+class="math display">\[
+\boldsymbol{ \phi}^\top\boldsymbol{ \phi}\mathbf{ w}= \boldsymbol{
+\phi}^\top \mathbf{ y}
+\]</span> Compute the corresponding error on the training data. How does
+it compare to the error you were able to achieve fitting the basis
+above? Plot the form of your prediction function from the least squares
+estimate alongside the form of you prediction function you fitted by
+hand.</p>
+<h2 id="lecture-on-basis-functions-from-gprs-uganda">Lecture on Basis
+Functions from GPRS Uganda</h2>
 <div class="figure">
 <div id="basis-functions-gprs-uganda-figure" class="figure-frame">
 <iframe width="600" height="450" src="https://www.youtube.com/embed/PoNbOnUnOao?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
 </div>
-<div id="basis-functions-gprs-uganda-magnify" class="magnify" onclick="magnifyFigure(&#39;basis-functions-gprs-uganda&#39;)">
+<div id="basis-functions-gprs-uganda-magnify" class="magnify"
+onclick="magnifyFigure(&#39;basis-functions-gprs-uganda&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="basis-functions-gprs-uganda-caption" class="caption-frame">
 <p>Figure: Lecture on Basis functions from GPRS in Uganda in 2013.</p>
 </div>
 </div>
-<h2 id="use-of-qr-decomposition-for-numerical-stability">Use of QR Decomposition for Numerical Stability</h2>
-<p>In the last session we showed how rather than computing <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> as an intermediate step to our solution, we could compute the solution to the regressiond directly through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>. Now we will consider an example with non linear basis functions where such computation is critical for forming the right answer.</p>
+<h2 id="use-of-qr-decomposition-for-numerical-stability">Use of QR
+Decomposition for Numerical Stability</h2>
+<p>In the last session we showed how rather than computing <span
+class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> as an
+intermediate step to our solution, we could compute the solution to the
+regressiond directly through <a
+href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>.
+Now we will consider an example with non linear basis functions where
+such computation is critical for forming the right answer.</p>
 <p><em>TODO</em> example with polynomials.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.fourier(x, <span class="dv">5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.fourier(x, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
-<li><p>Section 1.4 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
-<li><p>Chapter 1, pg 1-6 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
-<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Section 1.4 of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Chapter 1, pg 1-6 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 </ul>
 <h2 id="thanks">Thanks!</h2>
-<p>For more information on these subjects and more you might want to check the following resources.</p>
+<p>For more information on these subjects and more you might want to
+check the following resources.</p>
 <ul>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+<li>podcast: <a href="http://thetalkingmachines.com">The Talking
+Machines</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Bishop:book06" class="csl-entry" role="listitem">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
-<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+<div id="ref-Rogers:book11" class="csl-entry" role="listitem">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 

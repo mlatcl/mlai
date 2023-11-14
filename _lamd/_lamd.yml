@@ -1,4 +1,3 @@
-layout: lecture
 author:
 - family: Lawrence
   given: Neil D.
@@ -7,22 +6,35 @@ author:
   twitter: lawrennd
   orcid: 0000-0001-9258-1030
   url: http://inverseprobability.com
-ipynb: True
+layout: lecture
+room:
+venue:
 talkcss: https://inverseprobability.com/assets/css/talks.css
-postsdir: ../../../mlatcl/mlai/_lectures/
-slidesdir: ../../../mlatcl/mlai/slides/
-notesdir: ../../../mlatcl/mlai/_notes/
-notebooksdir: ../../../mlatcl/mlai/_notebooks/
+bibdir: $HOME/lawrennd/bibliography
+postsdir: ../_lectures/
+slidesdir: ../slides/
+notesdir: ../_notes/
+notebooksdir: ../_notebooks/
+practicalsdir: ../_practicals/
+snippetsdir: $HOME/lawrennd/snippets
 writediagramsdir: .
-scriptsdir: ../scripts/
+scriptsdir: ./scripts/
 diagramsdir: ./slides/diagrams/
+posts: True
+docx: False
+notespdf: False
+slidesipynb: False
+pptx: True
+pdf: False
+assignment: False
+ipynb: True
+reveal: True
 transition: None
 baseurl: "mlai/" # the subpath of your site, e.g. /blog/
 url: "https://mlatcl.github.io/" # the base hostname & protocol for your site
-time:
 ghub:
-- organization: lawrennd
-  repository: talks
+- organization: mlatcl
+  repository: mlai
   branch: gh-pages
-  directory: _mlai
+  directory: _lamd
 transition: None
