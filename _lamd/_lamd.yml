@@ -9,27 +9,32 @@ author:
 layout: lecture
 room:
 venue:
+url: https://inverseprobability.com/
 talkcss: https://inverseprobability.com/assets/css/talks.css
 bibdir: $HOME/lawrennd/bibliography
 postsdir: ../_lectures/
-slidesdir: ../slides/
+slidesdir: $HOME/lawrennd/slides/
 notesdir: ../_notes/
 notebooksdir: ../_notebooks/
 practicalsdir: ../_practicals/
 snippetsdir: $HOME/lawrennd/snippets
 writediagramsdir: .
-scriptsdir: ./scripts/
-diagramsdir: ./slides/diagrams/
+scriptsdir: https://inverseprobability.com/talks/scripts/
+diagramsdir: ../slides/diagrams/
+slidesheader: slides-header.html
+notation: talk-notation.tex
 posts: True
 docx: False
 notespdf: False
 slidesipynb: False
-pptx: True
+pptx: False
 pdf: False
 assignment: False
 ipynb: True
 reveal: True
 transition: None
+potx: custom-reference.potx 
+dotx: custom-reference.dotx
 baseurl: "mlai/" # the subpath of your site, e.g. /blog/
 url: "https://mlatcl.github.io/" # the base hostname & protocol for your site
 ghub:
