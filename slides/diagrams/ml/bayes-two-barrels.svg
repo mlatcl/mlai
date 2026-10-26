@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 740 420" width="740" height="420">
+  <!--
+    Both cups are identical in size (200px wide, same U-shape).
+    Both use the same 6-column grid, 28px step.
+    Fruit rows are bottom-aligned: bottom row at y=225, stepping up by 28.
+    Barrel 1 (4 rows): y = 141, 169, 197, 225
+    Barrel 2 (2 rows): y = 197, 225
+    Col x positions:
+      Cup 1 (centre 220): 148, 176, 204, 232, 260, 288
+      Cup 2 (centre 540): 468, 496, 524, 552, 580, 608
+  -->
+  <defs>
+    <clipPath id="b1clip">
+      <rect x="120" y="75" width="200" height="175"/>
+    </clipPath>
+    <clipPath id="b2clip">
+      <rect x="440" y="75" width="200" height="175"/>
+    </clipPath>
+
+    <!-- Apple body clip (so the blush ellipse doesn't spill outside the body) -->
+    <clipPath id="appleclip">
+      <path d="M 0,-8
+               C -2,-12 -11,-10 -11,-2
+               C -11,7 -6,13 -3,13
+               L 3,13
+               C 6,13 11,7 11,-2
+               C 11,-10 2,-12 0,-8 Z"/>
+    </clipPath>
+
+    <!-- Blush gradient: fades from warm red-orange at centre to transparent
+         at the ellipse edge, so it blends softly into the green body. -->
+    <radialGradient id="blush" gradientUnits="objectBoundingBox"
+                    cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%"   stop-color="#C84418" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#C84418" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Braeburn-style apple, centred at origin.
+         Taller than wide (22px x 25px) so it reads as apple not heart.
+         Green base, warm red-orange blush ellipse clipped to body. -->
+    <g id="apple">
+      <!-- green body -->
+      <path d="M 0,-8
+               C -2,-12 -11,-10 -11,-2
+               C -11,7 -6,13 -3,13
+               L 3,13
+               C 6,13 11,7 11,-2
+               C 11,-10 2,-12 0,-8 Z"
+            fill="#6A9A20" stroke="#3A5810" stroke-width="1"/>
+      <!-- blush: fades from warm red-orange at centre to transparent,
+           clipped to apple body -->
+      <ellipse cx="-3" cy="-2" rx="9" ry="10"
+               fill="url(#blush)"
+               clip-path="url(#appleclip)"/>
+      <!-- stem -->
+      <line x1="0" y1="-8" x2="1" y2="-14"
+            stroke="#5A3010" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <!-- =========================================================
+       CUP ONE  (centre x=220)
+       20 apples + 4 oranges, 4 rows x 6 cols
+       row 0-2: all apples; row 3: 2 apples + 4 oranges
+  ========================================================= -->
+
+  <path d="M 120,80 L 120,245 C 170,262 270,262 320,245 L 320,80 Z"
+        fill="#EDD9A3" stroke="none"/>
+
+  <g clip-path="url(#b1clip)">
+    <!-- row 0, y=141 -->
+    <use xlink:href="#apple" transform="translate(148,141)"/>
+    <use xlink:href="#apple" transform="translate(176,141)"/>
+    <use xlink:href="#apple" transform="translate(204,141)"/>
+    <use xlink:href="#apple" transform="translate(232,141)"/>
+    <use xlink:href="#apple" transform="translate(260,141)"/>
+    <use xlink:href="#apple" transform="translate(288,141)"/>
+    <!-- row 1, y=169 -->
+    <use xlink:href="#apple" transform="translate(148,169)"/>
+    <use xlink:href="#apple" transform="translate(176,169)"/>
+    <use xlink:href="#apple" transform="translate(204,169)"/>
+    <use xlink:href="#apple" transform="translate(232,169)"/>
+    <use xlink:href="#apple" transform="translate(260,169)"/>
+    <use xlink:href="#apple" transform="translate(288,169)"/>
+    <!-- row 2, y=197 -->
+    <use xlink:href="#apple" transform="translate(148,197)"/>
+    <use xlink:href="#apple" transform="translate(176,197)"/>
+    <use xlink:href="#apple" transform="translate(204,197)"/>
+    <use xlink:href="#apple" transform="translate(232,197)"/>
+    <use xlink:href="#apple" transform="translate(260,197)"/>
+    <use xlink:href="#apple" transform="translate(288,197)"/>
+    <!-- row 3, y=225: cols 0-1 apple, cols 2-5 orange -->
+    <use xlink:href="#apple" transform="translate(148,225)"/>
+    <use xlink:href="#apple" transform="translate(176,225)"/>
+    <circle cx="204" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="232" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="260" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="288" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+  </g>
+
+  <!-- cup border -->
+  <path d="M 120,80 L 120,245 C 170,262 270,262 320,245 L 320,80"
+        fill="none" stroke="#8B6520" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- label and legend -->
+  <text x="220" y="282"
+        font-family="sans-serif" font-size="18" font-weight="bold"
+        text-anchor="middle" fill="#2A2A2A">Barrel One</text>
+  <use xlink:href="#apple" transform="translate(157,304) scale(0.72)"/>
+  <text x="170" y="309"
+        font-family="sans-serif" font-size="14" fill="#444">20 apples</text>
+  <circle cx="157" cy="326" r="8" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+  <text x="170" y="331"
+        font-family="sans-serif" font-size="14" fill="#444">4 oranges</text>
+
+  <!-- =========================================================
+       CUP TWO  (centre x=540)
+       4 apples + 8 oranges, 2 rows x 6 cols
+       row 0: 4 apples + 2 oranges; row 1: all 6 oranges
+  ========================================================= -->
+
+  <path d="M 440,80 L 440,245 C 490,262 590,262 640,245 L 640,80 Z"
+        fill="#EDD9A3" stroke="none"/>
+
+  <g clip-path="url(#b2clip)">
+    <!-- row 0, y=197: cols 0-3 apple, cols 4-5 orange -->
+    <use xlink:href="#apple" transform="translate(468,197)"/>
+    <use xlink:href="#apple" transform="translate(496,197)"/>
+    <use xlink:href="#apple" transform="translate(524,197)"/>
+    <use xlink:href="#apple" transform="translate(552,197)"/>
+    <circle cx="580" cy="197" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="608" cy="197" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <!-- row 1, y=225: all oranges -->
+    <circle cx="468" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="496" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="524" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="552" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="580" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+    <circle cx="608" cy="225" r="11" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+  </g>
+
+  <!-- cup border -->
+  <path d="M 440,80 L 440,245 C 490,262 590,262 640,245 L 640,80"
+        fill="none" stroke="#8B6520" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- label and legend -->
+  <text x="540" y="282"
+        font-family="sans-serif" font-size="18" font-weight="bold"
+        text-anchor="middle" fill="#2A2A2A">Barrel Two</text>
+  <use xlink:href="#apple" transform="translate(477,304) scale(0.72)"/>
+  <text x="490" y="309"
+        font-family="sans-serif" font-size="14" fill="#444">4 apples</text>
+  <circle cx="477" cy="326" r="8" fill="#FF8800" stroke="#CC5500" stroke-width="1"/>
+  <text x="490" y="331"
+        font-family="sans-serif" font-size="14" fill="#444">8 oranges</text>
+
+</svg>

@@ -13,7 +13,7 @@ url: https://inverseprobability.com/
 talkcss: https://inverseprobability.com/assets/css/talks.css
 bibdir: $HOME/lawrennd/bibliography
 postsdir: ../_lectures/
-slidesdir: $HOME/lawrennd/slides/
+slidesdir: ../slides/ # Where compiled slides go
 notesdir: ../_notes/
 notebooksdir: ../_notebooks/
 practicalsdir: ../_practicals/
@@ -21,7 +21,7 @@ snippetsdir: $HOME/lawrennd/snippets
 macrosdir: $HOME/lawrennd/lamd/lamd/macros
 writediagramsdir: .
 scriptsdir: https://inverseprobability.com/talks/scripts/
-diagramsdir: ../slides/diagrams/
+diagramsdir: $HOME/lawrennd/slides/diagrams/ # Shared figure library (copy_web_diagrams reads from here)
 slidesheader: slides-header.html
 notation: talk-notation.tex
 posts: True
