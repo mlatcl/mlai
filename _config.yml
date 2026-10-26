@@ -102,11 +102,6 @@ github_username: mlatcl
 # their entries' file path in the `include:` list.
 #
 exclude:
-  - slides/reveal.js/plugin/markdown/example
-  - slides/reveal.js/plugin/markdown/example
-  - slides/reveal.js-3.8.0/plugin/markdown/example
-  - slides/reveal.js-3.8.0/test/
-  - slides/reveal.js-3.8.0/css/theme/
   - .sass-cache/
   - .jekyll-cache/
   - gemfiles/
