@@ -9,13 +9,12 @@ author:
 layout: lecture
 room:
 venue:
-url: https://inverseprobability.com/
 talktheme: white
 talkcss: mlatcl.css
 talkfontsize: xs
 bibdir: $HOME/lawrennd/bibliography
 postsdir: ../_lectures/
-slidesdir: ../slides/ # Where compiled slides go
+slidesdir: ../slides/
 notesdir: ../_notes/
 notebooksdir: ../_notebooks/
 practicalsdir: ../_practicals/
@@ -23,7 +22,8 @@ snippetsdir: $HOME/lawrennd/snippets
 macrosdir: $HOME/lawrennd/lamd/lamd/macros
 writediagramsdir: .
 scriptsdir: https://inverseprobability.com/talks/scripts/
-diagramsdir: $HOME/lawrennd/slides/diagrams/ # Shared figure library (copy_web_diagrams reads from here)
+diagramsdir: ../slides/diagrams/
+diagramsurl: https://mlatcl.github.io/mlai/slides/diagrams/
 slidesheader: slides-header.html
 notation: talk-notation.tex
 posts: True

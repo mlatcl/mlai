@@ -1,0 +1,37 @@
+/* CIP-0014: Reveal slide font-size scale (deck + per-slide).
+   Deck scale: --lamd-fs-scale (set via slide-fontsize-*.css or leave at 1).
+   Per-slide: section.font-{xs,sm,md,lg,xl} relative to the current deck base. */
+
+:root {
+  --lamd-fs-base: 40px;
+  --lamd-fs-scale: 1;
+  --lamd-fs-xs: 0.70;
+  --lamd-fs-sm: 0.85;
+  --lamd-fs-md: 1.00;
+  --lamd-fs-lg: 1.15;
+  --lamd-fs-xl: 1.30;
+}
+
+.reveal {
+  font-size: calc(var(--lamd-fs-base) * var(--lamd-fs-scale));
+}
+
+.reveal .slides section.font-xs {
+  font-size: calc(1em * var(--lamd-fs-xs));
+}
+
+.reveal .slides section.font-sm {
+  font-size: calc(1em * var(--lamd-fs-sm));
+}
+
+.reveal .slides section.font-md {
+  font-size: calc(1em * var(--lamd-fs-md));
+}
+
+.reveal .slides section.font-lg {
+  font-size: calc(1em * var(--lamd-fs-lg));
+}
+
+.reveal .slides section.font-xl {
+  font-size: calc(1em * var(--lamd-fs-xl));
+}

@@ -1,0 +1,4 @@
+/* CIP-0014: deck talkfontsize = xs / smaller */
+:root {
+  --lamd-fs-scale: 0.70;
+}
