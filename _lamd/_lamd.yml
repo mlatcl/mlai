@@ -35,7 +35,7 @@ pdf: False
 assignment: False
 ipynb: True
 reveal: True
-transition: None
+transition: "none"
 potx: custom-reference.potx 
 dotx: custom-reference.dotx
 baseurl: "mlai/" # the subpath of your site, e.g. /blog/
@@ -45,4 +45,4 @@ ghub:
   repository: mlai
   branch: gh-pages
   directory: _lamd
-transition: None
+
