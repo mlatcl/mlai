@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ml@cl pixel-grid mark, faded for bottom-right slide chrome -->
+<svg width="220" height="220" viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(46,46) scale(-1,-1)" fill="#DB3900" stroke="#DB3900" stroke-linecap="square" opacity="0.28">
+    <g fill="#DB3900" stroke="none">
+      <rect opacity="0.35" x="0" y="0" width="4" height="4"/>
+      <rect x="0" y="14" width="4" height="4"/>
+      <rect x="0" y="28" width="4" height="4"/>
+      <rect opacity="0.35" x="0" y="42" width="4" height="4"/>
+      <rect x="14" y="14" width="4" height="4"/>
+      <rect x="14" y="0" width="4" height="4"/>
+      <rect x="14" y="28" width="4" height="4"/>
+      <rect x="14" y="42" width="4" height="4"/>
+      <rect x="28" y="0" width="4" height="4"/>
+      <rect x="28" y="14" width="4" height="4"/>
+      <rect x="28" y="28" width="4" height="4"/>
+      <rect x="28" y="42" width="4" height="4"/>
+      <rect opacity="0.35" x="42" y="0" width="4" height="4"/>
+      <rect x="42" y="14" width="4" height="4"/>
+      <rect x="42" y="28" width="4" height="4"/>
+      <rect opacity="0.35" x="42" y="42" width="4" height="4"/>
+    </g>
+    <g transform="translate(0,1)" fill="none">
+      <line x1="16.5" y1="43.5" x2="1.5" y2="28.5" opacity="0.35"/>
+      <line x1="44.5" y1="43.5" x2="29.5" y2="28.5" opacity="0.35" transform="translate(37,36) scale(-1,1) translate(-37,-36)"/>
+      <line x1="44.5" y1="15.5" x2="29.5" y2="0.5" opacity="0.35" transform="translate(37,8) scale(-1,-1) translate(-37,-8)"/>
+      <line x1="16.5" y1="15.5" x2="1.5" y2="0.5" opacity="0.35" transform="translate(9,8) scale(1,-1) translate(-9,-8)"/>
+      <line x1="2" y1="15.5" x2="2" y2="29.5" opacity="0.35"/>
+      <line x1="44" y1="15.5" x2="44" y2="29.5" opacity="0.35"/>
+      <line x1="16.5" y1="1" x2="29.5" y2="1" opacity="0.35"/>
+      <line x1="16.5" y1="43" x2="29.5" y2="43" opacity="0.35"/>
+      <line x1="16" y1="0.5" x2="16" y2="43.5" opacity="0.35"/>
+      <line x1="30" y1="0.5" x2="30" y2="43.5" opacity="0.35"/>
+      <line x1="43.5" y1="15" x2="0.5" y2="15" opacity="0.35"/>
+      <line x1="43.5" y1="29" x2="0.5" y2="29" opacity="0.35"/>
+      <g transform="translate(14.5,14.076)">
+        <line x1="1.5" y1="15.424" x2="1.5" y2="1.424"/>
+        <line x1="2.5" y1="14.924" x2="16.5" y2="14.924" opacity="0.35"/>
+        <line x1="15.5" y1="15.424" x2="15.5" y2="1.424"/>
+        <line x1="8" y1="7.424" x2="15.664" y2="1" transform="translate(11.832,4.212) rotate(-8) translate(-11.832,-4.212)"/>
+        <line x1="1.212" y1="7.424" x2="8.876" y2="1" transform="translate(5.044,4.212) scale(-1,1) rotate(-7) translate(-5.044,-4.212)"/>
+      </g>
+    </g>
+  </g>
+</svg>
