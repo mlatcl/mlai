@@ -22,8 +22,8 @@ snippetsdir: $HOME/lawrennd/snippets
 macrosdir: $HOME/lawrennd/lamd/lamd/macros
 writediagramsdir: .
 scriptsdir: https://inverseprobability.com/talks/scripts/
-diagramsdir: ../slides/diagrams/
-diagramsurl: https://mlatcl.github.io/mlai/slides/diagrams/
+diagramsdir: $HOME/lawrennd/slides/diagrams/ # Shared figure library (copy_web_diagrams reads from here)
+diagramswebpath: slides/diagrams/
 slidesheader: slides-header.html
 notation: talk-notation.tex
 posts: True
