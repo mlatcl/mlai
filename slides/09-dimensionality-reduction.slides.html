@@ -123,8 +123,7 @@
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Dimensionality Reduction: Latent Variable
-Modelling</h1>
+  <h1 class="title">Dimensionality Reduction: Latent Variable Modelling</h1>
 </section>
 
 <section class="slide level2">
@@ -198,13 +197,10 @@ sns.set_palette('colorblind')}-->
 <section id="mathematical-formulation" class="slide level2">
 <h2>Mathematical Formulation</h2>
 <ul>
-<li>Represent objects as data vectors <span
-class="math inline">\(\mathbf{ x}_i\)</span></li>
-<li>Represent cluster centres as vectors <span
-class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
+<li>Represent objects as data vectors <span class="math inline">\(\mathbf{ x}_i\)</span></li>
+<li>Represent cluster centres as vectors <span class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
 <li>Define similarity/distance between objects and centres</li>
-<li>Distance function: <span class="math inline">\(d_{ij} = f(\mathbf{
-x}_i, \boldsymbol{ \mu}_j)\)</span></li>
+<li>Distance function: <span class="math inline">\(d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j)\)</span></li>
 </ul>
 </section>
 <section id="squared-distance" class="slide level2">
@@ -219,36 +215,26 @@ d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>Given similarity measure, need number of cluster centres, <span
-class="math inline">\(K\)</span>.</li>
-<li>Find their location by allocating each center to a sub-set of the
-points and minimizing the sum of the squared errors, <span
-class="math display">\[
-E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{
-\mu}_j)^2
-\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all
-indices of data points allocated to the <span
-class="math inline">\(j\)</span>th center.</li>
+<li>Given similarity measure, need number of cluster centres, <span class="math inline">\(K\)</span>.</li>
+<li>Find their location by allocating each center to a sub-set of the points and minimizing the sum of the squared errors, <span class="math display">\[
+E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
+\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all indices of data points allocated to the <span class="math inline">\(j\)</span>th center.</li>
 </ul>
 </section>
 <section id="k-means-clustering-1" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
 <ul>
-<li><em><span class="math inline">\(k\)</span>-means clustering</em> is
-simple and quick to implement.</li>
+<li><em><span class="math inline">\(k\)</span>-means clustering</em> is simple and quick to implement.</li>
 <li>Very <em>initialisation</em> sensitive.</li>
 </ul>
 </section>
 <section id="initialisation" class="slide level2">
 <h2>Initialisation</h2>
 <ul>
-<li>Initialisation is the process of selecting a starting set of
-parameters.</li>
+<li>Initialisation is the process of selecting a starting set of parameters.</li>
 <li>Optimisation result can depend on the starting point.</li>
-<li>For <span class="math inline">\(k\)</span>-means clustering you need
-to choose an initial set of centres.</li>
-<li>Optimisation surface has many local optima, algorithm gets stuck in
-ones near initialisation.</li>
+<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centres.</li>
+<li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
 </ul>
 </section>
 <section id="k-means-algorithm" class="slide level2">
@@ -268,9 +254,7 @@ ones near initialisation.</li>
 <h2>Objective Function</h2>
 <ul>
 <li>Minimizes sum of squared distances: <span class="math display">\[
-E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i,
-:} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} -
-\boldsymbol{ \mu}_{j, :}\right)
+E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
 \]</span></li>
 <li>Solution not guaranteed to be global or unique</li>
 <li>Represents a non-convex optimization problem</li>
@@ -278,17 +262,12 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i,
 </section>
 <section id="k-means-clustering-2" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
-<div id="animation-kmeans-clustering" class="lamd-animation"
-role="region" aria-label="$k$-means"
-data-animation-group="kmeans-clustering">
+<div id="animation-kmeans-clustering" class="lamd-animation" role="region" aria-label="$k$-means" data-animation-group="kmeans-clustering">
 <noscript>
 <style>#animation-kmeans-clustering .animation-controls{display:none}#animation-kmeans-clustering .kmeans-clustering~.kmeans-clustering{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small><span class="math inline">\(k\)</span>-means</small>
-<input id="range-kmeans-clustering" type="range" min="0" max="22" value="0" aria-label="Frame slider for $k$-means" aria-valuemin="0" aria-valuemax="22" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('kmeans-clustering')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('kmeans-clustering')">
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'kmeans-clustering');" aria-label="Previous frame">❮</button>
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'kmeans-clustering');" aria-label="Next frame">❯</button></p>
+<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="0" max="22" value="0" aria-label="Frame slider for $k$-means" aria-valuemin="0" aria-valuemax="22" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('kmeans-clustering')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('kmeans-clustering')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'kmeans-clustering');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'kmeans-clustering');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -305,119 +284,96 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'kmeans-clustering'+'" failed to initialize:',e);}
 });
 </script>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_000.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_000.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_001.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_001.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_002.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_002.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_003.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_003.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_004.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_004.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_005.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_005.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_006.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_006.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_007.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_007.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_008.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_008.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_009.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_009.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_010.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_010.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_011.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_011.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_012.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_012.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_013.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_013.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_014.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_014.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_015.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_015.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_016.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_016.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_017.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_017.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_018.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_018.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_019.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_019.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_020.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_020.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_021.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_021.svg" width="40%" style=" ">
 </object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;" role="img"
-aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/kmeans_clustering_022.svg" width="40%" style=" ">
+<div class="kmeans-clustering" style="text-align:center;" role="img" aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/kmeans_clustering_022.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
@@ -438,15 +394,11 @@ aria-label="kmeans-clustering" data-animation-frame="kmeans-clustering">
 <section id="linkage-criteria" class="slide level2">
 <h2>Linkage Criteria</h2>
 <ul>
-<li><em>Single linkage</em>: Distance between closest points in
-clusters</li>
-<li><em>Complete linkage</em>: Distance between farthest points in
-clusters<br />
+<li><em>Single linkage</em>: Distance between closest points in clusters</li>
+<li><em>Complete linkage</em>: Distance between farthest points in clusters<br />
 </li>
-<li><em>Average linkage</em>: Average distance between all point
-pairs</li>
-<li><em>Ward linkage</em>: Minimises within-cluster variance
-increase</li>
+<li><em>Average linkage</em>: Average distance between all point pairs</li>
+<li><em>Ward linkage</em>: Minimises within-cluster variance increase</li>
 </ul>
 </section>
 <section id="wards-criterion" class="slide level2">
@@ -455,12 +407,9 @@ increase</li>
 <li>Ward’s method minimizes the increase in within-cluster variance</li>
 <li>Set every data point as cluster size 1.</li>
 <li>Select as <span class="math display">\[
-\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i -
-\boldsymbol{ \mu}_j\|^2
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
 \]</span></li>
-<li>Where <span class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{
-\mu}_j\)</span> are cluster centroids and <span
-class="math inline">\(n_i, n_j\)</span> are cluster sizes</li>
+<li>Where <span class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{ \mu}_j\)</span> are cluster centroids and <span class="math inline">\(n_i, n_j\)</span> are cluster sizes</li>
 </ul>
 </section>
 <section id="wards-criterion-1" class="slide level2">
@@ -480,81 +429,50 @@ class="math inline">\(n_i, n_j\)</span> are cluster sizes</li>
 <section id="mathematical-derivation" class="slide level2">
 <h2>Mathematical Derivation</h2>
 <ul>
-<li><em>Within-cluster sum of squares (<span
-class="math inline">\(E(\mathbf{M})\)</span>):</em>
+<li><em>Within-cluster sum of squares (<span class="math inline">\(E(\mathbf{M})\)</span>):</em>
 <ul>
-<li><span class="math inline">\(E(\mathbf{M}) = \sum_{i=1}^k
-\sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{
-\mu}_i\|^2\)</span></li>
+<li><span class="math inline">\(E(\mathbf{M}) = \sum_{i=1}^k \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2\)</span></li>
 </ul></li>
-<li><em>Ward’s criterion:</em> Minimise increase in <span
-class="math inline">\(E(\mathbf{M})\)</span> when merging</li>
-<li>This is the same criterion as used for objective in <span
-class="math inline">\(k\)</span>-means</li>
-<li><strong>Key insight:</strong> For spherical clusters, this is
-equivalent to minimising centroid distance weighted by cluster
-sizes</li>
+<li><em>Ward’s criterion:</em> Minimise increase in <span class="math inline">\(E(\mathbf{M})\)</span> when merging</li>
+<li>This is the same criterion as used for objective in <span class="math inline">\(k\)</span>-means</li>
+<li><strong>Key insight:</strong> For spherical clusters, this is equivalent to minimising centroid distance weighted by cluster sizes</li>
 </ul>
 </section>
-<section id="mathematical-derivation-of-ward-distance"
-class="slide level2">
+<section id="mathematical-derivation-of-ward-distance" class="slide level2">
 <h2>Mathematical Derivation of Ward Distance</h2>
 <ul>
-<li>Start with two clusters <span class="math inline">\(C_i\)</span> and
-<span class="math inline">\(C_j\)</span> with centroids <span
-class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{
-\mu}_j\)</span></li>
+<li>Start with two clusters <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span> with centroids <span class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{ \mu}_j\)</span></li>
 <li>After merging: new centroid <span class="math display">\[
-\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j
-\boldsymbol{ \mu}_j}{n_i + n_j}
+\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j \boldsymbol{ \mu}_j}{n_i + n_j}
 \]</span></li>
-<li>Increase in <span class="math inline">\(E(\mathbf{M})\)</span>:
-<span class="math display">\[
-\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i -
-\boldsymbol{ \mu}_j\|^2
+<li>Increase in <span class="math inline">\(E(\mathbf{M})\)</span>: <span class="math display">\[
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
 \]</span></li>
 </ul>
 </section>
 <section id="mathematical-derivation---ii" class="slide level2">
 <h2>Mathematical Derivation - II</h2>
 <ul>
-<li><em>Step 1:</em> Original <span
-class="math inline">\(E(\mathbf{M})\)</span> for separate clusters <span
-class="math display">\[
-E(\mathbf{M})_{\text{original}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{
-x}- \boldsymbol{ \mu}_i\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}-
-\boldsymbol{ \mu}_j\|^2
+<li><em>Step 1:</em> Original <span class="math inline">\(E(\mathbf{M})\)</span> for separate clusters <span class="math display">\[
+E(\mathbf{M})_{\text{original}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_j\|^2
 \]</span></li>
-<li><em>Step 2:</em> New <span
-class="math inline">\(E(\mathbf{M})\)</span> after merging <span
-class="math display">\[
-E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i \cup C_j}
-\|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2
+<li><em>Step 2:</em> New <span class="math inline">\(E(\mathbf{M})\)</span> after merging <span class="math display">\[
+E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i \cup C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2
 \]</span></li>
-<li><em>Step 3:</em> Increase in <span
-class="math inline">\(E(\mathbf{M})\)</span> <span
-class="math display">\[
-\Delta_{i,j} = E(\mathbf{M})_{\text{new}} -
-E(\mathbf{M})_{\text{original}}
+<li><em>Step 3:</em> Increase in <span class="math inline">\(E(\mathbf{M})\)</span> <span class="math display">\[
+\Delta_{i,j} = E(\mathbf{M})_{\text{new}} - E(\mathbf{M})_{\text{original}}
 \]</span></li>
 </ul>
 </section>
 <section id="mathematical-derivation---iii" class="slide level2">
 <h2>Mathematical Derivation - III</h2>
 <ul>
-<li><em>Expanding the new <span
-class="math inline">\(E(\mathbf{M})\)</span>:</em> <span
-class="math display">\[
-E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}-
-\boldsymbol{ \mu}_{ij}\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}-
-\boldsymbol{ \mu}_{ij}\|^2
+<li><em>Expanding the new <span class="math inline">\(E(\mathbf{M})\)</span>:</em> <span class="math display">\[
+E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2
 \]</span></li>
 <li><strong>Key identity</strong>
 <span class="math display">\[\begin{aligned}
-\|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2 = &amp; \|\mathbf{ x}-
-\boldsymbol{ \mu}_i\|^2 \\ &amp; + \|\boldsymbol{ \mu}_i - \boldsymbol{
-\mu}_{ij}\|^2 \\ &amp; + 2(\mathbf{ x}- \boldsymbol{
-\mu}_i)^\top(\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij})
+\|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2 = &amp; \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2 \\ &amp; + \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij}\|^2 \\ &amp; + 2(\mathbf{ x}- \boldsymbol{ \mu}_i)^\top(\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij})
 \end{aligned}\]</span></li>
 </ul>
 </section>
@@ -563,9 +481,7 @@ E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}-
 <ul>
 <li>After simplification
 <span class="math display">\[\begin{aligned}
-E(\mathbf{M})_{\text{new}} = &amp; E(\mathbf{M})_{\text{original}} \\
-&amp; + n_i \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij}\|^2 \\ &amp;
-+ n_j \|\boldsymbol{ \mu}_j - \boldsymbol{ \mu}_{ij}\|^2
+E(\mathbf{M})_{\text{new}} = &amp; E(\mathbf{M})_{\text{original}} \\ &amp; + n_i \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij}\|^2 \\ &amp; + n_j \|\boldsymbol{ \mu}_j - \boldsymbol{ \mu}_{ij}\|^2
 \end{aligned}\]</span></li>
 </ul>
 </section>
@@ -573,32 +489,25 @@ E(\mathbf{M})_{\text{new}} = &amp; E(\mathbf{M})_{\text{original}} \\
 <h2>Mathematica Derivation - V</h2>
 <ul>
 <li>Substituting the centroid formula <span class="math display">\[
-\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j
-\boldsymbol{ \mu}_j}{n_i + n_j}
+\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j \boldsymbol{ \mu}_j}{n_i + n_j}
 \]</span></li>
 <li><strong>Final result:</strong> <span class="math display">\[
-\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i -
-\boldsymbol{ \mu}_j\|^2
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
 \]</span></li>
 </ul>
 </section>
 <section id="local-optimality" class="slide level2">
 <h2>Local Optimality</h2>
 <ul>
-<li>Spherical clusters have minimal <span
-class="math inline">\(E(\mathbf{M})\)</span> for given number of
-points</li>
-<li>Ward’s method makes <em>locally</em> optimal choices at each merge
-step</li>
-<li>The weighting <span class="math inline">\(\frac{n_i n_j}{n_i +
-n_j}\)</span> prevents premature merging of large clusters</li>
+<li>Spherical clusters have minimal <span class="math inline">\(E(\mathbf{M})\)</span> for given number of points</li>
+<li>Ward’s method makes <em>locally</em> optimal choices at each merge step</li>
+<li>The weighting <span class="math inline">\(\frac{n_i n_j}{n_i + n_j}\)</span> prevents premature merging of large clusters</li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
-<li><em>Step 1</em>: Start with <span class="math inline">\(n\)</span>
-clusters (one per point)</li>
+<li><em>Step 1</em>: Start with <span class="math inline">\(n\)</span> clusters (one per point)</li>
 <li><em>Step 2</em>: Compute distance matrix between all clusters</li>
 <li><em>Step 3</em>: Find and merge the two closest clusters</li>
 <li><em>Step 4</em>: Update distance matrix</li>
@@ -609,53 +518,44 @@ clusters (one per point)</li>
 <h2>Ward’s Criterion on Artificial Data</h2>
 <div class="figure">
 <div id="hierarchical-clustering-figure" class="figure-frame">
-<div class="lamd-columns"
-style="display:flex; width:100%; justify-content:center; align-items:center; column-gap:1em;">
+<div class="lamd-columns" style="display:flex; width:100%; justify-content:center; align-items:center; column-gap:1em;">
 <div style="flex:0 0 40%; max-width:40%;">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/hierarchical_clustering_000.svg" width="100%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/hierarchical_clustering_000.svg" width="100%" style=" ">
 </object>
 </div>
 <div style="flex:0 0 40%; max-width:40%;">
-<object class data="https://mlatcl.github.io/mlai/slides/diagrams/ml/hierarchical_clustering_001.svg" width="100%" style=" ">
+<object class data="https://mlatcl.github.io/mlai/diagrams/ml/hierarchical_clustering_001.svg" width="100%" style=" ">
 </object>
 </div>
 </div>
 </div>
 </div>
 <aside class="notes">
-Hierarchical clustering of some artificial data. On the left we have an
-artificially generated data set containing three clusters. On the right
-we can see the dendogram formed by clustering using Ward’s criterion.
+Hierarchical clustering of some artificial data. On the left we have an artificially generated data set containing three clusters. On the right we can see the dendogram formed by clustering using Ward’s criterion.
 </aside>
 </section>
 <section id="oil-flow-data" class="slide level2">
 <h2>Oil Flow Data</h2>
 <div class="figure">
 <div id="oil-flow-data-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/datasets/oil-flow-data.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/datasets/oil-flow-data.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Visualization of the first two dimensions of the oil flow data from
-<span class="citation" data-cites="Bishop-oil93">Bishop and James
-(1993)</span>
+Visualization of the first two dimensions of the oil flow data from <span class="citation" data-cites="Bishop-oil93">Bishop and James (1993)</span>
 </aside>
 </section>
-<section id="hierarchical-clustering-of-oil-flow-data"
-class="slide level2">
+<section id="hierarchical-clustering-of-oil-flow-data" class="slide level2">
 <h2>Hierarchical Clustering of Oil Flow Data</h2>
 <div class="figure">
 <div id="hierarchical-clustering-oil-figure" class="figure-frame">
-<object class data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/hierarchical-clustering-oil.svg" width="60%" style=" ">
+<object class data="https://mlatcl.github.io/mlai/diagrams/dimred/hierarchical-clustering-oil.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Hierarchical clustering applied to oil flow data. The dendrogram shows
-how different flow regimes are grouped based on their measurement
-similarities. The three main flow regimes (homogeneous, annular, and
-laminar) should form distinct clusters.
+Hierarchical clustering applied to oil flow data. The dendrogram shows how different flow regimes are grouped based on their measurement similarities. The three main flow regimes (homogeneous, annular, and laminar) should form distinct clusters.
 </aside>
 </section>
 <section id="phylogenetic-trees" class="slide level2">
@@ -672,15 +572,13 @@ laminar) should form distinct clusters.
 <ul>
 <li>Hierarchical clustering for e-commerce products</li>
 <li>Creates product taxonomy trees</li>
-<li>Splits into nested categories (e.g. Electronics → Phones →
-Smartphones)</li>
+<li>Splits into nested categories (e.g. Electronics → Phones → Smartphones)</li>
 </ul>
 </section>
 <section id="hierarchical-clustering-challenge" class="slide level2">
 <h2>Hierarchical Clustering Challenge</h2>
 <ul>
-<li>Many products belong in multiple clusters (e.g. running shoes are
-both ‘sporting goods’ and ‘clothing’)</li>
+<li>Many products belong in multiple clusters (e.g. running shoes are both ‘sporting goods’ and ‘clothing’)</li>
 <li>Tree structures are too rigid for natural categorization</li>
 <li>Human concept learning is more flexible:
 <ul>
@@ -700,16 +598,12 @@ both ‘sporting goods’ and ‘clothing’)</li>
 </section>
 <section id="usps-samples" class="slide level2">
 <h2>USPS Samples</h2>
-<div id="animation-dem-six-sample" class="lamd-animation" role="region"
-aria-label="Six Samples" data-animation-group="dem-six-sample">
+<div id="animation-dem-six-sample" class="lamd-animation" role="region" aria-label="Six Samples" data-animation-group="dem-six-sample">
 <noscript>
 <style>#animation-dem-six-sample .animation-controls{display:none}#animation-dem-six-sample .dem-six-sample~.dem-six-sample{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small>Six Samples</small>
-<input id="range-dem-six-sample" type="range" min="0" max="4" value="0" aria-label="Frame slider for Six Samples" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('dem-six-sample')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('dem-six-sample')">
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'dem-six-sample');" aria-label="Previous frame">❮</button>
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'dem-six-sample');" aria-label="Next frame">❯</button></p>
+<p><small>Six Samples</small> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" aria-label="Frame slider for Six Samples" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('dem-six-sample')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('dem-six-sample')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'dem-six-sample');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'dem-six-sample');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -726,28 +620,24 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'dem-six-sample'+'" failed to initialize:',e);}
 });
 </script>
-<div class="dem-six-sample" style="text-align:center;" role="img"
-aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
+<div class="dem-six-sample" style="text-align:center;" role="img" aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_six000.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_six000.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div class="dem-six-sample" style="text-align:center;" role="img"
-aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
+<div class="dem-six-sample" style="text-align:center;" role="img" aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_six001.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_six001.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div class="dem-six-sample" style="text-align:center;" role="img"
-aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
+<div class="dem-six-sample" style="text-align:center;" role="img" aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_six002.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_six002.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div class="dem-six-sample" style="text-align:center;" role="img"
-aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
+<div class="dem-six-sample" style="text-align:center;" role="img" aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_six003.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_six003.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
@@ -755,43 +645,33 @@ aria-label="dem-six-sample" data-animation-frame="dem-six-sample">
 <section id="simple-model-of-digit" class="slide level2">
 <h2>Simple Model of Digit</h2>
 </section>
-<section id="probability-of-random-image-generation"
-class="slide level2">
+<section id="probability-of-random-image-generation" class="slide level2">
 <h2>Probability of Random Image Generation</h2>
 <ul>
 <li>Independent pixel model
 <ul>
 <li>Each pixel modeled as independent binomial trial</li>
-<li>Probability of pixel being “on”<span class="math display">\[\pi=
-\frac{849}{3,648} \approx 0.233\]</span></li>
+<li>Probability of pixel being “on”<span class="math display">\[\pi= \frac{849}{3,648} \approx 0.233\]</span></li>
 </ul></li>
-<li>Probability of original image <span
-class="math display">\[p(\text{original six}) = \pi^{849}(1-\pi)^{2799}
-= 2.67 \times 10^{-860}
+<li>Probability of original image <span class="math display">\[p(\text{original six}) = \pi^{849}(1-\pi)^{2799} = 2.67 \times 10^{-860}
 \]</span></li>
 </ul>
 </section>
-<section id="probability-of-random-image-generation-1"
-class="slide level2">
+<section id="probability-of-random-image-generation-1" class="slide level2">
 <h2>Probability of Random Image Generation</h2>
 <ul>
 <li>This is astronomically small!</li>
-<li>Even sampling every nanosecond until end of universe won’t find
-it</li>
+<li>Even sampling every nanosecond until end of universe won’t find it</li>
 </ul>
 </section>
 <section id="rotate-a-prototype" class="slide level2">
 <h2>Rotate a Prototype</h2>
-<div id="animation-six-rotate" class="lamd-animation" role="region"
-aria-label="Rotate Prototype" data-animation-group="six-rotate">
+<div id="animation-six-rotate" class="lamd-animation" role="region" aria-label="Rotate Prototype" data-animation-group="six-rotate">
 <noscript>
 <style>#animation-six-rotate .animation-controls{display:none}#animation-six-rotate .six-rotate~.six-rotate{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small>Rotate Prototype</small>
-<input id="range-six-rotate" type="range" min="1" max="5" value="1" aria-label="Frame slider for Rotate Prototype" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('six-rotate')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('six-rotate')">
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'six-rotate');" aria-label="Previous frame">❮</button>
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'six-rotate');" aria-label="Next frame">❯</button></p>
+<p><small>Rotate Prototype</small> <input id="range-six-rotate" type="range" min="1" max="5" value="1" aria-label="Frame slider for Rotate Prototype" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('six-rotate')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('six-rotate')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'six-rotate');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'six-rotate');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -808,34 +688,28 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'six-rotate'+'" failed to initialize:',e);}
 });
 </script>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate000.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate000.svg" width="50%" style=" ">
 </object>
 </div>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate001.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate001.svg" width="50%" style=" ">
 </object>
 </div>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate002.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate002.svg" width="50%" style=" ">
 </object>
 </div>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate003.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate003.svg" width="50%" style=" ">
 </object>
 </div>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate004.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate004.svg" width="50%" style=" ">
 </object>
 </div>
-<div class="six-rotate" style="text-align:center;" role="img"
-aria-label="six-rotate" data-animation-frame="six-rotate">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_rotate005.svg" width="50%" style=" ">
+<div class="six-rotate" style="text-align:center;" role="img" aria-label="six-rotate" data-animation-frame="six-rotate">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_rotate005.svg" width="50%" style=" ">
 </object>
 </div>
 </div>
@@ -844,51 +718,40 @@ aria-label="six-rotate" data-animation-frame="six-rotate">
 <h2>PCA of Rotated Sixes</h2>
 <div class="figure">
 <div id="six-manifold-001-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_manifold_001.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_manifold_001.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-The rotated sixes projected onto the first two principal components. The
-data lives on a one-dimensional manifold in the high-dimensional space,
-forming approximately a circle in the 2D projection.
+The rotated sixes projected onto the first two principal components. The data lives on a one-dimensional manifold in the high-dimensional space, forming approximately a circle in the 2D projection.
 </aside>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="six-manifold-002-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/six_manifold_002.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/six_manifold_002.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-The rotated sixes projected onto the first two principal components as
-sixes and nines. The six and nine data live on two separate
-one-dimensional manifolds in the high-dimensional space, forming two
-arcs from a circle in the 2D projection.
+The rotated sixes projected onto the first two principal components as sixes and nines. The six and nine data live on two separate one-dimensional manifolds in the high-dimensional space, forming two arcs from a circle in the 2D projection.
 </aside>
 </section>
-<section id="interpoint-distances-for-rotated-sixes"
-class="slide level2">
+<section id="interpoint-distances-for-rotated-sixes" class="slide level2">
 <h2>Interpoint Distances for Rotated Sixes</h2>
 <div class="figure">
 <div id="six-distances-360-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem-six-distances-360.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/dem-six-distances-360.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Inter-point squared distances for the rotated digits data. Much of the
-data structure can be seen in the matrix. All points are ordered by
-angle of rotation. We can see that the distance between two points with
-similar angle of rotation is small (note in the upper right and lower
-left corners the low distances associated with 6s rotated by roughly 360
-degrees and unrotated 6s).
+Inter-point squared distances for the rotated digits data. Much of the data structure can be seen in the matrix. All points are ordered by angle of rotation. We can see that the distance between two points with similar angle of rotation is small (note in the upper right and lower left corners the low distances associated with 6s rotated by roughly 360 degrees and unrotated 6s).
 </aside>
 <div class="figure">
 <div id="rotated-sixes-squared-distances-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/rotated-sixes_squared-distances.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/rotated-sixes_squared-distances.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -906,10 +769,8 @@ Hisgogram of squared distances vs theory for the rotated sixes.
 <li>For high dimensional data with <em>structure</em>:
 <ul>
 <li>We expect fewer distortions than dimensions;</li>
-<li>Therefore we expect the data to live on a lower dimensional
-manifold.</li>
-<li>Conclusion: Deal with high dimensional data by looking for a lower
-dimensional non-linear embedding.</li>
+<li>Therefore we expect the data to live on a lower dimensional manifold.</li>
+<li>Conclusion: Deal with high dimensional data by looking for a lower dimensional non-linear embedding.</li>
 </ul></li>
 </ul>
 <!-- SECTION Latent Variables -->
@@ -917,8 +778,7 @@ dimensional non-linear embedding.</li>
 <section id="latent-variables" class="slide level2">
 <h2>Latent Variables</h2>
 <ul>
-<li><em>Hidden/unobservable</em> variables we infer from
-observations</li>
+<li><em>Hidden/unobservable</em> variables we infer from observations</li>
 <li><em>Compression</em> of complex data into simpler concepts</li>
 <li><em>Examples</em>: motives, intentions, underlying causes</li>
 </ul>
@@ -983,58 +843,48 @@ f_j(\mathbf{ z}) =
 <h2>Data Representation</h2>
 <p><span class="math display">\[
 \mathbf{Y}
-= \begin{bmatrix} \mathbf{ y}_{1, :}^\top \\ \mathbf{ y}_{2, :}^\top \\
-\vdots \\
+= \begin{bmatrix} \mathbf{ y}_{1, :}^\top \\ \mathbf{ y}_{2, :}^\top \\ \vdots \\
 \mathbf{ y}_{n, :}^\top\end{bmatrix},
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{F} = \mathbf{Z}\mathbf{W}^\top,
 \]</span></p>
 </section>
-<section id="latent-variables-vs-linear-regression"
-class="slide level2">
+<section id="latent-variables-vs-linear-regression" class="slide level2">
 <h2>Latent Variables vs Linear Regression</h2>
 </section>
 <section id="latent-vs-observed-variables" class="slide level2">
 <h2>Latent vs Observed Variables</h2>
 <ul>
-<li><em>Regression</em>: covariates <span
-class="math inline">\(\mathbf{Z}\)</span> are observed</li>
-<li><em>Factor analysis</em>: <span
-class="math inline">\(\mathbf{Z}\)</span> are latent/unknown</li>
+<li><em>Regression</em>: covariates <span class="math inline">\(\mathbf{Z}\)</span> are observed</li>
+<li><em>Factor analysis</em>: <span class="math inline">\(\mathbf{Z}\)</span> are latent/unknown</li>
 <li><em>Solution</em>: treat as probability distributions</li>
 </ul>
 <p><span class="math display">\[
 x_{i,j} \sim
 \mathscr{N}\left(0,1\right),
-\]</span> and we can write the density governing the latent variable
-associated with a single point as, <span class="math display">\[
+\]</span> and we can write the density governing the latent variable associated with a single point as, <span class="math display">\[
 \mathbf{ z}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right).
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{f}_{i, :} =
-\mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :}
+\mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :} 
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{f}_{i, :} \sim
-\mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{f}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
 </section>
 <section id="data-distribution" class="slide level2">
 <h2>Data Distribution</h2>
 <p><span class="math display">\[
-\mathbf{ y}_{i, :} = \sim
-\mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top +
-\boldsymbol{\Sigma}\right)
+\mathbf{ y}_{i, :} = \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\right)
 \]</span></p>
 <p><span class="math display">\[
-\boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp;
-0\\
+\boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp; 0\\
 0 &amp; \sigma^2_{2} &amp; 0 &amp; 0\\
                                      0 &amp; 0 &amp; \ddots &amp;
 0\\
-                                     0 &amp; 0 &amp; 0 &amp;
-\sigma^2_p\end{bmatrix}.
+                                     0 &amp; 0 &amp; 0 &amp; \sigma^2_p\end{bmatrix}.
 \]</span></p>
 </section>
 <section id="mean-vector" class="slide level2">
@@ -1046,8 +896,7 @@ associated with a single point as, <span class="math display">\[
 <p><span class="math display">\[
 \boldsymbol{ \mu}= \frac{1}{n} \sum_{i=1}^n
 \mathbf{ y}_{i, :},
-\]</span> <span class="math inline">\(\mathbf{C}=
-\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\)</span></p>
+\]</span> <span class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\)</span></p>
 <!-- SECTION Principal Component Analysis -->
 </section>
 <section id="principal-component-analysis" class="slide level2">
@@ -1057,16 +906,11 @@ associated with a single point as, <span class="math display">\[
 <h2>Hotelling’s PCA (1933)</h2>
 <ul>
 <li><em>Mathematical foundation</em> for factor analysis</li>
-<li><em>Noiseless limit</em>: <span class="math inline">\(\sigma^2_i
-\rightarrow 0\)</span></li>
+<li><em>Noiseless limit</em>: <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span></li>
 <li><em>Eigenvalue decomposition</em> of covariance matrix</li>
 </ul>
-<p><span class="citation" data-cites="Hotelling:analysis33">Hotelling
-(1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow
-0\)</span> so <span class="math display">\[
-\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0}
-\mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2
-\mathbf{I}\right).
+<p><span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span> so <span class="math display">\[
+\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
 \]</span></p>
 </section>
 <section id="degenerate-covariance" class="slide level2">
@@ -1075,79 +919,50 @@ associated with a single point as, <span class="math display">\[
 p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 \lim_{\sigma^2 \rightarrow 0} \frac{1}{(2\pi)^\frac{p}{2}
 |\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}|^{\frac{1}{2}}}
-\exp\left(-\frac{1}{2}\mathbf{ y}_{i, :}\left[\mathbf{W}\mathbf{W}^\top+
-\sigma^2
+\exp\left(-\frac{1}{2}\mathbf{ y}_{i, :}\left[\mathbf{W}\mathbf{W}^\top+ \sigma^2
 \mathbf{I}\right]^{-1}\mathbf{ y}_{i, :}\right),
 \]</span></small></p>
 </section>
-<section id="computation-of-the-marginal-likelihood"
-class="slide level2">
+<section id="computation-of-the-marginal-likelihood" class="slide level2">
 <h2>Computation of the Marginal Likelihood</h2>
 <p><small><span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{
-\epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim
-\mathscr{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{
-\epsilon}_{i,:} \sim
-\mathscr{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
+\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
 \]</span></small></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i,:} \sim
-\mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{W}\mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim
-\mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2
-\mathbf{I}\right)
+\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
 \]</span></p>
 </section>
 <section id="linear-latent-variable-model-ii" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span
-class="citation" data-cites="Tipping-probpca99">Tipping and Bishop
-(1999)</span>)</p>
+<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>)</p>
 <div class="figure">
 <div id="ppca-graphical-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/ppca_graphical.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/ppca_graphical.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Graphical model representing probabilistic PCA.
 </aside>
-<p><span
-class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{
-y}_{i,
-:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
+<p><span class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
 </section>
 <section id="linear-latent-variable-model-ii-1" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span
-class="citation" data-cites="Tipping-probpca99">Tipping and Bishop
-(1999)</span>) <small><span class="math display">\[
-  p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{
-y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad
-\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
+<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>) <small><span class="math display">\[
+  p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad \mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
   \]</span></small> <small><span class="math display">\[
-  \log
-p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
-  \]</span></small> If <span
-class="math inline">\(\mathbf{U}_{q}\)</span> are first <span
-class="math inline">\(q\)</span> principal eigenvectors of <span
-class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the
-corresponding eigenvalues are <span
-class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <small><span
-class="math display">\[
+  \log p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
+  \]</span></small> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are first <span class="math inline">\(q\)</span> principal eigenvectors of <span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the corresponding eigenvalues are <span class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <small><span class="math display">\[
   \mathbf{W}=\mathbf{U}_{q}\mathbf{L}\mathbf{R}^{\top},\quad\mathbf{L}=\left(\boldsymbol{\Lambda}_{q}-\sigma^{2}\mathbf{I}\right)^{\frac{1}{2}}
-  \]</span></small> where <span
-class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation
-matrix.</p>
+  \]</span></small> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
 </section>
 <section id="principal-component-analysis-1" class="slide level2">
 <h2>Principal Component Analysis</h2>
 <ul>
-<li>PCA (<span class="citation"
-data-cites="Hotelling:analysis33">Hotelling (1933)</span>) is a linear
-embedding</li>
+<li>PCA (<span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span>) is a linear embedding</li>
 <li>Today its presented as:
 <ul>
 <li>Rotate to find ‘directions’ in data with maximal variance</li>
@@ -1155,55 +970,39 @@ embedding</li>
 </ul></li>
 </ul>
 <p><span class="math display">\[
-\mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{
-\mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
+\mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{ \mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
 \]</span></p>
 </section>
 <section id="principal-component-analysis-2" class="slide level2">
 <h2>Principal Component Analysis</h2>
 <ul>
-<li>Find directions in the data, <span class="math inline">\(\mathbf{
-z}= \mathbf{U}\mathbf{ y}\)</span>, for which variance is
-maximized.</li>
+<li>Find directions in the data, <span class="math inline">\(\mathbf{ z}= \mathbf{U}\mathbf{ y}\)</span>, for which variance is maximized.</li>
 </ul>
 </section>
 <section id="lagrangian" class="slide level2">
 <h2>Lagrangian</h2>
 <ul>
-<li><p>Solution is found via constrained optimisation (which uses <a
-href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange
-multipliers</a>): <span class="math display">\[
+<li><p>Solution is found via constrained optimisation (which uses <a href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange multipliers</a>): <span class="math display">\[
 L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{u}_{1}+\lambda_{1}\left(1-\mathbf{u}_{1}^{\top}\mathbf{u}_{1}\right)
 \]</span></p></li>
-<li><p>Gradient with respect to <span
-class="math inline">\(\mathbf{u}_{1}\)</span> <span
-class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span></p></li>
+<li><p>Gradient with respect to <span class="math inline">\(\mathbf{u}_{1}\)</span> <span class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span></p></li>
 </ul>
 </section>
 <section id="lagrangian-1" class="slide level2">
 <h2>Lagrangian</h2>
 <ul>
-<li>Rearrange to form <span
-class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span>
-Which is known as an <a
-href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue
-problem</em></a>.</li>
-<li>Further directions that are <em>orthogonal</em> to the first can
-also be shown to be eigenvectors of the covariance.</li>
+<li>Rearrange to form <span class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span> Which is known as an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue problem</em></a>.</li>
+<li>Further directions that are <em>orthogonal</em> to the first can also be shown to be eigenvectors of the covariance.</li>
 </ul>
 </section>
 <section id="pca-directions" class="slide level2">
 <h2>PCA directions</h2>
-<div id="animation-pca-directions" class="lamd-animation" role="region"
-aria-label="" data-animation-group="pca-directions">
+<div id="animation-pca-directions" class="lamd-animation" role="region" aria-label="" data-animation-group="pca-directions">
 <noscript>
 <style>#animation-pca-directions .animation-controls{display:none}#animation-pca-directions .pca-directions~.pca-directions{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small></small>
-<input id="range-pca-directions" type="range" min="0" max="3" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('pca-directions')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('pca-directions')">
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'pca-directions');" aria-label="Previous frame">❮</button>
-<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'pca-directions');" aria-label="Next frame">❯</button></p>
+<p><small></small> <input id="range-pca-directions" type="range" min="0" max="3" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('pca-directions')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('pca-directions')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'pca-directions');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'pca-directions');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -1220,43 +1019,33 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'pca-directions'+'" failed to initialize:',e);}
 });
 </script>
-<div class="pca-directions" style="text-align:center;" role="img"
-aria-label="pca-directions" data-animation-frame="pca-directions">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/pca-directions-000.svg" width="60%" style=" ">
+<div class="pca-directions" style="text-align:center;" role="img" aria-label="pca-directions" data-animation-frame="pca-directions">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/pca-directions-000.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="pca-directions" style="text-align:center;" role="img"
-aria-label="pca-directions" data-animation-frame="pca-directions">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/pca-directions-001.svg" width="60%" style=" ">
+<div class="pca-directions" style="text-align:center;" role="img" aria-label="pca-directions" data-animation-frame="pca-directions">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/pca-directions-001.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="pca-directions" style="text-align:center;" role="img"
-aria-label="pca-directions" data-animation-frame="pca-directions">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/pca-directions-002.svg" width="60%" style=" ">
+<div class="pca-directions" style="text-align:center;" role="img" aria-label="pca-directions" data-animation-frame="pca-directions">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/pca-directions-002.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="pca-directions" style="text-align:center;" role="img"
-aria-label="pca-directions" data-animation-frame="pca-directions">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/pca-directions-003.svg" width="60%" style=" ">
+<div class="pca-directions" style="text-align:center;" role="img" aria-label="pca-directions" data-animation-frame="pca-directions">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/pca-directions-003.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
-<p><em>Maximum variance directions are eigenvectors of the covariance
-matrix</em></p>
+<p><em>Maximum variance directions are eigenvectors of the covariance matrix</em></p>
 </section>
 <section id="probabilistic-pca" class="slide level2">
 <h2>Probabilistic PCA</h2>
 <ul>
-<li>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>,
-with a lower dimensional set of latent variables <span
-class="math inline">\(\mathbf{Z}\)</span>.</li>
-<li>Assume a linear relationship of the form <span
-class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{
-\epsilon}_{i,:},
+<li>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>, with a lower dimensional set of latent variables <span class="math inline">\(\mathbf{Z}\)</span>.</li>
+<li>Assume a linear relationship of the form <span class="math display">\[
+\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},
 \]</span> where <span class="math display">\[
-\boldsymbol{ \epsilon}_{i,:} \sim
-\mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
+\boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
 \]</span></li>
 </ul>
 </section>
@@ -1265,20 +1054,18 @@ class="math display">\[
 <ul>
 <li>PPCA defines a probabilistic model where:
 <ul>
-<li>Data is generated from latent variables through linear
-transformation</li>
+<li>Data is generated from latent variables through linear transformation</li>
 <li>Gaussian noise is added to the transformed variables</li>
 <li>Latent variables have standard Gaussian prior</li>
 </ul></li>
 <li>Maximum likelihood recovers classical PCA</li>
 </ul>
 </section>
-<section id="graphical-model-representing-probabilistic-pca"
-class="slide level2">
+<section id="graphical-model-representing-probabilistic-pca" class="slide level2">
 <h2>Graphical model representing probabilistic PCA</h2>
 <div class="figure">
 <div id="ppca-graphical_model-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/ppca_graphical_model.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/ppca_graphical_model.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -1286,8 +1073,7 @@ class="slide level2">
 Graphical model representing probabilistic PCA.
 </aside>
 </section>
-<section id="posterior-for-principal-component-analysis"
-class="slide level2">
+<section id="posterior-for-principal-component-analysis" class="slide level2">
 <h2>Posterior for Principal Component Analysis</h2>
 <p><span class="math display">\[
 p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :})
@@ -1297,16 +1083,13 @@ p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
 :}|\mathbf{W}, \mathbf{ z}_{i, :}, \sigma^2) p(\mathbf{ z}_{i, :})
 \]</span></p>
 <p><span class="math display">\[
-\log p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) = \log p(\mathbf{ y}_{i,
-:}|\mathbf{W},
-\mathbf{ z}_{i, :}, \sigma^2) + \log p(\mathbf{ z}_{i, :}) +
-\text{const}
+\log p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) = \log p(\mathbf{ y}_{i, :}|\mathbf{W},
+\mathbf{ z}_{i, :}, \sigma^2) + \log p(\mathbf{ z}_{i, :}) + \text{const}
 \]</span></p>
 <p><span class="math display">\[
 \log p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) =
 -\frac{1}{2\sigma^2} (\mathbf{ y}_{i, :} - \mathbf{W}\mathbf{ z}_{i,
-:})^\top(\mathbf{ y}_{i, :} - \mathbf{W}\mathbf{ z}_{i, :}) -
-\frac{1}{2}
+:})^\top(\mathbf{ y}_{i, :} - \mathbf{W}\mathbf{ z}_{i, :}) - \frac{1}{2}
 \mathbf{ z}_{i, :}^\top \mathbf{ z}_{i, :} + \text{const}
 \]</span></p>
 </section>
@@ -1314,13 +1097,12 @@ p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
 <h2>Scikit-learn implementation PCA</h2>
 <div class="figure">
 <div id="oil-flow-pca-sklearn-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/oil-flow-pca_sklearn.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/oil-flow-pca_sklearn.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-PCA of the oil flow data. The flow is homogeneous, annular and
-stratified.
+PCA of the oil flow data. The flow is homogeneous, annular and stratified.
 </aside>
 </section>
 <section id="examples-motion-capture-data" class="slide level2">
@@ -1331,13 +1113,12 @@ stratified.
 <h2>OSU Motion Capture Data: Run 1</h2>
 <div class="figure">
 <div id="dem-osu-run1-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/osu-run1-pca.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/osu-run1-pca.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-First two principal components of motion capture data of an individual
-running.
+First two principal components of motion capture data of an individual running.
 </aside>
 </section>
 <section id="robot-navigation-example" class="slide level2">
@@ -1349,7 +1130,7 @@ running.
 </ul>
 <div class="figure">
 <div id="robot-wireless-pca-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/dimred/robot_wireless_pca.svg" width style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/dimred/robot_wireless_pca.svg" width style=" ">
 </object>
 </div>
 </div>
@@ -1358,23 +1139,20 @@ PCA of the robot wireless data.
 </aside>
 <!-- SECTION Interpretations of Principal Component Analysis -->
 </section>
-<section id="interpretations-of-principal-component-analysis"
-class="slide level2">
+<section id="interpretations-of-principal-component-analysis" class="slide level2">
 <h2>Interpretations of Principal Component Analysis</h2>
 </section>
 <section id="relationship-to-matrix-factorization" class="slide level2">
 <h2>Relationship to Matrix Factorization</h2>
 <ul>
 <li><p>PCA is closely related to matrix factorisation.</p></li>
-<li><p>Instead of <span class="math inline">\(\mathbf{Z}\)</span>, <span
-class="math inline">\(\mathbf{W}\)</span></p></li>
-<li><p>Define Users <span class="math inline">\(\mathbf{U}\)</span> and
-items <span class="math inline">\(\mathbf{V}\)</span></p></li>
+<li><p>Instead of <span class="math inline">\(\mathbf{Z}\)</span>, <span class="math inline">\(\mathbf{W}\)</span></p></li>
+<li><p>Define Users <span class="math inline">\(\mathbf{U}\)</span> and items <span class="math inline">\(\mathbf{V}\)</span></p></li>
 <li><p>Matrix factorisation: <span class="math display">\[
 f_{i, j} =
-\mathbf{u}_{i, :}^\top \mathbf{v}_{j, :}
+\mathbf{u}_{i, :}^\top \mathbf{v}_{j, :} 
 \]</span> PCA: <span class="math display">\[
-f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
+f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :} 
 \]</span></p></li>
 </ul>
 </section>
@@ -1390,16 +1168,14 @@ f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 \]</span></p>
 <p><span class="math display">\[
 \mathbf{Y}^\top\mathbf{Y}=
-\mathbf{U}\boldsymbol{\Lambda}\mathbf{V}^\top\mathbf{V}
-\boldsymbol{\Lambda}
+\mathbf{U}\boldsymbol{\Lambda}\mathbf{V}^\top\mathbf{V} \boldsymbol{\Lambda}
 \mathbf{U}^\top = \mathbf{U}\boldsymbol{\Lambda}^2 \mathbf{U}^\top
 \]</span></p>
 </section>
 <section id="separating-model-and-algorithm" class="slide level2">
 <h2>Separating Model and Algorithm</h2>
 <ul>
-<li>Separation between <em>model</em> and <em>algorithm</em> is helpful
-conceptually.</li>
+<li>Separation between <em>model</em> and <em>algorithm</em> is helpful conceptually.</li>
 <li>Even if in practice they conflate (e.g. deep neural networks).</li>
 <li>Sometimes difficult to pull apart.</li>
 <li>Helpful to revisit algorithms with modelling perspective in mind.
@@ -1431,8 +1207,7 @@ conceptually.</li>
 </section>
 <section id="have-you-done-pca-yet" class="slide level2">
 <h2>Have you done PCA yet?</h2>
-<p>“Have you done PCA yet?” is data scientists equivalent of “Have you
-switched it off and on again yet?”</p>
+<p>“Have you done PCA yet?” is data scientists equivalent of “Have you switched it off and on again yet?”</p>
 <!-- SECTION Derivation of PPCA -->
 </section>
 <section id="derivation-of-ppca" class="slide level2">
@@ -1442,11 +1217,9 @@ switched it off and on again yet?”</p>
 <section id="ppca-marginal-likelihood" class="slide level2">
 <h2>PPCA Marginal Likelihood</h2>
 <ul>
-<li>Posterior density over latent variables given data and
-parameters</li>
+<li>Posterior density over latent variables given data and parameters</li>
 <li>Similar form to Bayesian regression posterior</li>
-<li><strong>Key differences</strong> from Bayesian multiple output
-regression:
+<li><strong>Key differences</strong> from Bayesian multiple output regression:
 <ul>
 <li>Independence across <em>features</em> vs <em>data points</em></li>
 <li>Different covariance structure</li>
@@ -1458,19 +1231,15 @@ regression:
 <ul>
 <li><strong>Model quality</strong> assessed using log likelihood</li>
 <li>Gaussian form allows efficient computation</li>
-<li><em>Key challenge</em>: Inverting <span
-class="math inline">\(d\times d\)</span> covariance matrix</li>
-<li><em>Solution</em>: Exploit low-rank structure of <span
-class="math inline">\(\mathbf{W}\mathbf{W}^\top\)</span></li>
+<li><em>Key challenge</em>: Inverting <span class="math inline">\(d\times d\)</span> covariance matrix</li>
+<li><em>Solution</em>: Exploit low-rank structure of <span class="math inline">\(\mathbf{W}\mathbf{W}^\top\)</span></li>
 </ul>
 </section>
 <section id="efficient-computation-strategy" class="slide level2">
 <h2>Efficient Computation Strategy</h2>
 <ul>
-<li>Low-rank structure <span class="math display">\[\mathbf{C}=
-\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\]</span></li>
-<li>SVD decomposition <span class="math display">\[\mathbf{W}=
-\mathbf{U}\mathbf{L}\mathbf{R}^\top\]</span></li>
+<li>Low-rank structure <span class="math display">\[\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\]</span></li>
+<li>SVD decomposition <span class="math display">\[\mathbf{W}= \mathbf{U}\mathbf{L}\mathbf{R}^\top\]</span></li>
 <li>Optimisations
 <ul>
 <li>Determinant computation using eigenvalues</li>
@@ -1481,110 +1250,60 @@ class="math inline">\(\mathbf{W}\mathbf{W}^\top\)</span></li>
 <section id="determinant-computation" class="slide level2">
 <h2>Determinant Computation</h2>
 <ul>
-<li>Efficient determinant <span class="math display">\[\log |\mathbf{C}|
-= \sum_{i=1}^q\log (\ell_i^2 + \sigma^2) + (d-q)\log
-\sigma^2\]</span></li>
-<li><strong>Only need</strong> <span class="math inline">\(q\)</span>
-eigenvalues instead of <span class="math inline">\(d\)</span></li>
-<li><strong>Computational complexity</strong>: <span
-class="math inline">\(O(q)\)</span> vs <span
-class="math inline">\(O(d)\)</span></li>
+<li>Efficient determinant <span class="math display">\[\log |\mathbf{C}| = \sum_{i=1}^q\log (\ell_i^2 + \sigma^2) + (d-q)\log \sigma^2\]</span></li>
+<li><strong>Only need</strong> <span class="math inline">\(q\)</span> eigenvalues instead of <span class="math inline">\(d\)</span></li>
+<li><strong>Computational complexity</strong>: <span class="math inline">\(O(q)\)</span> vs <span class="math inline">\(O(d)\)</span></li>
 </ul>
 </section>
 <section id="woodbury-matrix-identity" class="slide level2">
 <h2>Woodbury Matrix Identity</h2>
 <ul>
-<li><strong>Inversion formula</strong>: <span
-class="math display">\[(\sigma^2 \mathbf{I}+
-\mathbf{W}\mathbf{W}^\top)^{-1} = \sigma^{-2}\mathbf{I}-
-\sigma^{-4}\mathbf{W}\mathbf{C}_x^{-1}\mathbf{W}^\top\]</span></li>
-<li>Invert <span class="math inline">\(q\times q\)</span> matrix instead
-of <span class="math inline">\(d\times d\)</span></li>
-<li><em>Computational savings</em>: <span
-class="math inline">\(O(q^3)\)</span> vs <span
-class="math inline">\(O(d^3)\)</span></li>
-<li><em>Connection</em>: <span
-class="math inline">\(\mathbf{C}_x\)</span> is the posterior covariance
-from the latent space</li>
+<li><strong>Inversion formula</strong>: <span class="math display">\[(\sigma^2 \mathbf{I}+ \mathbf{W}\mathbf{W}^\top)^{-1} = \sigma^{-2}\mathbf{I}- \sigma^{-4}\mathbf{W}\mathbf{C}_x^{-1}\mathbf{W}^\top\]</span></li>
+<li>Invert <span class="math inline">\(q\times q\)</span> matrix instead of <span class="math inline">\(d\times d\)</span></li>
+<li><em>Computational savings</em>: <span class="math inline">\(O(q^3)\)</span> vs <span class="math inline">\(O(d^3)\)</span></li>
+<li><em>Connection</em>: <span class="math inline">\(\mathbf{C}_x\)</span> is the posterior covariance from the latent space</li>
 </ul>
 </section>
 <section id="final-log-likelihood-formula" class="slide level2">
 <h2>Final Log Likelihood Formula</h2>
 <ul>
-<li>Complete formula <span class="math display">\[\log
-p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \sum_{i=1}^q\log (\ell_i^2 +
-\sigma^2) - \frac{n(d-q)}{2}\log \sigma^2 - \frac{\sigma^{-2}}{2}
-\text{tr}\left(\mathbf{Y}^\top \mathbf{Y}\right) + \frac{\sigma^{-4}}{2}
-\text{tr}\left(\mathbf{B}\mathbf{C}_x\mathbf{B}^\top\right)\]</span></li>
+<li>Complete formula <span class="math display">\[\log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \sum_{i=1}^q\log (\ell_i^2 + \sigma^2) - \frac{n(d-q)}{2}\log \sigma^2 - \frac{\sigma^{-2}}{2} \text{tr}\left(\mathbf{Y}^\top \mathbf{Y}\right) + \frac{\sigma^{-4}}{2} \text{tr}\left(\mathbf{B}\mathbf{C}_x\mathbf{B}^\top\right)\]</span></li>
 <li><em>Key terms</em>
 <ul>
-<li>Determinant: <span class="math inline">\(O(q)\)</span>
-computation</li>
-<li>Trace terms: <span class="math inline">\(O(nd)\)</span>
-computation</li>
-<li>Matrix inversions: <span class="math inline">\(O(q^3)\)</span>
-instead of <span class="math inline">\(O(d^3)\)</span></li>
+<li>Determinant: <span class="math inline">\(O(q)\)</span> computation</li>
+<li>Trace terms: <span class="math inline">\(O(nd)\)</span> computation</li>
+<li>Matrix inversions: <span class="math inline">\(O(q^3)\)</span> instead of <span class="math inline">\(O(d^3)\)</span></li>
 </ul></li>
 </ul>
 </section>
 <section id="computational-efficiency" class="slide level2">
 <h2>Computational Efficiency</h2>
 <ul>
-<li><em>Hadamard product</em>: <span
-class="math inline">\(\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right) =
-\sum_{i,j} (\mathbf{Y}\circ \mathbf{Y})_{i,j}\)</span></li>
+<li><em>Hadamard product</em>: <span class="math inline">\(\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right) = \sum_{i,j} (\mathbf{Y}\circ \mathbf{Y})_{i,j}\)</span></li>
 <li>Do <code>(Y*Y).sum()</code> not <code>np.trace(Y.T@Y)</code></li>
-<li><em>Element-wise operations</em> faster than matrix
-multiplication</li>
-<li><em>Overall complexity</em>: <span class="math inline">\(O(nd+
-q^3)\)</span> vs <span class="math inline">\(O(d^3)\)</span></li>
-<li><em>Scales well</em> for high-dimensional data with low latent
-dimension</li>
+<li><em>Element-wise operations</em> faster than matrix multiplication</li>
+<li><em>Overall complexity</em>: <span class="math inline">\(O(nd+ q^3)\)</span> vs <span class="math inline">\(O(d^3)\)</span></li>
+<li><em>Scales well</em> for high-dimensional data with low latent dimension</li>
 </ul>
 </section>
 <section id="reconstruction-of-the-data" class="slide level2">
 <h2>Reconstruction of the Data</h2>
-<p>Given any posterior projection of a data point, we can replot the
-original data as a function of the input space.</p>
-<p>We will now try to reconstruct the motion capture figure form some
-different places in the latent plot.</p>
+<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
+<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
 </section>
 <section id="other-data-sets-to-explore" class="slide level2">
 <h2>Other Data Sets to Explore</h2>
-<p>Below there are a few other data sets from <code>pods</code> you
-might want to explore with PCA. Both of them have <span
-class="math inline">\(p\)</span>&gt;<span
-class="math inline">\(n\)</span> so you need to consider how to do the
-larger eigenvalue probleme efficiently without large demands on computer
-memory.</p>
-<p>The data is actually quite high dimensional, and solving the
-eigenvalue problem in the high dimensional space can take some time. At
-this point we turn to a neat trick, you don’t have to solve the full
-eigenvalue problem in the <span class="math inline">\(d\times d\)</span>
-covariance, you can choose instead to solve the related eigenvalue
-problem in the <span class="math inline">\(n\times n\)</span> space, and
-in this case <span class="math inline">\(n=200\)</span> which is much
-smaller than <span class="math inline">\(d\)</span>.</p>
-<p>The original eigenvalue problem has the form <span
-class="math display">\[
+<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
+<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(d\times d\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(d\)</span>.</p>
+<p>The original eigenvalue problem has the form <span class="math display">\[
 \mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
-\]</span> But if we premultiply by <span
-class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span
-class="math display">\[
-\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} =
-\mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
-\]</span> but it turns out that we can write <span
-class="math display">\[
+\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
+\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
+\]</span> but it turns out that we can write <span class="math display">\[
 \mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
-\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span>
-is an orthorormal matrix because <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime =
-\Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U}
-\Lambda^{-\frac{1}{2}}
-\]</span> and since <span class="math inline">\(\mathbf{U}\)</span>
-diagonalises <span
-class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span
-class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
+\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
+\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
 \mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
 \]</span> then <span class="math display">\[
 \left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
@@ -1595,7 +1314,7 @@ class="math display">\[
 <div class="figure">
 <div id="olivetti-faces-data-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
@@ -1609,7 +1328,7 @@ Data set from Olivetti Research Laboratory of faces.
 <div class="figure">
 <div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
@@ -1622,7 +1341,7 @@ First 9 eigenvectors of the Olivetti faces data.
 <div class="figure">
 <div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/diagrams/dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
@@ -1636,52 +1355,35 @@ Reconstruction from the latent space of the faces data.
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Chapter 7 up to pg 249 of <span class="citation"
-data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Chapter 7 up to pg 249 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
 <li><p>company: <a href="https://trent.ai">Trent AI</a></p></li>
-<li><p>book: <a
-href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The
-Atomic Human</a></p></li>
-<li><p>twitter: <a
-href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p><a href="https://the-atomic-human.ai">The Atomic
-Human</a></p></li>
-<li><p>newspaper: <a
-href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
-Page</a></p></li>
+<li><p>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></p></li>
+<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p><a href="https://the-atomic-human.ai">The Atomic Human</a></p></li>
+<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a
-href="http://inverseprobability.com/2014/07/01/open-data-science">Open
-Data Science</a></p></li>
+<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent"
-role="list">
-<div id="ref-Bishop-oil93" class="csl-entry" role="listitem">
-Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using
-dual-energy gamma densitometry and neural networks. Nuclear Instruments
-and Methods in Physics Research A327, 580–593. <a
-href="https://doi.org/10.1016/0168-9002(93)90728-Z">https://doi.org/10.1016/0168-9002(93)90728-Z</a>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Bishop-oil93" class="csl-entry" role="doc-biblioentry">
+Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using dual-energy gamma densitometry and neural networks. Nuclear Instruments and Methods in Physics Research A327, 580–593. <a href="https://doi.org/10.1016/0168-9002(93)90728-Z">https://doi.org/10.1016/0168-9002(93)90728-Z</a>
 </div>
-<div id="ref-Hotelling:analysis33" class="csl-entry" role="listitem">
-Hotelling, H., 1933. Analysis of a complex of statistical variables into
-principal components. Journal of Educational Psychology 24, 417–441.
+<div id="ref-Hotelling:analysis33" class="csl-entry" role="doc-biblioentry">
+Hotelling, H., 1933. Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology 24, 417–441.
 </div>
-<div id="ref-Rogers:book11" class="csl-entry" role="listitem">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
-Press.
+<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>
-<div id="ref-Tipping-probpca99" class="csl-entry" role="listitem">
-Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component
-analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a
-href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>
+<div id="ref-Tipping-probpca99" class="csl-entry" role="doc-biblioentry">
+Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>
 </div>
 </div>
 </section>
@@ -1696,39 +1398,8 @@ href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Display controls in the bottom right corner
-        controls: true,
-        // Display a presentation progress bar
-        progress: true,
         // Push each slide change to the browser history
         history: true,
-        // Enable keyboard shortcuts for navigation
-        keyboard: true,
-        // Enable the slide overview mode
-        overview: true,
-        // Vertical centering of slides
-        center: true,
-        // Enables touch navigation on devices with touch input
-        touch: true,
-        // Turns fragments on and off globally
-        fragments: true,
-        // Flags if we should show a help overlay when the questionmark
-        // key is pressed
-        help: true,
-        // Number of milliseconds between automatically proceeding to the
-        // next slide, disabled when set to 0, this value can be overwritten
-        // by using a data-autoslide attribute on your slides
-        autoSlide: 0,
-        // Stop auto-sliding after user input
-        autoSlideStoppable: true,
-        // Transition style
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
-        // Transition speed
-        transitionSpeed: 'default', // default/fast/slow
-        // Transition style for full page slide backgrounds
-        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
-        // Number of slides away from the current that are visible
-        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
