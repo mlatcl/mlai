@@ -16,14 +16,11 @@ youtube: 5VPr6NbHHjg
 * This time: explore least squares for regression.
 
 \include{_ml/includes/regression-examples.md}
-
-\include{_datasets/includes/olympic-100m-data.md}
-
-
 \include{_datasets/includes/olympic-marathon-data.md}
 \include{_ml/includes/what-is-ml.md}
 \include{_ml/includes/sum-of-squares-error.md}
 \include{_ml/includes/linear-algebra-regression.md}
+\include{_ml/includes/linear-regression-hessian.md}
 
 \thanks
 
