@@ -46,7 +46,7 @@ are going to take a slightly different tack.}
 
 \include{_software/includes/pods-software.md}
 
-\include{_ml/includes/movie-body-count-data.md}
+\include{_data-science/includes/movie-body-count-pandas.md}
 
 \writeassignment{Data ethics. If you find data available on the
 internet, can you simply use it without consequence? If you are given data by a

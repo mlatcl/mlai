@@ -1,0 +1,54 @@
+# Jupyter and notebook checkpoints
+.ipynb_checkpoints/
+
+# OS and editor files
+.DS_Store
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# Local workspace files
+*.code-workspace
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Backups
+*.bak
+
+# Build artefacts
+*.o
+*.so
+*.out
+*.log
+
+# LaMD intermediate build artefacts (maketalk) under _lamd/
+# Keep sources (*.md), _lamd.yml, compile.sh, lectures.csv tracked.
+_lamd/*.gpp.markdown
+_lamd/*.ipynb
+_lamd/*.ipynb.markdown
+_lamd/*.html
+_lamd/*.html.markdown
+_lamd/*.notes.*
+_lamd/*.posts.*
+_lamd/*.slides.*
+_lamd/makefile
+_lamd/*.log
+_lamd/talk-people.gpp
+_lamd/*-e
+_lamd/*.tmp.markdown
+
+# Compiled Jekyll site
+_site/
+
+# Ruby bundler
+.bundle/
+
+# Local Python env and notebook smoke artefacts
+.venv/
+_notebooks/test-results/

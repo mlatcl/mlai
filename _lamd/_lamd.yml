@@ -18,6 +18,7 @@ notesdir: ../_notes/
 notebooksdir: ../_notebooks/
 practicalsdir: ../_practicals/
 snippetsdir: $HOME/lawrennd/snippets
+macrosdir: $HOME/lawrennd/lamd/lamd/macros
 writediagramsdir: .
 scriptsdir: https://inverseprobability.com/talks/scripts/
 diagramsdir: ../slides/diagrams/
