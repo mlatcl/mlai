@@ -17,8 +17,8 @@ youtube: 0mtK2_rc0IY
 \notes{So far in our classes we have focussed mainly on regression
 problems, which are examples of supervised learning. We have considered the
 relationship between the likelihood and the objective function and we have shown
-how we can find paramters by maximizing the likelihood (equivalent to minimizing
-the objective function) and in the last session we saw how we can *marginalize*
+how we can find parameters by maximising the likelihood (equivalent to minimising
+the objective function) and in the last session we saw how we can *marginalise*
 the parameters in a process known as Bayesian inference.}
 
 
@@ -30,10 +30,14 @@ the parameters in a process known as Bayesian inference.}
 
 \include{_dimred/includes/probabilistic-pca.md}
 
-\include{_dimred/includes/mocap-ppca.md}
+\include{_dimred/includes/osu-run1-ppca.md}
 \include{_dimred/includes/robot-wireless-ppca.md}
+
 \include{_dimred/includes/ppca-interpretations.md}
-\include{_dimred/includes/pca-in-practice.md}
+\include{_dimred/includes/pca-effectiveness.md}
+
+\section{Derivation of PPCA}
+
 \include{_dimred/includes/ppca-marginal-likelihood.md}
 \include{_dimred/includes/ppca-reconstruction.md}
 
