@@ -11,6 +11,10 @@ abstract: |
 \include{_mlai/includes/mlai-notebook-setup.md}
 \include{_ml/includes/non-linear-regression-intro.md}
 
+\define{designVector}{\basisVector}
+\define{designVariable}{Phi}
+\define{designMatrix}{\basisMatrix}
+
 \include{_ml/includes/basis-functions.md}
 \include{_ml/includes/basis-function-models.md}
 
