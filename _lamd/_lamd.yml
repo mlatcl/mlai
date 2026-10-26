@@ -10,7 +10,9 @@ layout: lecture
 room:
 venue:
 url: https://inverseprobability.com/
-talkcss: https://inverseprobability.com/assets/css/talks.css
+talktheme: white
+talkcss: mlatcl.css
+talkfontsize: xs
 bibdir: $HOME/lawrennd/bibliography
 postsdir: ../_lectures/
 slidesdir: ../slides/ # Where compiled slides go
