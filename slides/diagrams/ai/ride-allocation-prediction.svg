@@ -37,7 +37,7 @@
     writing-mode:lr;
     text-align:center;
     dominant-baseline:middle;
-    text-anchor:middle"    
+    text-anchor:middle;
     }
     .myrect {
     fill:none;
