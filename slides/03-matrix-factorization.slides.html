@@ -123,7 +123,8 @@
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Objective Functions: A Simple Example with Matrix Factorisation</h1>
+  <h1 class="title">Objective Functions: A Simple Example with Matrix
+Factorisation</h1>
 </section>
 
 <section class="slide level2">
@@ -146,45 +147,58 @@ sns.set_palette('colorblind')}-->
 <h2>Objective Function</h2>
 <ul>
 <li>Last week we motivated the importance of probability.</li>
-<li>This week we motivate the idea of the ‘objective function.’</li>
+<li>This week we motivate the idea of the ‘objective function’.</li>
 </ul>
 </section>
 <section id="the-perceptron" class="slide level2">
 <h2>The Perceptron</h2>
 <ul>
 <li>Developed in 1957 by Rosenblatt.</li>
-<li>Take a data point at, <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
-<li>Predict class, <span class="math inline">\(y_i=1\)</span> if <span class="math inline">\(\sum_jw_{j} \mathbf{ x}_{i, j} + b &gt; 0\)</span></li>
+<li>Take a data point at, <span class="math inline">\(\mathbf{
+x}_i\)</span>.</li>
+<li>Predict class, <span class="math inline">\(y_i=1\)</span> if <span
+class="math inline">\(\sum_jw_{j} \mathbf{ x}_{i, j} + b &gt;
+0\)</span></li>
 <li>Otherwise predict <span class="math inline">\(y_i=-1\)</span>.</li>
 </ul>
 </section>
-<section id="mathematical-drawing-of-decision-boundary" class="slide level2">
+<section id="mathematical-drawing-of-decision-boundary"
+class="slide level2">
 <h2>Mathematical Drawing of Decision Boundary</h2>
 <ul>
 <li>Decision boundary defined by hyperplane</li>
-<li>Classification: <span class="math inline">\(\text{sign}(\mathbf{ x}^\top \mathbf{ w})\)</span></li>
-<li>Two features: <span class="math inline">\(w_1x_{i,1} + w_2x_{i,2} + b\)</span></li>
+<li>Classification: <span class="math inline">\(\text{sign}(\mathbf{
+x}^\top \mathbf{ w})\)</span></li>
+<li>Two features: <span class="math inline">\(w_1x_{i,1} + w_2x_{i,2} +
+b\)</span></li>
 <li>Boundary where prediction switches from -1 to +1</li>
 </ul>
 </section>
 <section id="reminder-equation-of-plane" class="slide level2">
 <h2>Reminder: Equation of Plane</h2>
 <ul>
-<li>Plane equation: <span class="math inline">\(w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0\)</span></li>
-<li>Decision boundary where <span class="math inline">\(\text{sign}(\cdot)\)</span> argument equals zero</li>
+<li>Plane equation: <span class="math inline">\(w_1 x_{i, 1} + w_2 x_{i,
+2} + b = 0\)</span></li>
+<li>Decision boundary where <span
+class="math inline">\(\text{sign}(\cdot)\)</span> argument equals
+zero</li>
 </ul>
 </section>
 <section id="reminder-equation-of-plane-1" class="slide level2">
 <h2>Reminder: Equation of Plane</h2>
 <ul>
-<li>Rearrange to plot: <span class="math inline">\(x_2 = -\frac{(b+x_1w_1)}{w_2}\)</span></li>
+<li>Rearrange to plot: <span class="math inline">\(x_2 =
+-\frac{(b+x_1w_1)}{w_2}\)</span></li>
 <li>Separating hyperplane divides feature space</li>
 </ul>
 </section>
-<section id="perceptron-algorithm-initialisation-maths" class="slide level2">
+<section id="perceptron-algorithm-initialisation-maths"
+class="slide level2">
 <h2>Perceptron Algorithm: Initialisation Maths</h2>
 <ul>
-<li>Set <span class="math inline">\(\mathbf{ w}\)</span> with random selected point <span class="math inline">\(i\)</span> <span class="math display">\[
+<li>Set <span class="math inline">\(\mathbf{ w}\)</span> with random
+selected point <span class="math inline">\(i\)</span> <span
+class="math display">\[
 \mathbf{ w}= y_i \mathbf{ x}_i.
 \]</span></li>
 <li>Why? Consider <span class="math display">\[
@@ -192,11 +206,15 @@ sns.set_palette('colorblind')}-->
 \]</span></li>
 </ul>
 </section>
-<section id="perceptron-algorithm-initialisation-maths-1" class="slide level2">
+<section id="perceptron-algorithm-initialisation-maths-1"
+class="slide level2">
 <h2>Perceptron Algorithm: Initialisation Maths</h2>
 <ul>
-<li>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span class="math display">\[
-\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i
+<li>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span
+class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span
+class="math display">\[
+\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{
+x}_i^\top \mathbf{ x}_i) = y_i
 \]</span></li>
 </ul>
 </section>
@@ -204,19 +222,22 @@ sns.set_palette('colorblind')}-->
 <h2>Drawing Decision Boundary</h2>
 <div class="figure">
 <div id="perceptron-init-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron_init.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron_init.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Initial perceptron setup showing data points and initial decision boundary.
+Initial perceptron setup showing data points and initial decision
+boundary.
 </aside>
 <ul>
 <li>Plot <span class="math display">\[
 x_2 = -\frac{(b+x_1 w_1)}{w_2}
 \]</span></li>
 </ul>
-<p><em>or</em> specify <span class="math inline">\(x_2\)</span> and compute <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>, <span class="math display">\[
+<p><em>or</em> specify <span class="math inline">\(x_2\)</span> and
+compute <span class="math inline">\(x_1\)</span> given the values for
+<span class="math inline">\(x_2\)</span>, <span class="math display">\[
 x_1 = -\frac{b + x_2w_2}{w_1}
 \]</span></p>
 </section>
@@ -229,12 +250,16 @@ x_1 = -\frac{b + x_2w_2}{w_1}
 </section>
 <section id="code-for-perceptron" class="slide level2">
 <h2>Code for Perceptron</h2>
-<div id="animation-perceptron" class="lamd-animation" role="region" aria-label="" data-animation-group="perceptron">
+<div id="animation-perceptron" class="lamd-animation" role="region"
+aria-label="" data-animation-group="perceptron">
 <noscript>
 <style>#animation-perceptron .animation-controls{display:none}#animation-perceptron .perceptron~.perceptron{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small></small> <input id="range-perceptron" type="range" min="0" max="14" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('perceptron')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('perceptron')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'perceptron');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'perceptron');" aria-label="Next frame">❯</button></p>
+<p><small></small>
+<input id="range-perceptron" type="range" min="0" max="14" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('perceptron')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('perceptron')">
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'perceptron');" aria-label="Previous frame">❮</button>
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'perceptron');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -251,64 +276,79 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'perceptron'+'" failed to initialize:',e);}
 });
 </script>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron000.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron000.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron001.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron001.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron002.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron002.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron003.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron003.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron004.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron004.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron005.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron005.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron006.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron006.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron007.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron007.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron008.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron008.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron009.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron009.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron010.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron010.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron011.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron011.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron012.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron012.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron013.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron013.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="perceptron" style="text-align:center;" role="img" aria-label="perceptron" data-animation-frame="perceptron">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/perceptron014.svg" width="60%" style=" ">
+<div class="perceptron" style="text-align:center;" role="img"
+aria-label="perceptron" data-animation-frame="perceptron">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -325,7 +365,8 @@ if(f.length>0){f[0].style.display='block';}
 <ul>
 <li>Non-convergence indicates inseparable data</li>
 <li>Possible fix: anneal learning rate</li>
-<li>Non-linear extensions: basis functions, kernel methods, multi-layer networks</li>
+<li>Non-linear extensions: basis functions, kernel methods, multi-layer
+networks</li>
 </ul>
 </section>
 <section id="the-objective-function" class="slide level2">
@@ -333,8 +374,10 @@ if(f.length>0){f[0].style.display='block';}
 <ul>
 <li>Perceptron algorithm lacks explicit objective function</li>
 <li>Updates provide intuition but not clear optimization target</li>
-<li>Objective functions (loss/error/cost) often easier starting point</li>
-<li>Connection between algorithm and objective not immediately obvious</li>
+<li>Objective functions (loss/error/cost) often easier starting
+point</li>
+<li>Connection between algorithm and objective not immediately
+obvious</li>
 </ul>
 </section>
 <section id="objective-functions-and-regression" class="slide level2">
@@ -347,7 +390,8 @@ if(f.length>0){f[0].style.display='block';}
 <section id="regression" class="slide level2">
 <h2>Regression</h2>
 <ul>
-<li><p>Our <em>prediction function</em> is <span class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
+<li><p>Our <em>prediction function</em> is <span
+class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
 <li><p>Need an <em>algorithm</em> to fit it.</p></li>
 </ul>
 </section>
@@ -356,19 +400,24 @@ if(f.length>0){f[0].style.display='block';}
 <ul>
 <li>Least squares: minimise an error.</li>
 </ul>
-<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2\]</span></p>
+<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i -
+f(x_i))^2\]</span></p>
 </section>
 <section id="regression-1" class="slide level2">
 <h2>Regression</h2>
 <ul>
 <li><p>Create an artifical data set.</p></li>
-<li><p><em>true</em> value for <span class="math inline">\(m\)</span> <code>m_true = 1.4</code></p></li>
-<li><p><em>true</em> value for <span class="math inline">\(c\)</span> <code>c_true = -3.1</code></p></li>
+<li><p><em>true</em> value for <span class="math inline">\(m\)</span>
+<code>m_true = 1.4</code></p></li>
+<li><p><em>true</em> value for <span class="math inline">\(c\)</span>
+<code>c_true = -3.1</code></p></li>
 </ul>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<p>We can use these values to create our artificial data. The formula <span class="math display">\[y_i = mx_i + c\]</span> is translated to code as follows:</p>
+<p>We can use these values to create our artificial data. The formula
+<span class="math display">\[y_i = mx_i + c\]</span> is translated to
+code as follows:</p>
 <p><code>y = m_true*x+c_true</code></p>
 </section>
 <section id="plot-of-data" class="slide level2">
@@ -376,7 +425,7 @@ if(f.length>0){f[0].style.display='block';}
 <p>We can now plot the artifical data we’ve created.</p>
 <div class="figure">
 <div id="linear-regression-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -389,14 +438,14 @@ A simple linear regression.
 <ul>
 <li>Points lie exactly on a straight line</li>
 <li>Not very realistic</li>
-<li>Corrupt them with Gaussian ‘noise.’</li>
+<li>Corrupt them with Gaussian ‘noise’.</li>
 </ul>
 </section>
 <section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
 <div class="figure">
 <div id="linear-regression-noise-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_noise.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_noise.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -408,12 +457,13 @@ A simple linear regression with noise.
 <h2>Contour Plot of Error Function</h2>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Contours of the objective function for linear regression by minimizing least squares.
+Contours of the objective function for linear regression by minimizing
+least squares.
 </aside>
 </section>
 <section id="steepest-descent" class="slide level2">
@@ -421,15 +471,19 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>Minimise the sum of squares error function.</li>
 <li>E.g. gradient descent.</li>
-<li>Initialise with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span></li>
-<li>update that guess by subtracting a portion of the gradient from the guess.</li>
-<li>Like walking down a hill in the steepest direction of the hill to get to the bottom.</li>
+<li>Initialise with a guess for <span class="math inline">\(m\)</span>
+and <span class="math inline">\(c\)</span></li>
+<li>update that guess by subtracting a portion of the gradient from the
+guess.</li>
+<li>Like walking down a hill in the steepest direction of the hill to
+get to the bottom.</li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
-<li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
+<li>We start with a guess for <span class="math inline">\(m\)</span> and
+<span class="math inline">\(c\)</span>.</li>
 </ul>
 <pre><code>m_star = 0.0
 c_star = -5.0</code></pre>
@@ -437,7 +491,8 @@ c_star = -5.0</code></pre>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
-<li>Gradient of the error wrt <span class="math inline">\(c\)</span>, <span class="math display">\[
+<li>Gradient of the error wrt <span class="math inline">\(c\)</span>,
+<span class="math display">\[
   \frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)
   \]</span></li>
 </ul>
@@ -448,7 +503,8 @@ c_star = -5.0</code></pre>
 </section>
 <section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
-<p>Gradient wrt <span class="math inline">\(m\)</span> is similar <span class="math display">\[
+<p>Gradient wrt <span class="math inline">\(m\)</span> is similar <span
+class="math display">\[
 \frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
 c)
 \]</span></p>
@@ -461,50 +517,62 @@ c)
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>Gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>Can update our inital guesses for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> using the gradient.</li>
+<li>Gradients with respect to <span class="math inline">\(m\)</span> and
+<span class="math inline">\(c\)</span>.</li>
+<li>Can update our inital guesses for <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span> using the gradient.</li>
 </ul>
 </section>
 <section id="update-equations-1" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>We don’t want to just subtract the gradient from <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>,</li>
-<li>We need to take a <em>small</em> step in the gradient direction.</li>
+<li>We don’t want to just subtract the gradient from <span
+class="math inline">\(m\)</span> and <span
+class="math inline">\(c\)</span>,</li>
+<li>We need to take a <em>small</em> step in the gradient
+direction.</li>
 <li>Otherwise we might overshoot the minimum.</li>
 </ul>
 </section>
 <section id="update-equations-2" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
+<li>We want to follow the gradient to get to the minimum, the gradient
+changes all the time.</li>
 </ul>
 </section>
 <section id="move-in-direction-of-gradient" class="slide level2">
 <h2>Move in Direction of Gradient</h2>
 <div class="figure">
 <div id="regression-contour-step-1-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_step001.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_step001.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Single update descending the contours of the error surface for regression.
+Single update descending the contours of the error surface for
+regression.
 </aside>
 </section>
 <section id="update-equations-3" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
 <li>The step size has already been introduced</li>
-<li>it’s known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
-c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}c}
+<li>it’s known as the learning rate and is denoted by <span
+class="math inline">\(\eta\)</span>. <span class="math display">\[
+c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}c}
 \]</span></li>
 </ul>
 </section>
 <section id="step-size" class="slide level2">
 <h2>Step Size</h2>
 <ul>
-<li>gives us an update for our estimate of <span class="math inline">\(c\)</span> and <span class="math display">\[
-m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
+<li>gives us an update for our estimate of <span
+class="math inline">\(c\)</span> and <span class="math display">\[
+m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m,
+c)}{\text{d}m}
 \]</span></li>
 <li>Giving us an update for <span class="math inline">\(m\)</span>.</li>
 </ul>
@@ -526,12 +594,17 @@ m_star = m_star - learn_rate*m_grad</code></pre>
 </section>
 <section id="gradient-descent-algorithm" class="slide level2">
 <h2>Gradient Descent Algorithm</h2>
-<div id="animation-regression_contour_fit" class="lamd-animation" role="region" aria-label="" data-animation-group="regression_contour_fit">
+<div id="animation-regression_contour_fit" class="lamd-animation"
+role="region" aria-label=""
+data-animation-group="regression_contour_fit">
 <noscript>
 <style>#animation-regression_contour_fit .animation-controls{display:none}#animation-regression_contour_fit .regression_contour_fit~.regression_contour_fit{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small></small> <input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" aria-label="Frame slider for " aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_contour_fit')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_contour_fit')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'regression_contour_fit');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'regression_contour_fit');" aria-label="Next frame">❯</button></p>
+<p><small></small>
+<input id="range-regression_contour_fit" type="range" min="1" max="28" value="1" aria-label="Frame slider for " aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_contour_fit')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_contour_fit')">
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'regression_contour_fit');" aria-label="Previous frame">❮</button>
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'regression_contour_fit');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -548,120 +621,178 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'regression_contour_fit'+'" failed to initialize:',e);}
 });
 </script>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit000.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit000.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit001.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit001.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit002.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit002.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit003.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit003.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit004.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit004.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit005.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit005.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit006.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit006.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit007.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit007.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit008.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit008.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit009.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit009.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit010.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit010.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit011.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit011.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit012.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit012.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit013.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit013.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit014.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit014.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit015.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit015.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit016.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit016.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit017.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit017.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit018.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit018.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit019.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit019.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit020.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit020.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit021.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit021.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit022.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit022.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit023.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit023.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit024.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit024.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit025.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit025.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit026.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit026.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit027.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit027.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_contour_fit" style="text-align:center;" role="img" aria-label="regression_contour_fit" data-animation-frame="regression_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_contour_fit028.svg" width="60%" style=" ">
+<div class="regression_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_contour_fit"
+data-animation-frame="regression_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_contour_fit028.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -669,17 +800,22 @@ if(f.length>0){f[0].style.display='block';}
 <section id="stochastic-gradient-descent" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>If <span class="math inline">\(n\)</span> is small, gradient descent is fine.</li>
-<li>But sometimes (e.g. on the internet) <span class="math inline">\(n\)</span> could be a billion.</li>
+<li>If <span class="math inline">\(n\)</span> is small, gradient descent
+is fine.</li>
+<li>But sometimes (e.g. on the internet) <span
+class="math inline">\(n\)</span> could be a billion.</li>
 <li>Stochastic gradient descent is more similar to perceptron.</li>
-<li>Look at gradient of one data point at a time rather than summing across <em>all</em> data points)</li>
+<li>Look at gradient of one data point at a time rather than summing
+across <em>all</em> data points)</li>
 <li>This gives a stochastic estimate of gradient.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-1" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>The real gradient with respect to <span class="math inline">\(m\)</span> is given by <span class="math display">\[
+<li>The real gradient with respect to <span
+class="math inline">\(m\)</span> is given by <span
+class="math display">\[
 \frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i -
 mx_i - c)
 \]</span></li>
@@ -687,21 +823,28 @@ mx_i - c)
 </section>
 <section id="decompose-the-sum" class="slide level2">
 <h2>Decompose the Sum</h2>
-but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form
+but it has <span class="math inline">\(n\)</span> terms in the sum.
+Substituting in the gradient we can see that the full update is of the
+form
 <span class="math display">\[\begin{aligned}
   m_\text{new} \leftarrow
-m_\text{old} \\ 
-&amp; + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) \right. \\ 
-&amp; + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) \\ 
+m_\text{old} \\
+&amp; + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) \right. \\
+&amp; + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) \\
 &amp; + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]
 \end{aligned}\]</span>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
-c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
-m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3 \leftarrow m_2 + 2\eta
-\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
+<p>This could be split up into lots of individual updates <span
+class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1
+- m_\text{old}x_1 -
+c_\text{old})\right]\]</span> <span class="math display">\[m_2
+\leftarrow m_1 + 2\eta\left[x_2 (y_2 -
+m_\text{old}x_2 - c_\text{old})\right]\]</span> <span
+class="math display">\[m_3 \leftarrow m_2 + 2\eta
+\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow
+m_{n-1} + 2\eta\left[x_n (y_n -
 m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 </section>
 <section id="section-2" class="slide level2">
@@ -709,9 +852,12 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 <p>which would lead to the same final update.</p>
 </section>
 <section id="updating-c-and-m" class="slide level2">
-<h2>Updating <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span></h2>
+<h2>Updating <span class="math inline">\(c\)</span> and <span
+class="math inline">\(m\)</span></h2>
 <ul>
-<li>In the sum we don’t change <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
+<li>In the sum we don’t change <span class="math inline">\(m\)</span>
+and <span class="math inline">\(c\)</span> we use for computing the
+gradient term at each update.</li>
 <li>In stochastic gradient descent we <em>do</em> change them.</li>
 <li>This means it’s not quite the same as steepest descent.</li>
 </ul>
@@ -719,30 +865,39 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 <section id="section-3" class="slide level2">
 <h2></h2>
 <ul>
-<li>But we can present each data point in a random order, like we did for the perceptron.</li>
+<li>But we can present each data point in a random order, like we did
+for the perceptron.</li>
 <li>This makes the algorithm suitable for large-scale data use</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-2" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
 <ul>
-<li>Since the data is presented in a random order we write <span class="math display">\[
-m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]
+<li>Since the data is presented in a random order we write <span
+class="math display">\[
+m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i -
+c_\text{old})\right]
 \]</span></li>
 </ul>
 </section>
 <section id="sgd-for-linear-regression" class="slide level2">
 <h2>SGD for Linear Regression</h2>
-<p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
+<p>Putting it all together in an algorithm, we can do stochastic
+gradient descent for our regression data.</p>
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
-<div id="animation-regression_sgd_contour_fit" class="lamd-animation" role="region" aria-label="" data-animation-group="regression_sgd_contour_fit">
+<div id="animation-regression_sgd_contour_fit" class="lamd-animation"
+role="region" aria-label=""
+data-animation-group="regression_sgd_contour_fit">
 <noscript>
 <style>#animation-regression_sgd_contour_fit .animation-controls{display:none}#animation-regression_sgd_contour_fit .regression_sgd_contour_fit~.regression_sgd_contour_fit{display:none}</style>
 </noscript>
 <div class="animation-controls">
-<p><small></small> <input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="58" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_sgd_contour_fit')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_sgd_contour_fit')"> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'regression_sgd_contour_fit');" aria-label="Previous frame">❮</button> <button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'regression_sgd_contour_fit');" aria-label="Next frame">❯</button></p>
+<p><small></small>
+<input id="range-regression_sgd_contour_fit" type="range" min="0" max="58" value="0" aria-label="Frame slider for " aria-valuemin="0" aria-valuemax="58" aria-valuenow="0" onchange="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_sgd_contour_fit')" oninput="typeof lamdSetDivs==='function'&&lamdSetDivs('regression_sgd_contour_fit')">
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(-1,'regression_sgd_contour_fit');" aria-label="Previous frame">❮</button>
+<button type="button" onclick="typeof lamdPlusDivs==='function'&&lamdPlusDivs(1,'regression_sgd_contour_fit');" aria-label="Next frame">❯</button></p>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -759,240 +914,358 @@ if(f.length>0){f[0].style.display='block';}
 }catch(e){console.warn('[lamd] Animation "'+'regression_sgd_contour_fit'+'" failed to initialize:',e);}
 });
 </script>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit000.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit000.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit001.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit001.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit002.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit002.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit003.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit003.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit004.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit004.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit005.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit005.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit006.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit006.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit007.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit007.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit008.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit008.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit009.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit009.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit010.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit010.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit011.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit011.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit012.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit012.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit013.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit013.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit014.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit014.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit015.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit015.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit016.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit016.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit017.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit017.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit018.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit018.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit019.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit019.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit020.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit020.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit021.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit021.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit022.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit022.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit023.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit023.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit024.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit024.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit025.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit025.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit026.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit026.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit027.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit027.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit028.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit028.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit029.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit029.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit030.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit030.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit031.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit031.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit032.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit032.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit033.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit033.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit034.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit034.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit035.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit035.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit036.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit036.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit037.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit037.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit038.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit038.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit039.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit039.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit040.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit040.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit041.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit041.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit042.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit042.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit043.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit043.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit044.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit044.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit045.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit045.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit046.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit046.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit047.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit047.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit048.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit048.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit049.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit049.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit050.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit050.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit051.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit051.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit052.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit052.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit053.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit053.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit054.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit054.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit055.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit055.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit056.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit056.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit057.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit057.svg" width="60%" style=" ">
 </object>
 </div>
-<div class="regression_sgd_contour_fit" style="text-align:center;" role="img" aria-label="regression_sgd_contour_fit" data-animation-frame="regression_sgd_contour_fit">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/diagrams/ml/regression_sgd_contour_fit058.svg" width="60%" style=" ">
+<div class="regression_sgd_contour_fit" style="text-align:center;"
+role="img" aria-label="regression_sgd_contour_fit"
+data-animation-frame="regression_sgd_contour_fit">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/regression_sgd_contour_fit058.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -1007,7 +1280,8 @@ if(f.length>0){f[0].style.display='block';}
 </ul></li>
 </ul>
 </section>
-<section id="reflection-on-linear-regression-and-supervised-learning" class="slide level2">
+<section id="reflection-on-linear-regression-and-supervised-learning"
+class="slide level2">
 <h2>Reflection on Linear Regression and Supervised Learning</h2>
 <ul>
 <li>Learning rate size</li>
@@ -1018,7 +1292,8 @@ if(f.length>0){f[0].style.display='block';}
 <h2>Lab Class</h2>
 <ul>
 <li>You will take the ideas you have learnt.</li>
-<li>You will apply them in the domain of <em>matrix factorisation</em>.</li>
+<li>You will apply them in the domain of <em>matrix
+factorisation</em>.</li>
 <li>Matrix factorization presents a different error function.</li>
 </ul>
 <p>for loss functions.</p>
@@ -1026,7 +1301,8 @@ if(f.length>0){f[0].style.display='block';}
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>
 <ul>
-<li>Section 1.1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li>Section 1.1.3 of <span class="citation"
+data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
 </ul>
 <!-- SECTION Movie Body Count Data Example -->
 </section>
@@ -1036,7 +1312,8 @@ if(f.length>0){f[0].style.display='block';}
 <section id="movie-violence-data" class="slide level2">
 <h2>Movie Violence Data</h2>
 <ul>
-<li>Data containing movie information (year, length, rating, genre, IMDB Rating).</li>
+<li>Data containing movie information (year, length, rating, genre, IMDB
+Rating).</li>
 <li>Try and predict what factors influence a movie’s violence</li>
 </ul>
 </section>
@@ -1049,7 +1326,7 @@ if(f.length>0){f[0].style.display='block';}
 <div class="figure">
 <div id="carthaginian-empire-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/diagrams/mlai/carthaginian-empire.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//mlai/carthaginian-empire.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
@@ -1057,7 +1334,8 @@ if(f.length>0){f[0].style.display='block';}
 The Carthaginian Empire at its peak.
 </aside>
 </section>
-<section id="inner-products-for-representing-similarity" class="slide level2">
+<section id="inner-products-for-representing-similarity"
+class="slide level2">
 <h2>Inner Products for Representing Similarity</h2>
 </section>
 <section id="the-library-on-an-infinite-plane" class="slide level2">
@@ -1086,25 +1364,63 @@ The Carthaginian Empire at its peak.
 </section>
 <section id="objective-function-1" class="slide level2">
 <h2>Objective Function</h2>
-<p>The error function (or objective function, or cost function) we will choose is known as ‘sum of squares,’ we will aim to minimize the sum of squared squared error between the inner product of <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_i\)</span> and the observed score for the user/item pairing, given by <span class="math inline">\(y_{i, j}\)</span>.</p>
-<p>The total objective function can be written as <span class="math display">\[
-E(\mathbf{U}, \mathbf{V}) = \sum_{i,j} s_{i,j} (y_{i,j} - \mathbf{u}_i^\top \mathbf{v}_j)^2
-\]</span> where <span class="math inline">\(s_{i,j}\)</span> is an <em>indicator</em> variable that is 1 if user <span class="math inline">\(i\)</span> has rated item <span class="math inline">\(j\)</span> and is zero otherwise. Here <span class="math inline">\(\mathbf{U}\)</span> is the matrix made up of all the vectors <span class="math inline">\(\mathbf{u}\)</span>, <span class="math display">\[
-\mathbf{U} = \begin{bmatrix} \mathbf{u}_1 \dots \mathbf{u}_n\end{bmatrix}^\top
-\]</span> where we note that <span class="math inline">\(i\)</span>th <em>row</em> of <span class="math inline">\(\mathbf{U}\)</span> contains the vector associated with the <span class="math inline">\(i\)</span>th user and <span class="math inline">\(n\)</span> is the total number of users. This form of matrix is known as a <em>design matrix</em>. Similarly, we define the matrix <span class="math display">\[
-\mathbf{V} = \begin{bmatrix} \mathbf{v}_1 \dots \mathbf{v}_m\end{bmatrix}^\top
-\]</span> where again the <span class="math inline">\(j\)</span>th row of <span class="math inline">\(\mathbf{V}\)</span> contains the vector associated with the <span class="math inline">\(j\)</span>th item and <span class="math inline">\(m\)</span> is the total number of items in the data set.</p>
+<p>The error function (or objective function, or cost function) we will
+choose is known as ‘sum of squares’, we will aim to minimize the sum of
+squared squared error between the inner product of <span
+class="math inline">\(\mathbf{u}_i\)</span> and <span
+class="math inline">\(\mathbf{v}_i\)</span> and the observed score for
+the user/item pairing, given by <span class="math inline">\(y_{i,
+j}\)</span>.</p>
+<p>The total objective function can be written as <span
+class="math display">\[
+E(\mathbf{U}, \mathbf{V}) = \sum_{i,j} s_{i,j} (y_{i,j} -
+\mathbf{u}_i^\top \mathbf{v}_j)^2
+\]</span> where <span class="math inline">\(s_{i,j}\)</span> is an
+<em>indicator</em> variable that is 1 if user <span
+class="math inline">\(i\)</span> has rated item <span
+class="math inline">\(j\)</span> and is zero otherwise. Here <span
+class="math inline">\(\mathbf{U}\)</span> is the matrix made up of all
+the vectors <span class="math inline">\(\mathbf{u}\)</span>, <span
+class="math display">\[
+\mathbf{U} = \begin{bmatrix} \mathbf{u}_1 \dots
+\mathbf{u}_n\end{bmatrix}^\top
+\]</span> where we note that <span class="math inline">\(i\)</span>th
+<em>row</em> of <span class="math inline">\(\mathbf{U}\)</span> contains
+the vector associated with the <span class="math inline">\(i\)</span>th
+user and <span class="math inline">\(n\)</span> is the total number of
+users. This form of matrix is known as a <em>design matrix</em>.
+Similarly, we define the matrix <span class="math display">\[
+\mathbf{V} = \begin{bmatrix} \mathbf{v}_1 \dots
+\mathbf{v}_m\end{bmatrix}^\top
+\]</span> where again the <span class="math inline">\(j\)</span>th row
+of <span class="math inline">\(\mathbf{V}\)</span> contains the vector
+associated with the <span class="math inline">\(j\)</span>th item and
+<span class="math inline">\(m\)</span> is the total number of items in
+the data set.</p>
 </section>
 <section id="objective-optimization" class="slide level2">
 <h2>Objective Optimization</h2>
-<p>The idea is to mimimize this objective. A standard, simple, technique for minimizing an objective is <em>gradient descent</em> or <em>steepest descent</em>. In gradient descent we simply choose to update each parameter in the model by subtracting a multiple of the objective function’s gradient with respect to the parameters. So for a parameter <span class="math inline">\(u_{i,j}\)</span> from the matrix <span class="math inline">\(\mathbf{U}\)</span> we would have an update as follows: <span class="math display">\[ 
+<p>The idea is to mimimize this objective. A standard, simple, technique
+for minimizing an objective is <em>gradient descent</em> or <em>steepest
+descent</em>. In gradient descent we simply choose to update each
+parameter in the model by subtracting a multiple of the objective
+function’s gradient with respect to the parameters. So for a parameter
+<span class="math inline">\(u_{i,j}\)</span> from the matrix <span
+class="math inline">\(\mathbf{U}\)</span> we would have an update as
+follows: <span class="math display">\[
 u_{k,\ell} \leftarrow u_{k,\ell} - \eta \frac{\text{d}
-E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} 
-\]</span> where <span class="math inline">\(\eta\)</span> (which is pronounced <em>eta</em> in English) is a Greek letter representing the <em>learning rate</em>.</p>
-<p>We can compute the gradient of the objective function with respect to <span class="math inline">\(u_{k,\ell}\)</span> as <span class="math display">\[
+E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
+\]</span> where <span class="math inline">\(\eta\)</span> (which is
+pronounced <em>eta</em> in English) is a Greek letter representing the
+<em>learning rate</em>.</p>
+<p>We can compute the gradient of the objective function with respect to
+<span class="math inline">\(u_{k,\ell}\)</span> as <span
+class="math display">\[
 \frac{\text{d}E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} = -2
 \sum_j s_{k,j}v_{j,\ell}(y_{k, j} - \mathbf{u}_k^\top\mathbf{v}_{j}).
-\]</span> Similarly each parameter <span class="math inline">\(v_{i,j}\)</span> needs to be updated according to its gradient.</p>
+\]</span> Similarly each parameter <span
+class="math inline">\(v_{i,j}\)</span> needs to be updated according to
+its gradient.</p>
 </section>
 <section id="steepest-descent-algorithm" class="slide level2">
 <h2>Steepest Descent Algorithm</h2>
@@ -1112,43 +1428,96 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <section id="initialisation" class="slide level2">
 <h2>Initialisation</h2>
 </section>
-<section id="stochastic-gradient-descent-or-robbins-monroe-algorithm" class="slide level2">
+<section id="stochastic-gradient-descent-or-robbins-monroe-algorithm"
+class="slide level2">
 <h2>Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
-<p>{In  we saw how stochastic gradient descent <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves updating separating each gradient update according to each separate observation, rather than summing over them all. It is an approximate optimization method, but it has proven convergence under certain conditions and can be much faster in practice. It is used widely by internet companies for doing machine learning in practice. For example, Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
+<p>{In we saw how stochastic gradient descent <span class="citation"
+data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves
+updating separating each gradient update according to each separate
+observation, rather than summing over them all. It is an approximate
+optimization method, but it has proven convergence under certain
+conditions and can be much faster in practice. It is used widely by
+internet companies for doing machine learning in practice. For example,
+Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
 </section>
 <section id="making-predictions" class="slide level2">
 <h2>Making Predictions</h2>
-<p>Predictions can be made from the model of the appropriate rating for a given user, <span class="math inline">\(i\)</span>, for a given film, <span class="math inline">\(j\)</span>, by simply taking the inner product between their vectors <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_j\)</span>.</p>
+<p>Predictions can be made from the model of the appropriate rating for
+a given user, <span class="math inline">\(i\)</span>, for a given film,
+<span class="math inline">\(j\)</span>, by simply taking the inner
+product between their vectors <span
+class="math inline">\(\mathbf{u}_i\)</span> and <span
+class="math inline">\(\mathbf{v}_j\)</span>.</p>
 </section>
-<section id="is-our-map-enough-are-our-data-enough" class="slide level2">
+<section id="is-our-map-enough-are-our-data-enough"
+class="slide level2">
 <h2>Is Our Map Enough? Are Our Data Enough?</h2>
-<p>Is two dimensions really enough to capture the complexity of humans and their artforms? Perhaps we need even more dimensions to capture that complexity. Extending our books analogy further, consider how we should place books that have a historical timeframe as well as some geographical location. Do we really want books from the 2nd World War to sit alongside books from the Roman Empire? Books on the American invasion of Sicily in 1943 are perhaps less related to books about Carthage than those that study the Jewish Revolt from 66-70 (in the Roman Province of Judaea). So books that relate to subjects which are closer in time should be stored together. However, a student of rebellion against empire may also be interested in the relationship between the Jewish Revolt of 66-70 and the Indian Rebellion of 1857, nearly 1800 years later. Whilst the technologies are different, the psychology of the people is shared: a rebellious nation angainst their imperial masters, triggered by misrule with a religious and cultural background. To capture such complexities we would need further dimensions in our latent representation. But are further dimensions justified by the amount of data we have? Can we really understand the facets of a film that only has at most three or four ratings?</p>
+<p>Is two dimensions really enough to capture the complexity of humans
+and their artforms? Perhaps we need even more dimensions to capture that
+complexity. Extending our books analogy further, consider how we should
+place books that have a historical timeframe as well as some
+geographical location. Do we really want books from the 2nd World War to
+sit alongside books from the Roman Empire? Books on the American
+invasion of Sicily in 1943 are perhaps less related to books about
+Carthage than those that study the Jewish Revolt from 66-70 (in the
+Roman Province of Judaea). So books that relate to subjects which are
+closer in time should be stored together. However, a student of
+rebellion against empire may also be interested in the relationship
+between the Jewish Revolt of 66-70 and the Indian Rebellion of 1857,
+nearly 1800 years later. Whilst the technologies are different, the
+psychology of the people is shared: a rebellious nation angainst their
+imperial masters, triggered by misrule with a religious and cultural
+background. To capture such complexities we would need further
+dimensions in our latent representation. But are further dimensions
+justified by the amount of data we have? Can we really understand the
+facets of a film that only has at most three or four ratings?</p>
 </section>
 <section id="going-further" class="slide level2">
 <h2>Going Further</h2>
-<p>If you want to take this model further then you’ll need more data. One possible source of data is the <a href="http://grouplens.org/datasets/movielens/"><code>movielens</code> data set</a>. They have data sets containing up to ten million movie ratings. The few ratings we were able to collect in the class are not enough to capture the rich structure underlying these films. Imagine if we assume that the ratings are uniformly distributed between 1 and 5. If you know something about information theory then you could use that to work out the maximum number of <em>bits</em> of information we could gain per rating.</p>
-<p>Now we’ll download the movielens 100k data and see if we can extract information about these movies.</p>
+<p>If you want to take this model further then you’ll need more data.
+One possible source of data is the <a
+href="http://grouplens.org/datasets/movielens/"><code>movielens</code>
+data set</a>. They have data sets containing up to ten million movie
+ratings. The few ratings we were able to collect in the class are not
+enough to capture the rich structure underlying these films. Imagine if
+we assume that the ratings are uniformly distributed between 1 and 5. If
+you know something about information theory then you could use that to
+work out the maximum number of <em>bits</em> of information we could
+gain per rating.</p>
+<p>Now we’ll download the movielens 100k data and see if we can extract
+information about these movies.</p>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
 <li><p>company: <a href="https://trent.ai">Trent AI</a></p></li>
-<li><p>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></p></li>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p><a href="https://the-atomic-human.ai">The Atomic Human</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
+<li><p>book: <a
+href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The
+Atomic Human</a></p></li>
+<li><p>twitter: <a
+href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
+<li><p><a href="https://the-atomic-human.ai">The Atomic
+Human</a></p></li>
+<li><p>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></p></li>
 <li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<p><a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Robbins:stoch51" class="csl-entry" role="doc-biblioentry">
-Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals of Mathematical Statistics 22, 400–407.
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Robbins:stoch51" class="csl-entry" role="listitem">
+Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals
+of Mathematical Statistics 22, 400–407.
 </div>
-<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+<div id="ref-Rogers:book11" class="csl-entry" role="listitem">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC
+Press.
 </div>
 </div>
 </section>
@@ -1163,8 +1532,39 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',

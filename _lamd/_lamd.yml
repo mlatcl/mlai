@@ -9,21 +9,21 @@ author:
 layout: lecture
 room:
 venue:
-url: https://inverseprobability.com/
 talktheme: white
 talkcss: mlatcl.css
 talkfontsize: xs
 bibdir: $HOME/lawrennd/bibliography
 postsdir: ../_lectures/
-slidesdir: ../slides/ # Where compiled slides go
+slidesdir: ../slides/ # Compiled slide HTML. copy_web_diagrams writes published figures into slides/diagrams/ here
 notesdir: ../_notes/
 notebooksdir: ../_notebooks/
 practicalsdir: ../_practicals/
 snippetsdir: $HOME/lawrennd/snippets
 macrosdir: $HOME/lawrennd/lamd/lamd/macros
-writediagramsdir: .
+writediagramsdir: . # Where the build writes newly created diagrams (not the shared library)
 scriptsdir: https://inverseprobability.com/talks/scripts/
-diagramsdir: $HOME/lawrennd/slides/diagrams/ # Shared figure library (copy_web_diagrams reads from here)
+diagramsdir: $HOME/lawrennd/slides/diagrams/ # Filesystem SOURCE library. copy_web_diagrams reads from here; not a URL
+diagramswebpath: slides/diagrams/ # Published URL path after url+baseurl. HTML \diagramsDir uses this, not diagramsdir
 slidesheader: slides-header.html
 notation: talk-notation.tex
 posts: True
