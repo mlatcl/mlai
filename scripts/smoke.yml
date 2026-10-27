@@ -1,0 +1,8 @@
+# Course-specific notebook smoke defaults (scripts/smoke_notebooks.py).
+# skip: filename prefixes to omit. plot_dirs: extra dirs created under _notebooks.
+# timeout_by_prefix: optional per-prefix cell timeouts in seconds.
+skip:
+  - "05"  # MariaDB + credential widgets
+plot_dirs: []
+timeout: 900
+timeout_by_prefix: {}

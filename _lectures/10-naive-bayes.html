@@ -127,7 +127,7 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 </div>
 <div class="figure">
 <div id="mnist-digits-subsample-examples-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//datasets/mnist-digits-subsample-examples.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/datasets/mnist-digits-subsample-examples.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="mnist-digits-subsample-examples-magnify" class="magnify" onclick="magnifyFigure(&#39;mnist-digits-subsample-examples&#39;)">
@@ -176,7 +176,7 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 </iframe>
 <div class="figure">
 <div id="bernoulli-urn-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/bernoulli-urn.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/bernoulli-urn.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="bernoulli-urn-magnify" class="magnify" onclick="magnifyFigure(&#39;bernoulli-urn&#39;)">
@@ -194,7 +194,7 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <p>For this reason in Bayes’s distribution there is considered to be <em>aleatoric</em> uncertainty about the distribution parameter.</p>
 <div class="figure">
 <div id="bayes-billiard-9-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/bayes-billiard009.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/bayes-billiard009.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="bayes-billiard-9-magnify" class="magnify" onclick="magnifyFigure(&#39;bayes-billiard-9&#39;)">
@@ -316,7 +316,7 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
@@ -353,21 +353,20 @@ E(\pi, \boldsymbol{ \theta}) = E(\boldsymbol{ \theta}) + E(\pi).
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;longitude&#39;</span>]].copy()</span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>]<span class="op">==</span><span class="va">True</span>  <span class="co"># set label to be whether there&#39;s a maternal health delivery service</span></span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create series of health center types with the relevant index</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> data[<span class="st">&#39;facility_type_display&#39;</span>].<span class="bu">apply</span>(pd.Series).stack()</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> s.index.droplevel(<span class="op">-</span><span class="dv">1</span>) <span class="co"># to line up with df&#39;s index</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract from the series the unique list of types.</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> s.unique()</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># For each type extract the indices where it is present and add a column to X</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>type_names <span class="op">=</span> []</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> htype <span class="kw">in</span> types:</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> s[s<span class="op">==</span>htype].index.tolist()</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    type_col<span class="op">=</span>htype.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>).replace(<span class="st">&#39;/&#39;</span>,<span class="st">&#39;-&#39;</span>).lower()</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># One row per facility type (list-valued cells are expanded)</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> data[<span class="st">&#39;facility_type_display&#39;</span>].explode().dropna()</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract from the series the unique list of types.</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> s.unique()</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># For each type extract the indices where it is present and add a column to X</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>type_names <span class="op">=</span> []</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> htype <span class="kw">in</span> types:</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> s[s<span class="op">==</span>htype].index.tolist()</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    type_col<span class="op">=</span>htype.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>).replace(<span class="st">&#39;/&#39;</span>,<span class="st">&#39;-&#39;</span>).lower()</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
 <p>This has given us a new data frame <code>X</code> which contains the different facility types in different columns.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
 <h2 id="naive-bayes-nmis">Naive Bayes NMIS</h2>

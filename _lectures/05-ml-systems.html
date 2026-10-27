@@ -169,7 +169,7 @@ sns.set_palette('colorblind')}-->
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
@@ -219,7 +219,7 @@ sns.set_palette('colorblind')}-->
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
 <div class="figure">
 <div id="nigerian-state-borders-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/nigerian-state-borders.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/nigerian-state-borders.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="nigerian-state-borders-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-state-borders&#39;)">
@@ -231,8 +231,7 @@ sns.set_palette('colorblind')}-->
 <p>Figure: Border locations for the thirty-six different states of Nigeria.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>zones_gdf <span class="op">=</span> data</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>zones_gdf[<span class="st">&#39;admin1Name_en&#39;</span>] <span class="op">=</span> zones_gdf.index</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>zones_gdf <span class="op">=</span> data.reset_index()</span></code></pre></div>
 <p>Now we have this data of the outlines of the different states in Nigeria.</p>
 <p>The next thing we need to know is how these health facilities map onto different states in Nigeria. Without “binning” facilities somehow, it’s difficult to effectively see how they are distributed across the country.</p>
 <p>We do this by finding a “geo” dataset that contains the spatial outlay of Nigerian states by latitude/longitude coordinates. The dataset we use is of the “gdb” (GeoDataBase) type and comes as a zip file. We don’t need to worry much about this datatype for this notebook, only noting that geopandas knows how to load in the dataset, and that it contains different “layers” for the same map. In this case, each layer is a different degree of granularity of the political boundaries, with layer 0 being the whole country, 1 is by state, or 2 is by local government. We’ll go with a state level view for simplicity, but as an excercise you can change it to layer 2 to view the distribution by local government.</p>
@@ -250,12 +249,12 @@ sns.set_palette('colorblind')}-->
 <p>There are some technial details here: the <code>crs</code> refers to the coordinate system in use by a particular GeoDataFrame. <code>EPSG:4326</code> is the standard coordinate system of latitude/longitude.</p>
 <h2 id="your-first-join-converting-gps-coordinates-to-states">Your First Join: Converting GPS Coordinates to States</h2>
 <p>Now we have the data in the <code>GeoPandas</code> format, we can start converting into states. We will use the <a href="https://pypi.org/project/Fiona/"><code>fiona</code></a> library for reading the right layers from the files. Before we do the join, lets plot the location of health centers and states on the same map.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>world_gdf <span class="op">=</span> gpd.read_file(gpd.datasets.get_path(<span class="st">&#39;naturalearth_lowres&#39;</span>))</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>world_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>nigeria_gdf <span class="op">=</span> world_gdf[(world_gdf[<span class="st">&#39;name&#39;</span>] <span class="op">==</span> <span class="st">&#39;Nigeria&#39;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nigeria_gdf <span class="op">=</span> zones_gdf.dissolve()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> nigeria_gdf.crs <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    nigeria_gdf.crs <span class="op">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span></code></pre></div>
 <div class="figure">
 <div id="nigeria-states-and-health-facilities-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/nigeria-states-and-health-facilities.svg" width="60%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/nigeria-states-and-health-facilities.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="nigeria-states-and-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigeria-states-and-health-facilities&#39;)">
@@ -326,7 +325,7 @@ sns.set_palette('colorblind')}-->
 <div class="figure">
 <div id="the-first-google-computer-at-stanford-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//cloud/The_first_Google_computer_at_Stanford.jpg" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/cloud/The_first_Google_computer_at_Stanford.jpg" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="the-first-google-computer-at-stanford-magnify" class="magnify" onclick="magnifyFigure(&#39;the-first-google-computer-at-stanford&#39;)">
@@ -356,7 +355,7 @@ sns.set_palette('colorblind')}-->
 <div class="figure">
 <div id="aws-select-mariadb-rds-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//cloud/aws-select-mariadb-rds.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/cloud/aws-select-mariadb-rds.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="aws-select-mariadb-rds-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-select-mariadb-rds&#39;)">
@@ -372,7 +371,7 @@ sns.set_palette('colorblind')}-->
 <div class="figure">
 <div id="aws-select-free-tier-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//cloud/aws-select-free-tier.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/cloud/aws-select-free-tier.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="aws-select-free-tier-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-select-free-tier&#39;)">
@@ -389,7 +388,7 @@ sns.set_palette('colorblind')}-->
 <div class="figure">
 <div id="aws-mariadb-settings-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//cloud/aws-mariadb-settings.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/cloud/aws-mariadb-settings.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="aws-mariadb-settings-magnify" class="magnify" onclick="magnifyFigure(&#39;aws-mariadb-settings&#39;)">
@@ -570,7 +569,7 @@ sns.set_palette('colorblind')}-->
 <div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-covid-data-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//datasets/nigerian-covid-data.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/datasets/nigerian-covid-data.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="nigerian-covid-data-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-covid-data&#39;)">
