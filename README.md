@@ -24,7 +24,7 @@ The lecture notes will all be given in the form of Jupyter Notebooks and are ava
 
 ## Notebook smoke tests
 
-Execute numbered lecture notebooks under `_notebooks/` with CI-safe patches (Agg backend, mocked stdin, capped GPy `optimize`, no widget hangs). Lecture 05 is skipped by default because it needs a live MariaDB and credential widgets.
+Execute numbered lecture notebooks under `_notebooks/` with CI-safe patches (Agg backend, mocked stdin, capped GPy `optimize`, no widget hangs). Course defaults live in `scripts/smoke.yml`; lecture 05 is skipped there because it needs a live MariaDB and credential widgets.
 
 ```bash
 python -m venv .venv
@@ -33,6 +33,7 @@ pip install -r requirements-smoke.txt
 python scripts/smoke_notebooks.py
 # subset: python scripts/smoke_notebooks.py --only 01 12
 # include lecture 05: python scripts/smoke_notebooks.py --only 05
+# run every numbered notebook: python scripts/smoke_notebooks.py --skip
 ```
 
 GitHub Actions runs the same harness on pull requests that touch notebooks or the smoke files, weekly on a schedule, and via **workflow_dispatch** (optional `--only` input). Results land in `_notebooks/test-results/` (gitignored) and as a workflow artifact.

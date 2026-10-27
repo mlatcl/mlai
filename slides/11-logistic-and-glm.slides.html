@@ -289,7 +289,7 @@ is our link function</li>
 href="http://en.wikipedia.org/wiki/Logistic_function">Logistic</a> (or
 sigmoid) squashes real line to between 0 &amp; 1. Sometimes also called
 a ‘squashing function’.
-<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams//ml/logistic.svg" width="" style=" "></object></li>
+<object class="svgplot " data="https://mlatcl.github.io/mlai/slides/diagrams/ml/logistic.svg" width="" style=" "></object></li>
 </ul>
 </section>
 <section id="logistic-funciton---4" class="slide level2">
@@ -429,10 +429,9 @@ x})\right)\right)
 <section id="objective-gradient-1" class="slide level2">
 <h2>Objective Gradient</h2>
 <p>Multiplying everything out leads to <span class="math display">\[
-\begin{aligned}
-\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = &amp; -\sum_{i=1}^n
-y_i- h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\boldsymbol{
-\phi}(\mathbf{ x}_i).
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} =
+-\sum_{i=1}^n\left(y_i - h\left(\mathbf{ w}^\top \boldsymbol{
+\phi}(\mathbf{ x}_i)\right)\right)\boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span></p>
 </section>
 <section id="optimisation-of-the-function" class="slide level2">

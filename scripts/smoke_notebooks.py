@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
-"""Execute MLAI lecture notebooks end-to-end for smoke testing.
+"""Execute lecture notebooks end-to-end for smoke testing.
 
-CI-oriented defaults:
+Shared runner for mlatcl courses. Course-specific defaults live in
+``scripts/smoke.yml`` (skip list, extra plot dirs, per-prefix timeouts).
+
+Always-on CI behaviour (each patch is try/except, so unused stacks are fine):
   - matplotlib Agg backend
   - mock stdin
-  - short-circuit ipywidgets.interact / notutils.display_plots (avoid hangs)
-  - cap GPy optimize iterations
-  - execute `%load -n module.attr` cells by importing the name
+  - short-circuit ipywidgets.interact / notutils.display_plots
+  - cap GPy / DeepGP optimize iterations
+  - execute ``%load -n module.attr`` by importing the name
   - fill student name / live-rating placeholders
   - blank incomplete exercise cells that are not valid Python
-    (Bayesian posterior assignment is filled from the lecture formulae)
-  - skip lecture 05 by default (MariaDB + credential widgets)
 
 Usage (from repo root)::
 
     python scripts/smoke_notebooks.py
-    python scripts/smoke_notebooks.py --only 01 12
-    python scripts/smoke_notebooks.py --skip
-    python scripts/smoke_notebooks.py --notebooks-dir _notebooks --results-dir _notebooks/test-results
+    python scripts/smoke_notebooks.py --only 01
+    python scripts/smoke_notebooks.py --skip 03-02 05-02
 """
 
 from __future__ import annotations
@@ -37,20 +37,53 @@ import nbformat
 from nbclient import NotebookClient
 from nbclient.exceptions import CellExecutionError
 
-# Injected as the first code cell of every notebook under test.
-PRELUDE = r"""
+DEFAULT_CONFIG = Path("scripts/smoke.yml")
+
+# Created relative to the notebooks directory. Extra dirs can be listed in smoke.yml.
+DEFAULT_PLOT_DIRS = (
+    "./datasets",
+    "./data-science",
+    "./dimred",
+    "./gp",
+    "./gplvm",
+    "./kern",
+    "./ml",
+    "./mlai",
+    "./deepgp",
+    "./deepnn",
+    "./nn",
+    "./cnn",
+    "./simulation",
+    "./uq",
+    "./iei",
+    "./dsa",
+)
+
+_LOAD_MAGIC = re.compile(r"^%load\s+-n\s+([\w.]+)\s*$")
+
+
+def _plot_dirs_literal(dirs: list[str]) -> str:
+    items = ",\n    ".join(repr(d) for d in dirs)
+    return f"(\n    {items},\n)"
+
+
+def build_prelude(plot_dirs: list[str]) -> str:
+    return f'''
 import builtins
 import numpy as np
 import pandas as pd
+import scipy as sp
 
 if not hasattr(np, "NaN"):
     np.NaN = np.nan
+if not hasattr(np, "trapz") and hasattr(np, "trapezoid"):
+    np.trapz = np.trapezoid
 
 
 def _mock_input(prompt=""):
     p = str(prompt).lower()
     if "distance" in p:
-        print(f"[mock input] {prompt!r} -> 50.0")
+        print(f"[mock input] {{prompt!r}} -> 50.0")
         return "50.0"
     if (
         (not prompt)
@@ -60,9 +93,9 @@ def _mock_input(prompt=""):
         or ("[y/n]" in p)
         or ("[yes/no]" in p)
     ):
-        print(f"[mock input] {prompt!r} -> y")
+        print(f"[mock input] {{prompt!r}} -> y")
         return "y"
-    print(f"[mock input] {prompt!r} -> 1.0")
+    print(f"[mock input] {{prompt!r}} -> 1.0")
     return "1.0"
 
 
@@ -79,26 +112,16 @@ import matplotlib
 
 matplotlib.use("Agg")
 
-# Lecture notebooks write figures under these relative dirs (cwd = notebooks dir).
 from pathlib import Path as _Path
 
-for _d in (
-    "./datasets",
-    "./data-science",
-    "./dimred",
-    "./gp",
-    "./kern",
-    "./ml",
-    "./mlai",
-):
+for _d in {_plot_dirs_literal(plot_dirs)}:
     _Path(_d).mkdir(parents=True, exist_ok=True)
 
 
-# Avoid ipywidgets.interact deadlocks under nbclient.
 def _once_interact(func=None, **kwargs):
     if func is None:
         return lambda f: _once_interact(f, **kwargs)
-    call = {}
+    call = {{}}
     for k, v in kwargs.items():
         if hasattr(v, "value"):
             call[k] = v.value
@@ -139,6 +162,31 @@ try:
 except Exception as e:
     print("notutils patch skipped", e)
 
+try:
+    import pods
+
+    def _skip_pods_method(name):
+        def _skip(*a, **k):
+            print(f"[smoke] skip pods.notebook.{{name}}", a[:1] if a else "")
+
+        return _skip
+
+    class _PodsNotebook:
+        def __getattr__(self, name):
+            return _skip_pods_method(name)
+
+    if getattr(pods, "notebook", None) is None:
+        pods.notebook = _PodsNotebook()
+    else:
+        for _name in (
+            "display_plots",
+            "display_prediction",
+            "display_google_book",
+        ):
+            setattr(pods.notebook, _name, _skip_pods_method(_name))
+except Exception as e:
+    print("pods.notebook patch skipped", e)
+
 
 def _cap_optimize(cls, method_name="optimize", max_iters=40):
     if not hasattr(cls, method_name):
@@ -167,13 +215,45 @@ except Exception as e:
     print("GPy patch skipped", e)
 
 try:
+    import deepgp
+
+    if hasattr(deepgp, "DeepGP"):
+        _cap_optimize(deepgp.DeepGP, "optimize", 25)
+        if hasattr(deepgp.DeepGP, "staged_optimize"):
+            orig = deepgp.DeepGP.staged_optimize
+
+            def staged(self, *args, **kwargs):
+                kwargs["messages"] = False
+                if "iters" in kwargs:
+                    it = kwargs["iters"]
+                    if isinstance(it, (list, tuple)):
+                        kwargs["iters"] = tuple(min(int(x), 15) for x in it)
+                return orig(self, *args, **kwargs)
+
+            deepgp.DeepGP.staged_optimize = staged
+except Exception as e:
+    print("deepgp patch skipped", e)
+
+try:
+    import sys as _sys
+    from pathlib import Path as _Cwd
+
+    _here = str(_Cwd.cwd().resolve())
+    _cwd_entries = [
+        p
+        for p in _sys.path
+        if p in ("", ".") or str(_Cwd(p).resolve()) == _here
+    ]
+    # Vendored _notebooks/mlai.py otherwise shadows the installed package.
+    _sys.path = [p for p in _sys.path if p not in _cwd_entries]
     import mlai
+    _sys.path[:0] = _cwd_entries or [""]
     from mlai import linear_models as _lm
 
     for _name in ("relu", "hyperbolic_tangent"):
         if not hasattr(mlai, _name) and hasattr(_lm, _name):
             setattr(mlai, _name, getattr(_lm, _name))
-            print(f"[smoke] attached mlai.{_name} from linear_models")
+            print(f"[smoke] attached mlai.{{_name}} from linear_models")
 
     _write_figure = mlai.write_figure
 
@@ -196,9 +276,21 @@ try:
     pio.renderers.default = "json"
 except Exception as e:
     print("plotly renderer patch skipped", e)
-"""
+'''
 
-_LOAD_MAGIC = re.compile(r"^%load\s+-n\s+([\w.]+)\s*$")
+
+def load_config(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    try:
+        import yaml
+    except ImportError:
+        print(f"PyYAML missing; ignoring {path}", file=sys.stderr)
+        return {}
+    data = yaml.safe_load(path.read_text()) or {}
+    if not isinstance(data, dict):
+        raise SystemExit(f"smoke config must be a mapping: {path}")
+    return data
 
 
 def _cell_source(cell) -> str:
@@ -209,11 +301,7 @@ def _cell_source(cell) -> str:
 
 
 def expand_load_magics(nb: nbformat.NotebookNode) -> None:
-    """Execute `%load -n module.attr` by importing the name.
-
-    IPython `%load` pastes source into the cell but does not run it. Students
-    re-execute interactively; under nbclient the name would never be defined.
-    """
+    """Execute `%load -n module.attr` by importing the name."""
     for cell in nb.cells:
         if cell.get("cell_type") != "code":
             continue
@@ -238,7 +326,6 @@ def expand_load_magics(nb: nbformat.NotebookNode) -> None:
 
 
 def patch_student_placeholders(nb: nbformat.NotebookNode) -> None:
-    """Fill interactive lecture placeholders that cannot run unattended."""
     dummy_ratings = (
         "Y = pd.DataFrame({\n"
         "    'user': ['smoke-a', 'smoke-a', 'smoke-b', 'smoke-b', 'smoke-c', 'smoke-c'],\n"
@@ -277,9 +364,7 @@ def blank_incomplete_exercises(nb: nbformat.NotebookNode) -> None:
     for cell in nb.cells:
         if cell.get("cell_type") != "code":
             continue
-        src = cell.get("source", "")
-        if isinstance(src, list):
-            src = "".join(src)
+        src = _cell_source(cell)
         if "Write code for you answer" not in src and "Write your answer to Exercise" not in src:
             continue
         try:
@@ -296,12 +381,12 @@ def blank_incomplete_exercises(nb: nbformat.NotebookNode) -> None:
                 cell["source"] = "# skipped incomplete exercise cell for smoke test\npass\n"
 
 
-def prepare(nb: nbformat.NotebookNode) -> nbformat.NotebookNode:
+def prepare(nb: nbformat.NotebookNode, plot_dirs: list[str]) -> nbformat.NotebookNode:
     nb = deepcopy(nb)
     blank_incomplete_exercises(nb)
     expand_load_magics(nb)
     patch_student_placeholders(nb)
-    nb.cells.insert(0, nbformat.v4.new_code_cell(PRELUDE))
+    nb.cells.insert(0, nbformat.v4.new_code_cell(build_prelude(plot_dirs)))
     return nb
 
 
@@ -321,16 +406,27 @@ def list_notebooks(nb_dir: Path, only: list[str] | None, skip: list[str] | None)
             for m in matches:
                 if m not in selected:
                     selected.append(m)
-        return selected
+    else:
+        selected = names
     skip = skip or []
-    selected = []
-    for name in names:
+    kept = []
+    for name in selected:
         skipped = next((tok for tok in skip if _matches_token(name, tok)), None)
         if skipped is not None:
             print(f"[smoke] skip {name} (--skip {skipped})", flush=True)
             continue
-        selected.append(name)
-    return selected
+        kept.append(name)
+    return kept
+
+
+def timeout_for(name: str, default: int, by_prefix: dict[str, int]) -> int:
+    best_key = ""
+    best_val = default
+    for prefix, value in by_prefix.items():
+        if name.startswith(str(prefix)) and len(str(prefix)) >= len(best_key):
+            best_key = str(prefix)
+            best_val = int(value)
+    return best_val
 
 
 def run_one(
@@ -338,13 +434,14 @@ def run_one(
     nb_dir: Path,
     out_dir: Path,
     timeout: int,
+    plot_dirs: list[str],
 ) -> dict:
     path = nb_dir / name
     print(f"\n======== {name} ========", flush=True)
     t0 = time.time()
     try:
         nb = nbformat.read(path, as_version=4)
-        nb = prepare(nb)
+        nb = prepare(nb, plot_dirs)
         client = NotebookClient(
             nb,
             timeout=timeout,
@@ -378,6 +475,12 @@ def run_one(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--config",
+        type=Path,
+        default=DEFAULT_CONFIG,
+        help="YAML with skip / plot_dirs / timeout_by_prefix (default: scripts/smoke.yml)",
+    )
+    parser.add_argument(
         "--notebooks-dir",
         type=Path,
         default=Path("_notebooks"),
@@ -398,15 +501,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--skip",
         nargs="*",
-        default=["05"],
+        default=None,
         help="Skip notebooks whose names start with these prefixes. "
-        "Default: 05 (MariaDB). Pass --skip with no values to run all.",
+        "Default comes from scripts/smoke.yml. Pass --skip with no values to run all.",
     )
     parser.add_argument(
         "--timeout",
         type=int,
-        default=900,
-        help="Per-notebook cell execution timeout in seconds (default 900)",
+        default=None,
+        help="Per-notebook cell execution timeout in seconds (default 900, or smoke.yml)",
     )
     parser.add_argument(
         "--summary-name",
@@ -414,6 +517,13 @@ def main(argv: list[str] | None = None) -> int:
         help="Summary JSON filename under --results-dir",
     )
     args = parser.parse_args(argv)
+
+    cfg = load_config(args.config)
+    skip = args.skip if args.skip is not None else list(cfg.get("skip") or [])
+    timeout = args.timeout if args.timeout is not None else int(cfg.get("timeout") or 900)
+    extra_dirs = [str(d) for d in (cfg.get("plot_dirs") or [])]
+    plot_dirs = list(dict.fromkeys([*DEFAULT_PLOT_DIRS, *extra_dirs]))
+    by_prefix = {str(k): int(v) for k, v in (cfg.get("timeout_by_prefix") or {}).items()}
 
     repo_root = Path.cwd()
     nb_dir = (repo_root / args.notebooks_dir).resolve()
@@ -430,12 +540,19 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Notebooks directory not found: {nb_dir}", file=sys.stderr)
         return 2
 
-    order = list_notebooks(nb_dir, args.only, args.skip)
+    print(f"[smoke] config={args.config} skip={skip} timeout={timeout}", flush=True)
+    order = list_notebooks(nb_dir, args.only, skip)
     print("Notebooks:", order, flush=True)
 
     results = []
     for name in order:
-        result = run_one(name, nb_dir, out_dir, args.timeout)
+        result = run_one(
+            name,
+            nb_dir,
+            out_dir,
+            timeout_for(name, timeout, by_prefix),
+            plot_dirs,
+        )
         results.append(result)
         (out_dir / args.summary_name).write_text(json.dumps(results, indent=2) + "\n")
 

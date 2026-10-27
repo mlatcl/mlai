@@ -5,6 +5,7 @@ on:
     paths:
       - "_notebooks/**/*.ipynb"
       - "scripts/smoke_notebooks.py"
+      - "scripts/smoke.yml"
       - "requirements-smoke.txt"
       - ".github/workflows/notebook-smoke.yml"
   schedule:

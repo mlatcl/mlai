@@ -207,9 +207,7 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <h2 id="optimisation-of-the-function">Optimisation of the Function</h2>
 <p>Reorganising the gradient to find a stationary point of the function with respect to the parameters <span class="math inline">\(\mathbf{ w}\)</span> turns out to be impossible. Optimisation has to proceed by <em>numerical methods</em>. Options include the multidimensional variant of <a href="http://en.wikipedia.org/wiki/Newton%27s_method">Newton’s method</a> or <a href="http://en.wikipedia.org/wiki/Gradient_method">gradient based optimisation methods</a> like we used for optimising matrix factorisation for the movie recommender system. We recall from matrix factorisation that, for large data, <em>stochastic gradient descent</em> or the Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> optimisation procedure worked best for function minimisation.</p>
 <p>Multiplying everything out leads to <span class="math display">\[
-\begin{aligned}
-\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = &amp; -\sum_{i=1}^n
-y_i- h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\boldsymbol{ \phi}(\mathbf{ x}_i).
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n\left(y_i - h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right)\right)\boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span></p>
 <h2 id="olivetti-glasses-data">Olivetti Glasses Data</h2>
 <div style="text-align:right">
@@ -230,7 +228,7 @@ y_i- h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\boldsymbol{ \phi}(\
 <div class="figure">
 <div id="olivetti-glasses-image-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams//datasets/olivetti-glasses-image.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlai/slides/diagrams/datasets/olivetti-glasses-image.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div id="olivetti-glasses-image-magnify" class="magnify" onclick="magnifyFigure(&#39;olivetti-glasses-image&#39;)">
